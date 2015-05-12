@@ -10,7 +10,7 @@
 const char *kKernelSource = u8R"openclc(
 
 kernel void GemmNN(
-    global T *c, constant T *a, constant T *b,
+    global T *c, global const T *a, global const T *b,
     const int M, const int N, const int K,
     const T alpha, const T beta) {
   int i = get_global_id(0), j = get_global_id(1);
@@ -22,7 +22,7 @@ kernel void GemmNN(
 }
 
 kernel void GemmNT(
-    global T *c, constant T *a, constant T *b,
+    global T *c, global const T *a, global const T *b,
     const int M, const int N, const int K,
     const T alpha, const T beta) {
   int i = get_global_id(0), j = get_global_id(1);
@@ -64,6 +64,20 @@ int main(int argument_count, char *arguments[]) {
     {3, 6}
   };
 
+  float *C = new float[M * N], *A = new float[M * K], *B = new float[K * N];
+
+  for (auto i = 0; i < M * N; ++i) {
+    C[i] = 0;
+  }
+
+  for (auto i = 0; i < M * K; ++i) {
+    A[i] = i;
+  }
+
+  for (auto i = 0; i < K * N; ++i) {
+    B[i] = i;
+  }
+
   cl_platform_id platform = 0;
   assert(CL_SUCCESS == clGetPlatformIDs(1, &platform, nullptr));
   cl_device_id device = 0;
@@ -90,6 +104,13 @@ int main(int argument_count, char *arguments[]) {
       CL_SUCCESS == clGetDeviceInfo(device, CL_DEVICE_EXTENSIONS, sizeof(buffer), buffer, &size));
   // std::cout << buffer << std::endl;
 
+  size_t max_work_items[3];
+  assert(CL_SUCCESS == clGetDeviceInfo(
+      device, CL_DEVICE_MAX_WORK_ITEM_SIZES, sizeof(max_work_items), max_work_items, nullptr));
+  // std::cout << max_work_items[0] << std::endl;
+  // std::cout << max_work_items[1] << std::endl;
+  // std::cout << max_work_items[2] << std::endl;
+
   cl_context_properties properties[3] = {
     CL_CONTEXT_PLATFORM, reinterpret_cast<cl_context_properties>(platform), 0
   };
@@ -110,11 +131,11 @@ int main(int argument_count, char *arguments[]) {
   assert(CL_SUCCESS == error);
 
   assert(CL_SUCCESS == clEnqueueWriteBuffer(
-      queue, buffer_a, CL_TRUE, 0, M * K * sizeof(float), a, 0, nullptr, nullptr));
+      queue, buffer_a, CL_TRUE, 0, M * K * sizeof(float), A, 0, nullptr, nullptr));
   assert(CL_SUCCESS == clEnqueueWriteBuffer(
-      queue, buffer_b, CL_TRUE, 0, K * N * sizeof(float), b, 0, nullptr, nullptr));
+      queue, buffer_b, CL_TRUE, 0, K * N * sizeof(float), B, 0, nullptr, nullptr));
   assert(CL_SUCCESS == clEnqueueWriteBuffer(
-      queue, buffer_c, CL_TRUE, 0, M * N * sizeof(float), c, 0, nullptr, nullptr));
+      queue, buffer_c, CL_TRUE, 0, M * N * sizeof(float), C, 0, nullptr, nullptr));
 
   cl_program program = clCreateProgramWithSource(context, 1, &kKernelSource, nullptr, &error);
   assert(CL_SUCCESS == error);
