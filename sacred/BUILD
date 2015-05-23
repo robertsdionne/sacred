@@ -4,6 +4,9 @@ cc_binary(
   srcs = [
     "convcl.cpp",
   ],
+  linkopts = [
+    "-framework OpenCL",
+  ],
 )
 
 cc_binary(
@@ -18,6 +21,9 @@ cc_binary(
   name = "gemmcl",
   srcs = [
     "gemmcl.cpp",
+  ],
+  linkopts = [
+    "-framework OpenCL",
   ],
 )
 
