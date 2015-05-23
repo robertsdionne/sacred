@@ -59,6 +59,23 @@ namespace sacred {
       return shape_.size();
     }
 
+    bool operator ==(const Array<F> &other) const {
+      if (number_of_axes() != other.number_of_axes()) {
+        return false;
+      }
+      for (auto i = 0; i < number_of_axes(); ++i) {
+        if (shape(i) != other.shape(i)) {
+          return false;
+        }
+      }
+      for (auto i = 0; i < count(); ++i) {
+        if (at(i) != other.at(i)) {
+          return false;
+        }
+      }
+      return true;
+    }
+
     inline const vector<int> &shape() const {
       return shape_;
     }
