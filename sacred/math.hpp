@@ -53,14 +53,14 @@ namespace sacred {
         const T output_coefficient, const T input_coefficient) {
       for (auto j = 0; j < output.shape(1); ++j) {
         for (auto i = 0; i < output.shape(0); ++i) {
+          auto I = i + filter.shape(0) / 2;
+          auto J = j - 1;
           T current_output = output_coefficient * output.at({i, j});
           for (auto k = 0; k < filter.shape(0); ++k) {
-            for (auto l = 0; l < filter.shape().at(1); ++l) {
-              auto y = i + k - filter.shape(0) / 2;
-              auto x = j + l - filter.shape(1);
-              auto in = 0 <= y && y < output.shape(0) && 0 <= x;
+            for (auto l = 0; l < filter.shape(1); ++l) {
+              auto in = 0 <= I - k && I - k < output.shape(0) && 0 <= J - l;
               if (in) {
-                current_output += input_coefficient * filter.at({k, l}) * output.at({y, x});
+                current_output += input_coefficient * filter.at({k, l}) * output.at({I - k, J - l});
               }
             }
           }
