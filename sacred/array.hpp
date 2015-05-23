@@ -20,6 +20,11 @@ namespace sacred {
       Reshape(shape);
     }
 
+    Array(const vector<int> &shape, const vector<F> &data)
+        : capacity_(data.size()), count_(), shape_(shape), data_(data) {
+      Reshape(shape);
+    }
+
     ~Array() = default;
 
     const F &at(int index) const {

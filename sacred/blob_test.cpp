@@ -37,3 +37,14 @@ TEST(BlobTest, Initialize) {
   EXPECT_EQ(3, blob.diff().shape(1));
   EXPECT_EQ(4, blob.diff().shape(2));
 }
+
+TEST(BlobTest, InitializeValue) {
+  auto blob = Blob<float>({1, 2, 3}, {0, 1, 2, 3, 4, 5}, {0, -1, -2, -3, -4, -5});
+
+  for (auto j = 0; j < 2; ++j) {
+    for (auto k = 0; k < 3; ++k) {
+      EXPECT_EQ(3 * j + k, blob.value({0, j, k}));
+      EXPECT_EQ(-3 * j - k, blob.diff({0, j, k}));
+    }
+  }
+}

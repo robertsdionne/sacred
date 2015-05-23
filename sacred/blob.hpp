@@ -14,7 +14,10 @@ namespace sacred {
   public:
     Blob() = default;
 
-    Blob(const vector<int> &shape) : value_(shape), diff_(shape) {}
+    explicit Blob(const vector<int> &shape) : value_(shape), diff_(shape) {}
+
+    Blob(const vector<int> &shape, const vector<F> &value, const vector<F> &diff)
+        : value_(shape, value), diff_(shape, diff) {}
 
     ~Blob() = default;
 
@@ -28,6 +31,22 @@ namespace sacred {
 
     inline Array<F> &diff() {
       return diff_;
+    }
+
+    inline const F &diff(int index) const {
+      return diff_.at(index);
+    }
+
+    inline F &diff(int index) {
+      return diff_.at(index);
+    }
+
+    inline const F &diff(const vector<int> &indices) const {
+      return diff_.at(indices);
+    }
+
+    inline F &diff(const vector<int> &indices) {
+      return diff_.at(indices);
     }
 
     inline int number_of_axes() const {
@@ -48,6 +67,22 @@ namespace sacred {
 
     inline Array<F> &value() {
       return value_;
+    }
+
+    inline const F &value(int index) const {
+      return value_.at(index);
+    }
+
+    inline F &value(int index) {
+      return value_.at(index);
+    }
+
+    inline const F &value(const vector<int> &indices) const {
+      return value_.at(indices);
+    }
+
+    inline F &value(const vector<int> &indices) {
+      return value_.at(indices);
     }
 
     void Reshape(const vector<int> &shape) {
