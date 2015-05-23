@@ -6,6 +6,7 @@ using sacred::Array;
 
 TEST(ArrayTest, Initialize) {
   auto array = Array<float>({1, 2, 3});
+  EXPECT_EQ(3, array.number_of_axes());
   EXPECT_EQ(6, array.count());
   EXPECT_EQ(1, array.shape(0));
   EXPECT_EQ(2, array.shape(1));

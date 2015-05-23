@@ -46,3 +46,14 @@ cc_test(
     "//external:googletest",
   ],
 )
+
+cc_test(
+  name = "blob_test",
+  srcs = [
+    "blob_test.cpp",
+  ],
+  size = "small",
+  deps = [
+    "//external:googletest",
+  ],
+)

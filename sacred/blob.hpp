@@ -12,33 +12,47 @@ namespace sacred {
   template <typename F>
   class Blob {
   public:
+    Blob() = default;
+
     Blob(const vector<int> &shape) : value_(shape), diff_(shape) {}
 
     ~Blob() = default;
 
-    const Array<F> &diff() const {
+    inline int count() const {
+      return value_.count();
+    }
+
+    inline const Array<F> &diff() const {
       return diff_;
     }
 
-    Array<F> &diff() {
+    inline Array<F> &diff() {
       return diff_;
     }
 
-    const vector<int> &shape() {
+    inline int number_of_axes() const {
+      return value_.number_of_axes();
+    }
+
+    inline const vector<int> &shape() const {
       return value_.shape();
     }
 
-    const Array<F> &value() const {
+    inline int shape(int index) const {
+      return value_.shape(index);
+    }
+
+    inline const Array<F> &value() const {
       return value_;
     }
 
-    Array<F> &value() {
+    inline Array<F> &value() {
       return value_;
     }
 
-    void Allocate() {
-      value_.Allocate();
-      diff_.Allocate();
+    void Reshape(const vector<int> &shape) {
+      value_.Reshape(shape);
+      diff_.Reshape(shape);
     }
 
   private:
