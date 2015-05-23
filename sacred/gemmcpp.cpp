@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "layer.hpp"
 #include "math.hpp"
 
 int main(int argument_count, char *arguments[]) {

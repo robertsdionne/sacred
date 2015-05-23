@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+#include "array.hpp"
+#include "checks.hpp"
+
 namespace sacred {
 
   template <typename T>
@@ -44,6 +47,23 @@ namespace sacred {
       }
     }
 
+    void Convolve2(Array<T> &output, const Array<T> &filter, const Array<T> &input,
+        const T output_coefficient, const T input_coefficient) {
+      CHECK_STATE(input.shape().at(0) - filter.shape().at(0) + 1 == output.shape().at(0));
+      CHECK_STATE(input.shape().at(1) - filter.shape().at(1) + 1 == output.shape().at(1));
+      for (auto i = 0; i < output.shape().at(0); ++i) {
+        for (auto j = 0; j < output.shape().at(1); ++j) {
+          T current_output = output_coefficient * output.DataAt({i, j});
+          for (auto k = 0; k < filter.shape().at(0); ++k) {
+            for (auto l = 0; l < filter.shape().at(1); ++l) {
+              current_output += input_coefficient * filter.DataAt({k, l}) * input.DataAt({i + k, j + l});
+            }
+          }
+          output.DataAt({i, j}) = current_output;
+        }
+      }
+    }
+
     void GeneralMatrixMultiplication(T *output, const T *left, const T *right,
         const T output_coefficient, const T input_coefficient,
         const int output_height, const int input_height, const int right_height) {
@@ -55,6 +75,22 @@ namespace sacred {
                 * Access(right, right_height, input_height, k, j);
           }
           Access(output, output_height, input_height, i, j) = current_output;
+        }
+      }
+    }
+
+    void GeneralMatrixMultiplication(Array<T> &output, const Array<T> &left, const Array<T> &right,
+        const T output_coefficient, const T input_coefficient) {
+      CHECK_STATE(left.shape().at(0) == output.shape().at(0));
+      CHECK_STATE(right.shape().at(1) == output.shape().at(1));
+      CHECK_STATE(left.shape().at(1) == right.shape().at(0));
+      for (auto i = 0; i < output.shape().at(0); ++i) {
+        for (auto j = 0; j < output.shape().at(1); ++j) {
+          T current_output = output_coefficient * output.DataAt({i, j});
+          for (auto k = 0; k < right.shape().at(0); ++k) {
+            current_output += input_coefficient * left.DataAt({i, k}) * right.DataAt({k, j});
+          }
+          output.DataAt({i, j}) = current_output;
         }
       }
     }
@@ -91,6 +127,26 @@ namespace sacred {
             }
           }
           Access(output, output_height, output_width, i, j) = current_output;
+        }
+      }
+    }
+
+    void RecurrentConvolve2(Array<T> &output, const Array<T> &filter,
+        const T output_coefficient, const T input_coefficient) {
+      for (auto j = 0; j < output.shape().at(1); ++j) {
+        for (auto i = 0; i < output.shape().at(0); ++i) {
+          T current_output = output_coefficient * output.DataAt({i, j});
+          for (auto k = 0; k < filter.shape().at(0); ++k) {
+            for (auto l = 0; l < filter.shape().at(1); ++l) {
+              auto y = i + k - filter.shape().at(0) / 2;
+              auto x = j + l - filter.shape().at(1);
+              auto in = 0 <= y && y < output.shape().at(0) && 0 <= x;
+              if (in) {
+                current_output += input_coefficient * filter.DataAt({k, l}) * output.DataAt({y, x});
+              }
+            }
+          }
+          output.DataAt({i, j}) = current_output;
         }
       }
     }

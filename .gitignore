@@ -1,4 +1,1 @@
-convcl
-convcpp
-gemmcl
-gemmcpp
+bazel-*
