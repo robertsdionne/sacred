@@ -37,9 +37,9 @@ cc_binary(
 )
 
 cc_test(
-  name = "test",
+  name = "array_test",
   srcs = [
-    "test.cpp",
+    "array_test.cpp",
   ],
   size = "small",
   deps = [

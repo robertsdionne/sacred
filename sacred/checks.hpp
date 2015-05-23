@@ -8,9 +8,6 @@
 #define CHECK_STATE(state) \
   sacred::CheckState(#state, state, __LINE__, __FILE__)
 
-#define FAIL(message) \
-  sacred::Fail(message, __LINE__, __FILE__)
-
 namespace sacred {
 
   using std::string;
