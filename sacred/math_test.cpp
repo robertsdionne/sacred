@@ -8,6 +8,92 @@ using sacred::Math;
 
 auto math = Math<float>();
 
+TEST(MathTest, BackwardConvolve2) {
+  auto a = Array<float>({3, 3}, {
+    1, 2, 3,
+    4, 5, 6,
+    7, 8, 9
+  });
+  auto b = Array<float>({4, 4}, {
+    1, 2, 3, 4,
+    5, 6, 7, 8,
+    9, 10, 11, 12,
+    13, 14, 15, 16
+  });
+  auto c = Array<float>({2, 2}, {
+    0, 0,
+    0, 0
+  });
+
+  math.BackwardConvolve2(c, a, b, 0.0, 1.0);
+
+  EXPECT_EQ(
+      Array<float>({2, 2}, {
+        348, 393,
+        528, 573
+      }),
+      c);
+}
+
+TEST(MathTest, BackwardRecurrentConvolve2) {
+  auto a = Array<float>({3, 3}, {
+    1, 2, 3,
+    4, 5, 6,
+    7, 8, 9
+  });
+  auto c = Array<float>({4, 4}, {
+    1, 2, 3, 4,
+    5, 6, 7, 8,
+    9, 10, 11, 12,
+    13, 14, 15, 16
+  });
+
+  math.BackwardRecurrentConvolve2(c, a, 1.0, 1.0);
+
+  EXPECT_EQ(
+      Array<float>({4, 4}, {
+        1, 53, 1446, 34685,
+        5, 120, 2749, 48191,
+        9, 196, 2777, 39825,
+        13, 119, 1400, 17795
+      }),
+      c);
+}
+TEST(MathTest, BackwardWideConvolve2) {
+  auto a = Array<float>({3, 3}, {
+    1, 2, 3,
+    4, 5, 6,
+    7, 8, 9
+  });
+  auto b = Array<float>({4, 4}, {
+    1, 2, 3, 4,
+    5, 6, 7, 8,
+    9, 10, 11, 12,
+    13, 14, 15, 16
+  });
+  auto c = Array<float>({6, 6}, {
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0
+  });
+
+  math.BackwardWideConvolve2(c, a, b, 0.0, 1.0);
+
+  EXPECT_EQ(
+      Array<float>({6, 6}, {
+        9, 26, 50, 74, 53, 28,
+        51, 111, 178, 217, 145, 72,
+        114, 231, 348, 393, 252, 120,
+        186, 363, 528, 573, 360, 168,
+        105, 197, 274, 295, 175, 76,
+        39, 68, 86, 92, 47, 16
+      }),
+      c);
+}
+
 TEST(MathTest, Convolve2) {
   auto a = Array<float>({3, 3}, {
     9, 8, 7,
@@ -86,6 +172,41 @@ TEST(MathTest, RecurrentConvolve2) {
         5, 120, 2749, 48191,
         9, 196, 2777, 39825,
         13, 119, 1400, 17795
+      }),
+      c);
+}
+
+TEST(MathTest, WideConvolve2) {
+  auto a = Array<float>({3, 3}, {
+    9, 8, 7,
+    6, 5, 4,
+    3, 2, 1
+  });
+  auto b = Array<float>({4, 4}, {
+    1, 2, 3, 4,
+    5, 6, 7, 8,
+    9, 10, 11, 12,
+    13, 14, 15, 16
+  });
+  auto c = Array<float>({6, 6}, {
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0
+  });
+
+  math.WideConvolve2(c, a, b, 0.0, 1.0);
+
+  EXPECT_EQ(
+      Array<float>({6, 6}, {
+        9, 26, 50, 74, 53, 28,
+        51, 111, 178, 217, 145, 72,
+        114, 231, 348, 393, 252, 120,
+        186, 363, 528, 573, 360, 168,
+        105, 197, 274, 295, 175, 76,
+        39, 68, 86, 92, 47, 16
       }),
       c);
 }
