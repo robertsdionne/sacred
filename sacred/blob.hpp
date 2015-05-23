@@ -16,6 +16,8 @@ namespace sacred {
 
     explicit Blob(const vector<int> &shape) : value_(shape), diff_(shape) {}
 
+    Blob(const vector<int> &shape, const vector<F> &value) : value_(shape, value), diff_(shape) {}
+
     Blob(const vector<int> &shape, const vector<F> &value, const vector<F> &diff)
         : value_(shape, value), diff_(shape, diff) {}
 
