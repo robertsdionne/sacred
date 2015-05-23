@@ -57,3 +57,14 @@ cc_test(
     "//external:googletest",
   ],
 )
+
+cc_test(
+  name = "checks_test",
+  srcs = [
+    "checks_test.cpp",
+  ],
+  size = "small",
+  deps = [
+    "//external:googletest",
+  ],
+)
