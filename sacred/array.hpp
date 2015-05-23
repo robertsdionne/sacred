@@ -2,6 +2,7 @@
 #define SACRED_ARRAY_HPP_
 
 #include <limits>
+#include <ostream>
 #include <vector>
 
 #include "checks.hpp"
@@ -9,6 +10,7 @@
 namespace sacred {
 
   using std::numeric_limits;
+  using std::ostream;
   using std::vector;
 
   template <typename F>
@@ -118,6 +120,17 @@ namespace sacred {
     vector<int> shape_;
     vector<F> data_;
   };
+
+  template <typename F>
+  ostream &operator <<(ostream &out, const Array<F> &array) {
+    for (auto i = 0; i < array.shape(0); ++i) {
+      for (auto j = 0; j < array.shape(1); ++j) {
+        out << array.at({i, j}) << u8" ";
+      }
+      out << std::endl;
+    }
+    return out;
+  }
 
 }  // namespace sacred
 

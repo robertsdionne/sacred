@@ -20,10 +20,12 @@ namespace sacred {
       CHECK_STATE(input.shape(1) - filter.shape(1) + 1 == output.shape(1));
       for (auto i = 0; i < output.shape(0); ++i) {
         for (auto j = 0; j < output.shape(1); ++j) {
+          auto I = i + filter.shape(0) - 1;
+          auto J = j + filter.shape(1) - 1;
           T current_output = output_coefficient * output.at({i, j});
           for (auto k = 0; k < filter.shape(0); ++k) {
             for (auto l = 0; l < filter.shape(1); ++l) {
-              current_output += input_coefficient * filter.at({k, l}) * input.at({i + k, j + l});
+              current_output += input_coefficient * filter.at({k, l}) * input.at({I - k, J - l});
             }
           }
           output.at({i, j}) = current_output;
