@@ -29,3 +29,14 @@ cc_binary(
     "math.hpp",
   ],
 )
+
+cc_test(
+  name = "test",
+  srcs = [
+    "test.cpp",
+  ],
+  size = "small",
+  deps = [
+    "//external:googletest",
+  ],
+)
