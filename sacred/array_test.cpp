@@ -4,7 +4,7 @@
 
 using sacred::Array;
 
-TEST(ArrayTest, Initialize) {
+TEST(Array, Initialize) {
   auto array = Array<float>({1, 2, 3});
   EXPECT_EQ(3, array.number_of_axes());
   EXPECT_EQ(6, array.count());
@@ -43,7 +43,7 @@ TEST(ArrayTest, Initialize) {
   EXPECT_DEATH(array.Reshape({4096, 4096, 4096}), ".*");
 }
 
-TEST(ArrayTest, InitializeValue) {
+TEST(Array, InitializeValue) {
   auto array = Array<float>({1, 2, 3}, {0, 1, 2, 3, 4, 5});
 
   for (auto j = 0; j < 2; ++j) {
@@ -53,7 +53,7 @@ TEST(ArrayTest, InitializeValue) {
   }
 }
 
-TEST(ArrayTest, Assign) {
+TEST(Array, Assign) {
   auto array = Array<float>({1, 2, 3});
 
   auto value = 0;

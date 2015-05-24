@@ -8,7 +8,7 @@ using sacred::Math;
 
 auto math = Math<float>();
 
-TEST(MathTest, NarrowConvolve2) {
+TEST(Math, NarrowConvolve2) {
   auto a = Array<float>({3, 3}, {
     9, 8, 7,
     6, 5, 4,
@@ -32,7 +32,7 @@ TEST(MathTest, NarrowConvolve2) {
       c);
 }
 
-TEST(MathTest, BackwardNarrowConvolve2) {
+TEST(Math, BackwardNarrowConvolve2) {
   auto a = Array<float>({3, 3}, {
     1, 2, 3,
     4, 5, 6,
@@ -56,7 +56,7 @@ TEST(MathTest, BackwardNarrowConvolve2) {
       c);
 }
 
-TEST(MathTest, WideConvolve2) {
+TEST(Math, WideConvolve2) {
   auto a = Array<float>({3, 3}, {
     9, 8, 7,
     6, 5, 4,
@@ -84,7 +84,7 @@ TEST(MathTest, WideConvolve2) {
       c);
 }
 
-TEST(MathTest, BackwardWideConvolve2) {
+TEST(Math, BackwardWideConvolve2) {
   auto a = Array<float>({3, 3}, {
     1, 2, 3,
     4, 5, 6,
@@ -112,7 +112,7 @@ TEST(MathTest, BackwardWideConvolve2) {
       c);
 }
 
-TEST(MathTest, RecurrentConvolve2) {
+TEST(Math, RecurrentConvolve2) {
   auto a = Array<float>({3, 3}, {
     9, 8, 7,
     6, 5, 4,
@@ -137,7 +137,7 @@ TEST(MathTest, RecurrentConvolve2) {
       c);
 }
 
-TEST(MathTest, BackwardRecurrentConvolve2) {
+TEST(Math, BackwardRecurrentConvolve2) {
   auto a = Array<float>({3, 3}, {
     1, 2, 3,
     4, 5, 6,
@@ -162,7 +162,7 @@ TEST(MathTest, BackwardRecurrentConvolve2) {
       c);
 }
 
-TEST(MathTest, GeneralMatrixMultiplication) {
+TEST(Math, GeneralMatrixMultiplication) {
   auto a = Array<float>({4, 2}, {
     1, 2,
     3, 4,

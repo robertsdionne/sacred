@@ -5,7 +5,7 @@
 
 using sacred::Blob;
 
-TEST(BlobTest, Initialize) {
+TEST(Blob, Initialize) {
   auto blob = Blob<float>({1, 2, 3});
   EXPECT_EQ(3, blob.number_of_axes());
   EXPECT_EQ(6, blob.count());
@@ -38,7 +38,7 @@ TEST(BlobTest, Initialize) {
   EXPECT_EQ(4, blob.diff().shape(2));
 }
 
-TEST(BlobTest, InitializeValue) {
+TEST(Blob, InitializeValue) {
   auto blob = Blob<float>({1, 2, 3}, {0, 1, 2, 3, 4, 5});
 
   for (auto j = 0; j < 2; ++j) {

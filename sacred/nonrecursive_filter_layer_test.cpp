@@ -8,7 +8,7 @@ using sacred::Array;
 using sacred::Blob;
 using sacred::NonrecursiveFilterLayer;
 
-TEST(NonrecursiveFilterLayerTest, Forward) {
+TEST(NonrecursiveFilterLayer, Forward) {
   auto input = Blob<float>({4, 4}, {
     1, 2, 3, 4,
     5, 6, 7, 8,
@@ -32,7 +32,7 @@ TEST(NonrecursiveFilterLayerTest, Forward) {
       output.value());
 }
 
-TEST(NonrecursiveFilterLayerTest, Backward) {
+TEST(NonrecursiveFilterLayer, Backward) {
   auto output = Blob<float>({2, 2}, {
     348, 393,
     528, 573
@@ -69,4 +69,8 @@ TEST(NonrecursiveFilterLayerTest, Backward) {
     11, 24, 28, 15,
     7, 15, 17, 9
   }), input.diff());
+}
+
+TEST(NonrecursiveFilterLayer, Gradient) {
+
 }
