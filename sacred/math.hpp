@@ -15,8 +15,28 @@ namespace sacred {
 
     virtual ~Math() = default;
 
+    void Add(Array<T> &output, const Array<T> &input, const T output_coefficient, const T input_coefficient) const {
+      CHECK_STATE(output.number_of_axes() == input.number_of_axes());
+      for (auto i = 0; i < output.number_of_axes(); ++i) {
+        CHECK_STATE(output.shape(i) == input.shape(i));
+      }
+      for (auto i = 0; i < output.count(); ++i) {
+        output.at(i) = output_coefficient * output.at(i) + input_coefficient * input.at(i);
+      }
+    }
+
+    void BroadcastAddVector(Array<T> &output, const Array<T> &vector,
+        const T output_coefficient, const T vector_coefficient) const {
+      CHECK_STATE(output.shape(0) == vector.shape(0));
+      for (auto i = 0; i < output.shape(0); ++i) {
+        for (auto j = 0; j < output.shape(1); ++j) {
+          output.at({i, j}) = output_coefficient * output.at({i, j}) + vector_coefficient * vector.at(j);
+        }
+      }
+    }
+
     void NarrowConvolve2(Array<T> &output, const Array<T> &filter, const Array<T> &input,
-        const T output_coefficient, const T input_coefficient) {
+        const T output_coefficient, const T input_coefficient) const {
       CHECK_STATE(input.shape(0) - filter.shape(0) + 1 == output.shape(0));
       CHECK_STATE(input.shape(1) - filter.shape(1) + 1 == output.shape(1));
       for (auto i = 0; i < output.shape(0); ++i) {
@@ -35,7 +55,7 @@ namespace sacred {
     }
 
     void BackwardNarrowConvolve2(Array<T> &output, const Array<T> &filter, const Array<T> &input,
-        const T output_coefficient, const T input_coefficient) {
+        const T output_coefficient, const T input_coefficient) const {
       CHECK_STATE(input.shape(0) - filter.shape(0) + 1 == output.shape(0));
       CHECK_STATE(input.shape(1) - filter.shape(1) + 1 == output.shape(1));
       for (auto i = 0; i < output.shape(0); ++i) {
@@ -52,7 +72,7 @@ namespace sacred {
     }
 
     void WideConvolve2(Array<T> &output, const Array<T> &filter, const Array<T> &input,
-        const T output_coefficient, const T input_coefficient) {
+        const T output_coefficient, const T input_coefficient) const {
       CHECK_STATE(input.shape(0) + filter.shape(0) - 1 == output.shape(0));
       CHECK_STATE(input.shape(1) + filter.shape(1) - 1 == output.shape(1));
       for (auto i = 0; i < output.shape(0); ++i) {
@@ -72,7 +92,7 @@ namespace sacred {
     }
 
     void BackwardWideConvolve2(Array<T> &output, const Array<T> &filter, const Array<T> &input,
-        const T output_coefficient, const T input_coefficient) {
+        const T output_coefficient, const T input_coefficient) const {
       CHECK_STATE(input.shape(0) + filter.shape(0) - 1 == output.shape(0));
       CHECK_STATE(input.shape(1) + filter.shape(1) - 1 == output.shape(1));
       for (auto i = 0; i < output.shape(0); ++i) {
@@ -94,7 +114,7 @@ namespace sacred {
     }
 
     void RecurrentConvolve2(Array<T> &output, const Array<T> &filter,
-        const T output_coefficient, const T input_coefficient) {
+        const T output_coefficient, const T input_coefficient) const {
       for (auto j = 0; j < output.shape(1); ++j) {
         for (auto i = 0; i < output.shape(0); ++i) {
           auto I = i + filter.shape(0) / 2;
@@ -114,7 +134,7 @@ namespace sacred {
     }
 
     void BackwardRecurrentConvolve2(Array<T> &output, const Array<T> &filter,
-        const T output_coefficient, const T input_coefficient) {
+        const T output_coefficient, const T input_coefficient) const {
       for (auto j = output.shape(1) - 1; j >= 0; --j) {
         for (auto i = 0; i < output.shape(0); ++i) {
           auto I = i - filter.shape(0) / 2;
@@ -134,7 +154,7 @@ namespace sacred {
     }
 
     void GeneralMatrixMultiplication(Array<T> &output, const Array<T> &left, const Array<T> &right,
-        const T output_coefficient, const T input_coefficient) {
+        const T output_coefficient, const T input_coefficient) const {
       CHECK_STATE(left.shape(0) == output.shape(0));
       CHECK_STATE(right.shape(1) == output.shape(1));
       CHECK_STATE(left.shape(1) == right.shape(0));

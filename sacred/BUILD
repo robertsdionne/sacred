@@ -62,3 +62,14 @@ cc_test(
     "//external:googletest",
   ],
 )
+
+cc_test(
+  name = "nonrecursive_filter_layer_test",
+  srcs = [
+    "nonrecursive_filter_layer_test.cpp",
+  ],
+  size = "small",
+  deps = [
+    "//external:googletest",
+  ],
+)

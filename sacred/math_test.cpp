@@ -20,10 +20,7 @@ TEST(MathTest, NarrowConvolve2) {
     9, 10, 11, 12,
     13, 14, 15, 16
   });
-  auto c = Array<float>({2, 2}, {
-    0, 0,
-    0, 0
-  });
+  auto c = Array<float>({2, 2});
 
   math.NarrowConvolve2(c, a, b, 0.0, 1.0);
 
@@ -47,10 +44,7 @@ TEST(MathTest, BackwardNarrowConvolve2) {
     9, 10, 11, 12,
     13, 14, 15, 16
   });
-  auto c = Array<float>({2, 2}, {
-    0, 0,
-    0, 0
-  });
+  auto c = Array<float>({2, 2});
 
   math.BackwardNarrowConvolve2(c, a, b, 0.0, 1.0);
 
@@ -74,14 +68,7 @@ TEST(MathTest, WideConvolve2) {
     9, 10, 11, 12,
     13, 14, 15, 16
   });
-  auto c = Array<float>({6, 6}, {
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0
-  });
+  auto c = Array<float>({6, 6});
 
   math.WideConvolve2(c, a, b, 0.0, 1.0);
 
@@ -109,14 +96,7 @@ TEST(MathTest, BackwardWideConvolve2) {
     9, 10, 11, 12,
     13, 14, 15, 16
   });
-  auto c = Array<float>({6, 6}, {
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0
-  });
+  auto c = Array<float>({6, 6});
 
   math.BackwardWideConvolve2(c, a, b, 0.0, 1.0);
 
@@ -193,12 +173,7 @@ TEST(MathTest, GeneralMatrixMultiplication) {
     1, 2, 3,
     4, 5, 6
   });
-  auto c = Array<float>({4, 3}, {
-    0, 0, 0,
-    0, 0, 0,
-    0, 0, 0,
-    0, 0, 0
-  });
+  auto c = Array<float>({4, 3});
 
   math.GeneralMatrixMultiplication(c, a, b, 0.0, 1.0);
 
