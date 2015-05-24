@@ -10,7 +10,7 @@ namespace sacred {
   template <typename F>
   class NonrecursiveFilterLayer : public Layer<F> {
   public:
-    NonrecursiveFilterLayer(const Blob<F> &bias, const Blob<F> filter) : bias_(bias), filter_(filter) {}
+    NonrecursiveFilterLayer(Blob<F> &bias, Blob<F> &filter) : bias_(bias), filter_(filter) {}
 
     virtual ~NonrecursiveFilterLayer() = default;
 
@@ -39,7 +39,7 @@ namespace sacred {
     }
 
   private:
-    Blob<F> bias_, filter_;
+    Blob<F> &bias_, &filter_;
     Math<F> math_;
   };
 
