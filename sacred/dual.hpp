@@ -1,106 +1,98 @@
 #ifndef SACRED_DUAL_HPP_
 #define SACRED_DUAL_HPP_
 
+#include <ostream>
+
 namespace sacred {
 
-  template <typename F>
   struct Dual {
-    constexpr Dual() = default;
+    constexpr Dual() : real(), dual() {}
 
-    constexpr Dual(const F real) : real(real), dual() {}
+    constexpr Dual(const float real) : real(real), dual() {}
 
-    constexpr Dual(const F real, F dual) : real(real), dual(dual) {}
+    constexpr Dual(const float real, float dual) : real(real), dual(dual) {}
 
-    template <typename G>
-    constexpr operator Dual<G>() const {
-      return Dual<G>(static_cast<G>(real), static_cast<G>(dual));
-    }
-
-    F real, dual;
+    float real, dual;
   };
 
-  // User-defined string-literals
-  constexpr Dual<long double> operator "" _ɛ(unsigned long long dual) {
-    return Dual<long double>(0.0, dual);
+  using std::ostream;
+
+  ostream &operator <<(ostream &out, const Dual d) {
+    return out << d.real << " + " << d.dual << "_ɛ";
   }
 
-  constexpr Dual<long double> operator "" _ɛ(long double dual) {
-    return Dual<long double>(0.0, dual);
+  // User-defined string-literals
+  constexpr Dual operator "" _ɛ(unsigned long long dual) {
+    return Dual(0.0, dual);
+  }
+
+  constexpr Dual operator "" _ɛ(long double dual) {
+    return Dual(0.0, dual);
   }
 
   // Negation
-  template <typename F>
-  constexpr Dual<F> operator -(const Dual<F> &d) {
-    return Dual<F>(-d.real, -d.dual);
+  constexpr Dual operator -(const Dual &d) {
+    return Dual(-d.real, -d.dual);
   }
 
   // Addition
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() + G())> operator +(const Dual<F> &a, const Dual<G> &b) {
-    return Dual<decltype(F() + G())>(a.real + b.real, a.dual + b.dual);
+  constexpr Dual operator +(const Dual &a, const Dual &b) {
+    return Dual(a.real + b.real, a.dual + b.dual);
   }
 
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() + G())> operator +(const F &a, const Dual<G> &b) {
-    return Dual<decltype(F() + G())>(a + b.real, b.dual);
+  constexpr Dual operator +(const float &a, const Dual &b) {
+    return Dual(a + b.real, b.dual);
   }
 
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() + G())> operator +(const Dual<F> &a, G &b) {
-    return Dual<decltype(F() + G())>(a.real + b, a.dual);
+  constexpr Dual operator +(const Dual &a, float &b) {
+    return Dual(a.real + b, a.dual);
+  }
+
+  inline Dual &operator +=(Dual &a, const Dual &b) {
+    return a = a + b;
   }
 
   // Subtraction
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() - G())> operator -(const Dual<F> &a, const Dual<G> &b) {
-    return Dual<decltype(F() - G())>(a.real - b.real, a.dual - b.dual);
+  constexpr Dual operator -(const Dual &a, const Dual &b) {
+    return Dual(a.real - b.real, a.dual - b.dual);
   }
 
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() - G())> operator -(const F &a, const Dual<G> &b) {
-    return Dual<decltype(F() - G())>(a - b.real, -b.dual);
+  constexpr Dual operator -(const float &a, const Dual &b) {
+    return Dual(a - b.real, -b.dual);
   }
 
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() - G())> operator -(const Dual<F> &a, G &b) {
-    return Dual<decltype(F() - G())>(a.real - b, a.dual);
+  constexpr Dual operator -(const Dual &a, float &b) {
+    return Dual(a.real - b, a.dual);
   }
 
   // Multiplication
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() * G())> operator *(const Dual<F> &a, const Dual<G> &b) {
-    return Dual<decltype(F() * G())>(a.real * b.real, a.real * b.dual + a.dual * b.real);
+  constexpr Dual operator *(const Dual &a, const Dual &b) {
+    return Dual(a.real * b.real, a.real * b.dual + a.dual * b.real);
   }
 
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() * G())> operator *(const F &a, const Dual<G> &b) {
-    return Dual<decltype(F() * G())>(a * b.real, a * b.dual);
+  constexpr Dual operator *(const float &a, const Dual &b) {
+    return Dual(a * b.real, a * b.dual);
   }
 
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() * G())> operator *(const Dual<F> &a, G &b) {
-    return Dual<decltype(F() * G())>(a.real * b, a.dual * b);
+  constexpr Dual operator *(const Dual &a, float &b) {
+    return Dual(a.real * b, a.dual * b);
   }
 
   // Division
-  template <typename F>
-  constexpr Dual<F> Reciprocal(const Dual<F> &d) {
-    return Dual<F>(1.0 / d.real, -d.dual / d.real / d.real);
+  constexpr Dual Reciprocal(const Dual &d) {
+    return Dual(1.0 / d.real, -d.dual / d.real / d.real);
   }
 
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() / G())> operator /(const Dual<F> &a, const Dual<G> &b) {
+  constexpr Dual operator /(const Dual &a, const Dual &b) {
     return a * Reciprocal(b);
   }
 
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() / G())> operator /(const F &a, const Dual<G> &b) {
+  constexpr Dual operator /(const float &a, const Dual &b) {
     return a * Reciprocal(b);
   }
 
-  template <typename F, typename G>
-  constexpr Dual<decltype(F() / G())> operator /(const Dual<F> &a, G &b) {
-    return Dual<decltype(F() / G())>(a.real / b, a.dual / b);
+  constexpr Dual operator /(const Dual &a, float &b) {
+    return Dual(a.real / b, a.dual / b);
   }
 
 }  // namespace sacred
