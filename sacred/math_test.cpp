@@ -32,29 +32,29 @@ TEST(Math, NarrowConvolve2) {
       c);
 }
 
-TEST(Math, BackwardNarrowConvolve2) {
-  auto a = Array<float>({3, 3}, {
-    1, 2, 3,
-    4, 5, 6,
-    7, 8, 9
-  });
-  auto b = Array<float>({4, 4}, {
-    1, 2, 3, 4,
-    5, 6, 7, 8,
-    9, 10, 11, 12,
-    13, 14, 15, 16
-  });
-  auto c = Array<float>({2, 2});
-
-  math.BackwardNarrowConvolve2(c, a, b, 0.0, 1.0);
-
-  EXPECT_EQ(
-      Array<float>({2, 2}, {
-        348, 393,
-        528, 573
-      }),
-      c);
-}
+// TEST(Math, BackwardNarrowConvolve2) {
+//   auto a = Array<float>({3, 3}, {
+//     1, 2, 3,
+//     4, 5, 6,
+//     7, 8, 9
+//   });
+//   auto b = Array<float>({4, 4}, {
+//     1, 2, 3, 4,
+//     5, 6, 7, 8,
+//     9, 10, 11, 12,
+//     13, 14, 15, 16
+//   });
+//   auto c = Array<float>({2, 2});
+//
+//   math.BackwardNarrowConvolve2(c, a, b, 0.0, 1.0);
+//
+//   EXPECT_EQ(
+//       Array<float>({2, 2}, {
+//         348, 393,
+//         528, 573
+//       }),
+//       c);
+// }
 
 TEST(Math, WideConvolve2) {
   auto a = Array<float>({3, 3}, {

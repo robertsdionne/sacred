@@ -23,9 +23,12 @@ namespace sacred {
 
     void Backward(const Blob<F> &top, Blob<F> *bottom) override {
       // Filter derivatives:
-      // ∂E/∂c_k = Σ_n ∂E/∂y_n * u_{n-k}
+      // ∂E/∂c_k = Σ_n ∂E/∂y_n * u_{n+k}
+      // Note: my manual calculations figured ∂E/∂c_k = Σ_n ∂E/∂y_n * u_{n-k} but this disagrees
+      //    with the dual number gradient verification. My mistake might be that
+      //    ∂E/∂c_{-k} = Σ_n ∂E/∂y_n * u_{n-k} === ∂E/∂c_k = Σ_n ∂E/∂y_n * u_{n+k} is correct.
       // ∇_c E = ∇_y E ⁎ u
-      math_.NarrowConvolve2(filter_.diff(), top.diff(), bottom->value(), F(1.0), F(1.0));
+      math_.BackwardNarrowConvolve2(filter_.diff(), bottom->value(), top.diff(), F(1.0), F(1.0));
 
       // Bottom derivatives:
       // ∂E/∂u_n = Σ_k ∂E/∂y_{n+k} c_k

@@ -54,19 +54,24 @@ namespace sacred {
       }
     }
 
-    void BackwardNarrowConvolve2(Array<T> &output, const Array<T> &filter, const Array<T> &input,
-        const T output_coefficient, const T input_coefficient) const {
+    void BackwardNarrowConvolve2(Array<T> &filter, const Array<T> &input, const Array<T> &output,
+        const T filter_coefficient, const T output_coefficient) const {
       CHECK_STATE(input.shape(0) - filter.shape(0) + 1 == output.shape(0));
       CHECK_STATE(input.shape(1) - filter.shape(1) + 1 == output.shape(1));
-      for (auto i = 0; i < output.shape(0); ++i) {
-        for (auto j = 0; j < output.shape(1); ++j) {
-          T current_output = output_coefficient * output.at({i, j});
-          for (auto k = 0; k < filter.shape(0); ++k) {
-            for (auto l = 0; l < filter.shape(1); ++l) {
-              current_output += input_coefficient * filter.at({k, l}) * input.at({i + k, j + l});
+      for (auto i = 0; i < filter.shape(0); ++i) {
+        for (auto j = 0; j < filter.shape(1); ++j) {
+          T current_filter = filter_coefficient * filter.at({i, j});
+          for (auto k = 0; k < input.shape(0); ++k) {
+            for (auto l = 0; l < input.shape(1); ++l) {
+              auto I = i - input.shape(0) / 2;
+              auto J = j - input.shape(1) / 2;
+              auto in = 0 <= I + k && I + k < output.shape(0) && 0 <= J + l && J + l < output.shape(1);
+              if (in) {
+                current_filter += output_coefficient * input.at({k, l}) * output.at({I + k, J + l});
+              }
             }
           }
-          output.at({i, j}) = current_output;
+          filter.at({i, j}) = current_filter;
         }
       }
     }
