@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <iostream>
 
 #include "array.hpp"
 #include "blob.hpp"
@@ -59,7 +58,7 @@ TEST(NonrecursiveFilterLayer, Backward) {
     1, 1
   }), bias.diff());
   EXPECT_EQ(Array<float>({3, 3}, {
-    54, 50, 46, 
+    54, 50, 46,
     38, 34, 30,
     22, 18, 14
   }), filter.diff());
@@ -135,8 +134,6 @@ TEST(NonrecursiveFilterLayer, Gradient) {
 
       filter.value({i, j}).dual = 1.0;
       layer.Forward(input, &output);
-
-      std::cout << output.value() << std::endl;
 
       auto loss = 0_ɛ;
       for (auto k = 0; k < output.shape(0); ++k) {
