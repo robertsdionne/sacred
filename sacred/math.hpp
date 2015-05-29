@@ -43,18 +43,13 @@ namespace sacred {
           for (auto l = 0; l < filter.shape(0); ++l) {
             auto in = 0 <= i - l;
             if (in) {
-              current_output += filter.at({l}) * scratch.at({k, i - l + 1});
+              current_output += filter.at({l}) * scratch.at({k, i - l});
             }
           }
           scratch.at({k, I}) += current_output * output_diff.at({I});
           filter_diff.at({k}) += current_output * output_diff.at({I});
         }
       }
-      std::cout << filter << std::endl;
-      std::cout << output << std::endl;
-      std::cout << output_diff << std::endl;
-      std::cout << scratch << std::endl;
-      std::cout << filter_diff << std::endl;
     }
 
     void Add(Array<T> &output, const Array<T> &input, const T output_coefficient, const T input_coefficient) const {
