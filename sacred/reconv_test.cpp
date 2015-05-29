@@ -111,8 +111,8 @@ TEST(Reconv, BackwardFilter2) {
 }
 
 TEST(Reconv, Backward) {
-  auto output = Array<float>({4, 1}, {
-    1, 2, 3, 4
+  auto output = Array<float>({8, 1}, {
+    1, 3, 8, 21, 55, 139, 351, 886
   });
   auto output_diff = Array<float>({4, 1}, {
     0, 1, 1, 1

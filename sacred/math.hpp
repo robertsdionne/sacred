@@ -43,7 +43,7 @@ namespace sacred {
           for (auto l = 0; l < filter.shape(0); ++l) {
             auto in = 0 <= i - l;
             if (in) {
-              current_output += filter.at({l}) * scratch.at({k, i - l + 1});
+              current_output += filter.at({l}) * scratch.at({k, i - l});
             }
           }
           scratch.at({k, I}) += current_output * output_diff.at({I});
