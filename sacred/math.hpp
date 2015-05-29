@@ -32,7 +32,7 @@ namespace sacred {
     void BackwardReconv(Array<T> &filter_diff, const Array<T> &filter,
         const Array<T> &output_diff, const Array<T> &output) {
       auto scratch = Array<T>({filter.shape(0), output.shape(0)});
-      for (auto i = 0; i < scratch.shape(0); ++i) {
+      for (auto i = 0; i < scratch.shape(1) - 1; ++i) {
         for (auto k = 0; k < filter.shape(0); ++k) {
           T current_output = T(0.0);
           auto I = i + 1;
@@ -50,6 +50,11 @@ namespace sacred {
           filter_diff.at({k}) += current_output * output_diff.at({I});
         }
       }
+      std::cout << filter << std::endl;
+      std::cout << output << std::endl;
+      std::cout << output_diff << std::endl;
+      std::cout << scratch << std::endl;
+      std::cout << filter_diff << std::endl;
     }
 
     void Add(Array<T> &output, const Array<T> &input, const T output_coefficient, const T input_coefficient) const {
