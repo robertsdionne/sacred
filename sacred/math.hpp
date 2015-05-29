@@ -32,7 +32,7 @@ namespace sacred {
     void BackwardReconv(Array<T> &filter_diff, const Array<T> &filter,
         const Array<T> &output_diff, const Array<T> &output) {
       auto scratch = Array<T>({filter.shape(0), output.shape(0)});
-      for (auto i = 0; i < scratch.shape(0); ++i) {
+      for (auto i = 0; i < scratch.shape(1) - 1; ++i) {
         for (auto k = 0; k < filter.shape(0); ++k) {
           T current_output = T(0.0);
           auto I = i + 1;
