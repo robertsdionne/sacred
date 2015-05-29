@@ -1,10 +1,13 @@
 #include <gtest/gtest.h>
 
 #include "array.hpp"
+#include "dual.hpp"
 #include "math.hpp"
 
 using sacred::Array;
+using sacred::Dual;
 using sacred::Math;
+using namespace sacred;
 
 auto math = Math<float>();
 
@@ -113,22 +116,23 @@ TEST(Math, BackwardWideConvolve2) {
 }
 
 TEST(Math, RecurrentConvolve2) {
-  auto a = Array<float>({3, 3}, {
-    9, 8, 7,
+  auto a = Array<Dual>({3, 3}, {
+    9 + 1_ɛ, 8, 7,
     6, 5, 4,
     3, 2, 1
   });
-  auto c = Array<float>({4, 4}, {
+  auto c = Array<Dual>({4, 4}, {
     1, 2, 3, 4,
     5, 6, 7, 8,
     9, 10, 11, 12,
     13, 14, 15, 16
   });
+  auto m = Math<Dual>();
 
-  math.RecurrentConvolve2(c, a, 1.0, 1.0);
+  m.RecurrentConvolve2(c, a, 1.0, 1.0);
 
   EXPECT_EQ(
-      Array<float>({4, 4}, {
+      Array<Dual>({4, 4}, {
         1, 53, 1446, 34685,
         5, 120, 2749, 48191,
         9, 196, 2777, 39825,

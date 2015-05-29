@@ -30,6 +30,14 @@ namespace sacred {
     return Dual(0.0, dual);
   }
 
+  constexpr bool operator ==(const Dual &a, const Dual &b) {
+    return a.real == b.real && a.dual == b.dual;
+  }
+
+  constexpr bool operator !=(const Dual &a, const Dual &b) {
+    return !(a == b);
+  }
+
   // Negation
   constexpr Dual operator -(const Dual &d) {
     return Dual(-d.real, -d.dual);

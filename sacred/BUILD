@@ -75,6 +75,17 @@ cc_test(
 )
 
 cc_test(
+  name = "reconv_test",
+  srcs = [
+    "reconv_test.cpp",
+  ],
+  size = "small",
+  deps = [
+    "//external:googletest",
+  ],
+)
+
+cc_test(
   name = "recursive_filter_layer_test",
   srcs = [
     "recursive_filter_layer_test.cpp",
