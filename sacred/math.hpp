@@ -46,7 +46,7 @@ namespace sacred {
               current_output += filter.at({l}) * scratch.at({k, i - l});
             }
           }
-          scratch.at({k, I}) += current_output * output_diff.at({I});
+          scratch.at({k, I}) += current_output;
           filter_diff.at({k}) += current_output * output_diff.at({I});
         }
       }
