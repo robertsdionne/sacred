@@ -23,120 +23,33 @@ TEST(Reconv, Forward) {
       output);
 }
 
-TEST(Reconv, BackwardFilter0) {
-  auto output = Array<Dual>({8, 1}, {
-    1, 2, 3, 4, 5, 6, 7, 8
-  });
-  auto filter = Array<Dual>({4, 1}, {
-    1 + 1_ɛ, 2, 3, 4
-  });
+TEST(Reconv, BackwardFilter) {
   auto math = Math<Dual>();
-
-  math.Reconv(output, filter);
-
-  EXPECT_EQ(Array<Dual>({8, 1}, {
-        1, 3 + 1_ɛ, 8 + 4_ɛ, 21 + 14_ɛ, 55 + 46_ɛ, 139 + 145_ɛ, 351 + 434_ɛ, 886 + 1269_ɛ
-      }),
-      output);
-
   auto target = Array<Dual>({8, 1}, {
     1, 2, 6, 20, 54, 138, 350, 885
   });
+  auto error = Array<Dual>({4, 1});
 
-  auto error = 0_ɛ;
-  for (auto i = 0; i < 8; ++i) {
-    auto delta = target.at({i}) - output.at({i});
-    error += delta * delta / 2.0;
+  for (auto k = 0; k < 4; ++k) {
+    auto output = Array<Dual>({8, 1}, {
+      1, 2, 3, 4, 5, 6, 7, 8
+    });
+    auto filter = Array<Dual>({4, 1}, {
+      1, 2, 3, 4
+    });
+    filter.at({k}) += 1_ɛ;
+
+    math.Reconv(output, filter);
+
+    for (auto i = 0; i < 8; ++i) {
+      auto delta = target.at({i}) - output.at({i});
+      error.at({k}) += delta * delta / 2.0;
+    }
   }
 
-  EXPECT_EQ(5.0 + 1917_ɛ, error);
-}
-
-TEST(Reconv, BackwardFilter1) {
-  auto output = Array<Dual>({8, 1}, {
-    1, 2, 3, 4, 5, 6, 7, 8
-  });
-  auto filter = Array<Dual>({4, 1}, {
-    1, 2 + 1_ɛ, 3, 4
-  });
-  auto math = Math<Dual>();
-
-  math.Reconv(output, filter);
-
-  EXPECT_EQ(Array<Dual>({8, 1}, {
-        1, 3, 8 + 1_ɛ, 21 + 4_ɛ, 55 + 14_ɛ, 139 + 46_ɛ, 351 + 145_ɛ, 886 + 434_ɛ
-      }),
-      output);
-
-  auto target = Array<Dual>({8, 1}, {
-    1, 2, 6, 20, 54, 138, 350, 885
-  });
-
-  auto error = 0_ɛ;
-  for (auto i = 0; i < 8; ++i) {
-    auto delta = target.at({i}) - output.at({i});
-    error += delta * delta / 2.0;
-  }
-
-  EXPECT_EQ(5.0 + 645_ɛ, error);
-}
-
-TEST(Reconv, BackwardFilter2) {
-  auto output = Array<Dual>({8, 1}, {
-    1, 2, 3, 4, 5, 6, 7, 8
-  });
-  auto filter = Array<Dual>({4, 1}, {
-    1, 2, 3 + 1_ɛ, 4
-  });
-  auto math = Math<Dual>();
-
-  math.Reconv(output, filter);
-
-  EXPECT_EQ(Array<Dual>({8, 1}, {
-        1, 3, 8, 21 + 1_ɛ, 55 + 4_ɛ, 139 + 14_ɛ, 351 + 46_ɛ, 886 + 145_ɛ
-      }),
-      output);
-
-  auto target = Array<Dual>({8, 1}, {
-    1, 2, 6, 20, 54, 138, 350, 885
-  });
-
-  auto error = 0_ɛ;
-  for (auto i = 0; i < 8; ++i) {
-    auto delta = target.at({i}) - output.at({i});
-    error += delta * delta / 2.0;
-  }
-
-  EXPECT_EQ(5.0 + 210_ɛ, error);
-}
-
-TEST(Reconv, BackwardFilter3) {
-  auto output = Array<Dual>({8, 1}, {
-    1, 2, 3, 4, 5, 6, 7, 8
-  });
-  auto filter = Array<Dual>({4, 1}, {
-    1, 2, 3, 4 + 1_ɛ
-  });
-  auto math = Math<Dual>();
-
-  math.Reconv(output, filter);
-
-  EXPECT_EQ(Array<Dual>({8, 1}, {
-        1, 3, 8, 21, 55 + 1_ɛ, 139 + 4_ɛ, 351 + 14_ɛ, 886 + 46_ɛ
-      }),
-      output);
-
-  auto target = Array<Dual>({8, 1}, {
-    1, 2, 6, 20, 54, 138, 350, 885
-  });
-
-  auto error = 0_ɛ;
-  for (auto i = 0; i < 8; ++i) {
-    auto delta = target.at({i}) - output.at({i});
-    error += delta * delta / 2.0;
-  }
-
-  EXPECT_EQ(5.0 + 65_ɛ, error);
+  EXPECT_EQ(Array<Dual>({4, 1}, {
+    5.0 + 1917_ɛ, 5.0 + 645_ɛ, 5.0 + 210_ɛ, 5.0 + 65_ɛ
+  }), error);
 }
 
 TEST(Reconv, Backward) {
