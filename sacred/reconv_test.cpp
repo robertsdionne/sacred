@@ -40,7 +40,7 @@ TEST(Reconv, BackwardFilter0) {
       output);
 
   auto target = Array<Dual>({8, 1}, {
-    1, 2, 7, 20, 54, 138, 350, 885
+    1, 2, 6, 20, 54, 138, 350, 885
   });
 
   auto error = 0_ɛ;
@@ -49,7 +49,7 @@ TEST(Reconv, BackwardFilter0) {
     error += delta * delta / 2.0;
   }
 
-  EXPECT_EQ(3.5 + 1913_ɛ, error);
+  EXPECT_EQ(5.0 + 1917_ɛ, error);
 }
 
 TEST(Reconv, BackwardFilter1) {
@@ -69,7 +69,7 @@ TEST(Reconv, BackwardFilter1) {
       output);
 
   auto target = Array<Dual>({8, 1}, {
-    1, 2, 7, 20, 54, 138, 350, 885
+    1, 2, 6, 20, 54, 138, 350, 885
   });
 
   auto error = 0_ɛ;
@@ -78,7 +78,7 @@ TEST(Reconv, BackwardFilter1) {
     error += delta * delta / 2.0;
   }
 
-  EXPECT_EQ(3.5 + 644_ɛ, error);
+  EXPECT_EQ(5.0 + 645_ɛ, error);
 }
 
 TEST(Reconv, BackwardFilter2) {
@@ -98,7 +98,7 @@ TEST(Reconv, BackwardFilter2) {
       output);
 
   auto target = Array<Dual>({8, 1}, {
-    1, 2, 7, 20, 54, 138, 350, 885
+    1, 2, 6, 20, 54, 138, 350, 885
   });
 
   auto error = 0_ɛ;
@@ -107,7 +107,7 @@ TEST(Reconv, BackwardFilter2) {
     error += delta * delta / 2.0;
   }
 
-  EXPECT_EQ(3.5 + 210_ɛ, error);
+  EXPECT_EQ(5.0 + 210_ɛ, error);
 }
 
 TEST(Reconv, BackwardFilter3) {
@@ -127,7 +127,7 @@ TEST(Reconv, BackwardFilter3) {
       output);
 
   auto target = Array<Dual>({8, 1}, {
-    1, 2, 7, 20, 54, 138, 350, 885
+    1, 2, 6, 20, 54, 138, 350, 885
   });
 
   auto error = 0_ɛ;
@@ -136,7 +136,7 @@ TEST(Reconv, BackwardFilter3) {
     error += delta * delta / 2.0;
   }
 
-  EXPECT_EQ(3.5 + 65_ɛ, error);
+  EXPECT_EQ(5.0 + 65_ɛ, error);
 }
 
 TEST(Reconv, Backward) {
@@ -144,7 +144,7 @@ TEST(Reconv, Backward) {
     1, 3, 8, 21, 55, 139, 351, 886
   });
   auto output_diff = Array<float>({8, 1}, {
-    0, 1, 1, 1, 1, 1, 1, 1
+    0, 1, 2, 1, 1, 1, 1, 1
   });
   auto filter = Array<float>({4, 1}, {
     1, 2, 3, 4
@@ -155,6 +155,6 @@ TEST(Reconv, Backward) {
   math.BackwardReconv(filter_diff, filter, output_diff, output);
 
   EXPECT_EQ(Array<float>({4, 1}, {
-        1913, 644, 210, 65
+        1917, 645, 210, 65
       }), filter_diff);
 }

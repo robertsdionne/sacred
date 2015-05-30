@@ -31,23 +31,25 @@ namespace sacred {
 
     void BackwardReconv(Array<T> &filter_diff, const Array<T> &filter,
         const Array<T> &output_diff, const Array<T> &output) {
-      auto scratch = Array<T>({filter.shape(0), output.shape(0)});
-      for (auto i = 0; i < scratch.shape(1) - 1; ++i) {
+      auto scratch = Array<T>({output.shape(0), 1});
+      for (auto i = 0; i < scratch.shape(0) - 1; ++i) {
+        T current_output = T(0.0);
+        auto I = i + 1;
+        current_output += output.at({i});
         for (auto k = 0; k < filter.shape(0); ++k) {
-          T current_output = T(0.0);
-          auto I = i + 1;
           auto in = 0 <= i - k;
           if (in) {
-            current_output += output.at({i - k});
+            current_output += filter.at({k}) * scratch.at({i - k});
           }
-          for (auto l = 0; l < filter.shape(0); ++l) {
-            auto in = 0 <= i - l;
-            if (in) {
-              current_output += filter.at({l}) * scratch.at({k, i - l});
-            }
+        }
+        scratch.at({I}) += current_output;
+      }
+      for (auto i = 0; i < scratch.shape(0) - 1; ++i) {
+        for (auto k = 0; k < filter.shape(0); ++k) {
+          auto in = 0 <= i - k;
+          if (in) {
+            filter_diff.at({k}) += scratch.at({i - k + 1}) * output_diff.at({i + 1});
           }
-          scratch.at({k, I}) += current_output;
-          filter_diff.at({k}) += current_output * output_diff.at({I});
         }
       }
     }
