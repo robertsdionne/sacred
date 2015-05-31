@@ -95,3 +95,14 @@ cc_test(
     "//external:googletest",
   ],
 )
+
+cc_test(
+  name = "stacked_test",
+  srcs = [
+    "stacked_test.cpp",
+  ],
+  size = "small",
+  deps = [
+    "//external:googletest",
+  ],
+)
