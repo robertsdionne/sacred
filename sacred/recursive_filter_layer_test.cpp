@@ -34,6 +34,50 @@ TEST(RecursiveFilterLayer, Forward) {
       output.value());
 }
 
+TEST(RecursiveFilterLayer, BackwardFilter) {
+  auto target = Array<Dual>({4, 4}, {
+    1, 6-1, 36-2, 227-3,
+    2-1, 14-2, 95-3, 635-4,
+    3-2, 22-3, 157-4, 1093-5,
+    4-3, 25-4, 171-5, 1196-6
+  });
+  auto error = Array<Dual>({3, 3});
+
+  for (auto k = 0; k < 3; ++k) {
+    for (auto l = 0; l < 3; ++l) {
+      auto input = Blob<Dual>({4, 4}, {
+        1, 2, 3, 4,
+        2, 3, 4, 5,
+        3, 4, 5, 6,
+        4, 5, 6, 7
+      });
+      auto bias = Blob<Dual>({4});
+      auto filter = Blob<Dual>({3, 3}, {
+        1, 2, 3,
+        2, 3, 4,
+        4, 5, 6
+      });
+      filter.value({k, l}) += 1_ɛ;
+      auto layer = RecursiveFilterLayer<Dual>(bias, filter);
+      auto output = Blob<Dual>({4, 4});
+      layer.Forward(input, &output);
+
+      for (auto i = 0; i < 4; ++i) {
+        for (auto j = 0; j < 4; ++j) {
+          auto delta = target.at({i, j}) - output.value({i, j});
+          error.at({k, l}) += delta * delta / 2.0;
+        }
+      }
+    }
+  }
+
+  EXPECT_EQ(Array<Dual>({3, 3}, {
+    92 + 6293_ɛ, 92 + 573_ɛ, 92 + 38_ɛ,
+    92 + 6475_ɛ, 92 + 640_ɛ, 92 + 50_ɛ,
+    92 + 4020_ɛ, 92 + 410_ɛ, 92 + 32_ɛ
+  }), error);
+}
+
 // TEST(RecursiveFilterLayer, Backward) {
 //   auto output = Blob<float>({4, 4}, {
 //     1, 53, 1446, 34685,
