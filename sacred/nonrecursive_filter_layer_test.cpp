@@ -10,47 +10,47 @@ using namespace sacred;
 TEST(NonrecursiveFilterLayer, Forward) {
   auto input = Blob<float>({4, 4}, {
     1, 2, 3, 4,
-    5, 6, 7, 8,
-    9, 10, 11, 12,
-    13, 14, 15, 16
+    2, 3, 4, 5,
+    3, 4, 5, 6,
+    4, 5, 6, 7
   });
   auto bias = Blob<float>({2, 2});
   auto filter = Blob<float>({3, 3}, {
-    9, 8, 7,
-    6, 5, 4,
-    3, 2, 1
+    1, 2, 3,
+    2, 3, 4,
+    3, 4, 5
   });
   auto layer = NonrecursiveFilterLayer<float>(bias, filter);
   auto output = Blob<float>({2, 2});
   layer.Forward(input, &output);
   EXPECT_EQ(
       Array<float>({2, 2}, {
-        348, 393,
-        528, 573
-      }),
+        69, 96,
+        96, 123
+       }),
       output.value());
 }
 
 TEST(NonrecursiveFilterLayer, Backward) {
   auto output = Blob<float>({2, 2}, {
-    348, 393,
-    528, 573
+    69, 96,
+    96, 123
   }, {
     1, 1,
     1, 1
   });
   auto bias = Blob<float>({2, 2});
   auto filter = Blob<float>({3, 3}, {
-    9, 8, 7,
-    6, 5, 4,
-    3, 2, 1
+    1, 2, 3,
+    2, 3, 4,
+    3, 4, 5
   });
   auto layer = NonrecursiveFilterLayer<float>(bias, filter);
   auto input = Blob<float>({4, 4}, {
     1, 2, 3, 4,
-    5, 6, 7, 8,
-    9, 10, 11, 12,
-    13, 14, 15, 16
+    2, 3, 4, 5,
+    3, 4, 5, 6,
+    4, 5, 6, 7
   });
   layer.Backward(output, &input);
   EXPECT_EQ(Array<float>({2, 2}, {
@@ -58,37 +58,37 @@ TEST(NonrecursiveFilterLayer, Backward) {
     1, 1
   }), bias.diff());
   EXPECT_EQ(Array<float>({3, 3}, {
-    54, 50, 46,
-    38, 34, 30,
-    22, 18, 14
-  }), filter.diff());
+    24, 20, 16,
+    20, 16, 12,
+    16, 12, 8
+   }), filter.diff());
   EXPECT_EQ(Array<float>({4, 4}, {
-    1, 3, 5, 3,
-    5, 12, 16, 9,
-    11, 24, 28, 15,
-    7, 15, 17, 9
+    5, 9, 7, 3,
+    9, 16, 12, 5,
+    7, 12, 8, 3,
+    3, 5, 3, 1
   }), input.diff());
 }
 
 TEST(NonrecursiveFilterLayer, Gradient) {
   auto target = Blob<Dual>({2, 2}, {
-    349, 392,
-    527, 572
+    69, 96,
+    96, 123
   });
 
   for (auto i = 0; i < 4; ++i) {
     for (auto j = 0; j < 4; ++j) {
       auto input = Blob<Dual>({4, 4}, {
         1, 2, 3, 4,
-        5, 6, 7, 8,
-        9, 10, 11, 12,
-        13, 14, 15, 16
+        2, 3, 4, 5,
+        3, 4, 5, 6,
+        4, 5, 6, 7
       });
       auto bias = Blob<Dual>({2, 2});
       auto filter = Blob<Dual>({3, 3}, {
-        9, 8, 7,
-        6, 5, 4,
-        3, 2, 1
+        1, 2, 3,
+        2, 3, 4,
+        3, 4, 5
       });
       auto layer = NonrecursiveFilterLayer<Dual>(bias, filter);
       auto output = Blob<Dual>({2, 2});
@@ -118,15 +118,15 @@ TEST(NonrecursiveFilterLayer, Gradient) {
     for (auto j = 0; j < 3; ++j) {
       auto input = Blob<Dual>({4, 4}, {
         1, 2, 3, 4,
-        5, 6, 7, 8,
-        9, 10, 11, 12,
-        13, 14, 15, 16
+        2, 3, 4, 5,
+        3, 4, 5, 6,
+        4, 5, 6, 7
       });
       auto bias = Blob<Dual>({2, 2});
       auto filter = Blob<Dual>({3, 3}, {
-        9, 8, 7,
-        6, 5, 4,
-        3, 2, 1
+        1, 2, 3,
+        2, 3, 4,
+        3, 4, 5
       });
       auto layer = NonrecursiveFilterLayer<Dual>(bias, filter);
       auto output = Blob<Dual>({2, 2});
@@ -157,15 +157,15 @@ TEST(NonrecursiveFilterLayer, Gradient) {
     for (auto j = 0; j < 2; ++j) {
       auto input = Blob<Dual>({4, 4}, {
         1, 2, 3, 4,
-        5, 6, 7, 8,
-        9, 10, 11, 12,
-        13, 14, 15, 16
+        2, 3, 4, 5,
+        3, 4, 5, 6,
+        4, 5, 6, 7
       });
       auto bias = Blob<Dual>({2, 2});
       auto filter = Blob<Dual>({3, 3}, {
-        9, 8, 7,
-        6, 5, 4,
-        3, 2, 1
+        1, 2, 3,
+        2, 3, 4,
+        3, 4, 5
       });
       auto layer = NonrecursiveFilterLayer<Dual>(bias, filter);
       auto output = Blob<Dual>({2, 2});
