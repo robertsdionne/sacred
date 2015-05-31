@@ -19,6 +19,16 @@ cc_binary(
   ],
 )
 
+cc_binary(
+  name = "sacred",
+  srcs = [
+    "sacred.cpp",
+  ],
+  deps = [
+    "//external:googleflags",
+  ],
+)
+
 cc_test(
   name = "array_test",
   srcs = [
