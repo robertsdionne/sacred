@@ -11,25 +11,25 @@ using namespace sacred;
 TEST(RecursiveFilterLayer, Forward) {
   auto input = Blob<float>({4, 4}, {
     1, 2, 3, 4,
-    5, 6, 7, 8,
-    9, 10, 11, 12,
-    13, 14, 15, 16
+    2, 3, 4, 5,
+    3, 4, 5, 6,
+    4, 5, 6, 7
   });
   auto bias = Blob<float>({4});
   auto filter = Blob<float>({3, 3}, {
-    9, 8, 7,
-    6, 5, 4,
-    3, 2, 1
+    1, 2, 3,
+    2, 3, 4,
+    4, 5, 6
   });
   auto layer = RecursiveFilterLayer<float>(bias, filter);
   auto output = Blob<float>({4, 4});
   layer.Forward(input, &output);
   EXPECT_EQ(
       Array<float>({4, 4}, {
-        1, 53, 1446, 34685,
-        5, 120, 2749, 48191,
-        9, 196, 2777, 39825,
-        13, 119, 1400, 17795
+        1, 6, 36, 227,
+        2, 14, 95, 635,
+        3, 22, 157, 1093,
+        4, 25, 171, 1196
       }),
       output.value());
 }
