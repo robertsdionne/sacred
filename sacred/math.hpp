@@ -28,46 +28,35 @@ namespace sacred {
 
     void BackwardRecurrentConvolveFilter(Array<T> &filter_diff, const Array<T> &filter,
         const Array<T> &output_diff, const Array<T> &output) {
-      auto scratch = Array<T>({output.shape(0), output.shape(1)});
-      for (auto j = 0; j < scratch.shape(1) - 1; ++j) {
-        for (auto i = 0; i < scratch.shape(0); ++i) {
-          T current_output = T(0.0);
-          auto I = i + filter.shape(0) / 2 - 1;
-          auto J = j + 1;
-          current_output += output.at({i, j});
-          for (auto k = 0; k < filter.shape(0); ++k) {
-            for (auto l = 0; l < filter.shape(1); ++l) {
-              auto in = 0 <= i - k && i - k < scratch.shape(0) && 0 <= j - l;
-              if (in) {
-                current_output += filter.at({k, l}) * scratch.at({i - k, j - l});
+      auto scratch = Array<T>({filter.shape(0), output.shape(0), output.shape(1)});
+      for (auto m = 0; m < filter.shape(0); ++m) {
+        for (auto j = 0; j < scratch.shape(2); ++j) {
+          for (auto i = 0; i < scratch.shape(1) + 1; ++i) {
+            T current_output = T(0.0);
+            current_output += output.at({i - filter.shape(0) / 2 + m, j - 1});
+            for (auto k = 0; k < filter.shape(0); ++k) {
+              for (auto l = 0; l < filter.shape(1); ++l) {
+                current_output += filter.at({k, l}) * scratch.at({m, i - k + filter.shape(0) / 2, j - l - 1});
               }
             }
-          }
-          auto in = 0 <= I && I < scratch.shape(0);
-          if (in) {
-            scratch.add({I, J}, current_output);
+            scratch.add({m, i, j}, current_output);
           }
         }
       }
-      for (auto j = 0; j < scratch.shape(1) - 1; ++j) {
-        for (auto i = 1; i < scratch.shape(0) - 1; ++i) {
-          auto I = i + filter.shape(0) / 2;
-          auto J = j + 1;
+      for (auto j = 0; j < scratch.shape(2); ++j) {
+        for (auto i = 0; i < scratch.shape(1); ++i) {
           for (auto k = 0; k < filter.shape(0); ++k) {
             for (auto l = 0; l < filter.shape(1); ++l) {
-              auto in = 0 <= I - k && I - k < scratch.shape(0) && 0 <= J - l && 0 <= I && I < output.shape(0) && 0 <= J && J < output.shape(1);
-              if (in) {
-                filter_diff.add({k, l}, scratch.at({I - k, J - l}) * output_diff.at({I, J}));
-              }
+              filter_diff.add({k, l}, scratch.at({filter.shape(0) - 1 - k, i, j}) * output_diff.at({i, j}));
             }
           }
         }
       }
-      std::cout << scratch << std::endl;
-      std::cout << filter_diff << std::endl;
-      std::cout << filter << std::endl;
-      std::cout << output_diff << std::endl;
-      std::cout << output << std::endl;
+      // std::cout << filter_diff << std::endl;
+      // std::cout << filter << std::endl;
+      // std::cout << output_diff << std::endl;
+      // std::cout << output << std::endl;
+      // std::cout << scratch << std::endl;
     }
 
     void BackwardReconv(Array<T> &filter_diff, const Array<T> &filter,

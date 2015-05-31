@@ -154,11 +154,28 @@ namespace sacred {
 
   template <typename F>
   ostream &operator <<(ostream &out, const Array<F> &array) {
-    for (auto i = 0; i < array.shape(0); ++i) {
-      for (auto j = 0; j < array.shape(1); ++j) {
-        out << array.at({i, j}) << u8" ";
+    if (1 == array.number_of_axes()) {
+      for (auto k = 0; k < array.shape(1); ++k) {
+        out << array.at({k}) << u8" ";
       }
       out << std::endl;
+    } else if (2 == array.number_of_axes()) {
+      for (auto j = 0; j < array.shape(0); ++j) {
+        for (auto k = 0; k < array.shape(1); ++k) {
+          out << array.at({j, k}) << u8" ";
+        }
+        out << std::endl;
+      }
+    } else if (3 == array.number_of_axes()) {
+      for (auto i = 0; i < array.shape(0); ++i) {
+        for (auto j = 0; j < array.shape(1); ++j) {
+          for (auto k = 0; k < array.shape(1); ++k) {
+            out << array.at({i, j, k}) << u8" ";
+          }
+          out << std::endl;
+        }
+        out << std::endl;
+      }
     }
     return out;
   }
