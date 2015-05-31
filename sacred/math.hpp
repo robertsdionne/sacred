@@ -105,7 +105,7 @@ namespace sacred {
         CHECK_STATE(output.shape(i) == input.shape(i));
       }
       for (auto i = 0; i < output.count(); ++i) {
-        output.at(i) = output_coefficient * output.at(i) + input_coefficient * input.at(i);
+        output.data(i) = output_coefficient * output.data(i) + input_coefficient * input.data(i);
       }
     }
 
@@ -114,7 +114,7 @@ namespace sacred {
       CHECK_STATE(output.shape(0) == vector.shape(0));
       for (auto i = 0; i < output.shape(0); ++i) {
         for (auto j = 0; j < output.shape(1); ++j) {
-          output.at({i, j}) = output_coefficient * output.at({i, j}) + vector_coefficient * vector.at(i);
+          output.at({i, j}) = output_coefficient * output.at({i, j}) + vector_coefficient * vector.data(i);
         }
       }
     }
@@ -122,11 +122,11 @@ namespace sacred {
     void Sum(Array<T> &output, const Array<T> &input,
         const T output_coefficient, const T input_coefficient) {
       for (auto i = 0; i < input.shape(0); ++i) {
-        T current_output = output_coefficient * output.at(i);
+        T current_output = output_coefficient * output.data(i);
         for (auto j = 0; j < input.shape(1); ++j) {
           current_output += input_coefficient * input.at({i, j});
         }
-        output.at(i) = current_output;
+        output.data(i) = current_output;
       }
     }
 

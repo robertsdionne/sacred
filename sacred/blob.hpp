@@ -36,11 +36,11 @@ namespace sacred {
     }
 
     inline const F &diff(int index) const {
-      return diff_.at(index);
+      return diff_.data(index);
     }
 
     inline F &diff(int index) {
-      return diff_.at(index);
+      return diff_.data(index);
     }
 
     inline const F &diff(const vector<int> &indices) const {
@@ -72,11 +72,11 @@ namespace sacred {
     }
 
     inline const F &value(int index) const {
-      return value_.at(index);
+      return value_.data(index);
     }
 
     inline F &value(int index) {
-      return value_.at(index);
+      return value_.data(index);
     }
 
     inline const F &value(const vector<int> &indices) const {

@@ -29,11 +29,11 @@ namespace sacred {
 
     ~Array() = default;
 
-    const F &at(int index) const {
+    const F &data(int index) const {
       return data_.at(index);
     }
 
-    F &at(int index) {
+    F &data(int index) {
       return data_.at(index);
     }
 
@@ -71,7 +71,7 @@ namespace sacred {
         }
       }
       for (auto i = 0; i < count(); ++i) {
-        if (at(i) != other.at(i)) {
+        if (data(i) != other.data(i)) {
           return false;
         }
       }

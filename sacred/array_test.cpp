@@ -10,9 +10,9 @@ TEST(Array, Initialize1D) {
   EXPECT_EQ(3, array.count());
   EXPECT_EQ(3, array.shape(0));
 
-  EXPECT_EQ(1, array.at(0));
-  EXPECT_EQ(2, array.at(1));
-  EXPECT_EQ(3, array.at(2));
+  EXPECT_EQ(1, array.data(0));
+  EXPECT_EQ(2, array.data(1));
+  EXPECT_EQ(3, array.data(2));
 }
 
 TEST(Array, Initialize) {
@@ -81,10 +81,10 @@ TEST(Array, Assign) {
   EXPECT_EQ(4, array.at({0, 1, 1}));
   EXPECT_EQ(5, array.at({0, 1, 2}));
 
-  EXPECT_EQ(0, array.at(0));
-  EXPECT_EQ(1, array.at(1));
-  EXPECT_EQ(2, array.at(2));
-  EXPECT_EQ(3, array.at(3));
-  EXPECT_EQ(4, array.at(4));
-  EXPECT_EQ(5, array.at(5));
+  EXPECT_EQ(0, array.data(0));
+  EXPECT_EQ(1, array.data(1));
+  EXPECT_EQ(2, array.data(2));
+  EXPECT_EQ(3, array.data(3));
+  EXPECT_EQ(4, array.data(4));
+  EXPECT_EQ(5, array.data(5));
 }
