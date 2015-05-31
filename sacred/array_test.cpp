@@ -4,6 +4,17 @@
 
 using sacred::Array;
 
+TEST(Array, Initialize1D) {
+  auto array = Array<float>({3}, {1, 2, 3});
+  EXPECT_EQ(1, array.number_of_axes());
+  EXPECT_EQ(3, array.count());
+  EXPECT_EQ(3, array.shape(0));
+
+  EXPECT_EQ(1, array.at(0));
+  EXPECT_EQ(2, array.at(1));
+  EXPECT_EQ(3, array.at(2));
+}
+
 TEST(Array, Initialize) {
   auto array = Array<float>({1, 2, 3});
   EXPECT_EQ(3, array.number_of_axes());

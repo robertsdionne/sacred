@@ -46,7 +46,7 @@ TEST(RecursiveFilterLayer, Backward) {
     2, 3, 4, 5,
     3, 4, 5, 6
   });
-  auto bias = Blob<float>({4, 1});
+  auto bias = Blob<float>({4});
   auto filter = Blob<float>({3, 3}, {
     1, 2, 3,
     2, 3, 4,
@@ -60,7 +60,7 @@ TEST(RecursiveFilterLayer, Backward) {
     4, 5, 6, 7
   });
   layer.Backward(output, &input);
-  EXPECT_EQ(Array<float>({4, 1}, {
+  EXPECT_EQ(Array<float>({4}, {
     6, 10, 14, 18
   }), bias.diff());
   EXPECT_EQ(Array<float>({3, 3}, {
@@ -172,7 +172,7 @@ TEST(RecursiveFilterLayer, GradientBias) {
     3-2, 22-3, 157-4, 1093-5,
     4-3, 25-4, 171-5, 1196-6
   });
-  auto error = Array<Dual>({4, 1});
+  auto error = Array<Dual>({4});
 
   for (auto k = 0; k < 4; ++k) {
     auto input = Blob<Dual>({4, 4}, {
@@ -200,7 +200,7 @@ TEST(RecursiveFilterLayer, GradientBias) {
     }
   }
 
-  EXPECT_EQ(Array<Dual>({4, 1}, {
+  EXPECT_EQ(Array<Dual>({4}, {
     92 + 6_ɛ, 92 + 10_ɛ, 92 + 14_ɛ, 92 + 18_ɛ
   }), error);
 }

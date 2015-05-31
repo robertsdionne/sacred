@@ -75,7 +75,7 @@ namespace sacred {
 
     void BackwardReconv(Array<T> &filter_diff, const Array<T> &filter,
         const Array<T> &output_diff, const Array<T> &output) {
-      auto scratch = Array<T>({output.shape(0), 1});
+      auto scratch = Array<T>({output.shape(0)});
       for (auto i = 0; i < scratch.shape(0) - 1; ++i) {
         T current_output = T(0.0);
         auto I = i + 1;
