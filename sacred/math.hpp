@@ -47,7 +47,7 @@ namespace sacred {
         for (auto i = 0; i < scratch.shape(1); ++i) {
           for (auto k = 0; k < filter.shape(0); ++k) {
             for (auto l = 0; l < filter.shape(1); ++l) {
-              filter_diff.add({k, l}, scratch.at({filter.shape(0) - 1 - k, i, j}) * output_diff.at({i, j}));
+              filter_diff.add({k, l}, scratch.at({filter.shape(0) - 1 - k, i, j - l}) * output_diff.at({i, j}));
             }
           }
         }
