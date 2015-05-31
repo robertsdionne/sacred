@@ -93,7 +93,7 @@ TEST(RecursiveFilterLayer, GradientInput) {
         3, 4, 5, 6,
         4, 5, 6, 7
       });
-      input.value({k, l}) += 1_ɛ;
+      input.value().axpby({k, l}, 1.0, 1_ɛ, 1.0);
       auto bias = Blob<Dual>({4});
       auto filter = Blob<Dual>({3, 3}, {
         1, 2, 3,
@@ -107,7 +107,7 @@ TEST(RecursiveFilterLayer, GradientInput) {
       for (auto i = 0; i < 4; ++i) {
         for (auto j = 0; j < 4; ++j) {
           auto delta = target.at({i, j}) - output.value({i, j});
-          error.at({k, l}) += delta * delta / 2.0;
+          error.axpby({k, l}, 1.0, delta * delta / 2.0, 1.0);
         }
       }
     }
@@ -144,7 +144,7 @@ TEST(RecursiveFilterLayer, GradientFilter) {
         2, 3, 4,
         4, 5, 6
       });
-      filter.value({k, l}) += 1_ɛ;
+      filter.value().axpby({k, l}, 1.0, 1_ɛ, 1.0);
       auto layer = RecursiveFilterLayer<Dual>(bias, filter);
       auto output = Blob<Dual>({4, 4});
       layer.Forward(input, &output);
@@ -152,7 +152,7 @@ TEST(RecursiveFilterLayer, GradientFilter) {
       for (auto i = 0; i < 4; ++i) {
         for (auto j = 0; j < 4; ++j) {
           auto delta = target.at({i, j}) - output.value({i, j});
-          error.at({k, l}) += delta * delta / 2.0;
+          error.axpby({k, l}, 1.0, delta * delta / 2.0, 1.0);
         }
       }
     }
@@ -182,7 +182,7 @@ TEST(RecursiveFilterLayer, GradientBias) {
       4, 5, 6, 7
     });
     auto bias = Blob<Dual>({4});
-    bias.value({k}) += 1_ɛ;
+    bias.value().axpby({k}, 1.0, 1_ɛ, 1.0);
     auto filter = Blob<Dual>({3, 3}, {
       1, 2, 3,
       2, 3, 4,
@@ -195,7 +195,7 @@ TEST(RecursiveFilterLayer, GradientBias) {
     for (auto i = 0; i < 4; ++i) {
       for (auto j = 0; j < 4; ++j) {
         auto delta = target.at({i, j}) - output.value({i, j});
-        error.at({k}) += delta * delta / 2.0;
+        error.axpby({k}, 1.0, delta * delta / 2.0, 1.0);
       }
     }
   }

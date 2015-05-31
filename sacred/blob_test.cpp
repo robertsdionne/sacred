@@ -43,8 +43,8 @@ TEST(Blob, InitializeValue) {
 
   for (auto j = 0; j < 2; ++j) {
     for (auto k = 0; k < 3; ++k) {
-      EXPECT_EQ(3 * j + k, blob.value({0, j, k}));
-      EXPECT_EQ(0, blob.diff({0, j, k}));
+      EXPECT_EQ(3 * j + k, blob.value().at({0, j, k}));
+      EXPECT_EQ(0, blob.diff().at({0, j, k}));
     }
   }
 
@@ -52,8 +52,8 @@ TEST(Blob, InitializeValue) {
 
   for (auto j = 0; j < 2; ++j) {
     for (auto k = 0; k < 3; ++k) {
-      EXPECT_EQ(3 * j + k, blob.value({0, j, k}));
-      EXPECT_EQ(-3 * j - k, blob.diff({0, j, k}));
+      EXPECT_EQ(3 * j + k, blob.value().at({0, j, k}));
+      EXPECT_EQ(-3 * j - k, blob.diff().at({0, j, k}));
     }
   }
 }

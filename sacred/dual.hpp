@@ -73,6 +73,10 @@ namespace sacred {
     return Dual(a.real - b, a.dual);
   }
 
+  inline Dual &operator -=(Dual &a, const Dual &b) {
+    return a = a - b;
+  }
+
   // Multiplication
   constexpr Dual operator *(const Dual &a, const Dual &b) {
     return Dual(a.real * b.real, a.real * b.dual + a.dual * b.real);
@@ -84,6 +88,10 @@ namespace sacred {
 
   constexpr Dual operator *(const Dual &a, float &b) {
     return Dual(a.real * b, a.dual * b);
+  }
+
+  inline Dual &operator *=(Dual &a, const Dual &b) {
+    return a = a * b;
   }
 
   // Division
@@ -101,6 +109,10 @@ namespace sacred {
 
   constexpr Dual operator /(const Dual &a, float &b) {
     return Dual(a.real / b, a.dual / b);
+  }
+
+  inline Dual &operator /=(Dual &a, const Dual &b) {
+    return a = a / b;
   }
 
 }  // namespace sacred

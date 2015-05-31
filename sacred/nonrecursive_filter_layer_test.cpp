@@ -93,20 +93,19 @@ TEST(NonrecursiveFilterLayer, Gradient) {
       auto layer = NonrecursiveFilterLayer<Dual>(bias, filter);
       auto output = Blob<Dual>({2, 2});
 
-      input.value({i, j}).dual = 1.0;
+      input.value().add({i, j}, 1_ɛ);
       layer.Forward(input, &output);
 
       auto loss = 0_ɛ;
       for (auto k = 0; k < output.shape(0); ++k) {
         for (auto l = 0; l < output.shape(1); ++l) {
           auto delta = target.value({k, l}) - output.value({k, l});
-          output.diff({k, l}) = -delta;
+          output.diff().set({k, l}, -delta);
           loss += delta * delta / 2.0f;
         }
       }
 
       layer.Backward(output, &input);
-      input.value({i, j}).dual = 0.0;
 
       auto actual_partial_error_with_respect_to_input_ij = input.diff({i, j}).real;
       auto expected_partial_error_with_respect_to_input_ij = loss.dual;
@@ -132,20 +131,19 @@ TEST(NonrecursiveFilterLayer, Gradient) {
       auto layer = NonrecursiveFilterLayer<Dual>(bias, filter);
       auto output = Blob<Dual>({2, 2});
 
-      filter.value({i, j}).dual = 1.0;
+      filter.value().add({i, j}, 1_ɛ);
       layer.Forward(input, &output);
 
       auto loss = 0_ɛ;
       for (auto k = 0; k < output.shape(0); ++k) {
         for (auto l = 0; l < output.shape(1); ++l) {
           auto delta = target.value({k, l}) - output.value({k, l});
-          output.diff({k, l}) = -delta;
+          output.diff().set({k, l}, -delta);
           loss += delta * delta / 2.0f;
         }
       }
 
       layer.Backward(output, &input);
-      filter.value({i, j}).dual = 0.0;
 
       auto actual_partial_error_with_respect_to_filter_ij = filter.diff({i, j}).real;
       auto expected_partial_error_with_respect_to_filter_ij = loss.dual;
@@ -172,20 +170,19 @@ TEST(NonrecursiveFilterLayer, Gradient) {
       auto layer = NonrecursiveFilterLayer<Dual>(bias, filter);
       auto output = Blob<Dual>({2, 2});
 
-      bias.value({i, j}).dual = 1.0;
+      bias.value().add({i, j}, 1_ɛ);
       layer.Forward(input, &output);
 
       auto loss = 0_ɛ;
       for (auto k = 0; k < output.shape(0); ++k) {
         for (auto l = 0; l < output.shape(1); ++l) {
           auto delta = target.value({k, l}) - output.value({k, l});
-          output.diff({k, l}) = -delta;
+          output.diff().set({k, l}, -delta);
           loss += delta * delta / 2.0f;
         }
       }
 
       layer.Backward(output, &input);
-      bias.value({i, j}).dual = 0.0;
 
       auto actual_partial_error_with_respect_to_bias_ij = bias.diff({i, j}).real;
       auto expected_partial_error_with_respect_to_bias_ij = loss.dual;

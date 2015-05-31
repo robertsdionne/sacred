@@ -37,12 +37,40 @@ namespace sacred {
       return data_.at(index);
     }
 
-    const F &at(const vector<int> &indices) const {
-      return data_.at(Offset(indices));
+    F at(const vector<int> &indices) const {
+      auto offset = Offset(indices);
+      if (offset < 0) {
+        return F(0.0);
+      }
+      return data_.at(offset);
     }
 
-    F &at(const vector<int> &indices) {
-      return data_.at(Offset(indices));
+    F add(const vector<int> &indices, const F x) {
+      auto offset = Offset(indices);
+      if (offset < 0) {
+        return F(0.0);
+      }
+      data_.at(offset) += x;
+      return data_.at(offset);
+    }
+
+    F axpby(const vector<int> &indices, const F alpha, const F x, const F beta) {
+      auto offset = Offset(indices);
+      if (offset < 0) {
+        return F(0.0);
+      }
+      data_.at(offset) *= beta;
+      data_.at(offset) += alpha * x;
+      return data_.at(offset);
+    }
+
+    F set(const vector<int> &indices, const F x) {
+      auto offset = Offset(indices);
+      if (offset < 0) {
+        return F(0.0);
+      }
+      data_.at(offset) = x;
+      return data_.at(offset);
     }
 
     inline int count() const {

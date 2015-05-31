@@ -37,13 +37,13 @@ TEST(Reconv, BackwardFilter) {
     auto filter = Array<Dual>({4}, {
       1, 2, 3, 4
     });
-    filter.at({k}) += 1_ɛ;
+    filter.add({k}, 1_ɛ);
 
     math.Reconv(output, filter);
 
     for (auto i = 0; i < 8; ++i) {
       auto delta = target.at({i}) - output.at({i});
-      error.at({k}) += delta * delta / 2.0;
+      error.add({k}, delta * delta / 2.0);
     }
   }
 

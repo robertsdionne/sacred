@@ -70,7 +70,7 @@ TEST(Array, Assign) {
   auto value = 0;
   for (auto j = 0; j < 2; ++j) {
     for (auto k = 0; k < 3; ++k) {
-      array.at({0, j, k}) = value++;
+      array.set({0, j, k}, value++);
     }
   }
 
