@@ -29,6 +29,50 @@ namespace sacred {
       }
     }
 
+    void BackwardRecurrentConvolveFilter(Array<T> &filter_diff, const Array<T> &filter,
+        const Array<T> &output_diff, const Array<T> &output) {
+      auto scratch = Array<T>({output.shape(0), output.shape(1)});
+      for (auto j = 0; j < scratch.shape(1) - 1; ++j) {
+        for (auto i = 0; i < scratch.shape(0); ++i) {
+          T current_output = T(0.0);
+          auto I = i + filter.shape(0) / 2 - 1;
+          auto J = j + 1;
+          current_output += output.at({i, j});
+          for (auto k = 0; k < filter.shape(0); ++k) {
+            for (auto l = 0; l < filter.shape(1); ++l) {
+              auto in = 0 <= i - k && i - k < scratch.shape(0) && 0 <= j - l;
+              if (in) {
+                current_output += filter.at({k, l}) * scratch.at({i - k, j - l});
+              }
+            }
+          }
+          auto in = 0 <= I && I < scratch.shape(0);
+          if (in) {
+            scratch.at({I, J}) += current_output;
+          }
+        }
+      }
+      for (auto j = 0; j < scratch.shape(1) - 1; ++j) {
+        for (auto i = 1; i < scratch.shape(0) - 1; ++i) {
+          auto I = i + filter.shape(0) / 2;
+          auto J = j + 1;
+          for (auto k = 0; k < filter.shape(0); ++k) {
+            for (auto l = 0; l < filter.shape(1); ++l) {
+              auto in = 0 <= I - k && I - k < scratch.shape(0) && 0 <= J - l && 0 <= I && I < output.shape(0) && 0 <= J && J < output.shape(1);
+              if (in) {
+                filter_diff.at({k, l}) += scratch.at({I - k, J - l}) * output_diff.at({I, J});
+              }
+            }
+          }
+        }
+      }
+      std::cout << scratch << std::endl;
+      std::cout << filter_diff << std::endl;
+      std::cout << filter << std::endl;
+      std::cout << output_diff << std::endl;
+      std::cout << output << std::endl;
+    }
+
     void BackwardReconv(Array<T> &filter_diff, const Array<T> &filter,
         const Array<T> &output_diff, const Array<T> &output) {
       auto scratch = Array<T>({output.shape(0), 1});
@@ -45,10 +89,11 @@ namespace sacred {
         scratch.at({I}) += current_output;
       }
       for (auto i = 0; i < scratch.shape(0) - 1; ++i) {
+        auto I = i + 1;
         for (auto k = 0; k < filter.shape(0); ++k) {
-          auto in = 0 <= i - k;
+          auto in = 0 <= I - k;
           if (in) {
-            filter_diff.at({k}) += scratch.at({i - k + 1}) * output_diff.at({i + 1});
+            filter_diff.at({k}) += scratch.at({I - k}) * output_diff.at({I});
           }
         }
       }
