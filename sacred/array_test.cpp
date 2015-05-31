@@ -29,9 +29,9 @@ TEST(Array, Initialize) {
     }
   }
 
-  EXPECT_DEATH(array.at({1, 0, 0}), ".*");
-  EXPECT_DEATH(array.at({0, 2, 0}), ".*");
-  EXPECT_DEATH(array.at({0, 0, 3}), ".*");
+  EXPECT_EQ(0, array.at({1, 0, 0}));
+  EXPECT_EQ(0, array.at({0, 2, 0}));
+  EXPECT_EQ(0, array.at({0, 0, 3}));
 
   array.Reshape({2, 3, 4});
   EXPECT_EQ(24, array.count());
@@ -47,9 +47,9 @@ TEST(Array, Initialize) {
     }
   }
 
-  EXPECT_DEATH(array.at({2, 0, 0}), ".*");
-  EXPECT_DEATH(array.at({0, 3, 0}), ".*");
-  EXPECT_DEATH(array.at({0, 0, 4}), ".*");
+  EXPECT_EQ(0, array.at({2, 0, 0}));
+  EXPECT_EQ(0, array.at({0, 3, 0}));
+  EXPECT_EQ(0, array.at({0, 0, 4}));
 
   EXPECT_DEATH(array.Reshape({4096, 4096, 4096}), ".*");
 }

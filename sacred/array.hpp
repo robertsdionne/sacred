@@ -135,9 +135,11 @@ namespace sacred {
       for (auto i = 0; i < number_of_axes(); ++i) {
         offset *= shape(i);
         if (indices.size() > i) {
-          CHECK_STATE(0 <= indices.at(i));
-          CHECK_STATE(indices.at(i) < shape(i));
-          offset += indices.at(i);
+          if (0 <= indices.at(i) && indices.at(i) < shape(i)) {
+            offset += indices.at(i);
+          } else {
+            return -1;
+          }
         }
       }
       return offset;

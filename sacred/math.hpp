@@ -230,7 +230,7 @@ namespace sacred {
               }
             }
           }
-          output.add({i, j}, current_output);
+          output.set({i, j}, current_output);
         }
       }
     }
