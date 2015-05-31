@@ -20,10 +20,7 @@ namespace sacred {
         T current_output = output.at({i});
         auto I = i - 1;
         for (auto k = 0; k < filter.shape(0); ++k) {
-          auto in = 0 <= I - k && I - k < output.shape(0);
-          if (in) {
-            current_output += filter.at({k}) * output.at({I - k});
-          }
+          current_output += filter.at({k}) * output.at({I - k});
         }
         output.set({i}, current_output);
       }
@@ -81,20 +78,14 @@ namespace sacred {
         auto I = i + 1;
         current_output += output.at({i});
         for (auto k = 0; k < filter.shape(0); ++k) {
-          auto in = 0 <= i - k;
-          if (in) {
-            current_output += filter.at({k}) * scratch.at({i - k});
-          }
+          current_output += filter.at({k}) * scratch.at({i - k});
         }
         scratch.add({I}, current_output);
       }
       for (auto i = 0; i < scratch.shape(0) - 1; ++i) {
         auto I = i + 1;
         for (auto k = 0; k < filter.shape(0); ++k) {
-          auto in = 0 <= I - k;
-          if (in) {
-            filter_diff.add({k}, scratch.at({I - k}) * output_diff.at({I}));
-          }
+          filter_diff.add({k}, scratch.at({I - k}) * output_diff.at({I}));
         }
       }
     }
@@ -160,10 +151,7 @@ namespace sacred {
             for (auto l = 0; l < input.shape(1); ++l) {
               auto I = i - input.shape(0) / 2;
               auto J = j - 1;
-              auto in = 0 <= I + k && I + k < filter.shape(0) && 0 <= J + l && J + l < filter.shape(1);
-              if (in) {
-                current_filter += output_coefficient * input.at({k, l}) * output.at({I + k, J + l});
-              }
+              current_filter += output_coefficient * input.at({k, l}) * output.at({I + k, J + l});
             }
           }
           filter.set({i, j}, current_filter);
@@ -182,10 +170,7 @@ namespace sacred {
             for (auto l = 0; l < input.shape(1); ++l) {
               auto I = i - input.shape(0) / 2;
               auto J = j - input.shape(1) / 2;
-              auto in = 0 <= I + k && I + k < output.shape(0) && 0 <= J + l && J + l < output.shape(1);
-              if (in) {
-                current_filter += output_coefficient * input.at({k, l}) * output.at({I + k, J + l});
-              }
+              current_filter += output_coefficient * input.at({k, l}) * output.at({I + k, J + l});
             }
           }
           filter.set({i, j}, current_filter);
@@ -202,10 +187,7 @@ namespace sacred {
           T current_output = output_coefficient * output.at({i, j});
           for (auto k = 0; k < filter.shape(0); ++k) {
             for (auto l = 0; l < filter.shape(1); ++l) {
-              auto in = 0 <= i - k && i - k < input.shape(0) && 0 <= j - l && j - l < input.shape(1);
-              if (in) {
-                current_output += input_coefficient * filter.at({k, l}) * input.at({i - k, j - l});
-              }
+              current_output += input_coefficient * filter.at({k, l}) * input.at({i - k, j - l});
             }
           }
           output.set({i, j}, current_output);
@@ -224,10 +206,7 @@ namespace sacred {
           T current_output = output_coefficient * output.at({i, j});
           for (auto k = 0; k < filter.shape(0); ++k) {
             for (auto l = 0; l < filter.shape(1); ++l) {
-              auto in = 0 <= I + k && I + k < input.shape(0) && 0 <= J + l && J + l < input.shape(1);
-              if (in) {
-                current_output += input_coefficient * filter.at({k, l}) * input.at({I + k, J + l});
-              }
+              current_output += input_coefficient * filter.at({k, l}) * input.at({I + k, J + l});
             }
           }
           output.set({i, j}, current_output);
@@ -244,10 +223,7 @@ namespace sacred {
           T current_output = output_coefficient * output.at({i, j});
           for (auto k = 0; k < filter.shape(0); ++k) {
             for (auto l = 0; l < filter.shape(1); ++l) {
-              auto in = 0 <= I - k && I - k < output.shape(0) && 0 <= J - l && J - l < output.shape(1);
-              if (in) {
-                current_output += input_coefficient * filter.at({k, l}) * output.at({I - k, J - l});
-              }
+              current_output += input_coefficient * filter.at({k, l}) * output.at({I - k, J - l});
             }
           }
           output.set({i, j}, current_output);
@@ -264,10 +240,7 @@ namespace sacred {
           T current_output = output_coefficient * output.at({i, j});
           for (auto k = 0; k < filter.shape(0); ++k) {
             for (auto l = 0; l < filter.shape(1); ++l) {
-              auto in = 0 <= I + k && I + k < output.shape(0) && 0 <= J + l && J + l < output.shape(1);
-              if (in) {
-                current_output += input_coefficient * filter.at({k, l}) * output.at({I + k, J + l});
-              }
+              current_output += input_coefficient * filter.at({k, l}) * output.at({I + k, J + l});
             }
           }
           output.set({i, j}, current_output);

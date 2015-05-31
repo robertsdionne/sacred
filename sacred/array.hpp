@@ -129,6 +129,7 @@ namespace sacred {
       }
     }
 
+    // TODO(robertsdionne): Allow circular indexing also.
     int Offset(const vector<int> &indices) const {
       CHECK_STATE(indices.size() == number_of_axes());
       int offset = 0;
