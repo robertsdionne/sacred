@@ -115,6 +115,8 @@ namespace sacred {
       CHECK_STATE(input.shape(0) - filter.shape(0) + 1 == output.shape(0));
       CHECK_STATE(input.shape(1) - filter.shape(1) + 1 == output.shape(1));
       for (auto i = 0; i < output.shape(0); ++i) {
+        std::cout << ".";
+        std::cout.flush();
         for (auto j = 0; j < output.shape(1); ++j) {
           auto I = i + filter.shape(0) - 1;
           auto J = j + filter.shape(1) - 1;
@@ -127,6 +129,7 @@ namespace sacred {
           output.set({i, j}, current_output);
         }
       }
+      std::cout << std::endl;
     }
 
     void BackwardConvolve2(Array<T> &filter, const Array<T> &input, const Array<T> &output,
@@ -206,6 +209,8 @@ namespace sacred {
     void RecurrentConvolve2(Array<T> &output, const Array<T> &filter,
         const T output_coefficient, const T input_coefficient) const {
       for (auto j = 0; j < output.shape(1); ++j) {
+        std::cout << ".";
+        std::cout.flush();
         for (auto i = 0; i < output.shape(0); ++i) {
           auto I = i + filter.shape(0) / 2;
           auto J = j - 1;
@@ -218,6 +223,7 @@ namespace sacred {
           output.set({i, j}, current_output);
         }
       }
+      std::cout << std::endl;
     }
 
     void BackwardRecurrentConvolve2(Array<T> &output, const Array<T> &filter,

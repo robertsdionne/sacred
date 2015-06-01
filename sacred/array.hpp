@@ -3,6 +3,7 @@
 
 #include <limits>
 #include <ostream>
+#include <random>
 #include <vector>
 
 #include "checks.hpp"
@@ -112,6 +113,15 @@ namespace sacred {
 
     inline int shape(int index) const {
       return shape_.at(index);
+    }
+
+    void Randomize() {
+      std::random_device r;
+      std::mt19937 generator(r());
+      std::uniform_real_distribution<F> uniform(F(-0.1), F(0.1));
+      for (auto i = 0; i < count(); ++i) {
+        data(i) = uniform(generator);
+      }
     }
 
     void Reshape(const vector<int> &shape) {
