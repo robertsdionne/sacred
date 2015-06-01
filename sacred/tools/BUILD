@@ -7,3 +7,10 @@ cc_binary(
     "//external:googleflags",
   ],
 )
+
+py_binary(
+  name = "prepare_data",
+  srcs = [
+    "prepare_data.py",
+  ],
+)
