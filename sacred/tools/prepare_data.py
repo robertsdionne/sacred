@@ -38,6 +38,8 @@ def read_word2vec_data(filename):
       # Read and normalize the vector before saving it to the numpy array.
       vector = numpy.ndarray(shape = (1, dimension), dtype = numpy.float32)
       vector[:] = struct.unpack('f' * dimension, file.read(4 * dimension))
+      vectors[i] = vector
+
     return words, vectors
 
 
