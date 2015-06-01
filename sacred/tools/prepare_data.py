@@ -54,7 +54,7 @@ def write_vectors(vectors, filename):
   """Writes a numpy 2darray to a binary file.
   """
   with open(filename, 'w') as file:
-    numpy.save(file, vectors)
+    vectors.tofile(file)
 
 
 def main():
