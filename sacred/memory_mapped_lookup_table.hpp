@@ -35,7 +35,7 @@ namespace sacred {
     }
 
     F at(int index) const {
-      if (index >= stat_info.st_size / sizeof(F)) {
+      if (index < 0 || index >= stat_info.st_size / sizeof(F)) {
         return F(0.0);
       }
       return memory_map[index];
