@@ -136,7 +136,7 @@ namespace sacred {
         count_ *= shape.at(i);
         shape_.at(i) = shape.at(i);
       }
-      if (count_ > capacity_) {
+      if (index_strategy_.Resize() && count_ > capacity_) {
         capacity_ = count_;
         data_.resize(capacity_);
       }

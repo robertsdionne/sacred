@@ -34,6 +34,9 @@ cc_test(
   srcs = [
     "array_test.cpp",
   ],
+  copts = [
+    "-I/usr/local/include/",
+  ],
   size = "small",
   deps = [
     "//external:googletest",

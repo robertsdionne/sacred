@@ -11,6 +11,10 @@ namespace sacred {
   public:
     virtual ~IndexStrategy() = default;
 
+    virtual bool Resize() const {
+      return true;
+    };
+
     /**
      * Calculates the index of data given the data size, array shape and indices.
      * @param  data_size The size of the data buffer.

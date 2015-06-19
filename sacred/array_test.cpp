@@ -1,9 +1,11 @@
 #include <gtest/gtest.h>
 
 #include "array.hpp"
+#include "hashed_index_strategy.hpp"
 #include "tiled_index_strategy.hpp"
 
 using sacred::Array;
+using sacred::HashedIndexStrategy;
 using sacred::TiledIndexStrategy;
 
 TEST(Array, Initialize1D) {
@@ -127,4 +129,15 @@ TEST(ArrayTiled, InitializeValue) {
 
   EXPECT_EQ(0, array.at({0, 0, 3}));
   EXPECT_EQ(3, array.at({0, 1, 3}));
+}
+
+TEST(ArrayHashed, InitializeValue) {
+  auto array = Array<float, HashedIndexStrategy>({1, 2, 3}, {3, 1, 2});
+
+  EXPECT_EQ(3, array.at({0, 0, 0}));
+  EXPECT_EQ(1, array.at({0, 0, 1}));
+  EXPECT_EQ(1, array.at({0, 0, 2}));
+  EXPECT_EQ(3, array.at({0, 1, 0}));
+  EXPECT_EQ(3, array.at({0, 1, 1}));
+  EXPECT_EQ(2, array.at({0, 1, 2}));
 }

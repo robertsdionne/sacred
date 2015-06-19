@@ -1,8 +1,6 @@
 #ifndef SACRED_TILED_INDEX_STRATEGY_HPP_
 #define SACRED_TILED_INDEX_STRATEGY_HPP_
 
-#include <iostream>
-
 #include "checks.hpp"
 #include "index_strategy.hpp"
 
@@ -25,7 +23,6 @@ namespace sacred {
           offset += index;
         }
       }
-      std::cout << std::endl;
       return offset;
     }
   };
