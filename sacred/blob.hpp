@@ -4,12 +4,14 @@
 #include <vector>
 
 #include "array.hpp"
+#include "clipped_index_strategy.hpp"
+#include "index_strategy.hpp"
 
 namespace sacred {
 
   using std::vector;
 
-  template <typename F>
+  template <typename F, typename IS = ClippedIndexStrategy<F>>
   class Blob {
   public:
     Blob() = default;
@@ -27,11 +29,11 @@ namespace sacred {
       return value_.count();
     }
 
-    inline const Array<F> &diff() const {
+    inline const Array<F, IS> &diff() const {
       return diff_;
     }
 
-    inline Array<F> &diff() {
+    inline Array<F, IS> &diff() {
       return diff_;
     }
 
@@ -59,11 +61,11 @@ namespace sacred {
       return value_.shape(index);
     }
 
-    inline const Array<F> &value() const {
+    inline const Array<F, IS> &value() const {
       return value_;
     }
 
-    inline Array<F> &value() {
+    inline Array<F, IS> &value() {
       return value_;
     }
 
@@ -85,7 +87,7 @@ namespace sacred {
     }
 
   private:
-    Array<F> value_, diff_;
+    Array<F, IS> value_, diff_;
   };
 
 }  // namespace sacred
