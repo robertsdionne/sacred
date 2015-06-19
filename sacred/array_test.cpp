@@ -1,8 +1,10 @@
 #include <gtest/gtest.h>
 
 #include "array.hpp"
+#include "tiled_index_strategy.hpp"
 
 using sacred::Array;
+using sacred::TiledIndexStrategy;
 
 TEST(Array, Initialize1D) {
   auto array = Array<float>({3}, {1, 2, 3});
@@ -95,4 +97,34 @@ TEST(Array, Assign) {
   EXPECT_EQ(3, array.data(3));
   EXPECT_EQ(4, array.data(4));
   EXPECT_EQ(5, array.data(5));
+}
+
+TEST(ArrayTiled, InitializeValue) {
+  auto array = Array<float, TiledIndexStrategy>({1, 2, 3}, {0, 1, 2, 3, 4, 5});
+
+  for (auto j = 0; j < 2; ++j) {
+    for (auto k = 0; k < 3; ++k) {
+      EXPECT_EQ(3 * j + k, array.at({-1, j, k}));
+    }
+  }
+
+  for (auto j = 0; j < 2; ++j) {
+    for (auto k = 0; k < 3; ++k) {
+      EXPECT_EQ(3 * j + k, array.at({1, j, k}));
+    }
+  }
+
+  EXPECT_EQ(3, array.at({0, -1, 0}));
+  EXPECT_EQ(4, array.at({0, -1, 1}));
+  EXPECT_EQ(5, array.at({0, -1, 2}));
+
+  EXPECT_EQ(0, array.at({0, 2, 0}));
+  EXPECT_EQ(1, array.at({0, 2, 1}));
+  EXPECT_EQ(2, array.at({0, 2, 2}));
+
+  EXPECT_EQ(2, array.at({0, 0, -1}));
+  EXPECT_EQ(5, array.at({0, 1, -1}));
+
+  EXPECT_EQ(0, array.at({0, 0, 3}));
+  EXPECT_EQ(3, array.at({0, 1, 3}));
 }
