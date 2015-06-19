@@ -29,6 +29,10 @@ TEST(Array, Initialize) {
     }
   }
 
+  EXPECT_EQ(0, array.at({-1, 0, 0}));
+  EXPECT_EQ(0, array.at({0, -1, 0}));
+  EXPECT_EQ(0, array.at({0, 0, -1}));
+
   EXPECT_EQ(0, array.at({1, 0, 0}));
   EXPECT_EQ(0, array.at({0, 2, 0}));
   EXPECT_EQ(0, array.at({0, 0, 3}));
@@ -46,6 +50,10 @@ TEST(Array, Initialize) {
       }
     }
   }
+
+  EXPECT_EQ(0, array.at({-1, 0, 0}));
+  EXPECT_EQ(0, array.at({0, -1, 0}));
+  EXPECT_EQ(0, array.at({0, 0, -1}));
 
   EXPECT_EQ(0, array.at({2, 0, 0}));
   EXPECT_EQ(0, array.at({0, 3, 0}));
