@@ -11,11 +11,20 @@ namespace sacred {
 
   using std::vector;
 
-  class HashedIndexStrategy : public IndexStrategy {
+  template <typename F>
+  class HashedIndexStrategy : public IndexStrategy<F> {
   public:
     HashedIndexStrategy() = default;
 
     virtual ~HashedIndexStrategy() = default;
+
+    static constexpr size_t kSeed = 0x7ff83ce;
+
+    F Parity(const vector<int> &indices) const override {
+      auto hash = kSeed;
+      boost::hash_combine(hash, boost::hash_value(indices));
+      return F(1.0) - (hash % 2) * F(2.0);
+    }
 
     bool Resize() const override {
       return false;

@@ -16,7 +16,7 @@ namespace sacred {
   using std::ostream;
   using std::vector;
 
-  template <typename F, typename IS = ClippedIndexStrategy>
+  template <typename F, typename IS = ClippedIndexStrategy<F>>
   class Array {
   public:
 

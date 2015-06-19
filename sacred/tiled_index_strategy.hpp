@@ -6,7 +6,8 @@
 
 namespace sacred {
 
-  class TiledIndexStrategy : public IndexStrategy {
+  template <typename F>
+  class TiledIndexStrategy : public IndexStrategy<F> {
   public:
     TiledIndexStrategy() = default;
 

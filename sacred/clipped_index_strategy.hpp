@@ -6,7 +6,8 @@
 
 namespace sacred {
 
-  class ClippedIndexStrategy : public IndexStrategy{
+  template <typename F>
+  class ClippedIndexStrategy : public IndexStrategy<F> {
   public:
     ClippedIndexStrategy() = default;
 

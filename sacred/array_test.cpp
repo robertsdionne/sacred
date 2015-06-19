@@ -102,7 +102,7 @@ TEST(Array, Assign) {
 }
 
 TEST(ArrayTiled, InitializeValue) {
-  auto array = Array<float, TiledIndexStrategy>({1, 2, 3}, {0, 1, 2, 3, 4, 5});
+  auto array = Array<float, TiledIndexStrategy<float>>({1, 2, 3}, {0, 1, 2, 3, 4, 5});
 
   for (auto j = 0; j < 2; ++j) {
     for (auto k = 0; k < 3; ++k) {
@@ -132,7 +132,7 @@ TEST(ArrayTiled, InitializeValue) {
 }
 
 TEST(ArrayHashed, InitializeValue) {
-  auto array = Array<float, HashedIndexStrategy>({1, 2, 3}, {3, 1, 2});
+  auto array = Array<float, HashedIndexStrategy<float>>({1, 2, 3}, {3, 1, 2});
 
   EXPECT_EQ(3, array.at({0, 0, 0}));
   EXPECT_EQ(1, array.at({0, 0, 1}));

@@ -7,9 +7,14 @@ namespace sacred {
 
   using std::vector;
 
+  template <typename F>
   class IndexStrategy {
   public:
     virtual ~IndexStrategy() = default;
+
+    virtual F Parity(const vector<int> &indices) const {
+      return F(1.0);
+    }
 
     virtual bool Resize() const {
       return true;
