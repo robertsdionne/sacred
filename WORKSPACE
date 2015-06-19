@@ -1,7 +1,8 @@
 new_http_archive(
   name = "gtest",
-  url = "https://googletest.googlecode.com/files/gtest-1.7.0.zip",
-  sha256 = "247ca18dd83f53deb1328be17e4b1be31514cedfc1e3424f672bf11fd7e0d60d",
+  url = "file:///Users/robertsdionne/Code/sacred/library/gtest-1.7.0.zip",
+  # url = "https://googletest.googlecode.com/files/gtest-1.7.0.zip",
+  sha256 = "2fa27ff3820916bd9a13ee1a29a2dbcbfe76beb34ef5278599e0c4bda46324af",
   build_file = "gtest.BUILD",
 )
 

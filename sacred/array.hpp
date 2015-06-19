@@ -7,6 +7,8 @@
 #include <vector>
 
 #include "checks.hpp"
+#include "clipped_index_strategy.hpp"
+#include "index_strategy.hpp"
 
 namespace sacred {
 
@@ -14,17 +16,18 @@ namespace sacred {
   using std::ostream;
   using std::vector;
 
-  template <typename F>
+  template <typename F, typename IS = ClippedIndexStrategy>
   class Array {
   public:
+
     Array() = default;
 
-    explicit Array(const vector<int> &shape) : capacity_(), count_(), shape_(shape) {
+    explicit Array(const vector<int> &shape) : capacity_(), count_(), shape_(shape), index_strategy_() {
       Reshape(shape);
     }
 
     Array(const vector<int> &shape, const vector<F> &data)
-        : capacity_(data.size()), count_(), shape_(shape), data_(data) {
+        : capacity_(data.size()), count_(), shape_(shape), data_(data), index_strategy_() {
       Reshape(shape);
     }
 
@@ -39,7 +42,7 @@ namespace sacred {
     }
 
     F at(const vector<int> &indices) const {
-      auto offset = Offset(indices);
+      auto offset = index_strategy_.Offset(data_.size(), shape_, indices);
       if (offset < 0) {
         return F(0.0);
       }
@@ -47,7 +50,7 @@ namespace sacred {
     }
 
     F add(const vector<int> &indices, const F x) {
-      auto offset = Offset(indices);
+      auto offset = index_strategy_.Offset(data_.size(), shape_, indices);
       if (offset < 0) {
         return F(0.0);
       }
@@ -56,7 +59,7 @@ namespace sacred {
     }
 
     F axpby(const vector<int> &indices, const F alpha, const F x, const F beta) {
-      auto offset = Offset(indices);
+      auto offset = index_strategy_.Offset(data_.size(), shape_, indices);
       if (offset < 0) {
         return F(0.0);
       }
@@ -66,7 +69,7 @@ namespace sacred {
     }
 
     F set(const vector<int> &indices, const F x) {
-      auto offset = Offset(indices);
+      auto offset = index_strategy_.Offset(data_.size(), shape_, indices);
       if (offset < 0) {
         return F(0.0);
       }
@@ -139,27 +142,11 @@ namespace sacred {
       }
     }
 
-    // TODO(robertsdionne): Allow circular indexing also.
-    int Offset(const vector<int> &indices) const {
-      CHECK_STATE(indices.size() == number_of_axes());
-      int offset = 0;
-      for (auto i = 0; i < number_of_axes(); ++i) {
-        offset *= shape(i);
-        if (indices.size() > i) {
-          if (0 <= indices.at(i) && indices.at(i) < shape(i)) {
-            offset += indices.at(i);
-          } else {
-            return -1;
-          }
-        }
-      }
-      return offset;
-    }
-
   private:
     int capacity_, count_;
     vector<int> shape_;
     vector<F> data_;
+    IS index_strategy_;
   };
 
   template <typename F>
