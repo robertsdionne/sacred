@@ -135,9 +135,9 @@ TEST(ArrayHashed, InitializeValue) {
   auto array = Array<float, HashedIndexStrategy<float>>({1, 2, 3}, {3, 1, 2});
 
   EXPECT_EQ(3, array.at({0, 0, 0}));
-  EXPECT_EQ(1, array.at({0, 0, 1}));
+  EXPECT_EQ(-1, array.at({0, 0, 1}));
   EXPECT_EQ(1, array.at({0, 0, 2}));
   EXPECT_EQ(3, array.at({0, 1, 0}));
-  EXPECT_EQ(3, array.at({0, 1, 1}));
+  EXPECT_EQ(-3, array.at({0, 1, 1}));
   EXPECT_EQ(2, array.at({0, 1, 2}));
 }

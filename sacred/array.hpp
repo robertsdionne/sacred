@@ -46,7 +46,7 @@ namespace sacred {
       if (offset < 0) {
         return F(0.0);
       }
-      return data_.at(offset);
+      return index_strategy_.Parity(indices) * data_.at(offset);
     }
 
     F add(const vector<int> &indices, const F x) {
@@ -54,7 +54,7 @@ namespace sacred {
       if (offset < 0) {
         return F(0.0);
       }
-      data_.at(offset) += x;
+      data_.at(offset) += index_strategy_.Parity(indices) * x;
       return data_.at(offset);
     }
 
@@ -64,7 +64,7 @@ namespace sacred {
         return F(0.0);
       }
       data_.at(offset) *= beta;
-      data_.at(offset) += alpha * x;
+      data_.at(offset) += index_strategy_.Parity(indices) * alpha * x;
       return data_.at(offset);
     }
 
@@ -73,7 +73,7 @@ namespace sacred {
       if (offset < 0) {
         return F(0.0);
       }
-      data_.at(offset) = x;
+      data_.at(offset) = index_strategy_.Parity(indices) * x;
       return data_.at(offset);
     }
 
