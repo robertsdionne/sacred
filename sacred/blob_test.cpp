@@ -2,12 +2,9 @@
 
 #include "array.hpp"
 #include "blob.hpp"
-#include "hashed_index_strategy.hpp"
-#include "tiled_index_strategy.hpp"
 
+using sacred::Array;
 using sacred::Blob;
-using sacred::HashedIndexStrategy;
-using sacred::TiledIndexStrategy;
 
 TEST(Blob, Initialize) {
   auto blob = Blob<float>({1, 2, 3});
@@ -52,18 +49,18 @@ TEST(Blob, InitializeValue) {
     }
   }
 
-  blob = Blob<float>({1, 2, 3}, {0, 1, 2, 3, 4, 5}, {0, -1, -2, -3, -4, -5});
+  auto blob2 = Blob<float>({1, 2, 3}, {0, 1, 2, 3, 4, 5}, {0, -1, -2, -3, -4, -5});
 
   for (auto j = 0; j < 2; ++j) {
     for (auto k = 0; k < 3; ++k) {
-      EXPECT_EQ(3 * j + k, blob.value().at({0, j, k}));
-      EXPECT_EQ(-3 * j - k, blob.diff().at({0, j, k}));
+      EXPECT_EQ(3 * j + k, blob2.value().at({0, j, k}));
+      EXPECT_EQ(-3 * j - k, blob2.diff().at({0, j, k}));
     }
   }
 }
 
 TEST(BlobTiled, InitializeValue) {
-  auto blob = Blob<float, TiledIndexStrategy<float>>({1, 2, 3}, {0, 1, 2, 3, 4, 5});
+  auto blob = Blob<float>({1, 2, 3}, {0, 1, 2, 3, 4, 5}, Array<float>::tiled_index_strategy);
 
   for (auto j = 0; j < 2; ++j) {
     for (auto k = 0; k < 3; ++k) {
@@ -74,7 +71,7 @@ TEST(BlobTiled, InitializeValue) {
 }
 
 TEST(BlobHashed, InitializeValue) {
-  auto blob = Blob<float, HashedIndexStrategy<float>>({1, 2, 3}, {1, 2, 3}, {1, 2, 3});
+  auto blob = Blob<float>({1, 2, 3}, {1, 2, 3}, {1, 2, 3}, Array<float>::hashed_index_strategy);
 
   EXPECT_EQ(1, blob.value().at({0, 0, 0}));
   EXPECT_EQ(-2, blob.value().at({0, 0, 1}));

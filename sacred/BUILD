@@ -24,6 +24,9 @@ cc_binary(
   srcs = [
     "sacred.cpp",
   ],
+  copts = [
+    "-I/usr/local/include/",
+  ],
   deps = [
     "//external:googleflags",
   ],
@@ -74,6 +77,9 @@ cc_test(
     "math_test.cpp",
   ],
   size = "small",
+  copts = [
+    "-I/usr/local/include/",
+  ],
   deps = [
     "//external:googletest",
   ],
@@ -85,6 +91,9 @@ cc_test(
     "nonrecursive_filter_layer_test.cpp",
   ],
   size = "small",
+  copts = [
+    "-I/usr/local/include/",
+  ],
   deps = [
     "//external:googletest",
   ],
@@ -96,6 +105,9 @@ cc_test(
     "reconv_test.cpp",
   ],
   size = "small",
+  copts = [
+    "-I/usr/local/include/",
+  ],
   deps = [
     "//external:googletest",
   ],
@@ -107,6 +119,9 @@ cc_test(
     "recursive_filter_layer_test.cpp",
   ],
   size = "small",
+  copts = [
+    "-I/usr/local/include/",
+  ],
   deps = [
     "//external:googletest",
   ],
@@ -118,6 +133,9 @@ cc_test(
     "stacked_test.cpp",
   ],
   size = "small",
+  copts = [
+    "-I/usr/local/include/",
+  ],
   deps = [
     "//external:googletest",
   ],

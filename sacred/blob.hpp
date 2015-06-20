@@ -11,17 +11,21 @@ namespace sacred {
 
   using std::vector;
 
-  template <typename F, typename IS = ClippedIndexStrategy<F>>
+  template <typename F>
   class Blob {
   public:
     Blob() = default;
 
-    explicit Blob(const vector<int> &shape) : value_(shape), diff_(shape) {}
+    explicit Blob(const vector<int> &shape, IndexStrategy<F> &index_strategy = Array<F>::clipped_index_strategy)
+        : value_(shape, index_strategy), diff_(shape, index_strategy) {}
 
-    Blob(const vector<int> &shape, const vector<F> &value) : value_(shape, value), diff_(shape) {}
+    Blob(const vector<int> &shape, const vector<F> &value,
+        IndexStrategy<F> &index_strategy = Array<F>::clipped_index_strategy)
+        : value_(shape, value, index_strategy), diff_(shape, index_strategy) {}
 
-    Blob(const vector<int> &shape, const vector<F> &value, const vector<F> &diff)
-        : value_(shape, value), diff_(shape, diff) {}
+    Blob(const vector<int> &shape, const vector<F> &value, const vector<F> &diff,
+        IndexStrategy<F> &index_strategy = Array<F>::clipped_index_strategy)
+        : value_(shape, value, index_strategy), diff_(shape, diff, index_strategy) {}
 
     ~Blob() = default;
 
@@ -29,11 +33,11 @@ namespace sacred {
       return value_.count();
     }
 
-    inline const Array<F, IS> &diff() const {
+    inline const Array<F> &diff() const {
       return diff_;
     }
 
-    inline Array<F, IS> &diff() {
+    inline Array<F> &diff() {
       return diff_;
     }
 
@@ -61,11 +65,11 @@ namespace sacred {
       return value_.shape(index);
     }
 
-    inline const Array<F, IS> &value() const {
+    inline const Array<F> &value() const {
       return value_;
     }
 
-    inline Array<F, IS> &value() {
+    inline Array<F> &value() {
       return value_;
     }
 
@@ -87,7 +91,7 @@ namespace sacred {
     }
 
   private:
-    Array<F, IS> value_, diff_;
+    Array<F> value_, diff_;
   };
 
 }  // namespace sacred

@@ -8,6 +8,9 @@
 
 #include "checks.hpp"
 #include "clipped_index_strategy.hpp"
+#include "dual.hpp"
+#include "hashed_index_strategy.hpp"
+#include "tiled_index_strategy.hpp"
 #include "index_strategy.hpp"
 
 namespace sacred {
@@ -16,18 +19,22 @@ namespace sacred {
   using std::ostream;
   using std::vector;
 
-  template <typename F, typename IS = ClippedIndexStrategy<F>>
+  template <typename F>
   class Array {
   public:
+    static ClippedIndexStrategy<F> clipped_index_strategy;
+    static HashedIndexStrategy<F> hashed_index_strategy;
+    static TiledIndexStrategy<F> tiled_index_strategy;
 
     Array() = default;
 
-    explicit Array(const vector<int> &shape) : capacity_(), count_(), shape_(shape), index_strategy_() {
+    explicit Array(const vector<int> &shape, IndexStrategy<F> &index_strategy = clipped_index_strategy)
+        : capacity_(), count_(), shape_(shape), index_strategy_(index_strategy) {
       Reshape(shape);
     }
 
-    Array(const vector<int> &shape, const vector<F> &data)
-        : capacity_(data.size()), count_(), shape_(shape), data_(data), index_strategy_() {
+    Array(const vector<int> &shape, const vector<F> &data, IndexStrategy<F> &index_strategy = clipped_index_strategy)
+        : capacity_(data.size()), count_(), shape_(shape), data_(data), index_strategy_(index_strategy) {
       Reshape(shape);
     }
 
@@ -146,7 +153,7 @@ namespace sacred {
     int capacity_, count_;
     vector<int> shape_;
     vector<F> data_;
-    IS index_strategy_;
+    IndexStrategy<F> &index_strategy_;
   };
 
   template <typename F>
@@ -177,6 +184,17 @@ namespace sacred {
     return out;
   }
 
+  template<> auto Array<float>::clipped_index_strategy = ClippedIndexStrategy<float>();
+  template<> auto Array<float>::hashed_index_strategy = HashedIndexStrategy<float>();
+  template<> auto Array<float>::tiled_index_strategy = TiledIndexStrategy<float>();
+
+  template<> auto Array<double>::clipped_index_strategy = ClippedIndexStrategy<double>();
+  template<> auto Array<double>::hashed_index_strategy = HashedIndexStrategy<double>();
+  template<> auto Array<double>::tiled_index_strategy = TiledIndexStrategy<double>();
+
+  template<> auto Array<Dual>::clipped_index_strategy = ClippedIndexStrategy<Dual>();
+  template<> auto Array<Dual>::hashed_index_strategy = HashedIndexStrategy<Dual>();
+  template<> auto Array<Dual>::tiled_index_strategy = TiledIndexStrategy<Dual>();
 }  // namespace sacred
 
 #endif  // SACRED_ARRAY_HPP_
