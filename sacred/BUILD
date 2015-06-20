@@ -48,6 +48,9 @@ cc_test(
   srcs = [
     "blob_test.cpp",
   ],
+  copts = [
+    "-I/usr/local/include/",
+  ],
   size = "small",
   deps = [
     "//external:googletest",
