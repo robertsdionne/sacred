@@ -1,22 +1,22 @@
 cc_library(
     name = "gflags",
     srcs = glob([
-      "gflags/include/gflags/*.h",
-      "gflags/src/*.cc",
-      "gflags/src/*.h",
+      "include/gflags/*.h",
+      "src/*.cc",
+      "src/*.h",
     ], exclude = [
-      "gflags/src/windows_*",
+      "src/windows_*",
     ]),
     hdrs = glob([
-      "gflags/include/gflags/*.h",
-      "gflags/src/*.h",
+      "include/gflags/*.h",
+      "src/*.h",
     ]),
     visibility = [
       "//visibility:public",
     ],
     includes = [
-      "gflags/include",
-      "gflags/include/gflags",
+      "include",
+      "include/gflags",
     ],
     linkopts = [
       "-lpthread",
