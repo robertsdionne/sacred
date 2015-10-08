@@ -42,7 +42,7 @@ cc_test(
   ],
   size = 'small',
   deps = [
-    '//external:googletest',
+    '//third_party:gtest',
   ],
 )
 
@@ -56,7 +56,7 @@ cc_test(
   ],
   size = 'small',
   deps = [
-    '//external:googletest',
+    '//third_party:gtest',
   ],
 )
 
@@ -67,7 +67,7 @@ cc_test(
   ],
   size = 'small',
   deps = [
-    '//external:googletest',
+    '//third_party:gtest',
   ],
 )
 
@@ -81,7 +81,7 @@ cc_test(
     '-I/usr/local/include/',
   ],
   deps = [
-    '//external:googletest',
+    '//third_party:gtest',
   ],
 )
 
@@ -95,7 +95,7 @@ cc_test(
     '-I/usr/local/include/',
   ],
   deps = [
-    '//external:googletest',
+    '//third_party:gtest',
   ],
 )
 
@@ -109,7 +109,7 @@ cc_test(
     '-I/usr/local/include/',
   ],
   deps = [
-    '//external:googletest',
+    '//third_party:gtest',
   ],
 )
 
@@ -123,7 +123,7 @@ cc_test(
     '-I/usr/local/include/',
   ],
   deps = [
-    '//external:googletest',
+    '//third_party:gtest',
   ],
 )
 
@@ -137,6 +137,6 @@ cc_test(
     '-I/usr/local/include/',
   ],
   deps = [
-    '//external:googletest',
+    '//third_party:gtest',
   ],
 )
