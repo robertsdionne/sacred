@@ -140,3 +140,17 @@ cc_test(
     '//third_party:gtest',
   ],
 )
+
+cc_test(
+  name = 'tensor_test',
+  srcs = [
+    'tensor_test.cpp',
+  ],
+  size = 'small',
+  copts = [
+    '-I/usr/local/include/',
+  ],
+  deps = [
+    '//third_party:gtest',
+  ],
+)
