@@ -1,16 +1,16 @@
 cc_binary(
-  name = "print_floats",
+  name = 'print_floats',
   srcs = [
-    "print_floats.cpp",
+    'print_floats.cpp',
   ],
   deps = [
-    "//external:googleflags",
+    '//external:googleflags',
   ],
 )
 
 py_binary(
-  name = "prepare_data",
+  name = 'prepare_data',
   srcs = [
-    "prepare_data.py",
+    'prepare_data.py',
   ],
 )

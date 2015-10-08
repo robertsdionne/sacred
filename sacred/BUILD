@@ -1,142 +1,142 @@
 
 cc_binary(
-  name = "convcl",
+  name = 'convcl',
   srcs = [
-    "convcl.cpp",
+    'convcl.cpp',
   ],
   linkopts = [
-    "-framework OpenCL",
+    '-framework OpenCL',
   ],
 )
 
 cc_binary(
-  name = "gemmcl",
+  name = 'gemmcl',
   srcs = [
-    "gemmcl.cpp",
+    'gemmcl.cpp',
   ],
   linkopts = [
-    "-framework OpenCL",
+    '-framework OpenCL',
   ],
 )
 
 cc_binary(
-  name = "sacred",
+  name = 'sacred',
   srcs = [
-    "sacred.cpp",
+    'sacred.cpp',
   ],
   copts = [
-    "-I/usr/local/include/",
+    '-I/usr/local/include/',
   ],
   deps = [
-    "//external:googleflags",
+    '//external:googleflags',
   ],
 )
 
 cc_test(
-  name = "array_test",
+  name = 'array_test',
   srcs = [
-    "array_test.cpp",
+    'array_test.cpp',
   ],
   copts = [
-    "-I/usr/local/include/",
+    '-I/usr/local/include/',
   ],
-  size = "small",
+  size = 'small',
   deps = [
-    "//external:googletest",
+    '//external:googletest',
   ],
 )
 
 cc_test(
-  name = "blob_test",
+  name = 'blob_test',
   srcs = [
-    "blob_test.cpp",
+    'blob_test.cpp',
   ],
   copts = [
-    "-I/usr/local/include/",
+    '-I/usr/local/include/',
   ],
-  size = "small",
+  size = 'small',
   deps = [
-    "//external:googletest",
+    '//external:googletest',
   ],
 )
 
 cc_test(
-  name = "checks_test",
+  name = 'checks_test',
   srcs = [
-    "checks_test.cpp",
+    'checks_test.cpp',
   ],
-  size = "small",
+  size = 'small',
   deps = [
-    "//external:googletest",
+    '//external:googletest',
   ],
 )
 
 cc_test(
-  name = "math_test",
+  name = 'math_test',
   srcs = [
-    "math_test.cpp",
+    'math_test.cpp',
   ],
-  size = "small",
+  size = 'small',
   copts = [
-    "-I/usr/local/include/",
+    '-I/usr/local/include/',
   ],
   deps = [
-    "//external:googletest",
+    '//external:googletest',
   ],
 )
 
 cc_test(
-  name = "nonrecursive_filter_layer_test",
+  name = 'nonrecursive_filter_layer_test',
   srcs = [
-    "nonrecursive_filter_layer_test.cpp",
+    'nonrecursive_filter_layer_test.cpp',
   ],
-  size = "small",
+  size = 'small',
   copts = [
-    "-I/usr/local/include/",
+    '-I/usr/local/include/',
   ],
   deps = [
-    "//external:googletest",
+    '//external:googletest',
   ],
 )
 
 cc_test(
-  name = "reconv_test",
+  name = 'reconv_test',
   srcs = [
-    "reconv_test.cpp",
+    'reconv_test.cpp',
   ],
-  size = "small",
+  size = 'small',
   copts = [
-    "-I/usr/local/include/",
+    '-I/usr/local/include/',
   ],
   deps = [
-    "//external:googletest",
+    '//external:googletest',
   ],
 )
 
 cc_test(
-  name = "recursive_filter_layer_test",
+  name = 'recursive_filter_layer_test',
   srcs = [
-    "recursive_filter_layer_test.cpp",
+    'recursive_filter_layer_test.cpp',
   ],
-  size = "small",
+  size = 'small',
   copts = [
-    "-I/usr/local/include/",
+    '-I/usr/local/include/',
   ],
   deps = [
-    "//external:googletest",
+    '//external:googletest',
   ],
 )
 
 cc_test(
-  name = "stacked_test",
+  name = 'stacked_test',
   srcs = [
-    "stacked_test.cpp",
+    'stacked_test.cpp',
   ],
-  size = "small",
+  size = 'small',
   copts = [
-    "-I/usr/local/include/",
+    '-I/usr/local/include/',
   ],
   deps = [
-    "//external:googletest",
+    '//external:googletest',
   ],
 )

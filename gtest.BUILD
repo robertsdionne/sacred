@@ -1,21 +1,21 @@
 cc_library(
-  name = "main",
+  name = 'main',
   srcs = glob([
-    "gtest-1.7.0/src/*.cc"
+    'gtest-1.7.0/src/*.cc'
   ], exclude = [
-    "gtest-1.7.0/src/gtest-all.cc",
+    'gtest-1.7.0/src/gtest-all.cc',
   ]),
   hdrs = glob([
-    "gtest-1.7.0/include/**/*.h",
+    'gtest-1.7.0/include/**/*.h',
   ]),
   includes = [
-    "gtest-1.7.0",
-    "gtest-1.7.0/include",
+    'gtest-1.7.0',
+    'gtest-1.7.0/include',
   ],
   linkopts = [
-    "-lpthread",
+    '-lpthread',
   ],
   visibility = [
-    "//visibility:public",
+    '//visibility:public',
   ],
 )
