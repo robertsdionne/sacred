@@ -18,14 +18,23 @@ namespace sacred {
 
     ~Tensor() = default;
 
-    F at(int index) {
-      return data_.at(index);
+    template <typename... Int>
+    F at(int index, Int... rest) {
+      vector<int> indices({index});
+      return at(indices, rest...);
     }
 
-    F at(initializer_list<int> indices) {
+    template <typename... Int>
+    F at(vector<int> &indices, int next, Int... rest) {
+      indices.push_back(next);
+      return at(indices, rest...);
+    }
+
+    F at(const vector<int> &indices) {
       CHECK_STATE(indices.size() == shape_.size());
       int index = 0;
-      initializer_list<int>::iterator s, i;
+      initializer_list<int>::iterator s;
+      vector<int>::const_iterator i;
       for (s = shape_.begin(), i = indices.begin();
           s < shape_.end() && i < indices.end();
           ++s, ++i) {
