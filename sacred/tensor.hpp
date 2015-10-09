@@ -11,12 +11,44 @@ namespace sacred {
   using std::initializer_list;
   using std::vector;
 
+  struct Slice {};
+
+  Slice _;
+
   template <typename F>
   class Tensor {
   public:
     Tensor(initializer_list<int> shape, const vector<F> &data) : shape_(shape), data_(data) {}
 
     ~Tensor() = default;
+
+    template <typename... Parameter>
+    Tensor<F> slice(int first, Parameter... rest) {
+      vector<int> indices({first}), slices;
+      return slice(indices, slices, rest...);
+    }
+
+    template <typename... Parameter>
+    Tensor<F> slice(Slice first, Parameter... rest) {
+      vector<int> indices, slices({0});
+      return slice(indices, slices, rest...);
+    }
+
+    template <typename... Parameter>
+    Tensor<F> slice(vector<int> &indices, vector<int> &slices, int next, Parameter... rest) {
+      indices.push_back(next);
+      return slice(indices, slices, rest...);
+    }
+
+    template <typename... Parameter>
+    Tensor<F> slice(vector<int> &indices, vector<int> &slices, Slice next, Parameter... rest) {
+      slices.push_back(indices.size() + slices.size());
+      return slice(indices, slices, rest...);
+    }
+
+    Tensor<F> slice(vector<int> &indices, vector<int> &slices) {
+      return Tensor<F>({1}, {0});
+    }
 
     template <typename... Int>
     F at(int index, Int... rest) {

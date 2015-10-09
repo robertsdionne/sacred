@@ -3,6 +3,7 @@
 #include "tensor.hpp"
 
 using sacred::Tensor;
+using sacred::_;
 
 TEST(Tensor, Initialize1D) {
   auto tensor = Tensor<float>({3}, {
@@ -15,6 +16,8 @@ TEST(Tensor, Initialize1D) {
 
   EXPECT_DEATH(tensor.shape(-1), "shape_\\.size\\(\\)");
   EXPECT_DEATH(tensor.shape(1), "shape_\\.size\\(\\)");
+
+  tensor.slice(_);
 
   EXPECT_EQ(1, tensor.at(0));
   EXPECT_EQ(2, tensor.at(1));
@@ -36,6 +39,8 @@ TEST(Tensor, Initialize2D) {
 
   EXPECT_DEATH(tensor.shape(-1), "shape_\\.size\\(\\)");
   EXPECT_DEATH(tensor.shape(2), "shape_\\.size\\(\\)");
+
+  tensor.slice(_, 0);
 
   EXPECT_EQ(1, tensor.at(0, 0));
   EXPECT_EQ(2, tensor.at(0, 1));
@@ -62,6 +67,9 @@ TEST(Tensor, Initialize3D) {
   EXPECT_EQ(2, tensor.shape(0));
   EXPECT_EQ(2, tensor.shape(1));
   EXPECT_EQ(2, tensor.shape(2));
+
+  tensor.slice(_, 0, 0);
+  tensor.slice(_, _, 0);
 
   EXPECT_DEATH(tensor.shape(-1), "shape_\\.size\\(\\)");
   EXPECT_DEATH(tensor.shape(3), "shape_\\.size\\(\\)");
@@ -102,6 +110,9 @@ TEST(Tensor, Initialize4D) {
   EXPECT_EQ(2, tensor.shape(1));
   EXPECT_EQ(2, tensor.shape(2));
   EXPECT_EQ(2, tensor.shape(2));
+
+  tensor.slice(_, 0, 0, 0);
+  tensor.slice(_, _, 0, 0);
 
   EXPECT_DEATH(tensor.shape(-1), "shape_\\.size\\(\\)");
   EXPECT_DEATH(tensor.shape(4), "shape_\\.size\\(\\)");
