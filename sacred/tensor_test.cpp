@@ -5,7 +5,9 @@
 using sacred::Tensor;
 
 TEST(Tensor, Initialize1D) {
-  auto tensor = Tensor<float>({3}, {1, 2, 3});
+  auto tensor = Tensor<float>({3}, {
+    1, 2, 3
+  });
 
   EXPECT_EQ(1, tensor.number_of_axes());
   EXPECT_EQ(3, tensor.size());
@@ -27,7 +29,10 @@ TEST(Tensor, Initialize1D) {
 }
 
 TEST(Tensor, Initialize2D) {
-  auto tensor = Tensor<float>({2, 3}, {1, 2, 3, 4, 5, 6});
+  auto tensor = Tensor<float>({2, 3}, {
+    1, 2, 3,
+    4, 5, 6,
+  });
 
   EXPECT_EQ(2, tensor.number_of_axes());
   EXPECT_EQ(6, tensor.size());
@@ -56,7 +61,13 @@ TEST(Tensor, Initialize2D) {
 }
 
 TEST(Tensor, Initialize3D) {
-  auto tensor = Tensor<float>({2, 2, 2}, {1, 2, 3, 4, 5, 6, 7, 8});
+  auto tensor = Tensor<float>({2, 2, 2}, {
+    1, 2,
+    3, 4,
+
+    5, 6,
+    7, 8,
+  });
 
   EXPECT_EQ(3, tensor.number_of_axes());
   EXPECT_EQ(8, tensor.size());
@@ -87,4 +98,69 @@ TEST(Tensor, Initialize3D) {
 
   EXPECT_DEATH(tensor.at({0, 0}), "indices\\.size\\(\\)");
   EXPECT_DEATH(tensor.at({0, 0, 0, 0}), "indices\\.size\\(\\)");
+}
+
+TEST(Tensor, Initialize4D) {
+  auto tensor = Tensor<float>({2, 2, 2, 2}, {
+    //{
+      1, 2,
+      3, 4,
+
+      5, 6,
+      7, 8,
+    //}, {
+      9, 10,
+      11, 12,
+
+      13, 14,
+      15, 16,
+    //}
+  });
+
+  EXPECT_EQ(4, tensor.number_of_axes());
+  EXPECT_EQ(16, tensor.size());
+  EXPECT_EQ(2, tensor.shape(0));
+  EXPECT_EQ(2, tensor.shape(1));
+  EXPECT_EQ(2, tensor.shape(2));
+  EXPECT_EQ(2, tensor.shape(2));
+
+  EXPECT_DEATH(tensor.shape(-1), "shape_\\.size\\(\\)");
+  EXPECT_DEATH(tensor.shape(4), "shape_\\.size\\(\\)");
+
+  EXPECT_EQ(1, tensor.at(0));
+  EXPECT_EQ(2, tensor.at(1));
+  EXPECT_EQ(3, tensor.at(2));
+  EXPECT_EQ(4, tensor.at(3));
+  EXPECT_EQ(5, tensor.at(4));
+  EXPECT_EQ(6, tensor.at(5));
+  EXPECT_EQ(7, tensor.at(6));
+  EXPECT_EQ(8, tensor.at(7));
+  EXPECT_EQ(9, tensor.at(8));
+  EXPECT_EQ(10, tensor.at(9));
+  EXPECT_EQ(11, tensor.at(10));
+  EXPECT_EQ(12, tensor.at(11));
+  EXPECT_EQ(13, tensor.at(12));
+  EXPECT_EQ(14, tensor.at(13));
+  EXPECT_EQ(15, tensor.at(14));
+  EXPECT_EQ(16, tensor.at(15));
+
+  EXPECT_EQ(1, tensor.at({0, 0, 0, 0}));
+  EXPECT_EQ(2, tensor.at({0, 0, 0, 1}));
+  EXPECT_EQ(3, tensor.at({0, 0, 1, 0}));
+  EXPECT_EQ(4, tensor.at({0, 0, 1, 1}));
+  EXPECT_EQ(5, tensor.at({0, 1, 0, 0}));
+  EXPECT_EQ(6, tensor.at({0, 1, 0, 1}));
+  EXPECT_EQ(7, tensor.at({0, 1, 1, 0}));
+  EXPECT_EQ(8, tensor.at({0, 1, 1, 1}));
+  EXPECT_EQ(9, tensor.at({1, 0, 0, 0}));
+  EXPECT_EQ(10, tensor.at({1, 0, 0, 1}));
+  EXPECT_EQ(11, tensor.at({1, 0, 1, 0}));
+  EXPECT_EQ(12, tensor.at({1, 0, 1, 1}));
+  EXPECT_EQ(13, tensor.at({1, 1, 0, 0}));
+  EXPECT_EQ(14, tensor.at({1, 1, 0, 1}));
+  EXPECT_EQ(15, tensor.at({1, 1, 1, 0}));
+  EXPECT_EQ(16, tensor.at({1, 1, 1, 1}));
+
+  EXPECT_DEATH(tensor.at({0, 0, 0}), "indices\\.size\\(\\)");
+  EXPECT_DEATH(tensor.at({0, 0, 0, 0, 0}), "indices\\.size\\(\\)");
 }
