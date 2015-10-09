@@ -144,6 +144,7 @@ cc_test(
 cc_test(
   name = 'tensor_test',
   srcs = [
+    'tensor.hpp',
     'tensor_test.cpp',
   ],
   size = 'small',
