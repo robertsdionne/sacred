@@ -144,8 +144,10 @@ cc_test(
 cc_test(
   name = 'tensor_test',
   srcs = [
+    'functional.hpp',
     'tensor.hpp',
     'tensor_test.cpp',
+    'testing.hpp',
   ],
   size = 'small',
   copts = [
