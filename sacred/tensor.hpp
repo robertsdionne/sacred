@@ -9,115 +9,110 @@
 
 #include "checks.hpp"
 #include "functional.hpp"
+#include "slice.hpp"
+#include "tensor_interface.hpp"
 #include "testing.hpp"
 
 namespace sacred {
 
   using namespace std;
 
-  struct Slice {};
-
   Slice _;
 
   template <typename F>
-  class Tensor {
+  struct TensorEntry {
+    vector<int> index;
+    F value;
+  };
+
+  template <typename F>
+  class Tensor : public TensorInterface<F> {
   public:
+    Tensor() : shape_({1}), data_({F()}) {}
+
+    Tensor(F value) : shape_({1}), data_({value}) {}
+
     Tensor(const vector<int> &shape) : shape_(shape), data_(ProductOf(shape)) {}
 
     Tensor(const vector<int> &shape, const vector<F> &data) : shape_(shape), data_(data) {}
 
     ~Tensor() = default;
 
-    template <typename... Parameter>
-    Tensor<F> slice(int first, Parameter... rest) {
-      vector<int> indices({first}), slices;
-      return slice(indices, slices, rest...);
+    virtual operator F() const override {
+      CHECK_STATE(1 == ProductOf(shape_));
+      return data_.at(0);
     }
 
-    template <typename... Parameter>
-    Tensor<F> slice(Slice first, Parameter... rest) {
-      vector<int> indices, slices({0});
-      return slice(indices, slices, rest...);
+    virtual Tensor<F> at(const vector<Slice> &indices) override {
+      // auto shape = SelectFrom(shape_, slices);
+      // if (1 == shape.size()) {
+      //   return SliceBase(indices, slices.at(0));
+      // }
+      return data_.at(0);
     }
 
-    template <typename... Parameter>
-    Tensor<F> slice(vector<int> &indices, vector<int> &slices, int next, Parameter... rest) {
-      indices.push_back(next);
-      return slice(indices, slices, rest...);
-    }
+    // Tensor<F> SliceBase(const vector<int> &indices, int slice) {
+    //   auto shape = shape_.at(slice);
+    //   auto subtensor = Tensor<F>({shape});
+    //   auto index = vector<int>(indices);
+    //   index.insert(next(begin(index), slice), 0);
+    //   for (auto i = 0; i < shape; ++i) {
+    //     index.at(slice) = i;
+    //     subtensor.at(i) = at(index);
+    //   }
+    //   return subtensor;
+    // }
 
-    template <typename... Parameter>
-    Tensor<F> slice(vector<int> &indices, vector<int> &slices, Slice next, Parameter... rest) {
-      slices.push_back(indices.size() + slices.size());
-      return slice(indices, slices, rest...);
-    }
+    // F &at(const vector<int> &indices) {
+    //   CHECK_STATE(indices.size() == shape_.size());
+    //   int index = 0;
+    //   vector<int>::const_iterator s, i;
+    //   for (s = shape_.begin(), i = indices.begin();
+    //       s < shape_.end() && i < indices.end();
+    //       ++s, ++i) {
+    //     index *= *s;
+    //     if (0 <= *i && *i < *s) {
+    //       index += *i;
+    //     }
+    //   }
+    //   return data_.at(index);
+    // }
 
-    Tensor<F> slice(const vector<int> &indices, const vector<int> &slices) {
-      auto shape = SelectFrom(shape_, slices);
-      if (1 == shape.size()) {
-        return SliceBase(indices, slices.at(0));
-      }
-      auto subtensor = Tensor<F>(shape);
-      return subtensor;
-    }
-
-    Tensor<F> SliceBase(const vector<int> &indices, int slice) {
-      auto shape = shape_.at(slice);
-      auto subtensor = Tensor<F>({shape});
-      auto index = vector<int>(indices);
-      index.insert(next(begin(index), slice), 0);
-      for (auto i = 0; i < shape; ++i) {
-        index.at(slice) = i;
-        subtensor.at(i) = at(index);
-      }
-      return subtensor;
-    }
-
-    template <typename... Int>
-    F &at(int index, Int... rest) {
-      vector<int> indices({index});
-      return at(indices, rest...);
-    }
-
-    template <typename... Int>
-    F &at(vector<int> &indices, int next, Int... rest) {
-      indices.push_back(next);
-      return at(indices, rest...);
-    }
-
-    F &at(const vector<int> &indices) {
-      CHECK_STATE(indices.size() == shape_.size());
-      int index = 0;
-      vector<int>::const_iterator s, i;
-      for (s = shape_.begin(), i = indices.begin();
-          s < shape_.end() && i < indices.end();
-          ++s, ++i) {
-        index *= *s;
-        if (0 <= *i && *i < *s) {
-          index += *i;
-        }
-      }
-      return data_.at(index);
-    }
-
-    const int number_of_axes() const {
+    virtual const int number_of_axes() const override {
       return shape_.size();
     }
 
-    friend bool operator ==(const Tensor<F> &left, const Tensor<F> &right) {
-      return left.shape_ == right.shape_ && left.data_ == right.data_;
+    virtual Tensor<F> operator [](const vector<Slice> &indices) override {
+      return data_.at(0);
+    }
+
+    virtual Tensor<F> &operator =(F other) override {
+      for (auto &entry : data_) {
+        entry = other;
+      }
+      return *this;
+    }
+
+    virtual Tensor<F> &operator =(const Tensor<F> &other) override {
+      // for (auto entry : other) {
+      //   at(entry.index) = entry.value;
+      // }
+      return *this;
+    }
+
+    virtual bool operator ==(const Tensor<F> &other) const override {
+      return shape_ == other.shape_ && data_ == other.data_;
     }
 
     friend ostream &operator <<(ostream &out, const Tensor<F> &tensor) {
       return out << "Tensor<F>(" << tensor.shape_ << ", " << tensor.data_ << ")";
     }
 
-    inline int shape(int index) {
-      CHECK_STATE(0 <= index && index < shape_.size());
-      return *(shape_.begin() + index);
+    virtual inline const vector<int> &shape() const override {
+      return shape_;
     }
 
-    inline int size() const {
+    virtual inline int size() const override {
       return data_.size();
     }
 

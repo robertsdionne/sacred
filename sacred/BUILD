@@ -161,6 +161,7 @@ cc_test(
   srcs = [
     'functional.hpp',
     'tensor.hpp',
+    'tensor_interface.hpp',
     'tensor_test.cpp',
     'testing.hpp',
   ],
