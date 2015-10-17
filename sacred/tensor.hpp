@@ -17,8 +17,6 @@ namespace sacred {
 
   using namespace std;
 
-  Slice _;
-
   template <typename F>
   struct TensorEntry {
     vector<int> index;

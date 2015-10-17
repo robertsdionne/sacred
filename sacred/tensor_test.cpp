@@ -3,7 +3,6 @@
 #include "tensor.hpp"
 
 using sacred::Tensor;
-using sacred::_;
 
 TEST(TestTensor, At) {
   auto tensor = Tensor<float>();
