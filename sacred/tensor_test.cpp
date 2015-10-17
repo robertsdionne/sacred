@@ -37,6 +37,9 @@ TEST(Tensor, Initialize1D) {
   EXPECT_EQ(2, tensor.at({1}));
   EXPECT_EQ(3, tensor.at({2}));
 
+  EXPECT_DEATH(tensor.at({-1}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({3}), "indices\\.at\\(i\\).* <");
+
   EXPECT_DEATH(tensor.at({0, 0}), "indices\\.size\\(\\)");
 
   // EXPECT_EQ(Tensor<float>({3}, {1, 2, 3}), tensor.slice(_));
@@ -59,6 +62,11 @@ TEST(Tensor, Initialize2D) {
   EXPECT_EQ(4, tensor.at({1, 0}));
   EXPECT_EQ(5, tensor.at({1, 1}));
   EXPECT_EQ(6, tensor.at({1, 2}));
+
+  EXPECT_DEATH(tensor.at({0, -1}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({-1, 0}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({0, 3}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({2, 0}), "indices\\.at\\(i\\).* <");
 
   // EXPECT_DEATH(tensor.at({0}), "indices\\.size\\(\\)");
   EXPECT_DEATH(tensor.at({0, 0, 0}), "indices\\.size\\(\\)");
@@ -94,6 +102,13 @@ TEST(Tensor, Initialize3D) {
   EXPECT_EQ(6, tensor.at({1, 0, 1}));
   EXPECT_EQ(7, tensor.at({1, 1, 0}));
   EXPECT_EQ(8, tensor.at({1, 1, 1}));
+
+  EXPECT_DEATH(tensor.at({0, 0, -1}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({0, -1, 0}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({-1, 0, 0}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({0, 0, 2}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, 2, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({2, 0, 0}), "indices\\.at\\(i\\).* <");
 
   // EXPECT_DEATH(tensor.at(0, 0), "indices\\.size\\(\\)");
   EXPECT_DEATH(tensor.at({0, 0, 0, 0}), "indices\\.size\\(\\)");
@@ -154,6 +169,15 @@ TEST(Tensor, Initialize4D) {
   EXPECT_EQ(14, tensor.at({1, 1, 0, 1}));
   EXPECT_EQ(15, tensor.at({1, 1, 1, 0}));
   EXPECT_EQ(16, tensor.at({1, 1, 1, 1}));
+
+  EXPECT_DEATH(tensor.at({0, 0, 0, -1}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({0, 0, -1, 0}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({0, -1, 0, 0}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({-1, 0, 0, 0}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({0, 0, 0, 2}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, 0, 2, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, 2, 0, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({2, 0, 0, 0}), "indices\\.at\\(i\\).* <");
 
   // EXPECT_DEATH(tensor.at(0, 0, 0), "indices\\.size\\(\\)");
   EXPECT_DEATH(tensor.at({0, 0, 0, 0, 0}), "indices\\.size\\(\\)");
