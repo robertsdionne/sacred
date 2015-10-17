@@ -26,13 +26,13 @@ namespace sacred {
   template <typename F>
   class Tensor : public TensorInterface<F> {
   public:
-    Tensor() : shape_({1}), data_({F()}) {}
+    Tensor() : shape_({1}), stride_(shape_.size()), data_({F()}) {}
 
-    Tensor(F value) : shape_({1}), data_({value}) {}
+    Tensor(F value) : shape_({1}), stride_(shape_.size()), data_({value}) {}
 
-    Tensor(const vector<int> &shape) : shape_(shape), data_(ProductOf(shape)) {}
+    Tensor(const vector<int> &shape) : shape_(shape), stride_(shape_.size()), data_(ProductOf(shape)) {}
 
-    Tensor(const vector<int> &shape, const vector<F> &data) : shape_(shape), data_(data) {}
+    Tensor(const vector<int> &shape, const vector<F> &data) : shape_(shape), stride_(shape_.size()), data_(data) {}
 
     ~Tensor() = default;
 
@@ -42,11 +42,13 @@ namespace sacred {
     }
 
     virtual Tensor<F> at(const vector<Slice> &indices) override {
-      // auto shape = SelectFrom(shape_, slices);
-      // if (1 == shape.size()) {
-      //   return SliceBase(indices, slices.at(0));
-      // }
-      return data_.at(0);
+      CHECK_STATE(indices.size() <= shape_.size());
+      int index = 0;
+      for (auto i = 0; i < shape_.size(); ++i) {
+        CHECK_STATE(0 <= indices.at(i).start(shape_.at(i)) && indices.at(i).start(shape_.at(i)) < shape_.at(i));
+        index += indices.at(i).start(shape_.at(i)) * stride_.at(i);
+      }
+      return data_.at(index);
     }
 
     // Tensor<F> SliceBase(const vector<int> &indices, int slice) {
@@ -115,7 +117,7 @@ namespace sacred {
     }
 
   private:
-    vector<int> shape_;
+    vector<int> shape_, stride_;
     vector<F> data_;
   };
 

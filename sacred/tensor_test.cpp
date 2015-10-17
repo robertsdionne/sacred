@@ -22,10 +22,6 @@ TEST(TestTensor, At) {
   EXPECT_EQ(5.0f, tensor4.at({0, 1}));
   EXPECT_EQ(5.0f, tensor4.at({1, 0}));
   EXPECT_EQ(5.0f, tensor4.at({1, 1}));
-
-  tensor.at({1, 2, 3});
-
-  float a = tensor.at({1, 2, 3});
 }
 
 // TEST(Tensor, Initialize1D) {

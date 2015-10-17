@@ -24,15 +24,15 @@ namespace sacred {
 
     ~Slice() = default;
 
-    bool has_start() {
+    bool has_start() const {
       return !start_empty_;
     }
 
-    bool has_stop() {
+    bool has_stop() const {
       return !stop_empty_;
     }
 
-    int start(int n) {
+    int start(int n) const {
       if (start_empty_) {
         if (step_ < 0) {
           return n;
@@ -42,7 +42,7 @@ namespace sacred {
       return start_;
     }
 
-    int stop(int n) {
+    int stop(int n) const {
       if (stop_empty_) {
         if (step_ < 0) {
           return -1;
@@ -52,7 +52,7 @@ namespace sacred {
       return stop_;
     }
 
-    int step() {
+    int step() const {
       return step_;
     }
 
