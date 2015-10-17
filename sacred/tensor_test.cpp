@@ -40,6 +40,12 @@ TEST(Tensor, Initialize1D) {
   EXPECT_DEATH(tensor.at({-1}), "0 <= indices\\.at\\(i\\)");
   EXPECT_DEATH(tensor.at({3}), "indices\\.at\\(i\\).* <");
 
+  EXPECT_EQ(3, tensor[{-1}]);
+  EXPECT_EQ(1, tensor[{0}]);
+  EXPECT_EQ(2, tensor[{1}]);
+  EXPECT_EQ(3, tensor[{2}]);
+  EXPECT_EQ(1, tensor[{3}]);
+
   EXPECT_DEATH(tensor.at({0, 0}), "indices\\.size\\(\\)");
 
   // EXPECT_EQ(Tensor<float>({3}, {1, 2, 3}), tensor.slice(_));
@@ -63,10 +69,32 @@ TEST(Tensor, Initialize2D) {
   EXPECT_EQ(5, tensor.at({1, 1}));
   EXPECT_EQ(6, tensor.at({1, 2}));
 
-  EXPECT_DEATH(tensor.at({0, -1}), "0 <= indices\\.at\\(i\\)");
   EXPECT_DEATH(tensor.at({-1, 0}), "0 <= indices\\.at\\(i\\)");
-  EXPECT_DEATH(tensor.at({0, 3}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, -1}), "0 <= indices\\.at\\(i\\)");
+
   EXPECT_DEATH(tensor.at({2, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, 3}), "indices\\.at\\(i\\).* <");
+
+  EXPECT_EQ(6, (tensor[{-1, -1}]));
+  EXPECT_EQ(4, (tensor[{-1, 0}]));
+  EXPECT_EQ(5, (tensor[{-1, 1}]));
+  EXPECT_EQ(6, (tensor[{-1, 2}]));
+  EXPECT_EQ(4, (tensor[{-1, 3}]));
+  EXPECT_EQ(3, (tensor[{0, -1}]));
+  EXPECT_EQ(1, (tensor[{0, 0}]));
+  EXPECT_EQ(2, (tensor[{0, 1}]));
+  EXPECT_EQ(3, (tensor[{0, 2}]));
+  EXPECT_EQ(1, (tensor[{0, 3}]));
+  EXPECT_EQ(6, (tensor[{1, -1}]));
+  EXPECT_EQ(4, (tensor[{1, 0}]));
+  EXPECT_EQ(5, (tensor[{1, 1}]));
+  EXPECT_EQ(6, (tensor[{1, 2}]));
+  EXPECT_EQ(4, (tensor[{1, 3}]));
+  EXPECT_EQ(3, (tensor[{2, -1}]));
+  EXPECT_EQ(1, (tensor[{2, 0}]));
+  EXPECT_EQ(2, (tensor[{2, 1}]));
+  EXPECT_EQ(3, (tensor[{2, 2}]));
+  EXPECT_EQ(1, (tensor[{2, 3}]));
 
   // EXPECT_DEATH(tensor.at({0}), "indices\\.size\\(\\)");
   EXPECT_DEATH(tensor.at({0, 0, 0}), "indices\\.size\\(\\)");
@@ -103,15 +131,81 @@ TEST(Tensor, Initialize3D) {
   EXPECT_EQ(7, tensor.at({1, 1, 0}));
   EXPECT_EQ(8, tensor.at({1, 1, 1}));
 
-  EXPECT_DEATH(tensor.at({0, 0, -1}), "0 <= indices\\.at\\(i\\)");
-  EXPECT_DEATH(tensor.at({0, -1, 0}), "0 <= indices\\.at\\(i\\)");
   EXPECT_DEATH(tensor.at({-1, 0, 0}), "0 <= indices\\.at\\(i\\)");
-  EXPECT_DEATH(tensor.at({0, 0, 2}), "indices\\.at\\(i\\).* <");
-  EXPECT_DEATH(tensor.at({0, 2, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, -1, 0}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({0, 0, -1}), "0 <= indices\\.at\\(i\\)");
+
   EXPECT_DEATH(tensor.at({2, 0, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, 2, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, 0, 2}), "indices\\.at\\(i\\).* <");
 
   // EXPECT_DEATH(tensor.at(0, 0), "indices\\.size\\(\\)");
   EXPECT_DEATH(tensor.at({0, 0, 0, 0}), "indices\\.size\\(\\)");
+
+  EXPECT_EQ(8, (tensor[{-1, -1, -1}]));
+  EXPECT_EQ(7, (tensor[{-1, -1, 0}]));
+  EXPECT_EQ(8, (tensor[{-1, -1, 1}]));
+  EXPECT_EQ(7, (tensor[{-1, -1, 2}]));
+  EXPECT_EQ(6, (tensor[{-1, 0, -1}]));
+  EXPECT_EQ(5, (tensor[{-1, 0, 0}]));
+  EXPECT_EQ(6, (tensor[{-1, 0, 1}]));
+  EXPECT_EQ(5, (tensor[{-1, 0, 2}]));
+  EXPECT_EQ(8, (tensor[{-1, 1, -1}]));
+  EXPECT_EQ(7, (tensor[{-1, 1, 0}]));
+  EXPECT_EQ(8, (tensor[{-1, 1, 1}]));
+  EXPECT_EQ(7, (tensor[{-1, 1, 2}]));
+  EXPECT_EQ(6, (tensor[{-1, 2, -1}]));
+  EXPECT_EQ(5, (tensor[{-1, 2, 0}]));
+  EXPECT_EQ(6, (tensor[{-1, 2, 1}]));
+  EXPECT_EQ(5, (tensor[{-1, 2, 2}]));
+  EXPECT_EQ(4, (tensor[{0, -1, -1}]));
+  EXPECT_EQ(3, (tensor[{0, -1, 0}]));
+  EXPECT_EQ(4, (tensor[{0, -1, 1}]));
+  EXPECT_EQ(3, (tensor[{0, -1, 2}]));
+  EXPECT_EQ(2, (tensor[{0, 0, -1}]));
+  EXPECT_EQ(1, (tensor[{0, 0, 0}]));
+  EXPECT_EQ(2, (tensor[{0, 0, 1}]));
+  EXPECT_EQ(1, (tensor[{0, 0, 2}]));
+  EXPECT_EQ(4, (tensor[{0, 1, -1}]));
+  EXPECT_EQ(3, (tensor[{0, 1, 0}]));
+  EXPECT_EQ(4, (tensor[{0, 1, 1}]));
+  EXPECT_EQ(3, (tensor[{0, 1, 2}]));
+  EXPECT_EQ(2, (tensor[{0, 2, -1}]));
+  EXPECT_EQ(1, (tensor[{0, 2, 0}]));
+  EXPECT_EQ(2, (tensor[{0, 2, 1}]));
+  EXPECT_EQ(1, (tensor[{0, 2, 2}]));
+  EXPECT_EQ(8, (tensor[{1, -1, -1}]));
+  EXPECT_EQ(7, (tensor[{1, -1, 0}]));
+  EXPECT_EQ(8, (tensor[{1, -1, 1}]));
+  EXPECT_EQ(7, (tensor[{1, -1, 2}]));
+  EXPECT_EQ(6, (tensor[{1, 0, -11}]));
+  EXPECT_EQ(5, (tensor[{1, 0, 0}]));
+  EXPECT_EQ(6, (tensor[{1, 0, 1}]));
+  EXPECT_EQ(5, (tensor[{1, 0, 2}]));
+  EXPECT_EQ(8, (tensor[{1, 1, -1}]));
+  EXPECT_EQ(7, (tensor[{1, 1, 0}]));
+  EXPECT_EQ(8, (tensor[{1, 1, 1}]));
+  EXPECT_EQ(7, (tensor[{1, 1, 2}]));
+  EXPECT_EQ(6, (tensor[{1, 2, -1}]));
+  EXPECT_EQ(5, (tensor[{1, 2, 0}]));
+  EXPECT_EQ(6, (tensor[{1, 2, 1}]));
+  EXPECT_EQ(5, (tensor[{1, 2, 2}]));
+  EXPECT_EQ(4, (tensor[{2, -1, -1}]));
+  EXPECT_EQ(3, (tensor[{2, -1, 0}]));
+  EXPECT_EQ(4, (tensor[{2, -1, 1}]));
+  EXPECT_EQ(3, (tensor[{2, -1, 2}]));
+  EXPECT_EQ(2, (tensor[{2, 0, -11}]));
+  EXPECT_EQ(1, (tensor[{2, 0, 0}]));
+  EXPECT_EQ(2, (tensor[{2, 0, 1}]));
+  EXPECT_EQ(1, (tensor[{2, 0, 2}]));
+  EXPECT_EQ(4, (tensor[{2, 1, -1}]));
+  EXPECT_EQ(3, (tensor[{2, 1, 0}]));
+  EXPECT_EQ(4, (tensor[{2, 1, 1}]));
+  EXPECT_EQ(3, (tensor[{2, 1, 2}]));
+  EXPECT_EQ(2, (tensor[{2, 2, -1}]));
+  EXPECT_EQ(1, (tensor[{2, 2, 0}]));
+  EXPECT_EQ(2, (tensor[{2, 2, 1}]));
+  EXPECT_EQ(1, (tensor[{2, 2, 2}]));
 
   // EXPECT_EQ(Tensor<float>({2}, {1, 5}), tensor.slice(_, 0, 0));
   // EXPECT_EQ(Tensor<float>({2}, {2, 6}), tensor.slice(_, 0, 1));
@@ -170,17 +264,338 @@ TEST(Tensor, Initialize4D) {
   EXPECT_EQ(15, tensor.at({1, 1, 1, 0}));
   EXPECT_EQ(16, tensor.at({1, 1, 1, 1}));
 
-  EXPECT_DEATH(tensor.at({0, 0, 0, -1}), "0 <= indices\\.at\\(i\\)");
-  EXPECT_DEATH(tensor.at({0, 0, -1, 0}), "0 <= indices\\.at\\(i\\)");
-  EXPECT_DEATH(tensor.at({0, -1, 0, 0}), "0 <= indices\\.at\\(i\\)");
   EXPECT_DEATH(tensor.at({-1, 0, 0, 0}), "0 <= indices\\.at\\(i\\)");
-  EXPECT_DEATH(tensor.at({0, 0, 0, 2}), "indices\\.at\\(i\\).* <");
-  EXPECT_DEATH(tensor.at({0, 0, 2, 0}), "indices\\.at\\(i\\).* <");
-  EXPECT_DEATH(tensor.at({0, 2, 0, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, -1, 0, 0}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({0, 0, -1, 0}), "0 <= indices\\.at\\(i\\)");
+  EXPECT_DEATH(tensor.at({0, 0, 0, -1}), "0 <= indices\\.at\\(i\\)");
+
   EXPECT_DEATH(tensor.at({2, 0, 0, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, 2, 0, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, 0, 2, 0}), "indices\\.at\\(i\\).* <");
+  EXPECT_DEATH(tensor.at({0, 0, 0, 2}), "indices\\.at\\(i\\).* <");
 
   // EXPECT_DEATH(tensor.at(0, 0, 0), "indices\\.size\\(\\)");
   EXPECT_DEATH(tensor.at({0, 0, 0, 0, 0}), "indices\\.size\\(\\)");
+
+  EXPECT_EQ(16, (tensor[{-1, -1, -1, -1}]));
+  EXPECT_EQ(15, (tensor[{-1, -1, -1, 0}]));
+  EXPECT_EQ(16, (tensor[{-1, -1, -1, 1}]));
+  EXPECT_EQ(15, (tensor[{-1, -1, -1, 2}]));
+
+  EXPECT_EQ(14, (tensor[{-1, -1, 0, -1}]));
+  EXPECT_EQ(13, (tensor[{-1, -1, 0, 0}]));
+  EXPECT_EQ(14, (tensor[{-1, -1, 0, 1}]));
+  EXPECT_EQ(13, (tensor[{-1, -1, 0, 2}]));
+
+  EXPECT_EQ(16, (tensor[{-1, -1, 1, -1}]));
+  EXPECT_EQ(15, (tensor[{-1, -1, 1, 0}]));
+  EXPECT_EQ(16, (tensor[{-1, -1, 1, 1}]));
+  EXPECT_EQ(15, (tensor[{-1, -1, 1, 2}]));
+
+  EXPECT_EQ(14, (tensor[{-1, -1, 2, -1}]));
+  EXPECT_EQ(13, (tensor[{-1, -1, 2, 0}]));
+  EXPECT_EQ(14, (tensor[{-1, -1, 2, 1}]));
+  EXPECT_EQ(13, (tensor[{-1, -1, 2, 2}]));
+
+  EXPECT_EQ(12, (tensor[{-1, 0, -1, -1}]));
+  EXPECT_EQ(11, (tensor[{-1, 0, -1, 0}]));
+  EXPECT_EQ(12, (tensor[{-1, 0, -1, 1}]));
+  EXPECT_EQ(11, (tensor[{-1, 0, -1, 2}]));
+
+  EXPECT_EQ(10, (tensor[{-1, 0, 0, -1}]));
+  EXPECT_EQ(9, (tensor[{-1, 0, 0, 0}]));
+  EXPECT_EQ(10, (tensor[{-1, 0, 0, 1}]));
+  EXPECT_EQ(9, (tensor[{-1, 0, 0, 2}]));
+
+  EXPECT_EQ(12, (tensor[{-1, 0, 1, -1}]));
+  EXPECT_EQ(11, (tensor[{-1, 0, 1, 0}]));
+  EXPECT_EQ(12, (tensor[{-1, 0, 1, 1}]));
+  EXPECT_EQ(11, (tensor[{-1, 0, 1, 2}]));
+
+  EXPECT_EQ(10, (tensor[{-1, 0, 2, -1}]));
+  EXPECT_EQ(9, (tensor[{-1, 0, 2, 0}]));
+  EXPECT_EQ(10, (tensor[{-1, 0, 2, 1}]));
+  EXPECT_EQ(9, (tensor[{-1, 0, 2, 2}]));
+
+  EXPECT_EQ(16, (tensor[{-1, 1, -1, -1}]));
+  EXPECT_EQ(15, (tensor[{-1, 1, -1, 0}]));
+  EXPECT_EQ(16, (tensor[{-1, 1, -1, 1}]));
+  EXPECT_EQ(15, (tensor[{-1, 1, -1, 2}]));
+
+  EXPECT_EQ(14, (tensor[{-1, 1, 0, -1}]));
+  EXPECT_EQ(13, (tensor[{-1, 1, 0, 0}]));
+  EXPECT_EQ(14, (tensor[{-1, 1, 0, 1}]));
+  EXPECT_EQ(13, (tensor[{-1, 1, 0, 2}]));
+
+  EXPECT_EQ(16, (tensor[{-1, 1, 1, -1}]));
+  EXPECT_EQ(15, (tensor[{-1, 1, 1, 0}]));
+  EXPECT_EQ(16, (tensor[{-1, 1, 1, 1}]));
+  EXPECT_EQ(15, (tensor[{-1, 1, 1, 2}]));
+
+  EXPECT_EQ(14, (tensor[{-1, 1, 2, -1}]));
+  EXPECT_EQ(13, (tensor[{-1, 1, 2, 0}]));
+  EXPECT_EQ(14, (tensor[{-1, 1, 2, 1}]));
+  EXPECT_EQ(13, (tensor[{-1, 1, 2, 2}]));
+
+  EXPECT_EQ(12, (tensor[{-1, 2, -1, -1}]));
+  EXPECT_EQ(11, (tensor[{-1, 2, -1, 0}]));
+  EXPECT_EQ(12, (tensor[{-1, 2, -1, 1}]));
+  EXPECT_EQ(11, (tensor[{-1, 2, -1, 2}]));
+
+  EXPECT_EQ(10, (tensor[{-1, 2, 0, -1}]));
+  EXPECT_EQ(9, (tensor[{-1, 2, 0, 0}]));
+  EXPECT_EQ(10, (tensor[{-1, 2, 0, 1}]));
+  EXPECT_EQ(9, (tensor[{-1, 2, 0, 2}]));
+
+  EXPECT_EQ(12, (tensor[{-1, 2, 1, -1}]));
+  EXPECT_EQ(11, (tensor[{-1, 2, 1, 0}]));
+  EXPECT_EQ(12, (tensor[{-1, 2, 1, 1}]));
+  EXPECT_EQ(11, (tensor[{-1, 2, 1, 2}]));
+
+  EXPECT_EQ(10, (tensor[{-1, 2, 2, -1}]));
+  EXPECT_EQ(9, (tensor[{-1, 2, 2, 0}]));
+  EXPECT_EQ(10, (tensor[{-1, 2, 2, 1}]));
+  EXPECT_EQ(9, (tensor[{-1, 2, 2, 2}]));
+
+  EXPECT_EQ(8, (tensor[{0, -1, -1, -1}]));
+  EXPECT_EQ(7, (tensor[{0, -1, -1, 0}]));
+  EXPECT_EQ(8, (tensor[{0, -1, -1, 1}]));
+  EXPECT_EQ(7, (tensor[{0, -1, -1, 2}]));
+
+  EXPECT_EQ(6, (tensor[{0, -1, 0, -1}]));
+  EXPECT_EQ(5, (tensor[{0, -1, 0, 0}]));
+  EXPECT_EQ(6, (tensor[{0, -1, 0, 1}]));
+  EXPECT_EQ(5, (tensor[{0, -1, 0, 2}]));
+
+  EXPECT_EQ(8, (tensor[{0, -1, 1, -1}]));
+  EXPECT_EQ(7, (tensor[{0, -1, 1, 0}]));
+  EXPECT_EQ(8, (tensor[{0, -1, 1, 1}]));
+  EXPECT_EQ(7, (tensor[{0, -1, 1, 2}]));
+
+  EXPECT_EQ(6, (tensor[{0, -1, 2, -1}]));
+  EXPECT_EQ(5, (tensor[{0, -1, 2, 0}]));
+  EXPECT_EQ(6, (tensor[{0, -1, 2, 1}]));
+  EXPECT_EQ(5, (tensor[{0, -1, 2, 2}]));
+
+  EXPECT_EQ(4, (tensor[{0, 0, -1, -1}]));
+  EXPECT_EQ(3, (tensor[{0, 0, -1, 0}]));
+  EXPECT_EQ(4, (tensor[{0, 0, -1, 1}]));
+  EXPECT_EQ(3, (tensor[{0, 0, -1, 2}]));
+
+  EXPECT_EQ(2, (tensor[{0, 0, 0, -1}]));
+  EXPECT_EQ(1, (tensor[{0, 0, 0, 0}]));
+  EXPECT_EQ(2, (tensor[{0, 0, 0, 1}]));
+  EXPECT_EQ(1, (tensor[{0, 0, 0, 2}]));
+
+  EXPECT_EQ(4, (tensor[{0, 0, 1, -1}]));
+  EXPECT_EQ(3, (tensor[{0, 0, 1, 0}]));
+  EXPECT_EQ(4, (tensor[{0, 0, 1, 1}]));
+  EXPECT_EQ(3, (tensor[{0, 0, 1, 2}]));
+
+  EXPECT_EQ(2, (tensor[{0, 0, 2, -1}]));
+  EXPECT_EQ(1, (tensor[{0, 0, 2, 0}]));
+  EXPECT_EQ(2, (tensor[{0, 0, 2, 1}]));
+  EXPECT_EQ(1, (tensor[{0, 0, 2, 2}]));
+
+  EXPECT_EQ(8, (tensor[{0, 1, -1, -1}]));
+  EXPECT_EQ(7, (tensor[{0, 1, -1, 0}]));
+  EXPECT_EQ(8, (tensor[{0, 1, -1, 1}]));
+  EXPECT_EQ(7, (tensor[{0, 1, -1, 2}]));
+
+  EXPECT_EQ(6, (tensor[{0, 1, 0, -1}]));
+  EXPECT_EQ(5, (tensor[{0, 1, 0, 0}]));
+  EXPECT_EQ(6, (tensor[{0, 1, 0, 1}]));
+  EXPECT_EQ(5, (tensor[{0, 1, 0, 2}]));
+
+  EXPECT_EQ(8, (tensor[{0, 1, 1, -1}]));
+  EXPECT_EQ(7, (tensor[{0, 1, 1, 0}]));
+  EXPECT_EQ(8, (tensor[{0, 1, 1, 1}]));
+  EXPECT_EQ(7, (tensor[{0, 1, 1, 2}]));
+
+  EXPECT_EQ(6, (tensor[{0, 1, 2, -1}]));
+  EXPECT_EQ(5, (tensor[{0, 1, 2, 0}]));
+  EXPECT_EQ(6, (tensor[{0, 1, 2, 1}]));
+  EXPECT_EQ(5, (tensor[{0, 1, 2, 2}]));
+
+  EXPECT_EQ(4, (tensor[{0, 2, -1, -1}]));
+  EXPECT_EQ(3, (tensor[{0, 2, -1, 0}]));
+  EXPECT_EQ(4, (tensor[{0, 2, -1, 1}]));
+  EXPECT_EQ(3, (tensor[{0, 2, -1, 2}]));
+
+  EXPECT_EQ(2, (tensor[{0, 2, 0, -1}]));
+  EXPECT_EQ(1, (tensor[{0, 2, 0, 0}]));
+  EXPECT_EQ(2, (tensor[{0, 2, 0, 1}]));
+  EXPECT_EQ(1, (tensor[{0, 2, 0, 2}]));
+
+  EXPECT_EQ(4, (tensor[{0, 2, 1, -1}]));
+  EXPECT_EQ(3, (tensor[{0, 2, 1, 0}]));
+  EXPECT_EQ(4, (tensor[{0, 2, 1, 1}]));
+  EXPECT_EQ(3, (tensor[{0, 2, 1, 2}]));
+
+  EXPECT_EQ(2, (tensor[{0, 2, 2, -1}]));
+  EXPECT_EQ(1, (tensor[{0, 2, 2, 0}]));
+  EXPECT_EQ(2, (tensor[{0, 2, 2, 1}]));
+  EXPECT_EQ(1, (tensor[{0, 2, 2, 2}]));
+
+  EXPECT_EQ(16, (tensor[{1, -1, -1, -1}]));
+  EXPECT_EQ(15, (tensor[{1, -1, -1, 0}]));
+  EXPECT_EQ(16, (tensor[{1, -1, -1, 1}]));
+  EXPECT_EQ(15, (tensor[{1, -1, -1, 2}]));
+
+  EXPECT_EQ(14, (tensor[{1, -1, 0, -1}]));
+  EXPECT_EQ(13, (tensor[{1, -1, 0, 0}]));
+  EXPECT_EQ(14, (tensor[{1, -1, 0, 1}]));
+  EXPECT_EQ(13, (tensor[{1, -1, 0, 2}]));
+
+  EXPECT_EQ(16, (tensor[{1, -1, 1, -1}]));
+  EXPECT_EQ(15, (tensor[{1, -1, 1, 0}]));
+  EXPECT_EQ(16, (tensor[{1, -1, 1, 1}]));
+  EXPECT_EQ(15, (tensor[{1, -1, 1, 2}]));
+
+  EXPECT_EQ(14, (tensor[{1, -1, 2, -1}]));
+  EXPECT_EQ(13, (tensor[{1, -1, 2, 0}]));
+  EXPECT_EQ(14, (tensor[{1, -1, 2, 1}]));
+  EXPECT_EQ(13, (tensor[{1, -1, 2, 2}]));
+
+  EXPECT_EQ(12, (tensor[{1, 0, -1, -1}]));
+  EXPECT_EQ(11, (tensor[{1, 0, -1, 0}]));
+  EXPECT_EQ(12, (tensor[{1, 0, -1, 1}]));
+  EXPECT_EQ(11, (tensor[{1, 0, -1, 2}]));
+
+  EXPECT_EQ(10, (tensor[{1, 0, 0, -1}]));
+  EXPECT_EQ(9, (tensor[{1, 0, 0, 0}]));
+  EXPECT_EQ(10, (tensor[{1, 0, 0, 1}]));
+  EXPECT_EQ(9, (tensor[{1, 0, 0, 2}]));
+
+  EXPECT_EQ(12, (tensor[{1, 0, 1, -1}]));
+  EXPECT_EQ(11, (tensor[{1, 0, 1, 0}]));
+  EXPECT_EQ(12, (tensor[{1, 0, 1, 1}]));
+  EXPECT_EQ(11, (tensor[{1, 0, 1, 2}]));
+
+  EXPECT_EQ(10, (tensor[{1, 0, 2, -1}]));
+  EXPECT_EQ(9, (tensor[{1, 0, 2, 0}]));
+  EXPECT_EQ(10, (tensor[{1, 0, 2, 1}]));
+  EXPECT_EQ(9, (tensor[{1, 0, 2, 2}]));
+
+  EXPECT_EQ(16, (tensor[{1, 1, -1, -1}]));
+  EXPECT_EQ(15, (tensor[{1, 1, -1, 0}]));
+  EXPECT_EQ(16, (tensor[{1, 1, -1, 1}]));
+  EXPECT_EQ(15, (tensor[{1, 1, -1, 2}]));
+
+  EXPECT_EQ(14, (tensor[{1, 1, 0, -1}]));
+  EXPECT_EQ(13, (tensor[{1, 1, 0, 0}]));
+  EXPECT_EQ(14, (tensor[{1, 1, 0, 1}]));
+  EXPECT_EQ(13, (tensor[{1, 1, 0, 2}]));
+
+  EXPECT_EQ(16, (tensor[{1, 1, 1, -1}]));
+  EXPECT_EQ(15, (tensor[{1, 1, 1, 0}]));
+  EXPECT_EQ(16, (tensor[{1, 1, 1, 1}]));
+  EXPECT_EQ(15, (tensor[{1, 1, 1, 2}]));
+
+  EXPECT_EQ(14, (tensor[{1, 1, 2, -1}]));
+  EXPECT_EQ(13, (tensor[{1, 1, 2, 0}]));
+  EXPECT_EQ(14, (tensor[{1, 1, 2, 1}]));
+  EXPECT_EQ(13, (tensor[{1, 1, 2, 2}]));
+
+  EXPECT_EQ(12, (tensor[{1, 2, -1, -1}]));
+  EXPECT_EQ(11, (tensor[{1, 2, -1, 0}]));
+  EXPECT_EQ(12, (tensor[{1, 2, -1, 1}]));
+  EXPECT_EQ(11, (tensor[{1, 2, -1, 2}]));
+
+  EXPECT_EQ(10, (tensor[{1, 2, 0, -1}]));
+  EXPECT_EQ(9, (tensor[{1, 2, 0, 0}]));
+  EXPECT_EQ(10, (tensor[{1, 2, 0, 1}]));
+  EXPECT_EQ(9, (tensor[{1, 2, 0, 2}]));
+
+  EXPECT_EQ(12, (tensor[{1, 2, 1, -1}]));
+  EXPECT_EQ(11, (tensor[{1, 2, 1, 0}]));
+  EXPECT_EQ(12, (tensor[{1, 2, 1, 1}]));
+  EXPECT_EQ(11, (tensor[{1, 2, 1, 2}]));
+
+  EXPECT_EQ(10, (tensor[{1, 2, 2, -1}]));
+  EXPECT_EQ(9, (tensor[{1, 2, 2, 0}]));
+  EXPECT_EQ(10, (tensor[{1, 2, 2, 1}]));
+  EXPECT_EQ(9, (tensor[{1, 2, 2, 2}]));
+
+  EXPECT_EQ(8, (tensor[{2, -1, -1, -1}]));
+  EXPECT_EQ(7, (tensor[{2, -1, -1, 0}]));
+  EXPECT_EQ(8, (tensor[{2, -1, -1, 1}]));
+  EXPECT_EQ(7, (tensor[{2, -1, -1, 2}]));
+
+  EXPECT_EQ(6, (tensor[{2, -1, 0, -1}]));
+  EXPECT_EQ(5, (tensor[{2, -1, 0, 0}]));
+  EXPECT_EQ(6, (tensor[{2, -1, 0, 1}]));
+  EXPECT_EQ(5, (tensor[{2, -1, 0, 2}]));
+
+  EXPECT_EQ(8, (tensor[{2, -1, 1, -1}]));
+  EXPECT_EQ(7, (tensor[{2, -1, 1, 0}]));
+  EXPECT_EQ(8, (tensor[{2, -1, 1, 1}]));
+  EXPECT_EQ(7, (tensor[{2, -1, 1, 2}]));
+
+  EXPECT_EQ(6, (tensor[{2, -1, 2, -1}]));
+  EXPECT_EQ(5, (tensor[{2, -1, 2, 0}]));
+  EXPECT_EQ(6, (tensor[{2, -1, 2, 1}]));
+  EXPECT_EQ(5, (tensor[{2, -1, 2, 2}]));
+
+  EXPECT_EQ(4, (tensor[{2, 0, -1, -1}]));
+  EXPECT_EQ(3, (tensor[{2, 0, -1, 0}]));
+  EXPECT_EQ(4, (tensor[{2, 0, -1, 1}]));
+  EXPECT_EQ(3, (tensor[{2, 0, -1, 2}]));
+
+  EXPECT_EQ(2, (tensor[{2, 0, 0, -1}]));
+  EXPECT_EQ(1, (tensor[{2, 0, 0, 0}]));
+  EXPECT_EQ(2, (tensor[{2, 0, 0, 1}]));
+  EXPECT_EQ(1, (tensor[{2, 0, 0, 2}]));
+
+  EXPECT_EQ(4, (tensor[{2, 0, 1, -1}]));
+  EXPECT_EQ(3, (tensor[{2, 0, 1, 0}]));
+  EXPECT_EQ(4, (tensor[{2, 0, 1, 1}]));
+  EXPECT_EQ(3, (tensor[{2, 0, 1, 2}]));
+
+  EXPECT_EQ(2, (tensor[{2, 0, 2, -1}]));
+  EXPECT_EQ(1, (tensor[{2, 0, 2, 0}]));
+  EXPECT_EQ(2, (tensor[{2, 0, 2, 1}]));
+  EXPECT_EQ(1, (tensor[{2, 0, 2, 2}]));
+
+  EXPECT_EQ(8, (tensor[{2, 1, -1, -1}]));
+  EXPECT_EQ(7, (tensor[{2, 1, -1, 0}]));
+  EXPECT_EQ(8, (tensor[{2, 1, -1, 1}]));
+  EXPECT_EQ(7, (tensor[{2, 1, -1, 2}]));
+
+  EXPECT_EQ(6, (tensor[{2, 1, 0, -1}]));
+  EXPECT_EQ(5, (tensor[{2, 1, 0, 0}]));
+  EXPECT_EQ(6, (tensor[{2, 1, 0, 1}]));
+  EXPECT_EQ(5, (tensor[{2, 1, 0, 2}]));
+
+  EXPECT_EQ(8, (tensor[{2, 1, 1, -1}]));
+  EXPECT_EQ(7, (tensor[{2, 1, 1, 0}]));
+  EXPECT_EQ(8, (tensor[{2, 1, 1, 1}]));
+  EXPECT_EQ(7, (tensor[{2, 1, 1, 2}]));
+
+  EXPECT_EQ(6, (tensor[{2, 1, 2, -1}]));
+  EXPECT_EQ(5, (tensor[{2, 1, 2, 0}]));
+  EXPECT_EQ(6, (tensor[{2, 1, 2, 1}]));
+  EXPECT_EQ(5, (tensor[{2, 1, 2, 2}]));
+
+  EXPECT_EQ(4, (tensor[{2, 2, -1, -1}]));
+  EXPECT_EQ(3, (tensor[{2, 2, -1, 0}]));
+  EXPECT_EQ(4, (tensor[{2, 2, -1, 1}]));
+  EXPECT_EQ(3, (tensor[{2, 2, -1, 2}]));
+
+  EXPECT_EQ(2, (tensor[{2, 2, 0, -1}]));
+  EXPECT_EQ(1, (tensor[{2, 2, 0, 0}]));
+  EXPECT_EQ(2, (tensor[{2, 2, 0, 1}]));
+  EXPECT_EQ(1, (tensor[{2, 2, 0, 2}]));
+
+  EXPECT_EQ(4, (tensor[{2, 2, 1, -1}]));
+  EXPECT_EQ(3, (tensor[{2, 2, 1, 0}]));
+  EXPECT_EQ(4, (tensor[{2, 2, 1, 1}]));
+  EXPECT_EQ(3, (tensor[{2, 2, 1, 2}]));
+
+  EXPECT_EQ(2, (tensor[{2, 2, 2, -1}]));
+  EXPECT_EQ(1, (tensor[{2, 2, 2, 0}]));
+  EXPECT_EQ(2, (tensor[{2, 2, 2, 1}]));
+  EXPECT_EQ(1, (tensor[{2, 2, 2, 2}]));
 
   // EXPECT_EQ(Tensor<float>({2}, {1, 9}), tensor.slice(_, 0, 0, 0));
   // EXPECT_EQ(Tensor<float>({2}, {2, 10}), tensor.slice(_, 0, 0, 1));

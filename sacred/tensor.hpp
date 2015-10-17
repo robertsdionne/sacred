@@ -44,7 +44,7 @@ namespace sacred {
 
     virtual Tensor<F> at(const vector<Slice> &indices) override {
       CHECK_STATE(indices.size() <= shape_.size());
-      int index = 0;
+      auto index = 0;
       for (auto i = 0; i < shape_.size(); ++i) {
         CHECK_STATE(0 <= indices.at(i).start(shape_.at(i)) && indices.at(i).start(shape_.at(i)) < shape_.at(i));
         index += indices.at(i).start(shape_.at(i)) * stride_.at(i);
@@ -84,7 +84,14 @@ namespace sacred {
     }
 
     virtual Tensor<F> operator [](const vector<Slice> &indices) override {
-      return data_.at(0);
+      CHECK_STATE(indices.size() <= shape_.size());
+      auto one_dimensional_index = 0;
+      for (auto i = 0; i < shape_.size(); ++i) {
+        auto index = indices.at(i).start(shape_.at(i)) % shape_.at(i);
+        auto wrapped_index = index % shape_.at(i) + shape_.at(i) * (index < 0);
+        one_dimensional_index += wrapped_index * stride_.at(i);
+      }
+      return data_.at(one_dimensional_index);
     }
 
     virtual Tensor<F> &operator =(F other) override {
