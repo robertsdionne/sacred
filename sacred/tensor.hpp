@@ -26,13 +26,14 @@ namespace sacred {
   template <typename F>
   class Tensor : public TensorInterface<F> {
   public:
-    Tensor() : shape_({1}), stride_(shape_.size()), data_({F()}) {}
+    Tensor(): shape_({1}), stride_(shape_.size()), data_({F()}) {}
 
-    Tensor(F value) : shape_({1}), stride_(shape_.size()), data_({value}) {}
+    Tensor(F value): shape_({1}), stride_(shape_.size()), data_({value}) {}
 
-    Tensor(const vector<int> &shape) : shape_(shape), stride_(shape_.size()), data_(ProductOf(shape)) {}
+    Tensor(const vector<int> &shape) : shape_(shape), stride_(CStyleStride(shape)), data_(ProductOf(shape)) {}
 
-    Tensor(const vector<int> &shape, const vector<F> &data) : shape_(shape), stride_(shape_.size()), data_(data) {}
+    Tensor(const vector<int> &shape, const vector<F> &data):
+        shape_(shape), stride_(CStyleStride(shape)), data_(data) {}
 
     ~Tensor() = default;
 
@@ -114,6 +115,17 @@ namespace sacred {
 
     virtual inline int size() const override {
       return data_.size();
+    }
+
+  private:
+    static vector<int> CStyleStride(const vector<int> shape) {
+      auto stride = vector<int>(shape.size());
+      auto product = 1;
+      for (auto i = 0; i < shape.size(); ++i) {
+        stride.at(shape.size() - 1 - i) = product;
+        product *= shape.at(shape.size() - 1 - i);
+      }
+      return stride;
     }
 
   private:
