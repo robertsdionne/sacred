@@ -80,16 +80,19 @@ TEST(Tensor, Initialize2D) {
   EXPECT_EQ(5, (tensor[{-1, 1}]));
   EXPECT_EQ(6, (tensor[{-1, 2}]));
   EXPECT_EQ(4, (tensor[{-1, 3}]));
+
   EXPECT_EQ(3, (tensor[{0, -1}]));
   EXPECT_EQ(1, (tensor[{0, 0}]));
   EXPECT_EQ(2, (tensor[{0, 1}]));
   EXPECT_EQ(3, (tensor[{0, 2}]));
   EXPECT_EQ(1, (tensor[{0, 3}]));
+
   EXPECT_EQ(6, (tensor[{1, -1}]));
   EXPECT_EQ(4, (tensor[{1, 0}]));
   EXPECT_EQ(5, (tensor[{1, 1}]));
   EXPECT_EQ(6, (tensor[{1, 2}]));
   EXPECT_EQ(4, (tensor[{1, 3}]));
+  
   EXPECT_EQ(3, (tensor[{2, -1}]));
   EXPECT_EQ(1, (tensor[{2, 0}]));
   EXPECT_EQ(2, (tensor[{2, 1}]));
@@ -146,62 +149,77 @@ TEST(Tensor, Initialize3D) {
   EXPECT_EQ(7, (tensor[{-1, -1, 0}]));
   EXPECT_EQ(8, (tensor[{-1, -1, 1}]));
   EXPECT_EQ(7, (tensor[{-1, -1, 2}]));
+
   EXPECT_EQ(6, (tensor[{-1, 0, -1}]));
   EXPECT_EQ(5, (tensor[{-1, 0, 0}]));
   EXPECT_EQ(6, (tensor[{-1, 0, 1}]));
   EXPECT_EQ(5, (tensor[{-1, 0, 2}]));
+
   EXPECT_EQ(8, (tensor[{-1, 1, -1}]));
   EXPECT_EQ(7, (tensor[{-1, 1, 0}]));
   EXPECT_EQ(8, (tensor[{-1, 1, 1}]));
   EXPECT_EQ(7, (tensor[{-1, 1, 2}]));
+
   EXPECT_EQ(6, (tensor[{-1, 2, -1}]));
   EXPECT_EQ(5, (tensor[{-1, 2, 0}]));
   EXPECT_EQ(6, (tensor[{-1, 2, 1}]));
   EXPECT_EQ(5, (tensor[{-1, 2, 2}]));
+
   EXPECT_EQ(4, (tensor[{0, -1, -1}]));
   EXPECT_EQ(3, (tensor[{0, -1, 0}]));
   EXPECT_EQ(4, (tensor[{0, -1, 1}]));
   EXPECT_EQ(3, (tensor[{0, -1, 2}]));
+
   EXPECT_EQ(2, (tensor[{0, 0, -1}]));
   EXPECT_EQ(1, (tensor[{0, 0, 0}]));
   EXPECT_EQ(2, (tensor[{0, 0, 1}]));
   EXPECT_EQ(1, (tensor[{0, 0, 2}]));
+
   EXPECT_EQ(4, (tensor[{0, 1, -1}]));
   EXPECT_EQ(3, (tensor[{0, 1, 0}]));
   EXPECT_EQ(4, (tensor[{0, 1, 1}]));
   EXPECT_EQ(3, (tensor[{0, 1, 2}]));
+
   EXPECT_EQ(2, (tensor[{0, 2, -1}]));
   EXPECT_EQ(1, (tensor[{0, 2, 0}]));
   EXPECT_EQ(2, (tensor[{0, 2, 1}]));
   EXPECT_EQ(1, (tensor[{0, 2, 2}]));
+
   EXPECT_EQ(8, (tensor[{1, -1, -1}]));
   EXPECT_EQ(7, (tensor[{1, -1, 0}]));
   EXPECT_EQ(8, (tensor[{1, -1, 1}]));
   EXPECT_EQ(7, (tensor[{1, -1, 2}]));
+
   EXPECT_EQ(6, (tensor[{1, 0, -11}]));
   EXPECT_EQ(5, (tensor[{1, 0, 0}]));
   EXPECT_EQ(6, (tensor[{1, 0, 1}]));
   EXPECT_EQ(5, (tensor[{1, 0, 2}]));
+
   EXPECT_EQ(8, (tensor[{1, 1, -1}]));
   EXPECT_EQ(7, (tensor[{1, 1, 0}]));
   EXPECT_EQ(8, (tensor[{1, 1, 1}]));
   EXPECT_EQ(7, (tensor[{1, 1, 2}]));
+
   EXPECT_EQ(6, (tensor[{1, 2, -1}]));
   EXPECT_EQ(5, (tensor[{1, 2, 0}]));
   EXPECT_EQ(6, (tensor[{1, 2, 1}]));
   EXPECT_EQ(5, (tensor[{1, 2, 2}]));
+
   EXPECT_EQ(4, (tensor[{2, -1, -1}]));
   EXPECT_EQ(3, (tensor[{2, -1, 0}]));
   EXPECT_EQ(4, (tensor[{2, -1, 1}]));
   EXPECT_EQ(3, (tensor[{2, -1, 2}]));
+
   EXPECT_EQ(2, (tensor[{2, 0, -11}]));
   EXPECT_EQ(1, (tensor[{2, 0, 0}]));
   EXPECT_EQ(2, (tensor[{2, 0, 1}]));
   EXPECT_EQ(1, (tensor[{2, 0, 2}]));
+
   EXPECT_EQ(4, (tensor[{2, 1, -1}]));
   EXPECT_EQ(3, (tensor[{2, 1, 0}]));
   EXPECT_EQ(4, (tensor[{2, 1, 1}]));
   EXPECT_EQ(3, (tensor[{2, 1, 2}]));
+
   EXPECT_EQ(2, (tensor[{2, 2, -1}]));
   EXPECT_EQ(1, (tensor[{2, 2, 0}]));
   EXPECT_EQ(2, (tensor[{2, 2, 1}]));
