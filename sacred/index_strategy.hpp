@@ -7,6 +7,20 @@ namespace sacred {
 
 using std::vector;
 
+// TODO(robertsdionne): Promote tensor namespace to parent.
+namespace tensor {
+
+template <typename F>
+class IndexStrategy {
+public:
+  virtual ~IndexStrategy() = default;
+
+  virtual vector<int> Transform(const vector<int> &shape, const vector<int> &stride, const vector<int> &index) = 0;
+};
+
+}  // namespace tensor
+
+// TODO(robertsdionne): Remove legacy IndexStrategy.
 template <typename F>
 class IndexStrategy {
 public:
