@@ -52,33 +52,6 @@ namespace sacred {
       return data_.at(index);
     }
 
-    // Tensor<F> SliceBase(const vector<int> &indices, int slice) {
-    //   auto shape = shape_.at(slice);
-    //   auto subtensor = Tensor<F>({shape});
-    //   auto index = vector<int>(indices);
-    //   index.insert(next(begin(index), slice), 0);
-    //   for (auto i = 0; i < shape; ++i) {
-    //     index.at(slice) = i;
-    //     subtensor.at(i) = at(index);
-    //   }
-    //   return subtensor;
-    // }
-
-    // F &at(const vector<int> &indices) {
-    //   CHECK_STATE(indices.size() == shape_.size());
-    //   int index = 0;
-    //   vector<int>::const_iterator s, i;
-    //   for (s = shape_.begin(), i = indices.begin();
-    //       s < shape_.end() && i < indices.end();
-    //       ++s, ++i) {
-    //     index *= *s;
-    //     if (0 <= *i && *i < *s) {
-    //       index += *i;
-    //     }
-    //   }
-    //   return data_.at(index);
-    // }
-
     virtual const int number_of_axes() const override {
       return shape_.size();
     }

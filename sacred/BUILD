@@ -24,9 +24,6 @@ cc_binary(
   srcs = [
     'sacred.cpp',
   ],
-  copts = [
-    '-I/usr/local/include/',
-  ],
   deps = [
     '//external:googleflags',
   ],
@@ -36,9 +33,6 @@ cc_test(
   name = 'array_test',
   srcs = [
     'array_test.cpp',
-  ],
-  copts = [
-    '-I/usr/local/include/',
   ],
   size = 'small',
   deps = [
@@ -50,9 +44,6 @@ cc_test(
   name = 'blob_test',
   srcs = [
     'blob_test.cpp',
-  ],
-  copts = [
-    '-I/usr/local/include/',
   ],
   size = 'small',
   deps = [
@@ -77,9 +68,6 @@ cc_test(
     'math_test.cpp',
   ],
   size = 'small',
-  copts = [
-    '-I/usr/local/include/',
-  ],
   deps = [
     '//third_party:gtest',
   ],
@@ -91,9 +79,6 @@ cc_test(
     'nonrecursive_filter_layer_test.cpp',
   ],
   size = 'small',
-  copts = [
-    '-I/usr/local/include/',
-  ],
   deps = [
     '//third_party:gtest',
   ],
@@ -105,9 +90,6 @@ cc_test(
     'reconv_test.cpp',
   ],
   size = 'small',
-  copts = [
-    '-I/usr/local/include/',
-  ],
   deps = [
     '//third_party:gtest',
   ],
@@ -119,9 +101,6 @@ cc_test(
     'recursive_filter_layer_test.cpp',
   ],
   size = 'small',
-  copts = [
-    '-I/usr/local/include/',
-  ],
   deps = [
     '//third_party:gtest',
   ],
@@ -134,9 +113,6 @@ cc_test(
     'slice_test.cpp',
   ],
   size = 'small',
-  copts = [
-    '-I/usr/local/include/',
-  ],
   deps = [
     '//third_party:gtest',
   ],
@@ -148,9 +124,6 @@ cc_test(
     'stacked_test.cpp',
   ],
   size = 'small',
-  copts = [
-    '-I/usr/local/include/',
-  ],
   deps = [
     '//third_party:gtest',
   ],
@@ -166,9 +139,6 @@ cc_test(
     'testing.hpp',
   ],
   size = 'small',
-  copts = [
-    '-I/usr/local/include/',
-  ],
   deps = [
     '//third_party:gtest',
   ],
