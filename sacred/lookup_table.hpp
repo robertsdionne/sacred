@@ -7,17 +7,17 @@
 
 namespace sacred {
 
-  using std::string;
+using std::string;
 
-  template <typename F>
-  class LookupTable {
-  public:
-    virtual ~LookupTable() = default;
+template <typename F>
+class LookupTable {
+public:
+  virtual ~LookupTable() = default;
 
-    virtual void Forward(const vector<string> &bottom, Blob<F> *top) = 0;
+  virtual void Forward(const vector<string> &bottom, Blob<F> *top) = 0;
 
-    virtual void Backward(const Blob<F> &top, const vector<string> &bottom) = 0;
-  };
+  virtual void Backward(const Blob<F> &top, const vector<string> &bottom) = 0;
+};
 
 }  // namespace sacred
 

@@ -9,31 +9,31 @@
 
 namespace sacred {
 
-  using std::vector;
+using std::vector;
 
-  template <typename F>
-  class HashedIndexStrategy : public IndexStrategy<F> {
-  public:
-    HashedIndexStrategy() = default;
+template <typename F>
+class HashedIndexStrategy : public IndexStrategy<F> {
+public:
+  HashedIndexStrategy() = default;
 
-    virtual ~HashedIndexStrategy() = default;
+  virtual ~HashedIndexStrategy() = default;
 
-    static constexpr size_t kSeed = 0x7ff83ce;
+  static constexpr size_t kSeed = 0x7ff83ce;
 
-    F Parity(const vector<int> &indices) const override {
-      auto hash = kSeed;
-      boost::hash_combine(hash, boost::hash_value(indices));
-      return F(1.0) - (hash % 2) * F(2.0);
-    }
+  F Parity(const vector<int> &indices) const override {
+    auto hash = kSeed;
+    boost::hash_combine(hash, boost::hash_value(indices));
+    return F(1.0) - (hash % 2) * F(2.0);
+  }
 
-    bool Resize() const override {
-      return false;
-    }
+  bool Resize() const override {
+    return false;
+  }
 
-    int Offset(int data_size, const vector<int> &shape, const vector<int> &indices) const override {
-      return boost::hash_value(indices) % data_size;
-    }
-  };
+  int Offset(int data_size, const vector<int> &shape, const vector<int> &indices) const override {
+    return boost::hash_value(indices) % data_size;
+  }
+};
 
 }  // namespace sacred
 

@@ -5,21 +5,21 @@
 
 namespace sacred {
 
-  using std::vector;
+using std::vector;
 
-  namespace strides {
+namespace strides {
 
-    vector<int> CStyle(const vector<int> &shape) {
-      auto stride = vector<int>(shape.size());
-      auto product = 1;
-      for (auto i = 0; i < shape.size(); ++i) {
-        stride.at(shape.size() - 1 - i) = product;
-        product *= shape.at(shape.size() - 1 - i);
-      }
-      return stride;
-    }
+vector<int> CStyle(const vector<int> &shape) {
+  auto stride = vector<int>(shape.size());
+  auto product = 1;
+  for (auto i = 0; i < shape.size(); ++i) {
+    stride.at(shape.size() - 1 - i) = product;
+    product *= shape.at(shape.size() - 1 - i);
+  }
+  return stride;
+}
 
-  }  // namespace strides
+}  // namespace strides
 
 }  // namespace sacred
 
