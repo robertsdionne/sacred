@@ -7,8 +7,10 @@
 #include <ostream>
 #include <vector>
 
+#include "checked_lookup.hpp"
 #include "checks.hpp"
 #include "functional.hpp"
+#include "identity_index.hpp"
 #include "slice.hpp"
 #include "strides.hpp"
 #include "tensor_interface.hpp"
@@ -66,15 +68,9 @@ public:
   // at(): {IdentityIndex} x {CheckedLookup}
   // operator[]: {IdentityIndex} x {IdentityLookup, MaskedLookup, HashedLookup}
   //             {WrappedIndex, ClippedIndex} x {IdentityLookup, HashedLookup}
-  // template <typename Index = IdentityLookup, typename Lookup = IdentityLookup>
-  virtual Tensor<F> at(const vector<int> &indices) override {
-    CHECK_STATE(indices.size() <= shape_.size());
-    auto index = 0;
-    for (auto i = 0; i < shape_.size(); ++i) {
-      CHECK_STATE(0 <= indices.at(i) && indices.at(i) < shape_.at(i));
-      index += indices.at(i) * stride_.at(i);
-    }
-    return data_.at(index);
+  template <typename Index = IdentityIndex, typename Lookup = CheckedLookup<F>>
+  Tensor<F> at(const vector<int> &indices) {
+    return data_.at(Lookup().Offset(data_.size(), shape_, stride_, Index().Transform(shape_, stride_, indices)));
   }
 
   virtual const int number_of_axes() const override {
