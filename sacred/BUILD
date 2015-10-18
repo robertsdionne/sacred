@@ -130,6 +130,18 @@ cc_test(
 )
 
 cc_test(
+  name = 'strides_test',
+  srcs = [
+    'strides.hpp',
+    'strides_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
   name = 'tensor_test',
   srcs = [
     'functional.hpp',

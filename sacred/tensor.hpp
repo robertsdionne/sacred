@@ -10,6 +10,7 @@
 #include "checks.hpp"
 #include "functional.hpp"
 #include "slice.hpp"
+#include "strides.hpp"
 #include "tensor_interface.hpp"
 #include "testing.hpp"
 
@@ -30,10 +31,10 @@ namespace sacred {
 
     Tensor(F value): shape_({1}), stride_(shape_.size()), data_({value}) {}
 
-    Tensor(const vector<int> &shape) : shape_(shape), stride_(CStyleStride(shape)), data_(ProductOf(shape)) {}
+    Tensor(const vector<int> &shape) : shape_(shape), stride_(strides::CStyle(shape)), data_(ProductOf(shape)) {}
 
     Tensor(const vector<int> &shape, const vector<F> &data):
-        shape_(shape), stride_(CStyleStride(shape)), data_(data) {}
+        shape_(shape), stride_(strides::CStyle(shape)), data_(data) {}
 
     ~Tensor() = default;
 
@@ -95,17 +96,6 @@ namespace sacred {
 
     virtual inline int size() const override {
       return data_.size();
-    }
-
-  private:
-    static vector<int> CStyleStride(const vector<int> shape) {
-      auto stride = vector<int>(shape.size());
-      auto product = 1;
-      for (auto i = 0; i < shape.size(); ++i) {
-        stride.at(shape.size() - 1 - i) = product;
-        product *= shape.at(shape.size() - 1 - i);
-      }
-      return stride;
     }
 
   private:
