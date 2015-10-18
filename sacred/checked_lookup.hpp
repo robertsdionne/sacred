@@ -11,8 +11,7 @@ namespace sacred {
 
   using std::vector;
 
-  template <typename F = float>
-  class CheckedLookup : public tensor::LookupStrategy<F> {
+  class CheckedLookup : public tensor::LookupStrategy {
   public:
     CheckedLookup() = default;
 
@@ -26,7 +25,7 @@ namespace sacred {
     }
 
   private:
-    IdentityLookup<F> identity_;
+    IdentityLookup identity_;
   };
 
 }  // namespace sacred

@@ -5,12 +5,15 @@
 #include <iostream>
 #include <iterator>
 #include <ostream>
+#include <type_traits>
 #include <vector>
 
 #include "checked_lookup.hpp"
 #include "checks.hpp"
 #include "functional.hpp"
 #include "identity_index.hpp"
+#include "index_strategy.hpp"
+#include "lookup_strategy.hpp"
 #include "slice.hpp"
 #include "strides.hpp"
 #include "tensor_interface.hpp"
@@ -55,6 +58,9 @@ public:
   // * ClippedIndex
   //   * Clips indices to range
   //   * Implies indices lie within shape
+  // * MirroredIndex
+  //   * Mirrors the index about shape
+  //   * Implies indices lie within shape
   // LookupStrategy
   // * IdentityLookup
   //   * Looks up values directly
@@ -69,8 +75,10 @@ public:
   // at(): {IdentityIndex} x {CheckedLookup}
   // operator[]: {IdentityIndex} x {IdentityLookup, MaskedLookup, HashedLookup}
   //             {WrappedIndex, ClippedIndex} x {IdentityLookup, HashedLookup}
-  template <typename Index = IdentityIndex, typename Lookup = CheckedLookup<F>>
+  template <typename Index = IdentityIndex, typename Lookup = CheckedLookup>
   Tensor<F> at(const vector<int> &index) {
+    static_assert(is_base_of<tensor::IndexStrategy, Index>::value, "Index must implement interface IndexStrategy.");
+    static_assert(is_base_of<tensor::LookupStrategy, Lookup>::value, "Lookup must implement interface LookupStrategy.");
     return data_.at(Lookup().Offset(data_.size(), shape_, stride_, Index().Transform(shape_, stride_, index)));
   }
 
@@ -79,7 +87,7 @@ public:
   }
 
   virtual Tensor<F> operator [](const vector<int> &index) override {
-    return at<WrappedIndex, IdentityLookup<F>>(index);
+    return at<WrappedIndex, IdentityLookup>(index);
   }
 
   virtual Tensor<F> &operator =(F other) override {

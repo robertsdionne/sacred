@@ -9,8 +9,7 @@ namespace sacred {
 
   using std::vector;
 
-  template <typename F = float>
-  class IdentityLookup : public tensor::LookupStrategy<F> {
+  class IdentityLookup : public tensor::LookupStrategy {
   public:
     IdentityLookup() = default;
 

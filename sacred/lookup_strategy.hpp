@@ -10,7 +10,6 @@ namespace tensor {
 
 using std::vector;
 
-template <typename F>
 class LookupStrategy {
 public:
   virtual ~LookupStrategy() = default;
