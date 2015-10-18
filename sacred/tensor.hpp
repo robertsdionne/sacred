@@ -67,12 +67,12 @@ public:
   // operator[]: {IdentityIndex} x {IdentityLookup, MaskedLookup, HashedLookup}
   //             {WrappedIndex, ClippedIndex} x {IdentityLookup, HashedLookup}
   // template <typename Index = IdentityLookup, typename Lookup = IdentityLookup>
-  virtual Tensor<F> at(const vector<Slice> &indices) override {
+  virtual Tensor<F> at(const vector<int> &indices) override {
     CHECK_STATE(indices.size() <= shape_.size());
     auto index = 0;
     for (auto i = 0; i < shape_.size(); ++i) {
-      CHECK_STATE(0 <= indices.at(i).start(shape_.at(i)) && indices.at(i).start(shape_.at(i)) < shape_.at(i));
-      index += indices.at(i).start(shape_.at(i)) * stride_.at(i);
+      CHECK_STATE(0 <= indices.at(i) && indices.at(i) < shape_.at(i));
+      index += indices.at(i) * stride_.at(i);
     }
     return data_.at(index);
   }
@@ -81,15 +81,14 @@ public:
     return shape_.size();
   }
 
-  virtual Tensor<F> operator [](const vector<Slice> &indices) override {
+  virtual Tensor<F> operator [](const vector<int> &indices) override {
     CHECK_STATE(indices.size() <= shape_.size());
-    auto one_dimensional_index = 0;
+    auto index = 0;
     for (auto i = 0; i < shape_.size(); ++i) {
-      auto index = indices.at(i).start(shape_.at(i)) % shape_.at(i);
-      auto wrapped_index = index % shape_.at(i) + shape_.at(i) * (index < 0);
-      one_dimensional_index += wrapped_index * stride_.at(i);
+      auto wrapped_index = indices.at(i) % shape_.at(i) + shape_.at(i) * (indices.at(i) < 0);
+      index += wrapped_index * stride_.at(i);
     }
-    return data_.at(one_dimensional_index);
+    return data_.at(index);
   }
 
   virtual Tensor<F> &operator =(F other) override {
