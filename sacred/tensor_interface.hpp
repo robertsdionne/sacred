@@ -44,7 +44,7 @@ public:
   virtual const int number_of_axes() const = 0;
 
   // broadcasting and wrapping
-  virtual Tensor<F> operator [](const vector<int> &indices) = 0;
+  virtual Tensor<F> operator [](const vector<int> &index) = 0;
 
   virtual Tensor<F> &operator =(F other) = 0;
 

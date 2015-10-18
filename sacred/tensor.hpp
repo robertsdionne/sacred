@@ -70,16 +70,16 @@ public:
   // operator[]: {IdentityIndex} x {IdentityLookup, MaskedLookup, HashedLookup}
   //             {WrappedIndex, ClippedIndex} x {IdentityLookup, HashedLookup}
   template <typename Index = IdentityIndex, typename Lookup = CheckedLookup<F>>
-  Tensor<F> at(const vector<int> &indices) {
-    return data_.at(Lookup().Offset(data_.size(), shape_, stride_, Index().Transform(shape_, stride_, indices)));
+  Tensor<F> at(const vector<int> &index) {
+    return data_.at(Lookup().Offset(data_.size(), shape_, stride_, Index().Transform(shape_, stride_, index)));
   }
 
   virtual const int number_of_axes() const override {
     return shape_.size();
   }
 
-  virtual Tensor<F> operator [](const vector<int> &indices) override {
-    return at<WrappedIndex, IdentityLookup<F>>(indices);
+  virtual Tensor<F> operator [](const vector<int> &index) override {
+    return at<WrappedIndex, IdentityLookup<F>>(index);
   }
 
   virtual Tensor<F> &operator =(F other) override {
