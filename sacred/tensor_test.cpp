@@ -5,10 +5,10 @@
 namespace sacred {
 
 TEST(TestTensor, At) {
-  auto tensor = Tensor<float>();
-  auto tensor2 = Tensor<float>(3);
-  Tensor<float> tensor3 = 4.0f;
-  auto tensor4 = Tensor<float>({2, 2});
+  auto tensor = Tensor<>();
+  auto tensor2 = Tensor<>(3);
+  Tensor<> tensor3 = 4.0f;
+  auto tensor4 = Tensor<>({2, 2});
 
   EXPECT_EQ(std::vector<int>({1}), tensor2.shape());
   EXPECT_EQ(3.0f, static_cast<int>(tensor2));
@@ -25,7 +25,7 @@ TEST(TestTensor, At) {
 }
 
 TEST(Tensor, Initialize1D) {
-  auto tensor = Tensor<float>({3}, {
+  auto tensor = Tensor<>({3}, {
     1, 2, 3
   });
 
@@ -52,7 +52,7 @@ TEST(Tensor, Initialize1D) {
 }
 
 TEST(Tensor, Initialize2D) {
-  auto tensor = Tensor<float>({2, 3}, {
+  auto tensor = Tensor<>({2, 3}, {
     1, 2, 3,
     4, 5, 6,
   });
@@ -92,7 +92,7 @@ TEST(Tensor, Initialize2D) {
   EXPECT_EQ(5, (tensor[{1, 1}]));
   EXPECT_EQ(6, (tensor[{1, 2}]));
   EXPECT_EQ(4, (tensor[{1, 3}]));
-  
+
   EXPECT_EQ(3, (tensor[{2, -1}]));
   EXPECT_EQ(1, (tensor[{2, 0}]));
   EXPECT_EQ(2, (tensor[{2, 1}]));
@@ -111,7 +111,7 @@ TEST(Tensor, Initialize2D) {
 }
 
 TEST(Tensor, Initialize3D) {
-  auto tensor = Tensor<float>({2, 2, 2}, {
+  auto tensor = Tensor<>({2, 2, 2}, {
     1, 2,
     3, 4,
 
@@ -242,7 +242,7 @@ TEST(Tensor, Initialize3D) {
 }
 
 TEST(Tensor, Initialize4D) {
-  auto tensor = Tensor<float>({2, 2, 2, 2}, {
+  auto tensor = Tensor<>({2, 2, 2, 2}, {
     //{
       1, 2,
       3, 4,

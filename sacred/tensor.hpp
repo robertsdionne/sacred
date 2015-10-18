@@ -24,7 +24,7 @@ struct TensorEntry {
   F value;
 };
 
-template <typename F>
+template <typename F = float>
 class Tensor : public TensorInterface<F> {
 public:
   Tensor(): shape_({1}), stride_(shape_.size()), data_({F()}) {}
