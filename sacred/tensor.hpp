@@ -43,6 +43,30 @@ public:
     return data_.at(0);
   }
 
+  // IndexStrategy
+  // * IdentityIndex
+  //   * Passes indices through unchanged
+  // * WrappedIndex
+  //   * Wraps indices about shape
+  //   * Implies indices lie within shape
+  // * ClippedIndex
+  //   * Clips indices to range
+  //   * Implies indices lie within shape
+  // LookupStrategy
+  // * IdentityLookup
+  //   * Looks up values directly
+  // * CheckedLookup
+  //   * Checks indices lie within shape
+  // * MaskedLookup
+  //   * Looks up values within shape
+  //   * Returns default value without
+  // * HashedLookup
+  //   * Looks up values with a hashed strategy
+  //
+  // at(): {IdentityIndex} x {CheckedLookup}
+  // operator[]: {IdentityIndex} x {IdentityLookup, MaskedLookup, HashedLookup}
+  //             {WrappedIndex, ClippedIndex} x {IdentityLookup, HashedLookup}
+  // template <typename Index = IdentityLookup, typename Lookup = IdentityLookup>
   virtual Tensor<F> at(const vector<Slice> &indices) override {
     CHECK_STATE(indices.size() <= shape_.size());
     auto index = 0;
