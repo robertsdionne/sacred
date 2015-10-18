@@ -9,6 +9,7 @@ namespace sacred {
 
   TEST(Strides, CStyle) {
     EXPECT_EQ(vector<int>({30, 6, 1}), strides::CStyle({4, 5, 6}));
+    EXPECT_EQ(vector<int>({32, 16, 8, 4, 2, 1}), strides::CStyle({2, 2, 2, 2, 2, 2}));
   }
 
 }  // namespace sacred
