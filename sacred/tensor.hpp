@@ -15,6 +15,7 @@
 #include "strides.hpp"
 #include "tensor_interface.hpp"
 #include "testing.hpp"
+#include "wrapped_index.hpp"
 
 namespace sacred {
 
@@ -78,13 +79,7 @@ public:
   }
 
   virtual Tensor<F> operator [](const vector<int> &indices) override {
-    CHECK_STATE(indices.size() <= shape_.size());
-    auto index = 0;
-    for (auto i = 0; i < shape_.size(); ++i) {
-      auto wrapped_index = indices.at(i) % shape_.at(i) + shape_.at(i) * (indices.at(i) < 0);
-      index += wrapped_index * stride_.at(i);
-    }
-    return data_.at(index);
+    return at<WrappedIndex, IdentityLookup<F>>(indices);
   }
 
   virtual Tensor<F> &operator =(F other) override {
