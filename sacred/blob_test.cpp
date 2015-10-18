@@ -3,8 +3,7 @@
 #include "array.hpp"
 #include "blob.hpp"
 
-using sacred::Array;
-using sacred::Blob;
+namespace sacred {
 
 TEST(Blob, Initialize) {
   auto blob = Blob<float>({1, 2, 3});
@@ -87,3 +86,5 @@ TEST(BlobHashed, InitializeValue) {
   EXPECT_EQ(-1, blob.diff().at({0, 1, 1}));
   EXPECT_EQ(3, blob.diff().at({0, 1, 2}));
 }
+
+}  // namespace sacred

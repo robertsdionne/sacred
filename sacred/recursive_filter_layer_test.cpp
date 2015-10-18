@@ -6,7 +6,7 @@
 #include "dual.hpp"
 #include "recursive_filter_layer.hpp"
 
-using namespace sacred;
+namespace sacred {
 
 TEST(RecursiveFilterLayer, Forward) {
   auto input = Blob<float>({4, 4}, {
@@ -204,3 +204,5 @@ TEST(RecursiveFilterLayer, GradientBias) {
     92 + 6_ɛ, 92 + 10_ɛ, 92 + 14_ɛ, 92 + 18_ɛ
   }), error);
 }
+
+}  // namespace sacred

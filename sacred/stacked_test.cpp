@@ -6,7 +6,7 @@
 #include "nonrecursive_filter_layer.hpp"
 #include "recursive_filter_layer.hpp"
 
-using namespace sacred;
+namespace sacred {
 
 TEST(Stacked, Forward) {
   auto input_0 = Blob<float>({8, 8}, {
@@ -36,3 +36,5 @@ TEST(Stacked, Forward) {
 
   std::cout << output.value() << std::endl;
 }
+
+}  // namespace sacred

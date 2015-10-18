@@ -5,7 +5,7 @@
 #include "dual.hpp"
 #include "nonrecursive_filter_layer.hpp"
 
-using namespace sacred;
+namespace sacred {
 
 TEST(NonrecursiveFilterLayer, Forward) {
   auto input = Blob<float>({4, 4}, {
@@ -192,3 +192,5 @@ TEST(NonrecursiveFilterLayer, Gradient) {
     }
   }
 }
+
+}  // namespace sacred

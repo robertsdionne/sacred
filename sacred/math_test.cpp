@@ -4,10 +4,7 @@
 #include "dual.hpp"
 #include "math.hpp"
 
-using sacred::Array;
-using sacred::Dual;
-using sacred::Math;
-using namespace sacred;
+namespace sacred {
 
 auto math = Math<float>();
 
@@ -190,3 +187,5 @@ TEST(Math, GeneralMatrixMultiplication) {
       }),
       c);
 }
+
+}  // namespace sacred

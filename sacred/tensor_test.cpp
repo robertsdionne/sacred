@@ -2,7 +2,7 @@
 
 #include "tensor.hpp"
 
-using sacred::Tensor;
+namespace sacred {
 
 TEST(TestTensor, At) {
   auto tensor = Tensor<float>();
@@ -633,3 +633,5 @@ TEST(Tensor, Initialize4D) {
   // EXPECT_EQ(Tensor<float>({2}, {13, 14}), tensor.slice(1, 1, 0, _));
   // EXPECT_EQ(Tensor<float>({2}, {15, 16}), tensor.slice(1, 1, 1, _));
 }
+
+}  // namespace sacred

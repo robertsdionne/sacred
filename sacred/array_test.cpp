@@ -2,7 +2,7 @@
 
 #include "array.hpp"
 
-using sacred::Array;
+namespace sacred {
 
 TEST(Array, Initialize1D) {
   auto array = Array<float>({3}, {1, 2, 3});
@@ -137,3 +137,5 @@ TEST(ArrayHashed, InitializeValue) {
   EXPECT_EQ(-3, array.at({0, 1, 1}));
   EXPECT_EQ(2, array.at({0, 1, 2}));
 }
+
+}  // namespace sacred

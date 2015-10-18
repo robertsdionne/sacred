@@ -4,7 +4,7 @@
 #include "dual.hpp"
 #include "math.hpp"
 
-using namespace sacred;
+namespace sacred {
 
 TEST(Reconv, Forward) {
   auto output = Array<float>({8}, {
@@ -71,3 +71,5 @@ TEST(Reconv, Backward) {
         1917, 645, 210, 65
       }), filter_diff);
 }
+
+}  // namespace sacred
