@@ -74,7 +74,7 @@ public:
   //
   // at(): {IdentityIndex} x {CheckedLookup}
   // operator[]: {IdentityIndex} x {IdentityLookup, MaskedLookup, HashedLookup}
-  //             {WrappedIndex, ClippedIndex} x {IdentityLookup, HashedLookup}
+  //             {WrappedIndex, ClippedIndex, MirroredIndex} x {IdentityLookup, HashedLookup}
   template <typename Index = IdentityIndex, typename Lookup = CheckedLookup>
   Tensor<F> at(const vector<int> &index) {
     static_assert(is_base_of<tensor::IndexStrategy, Index>::value, "Index must implement interface IndexStrategy.");

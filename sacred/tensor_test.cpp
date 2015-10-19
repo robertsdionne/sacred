@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "mirrored_index.hpp"
 #include "tensor.hpp"
 
 namespace sacred {
@@ -22,6 +23,118 @@ TEST(TestTensor, At) {
   EXPECT_EQ(5.0f, tensor4.at({0, 1}));
   EXPECT_EQ(5.0f, tensor4.at({1, 0}));
   EXPECT_EQ(5.0f, tensor4.at({1, 1}));
+
+  auto mirrored_index = MirroredIndex();
+
+  EXPECT_EQ(2, mirrored_index.Transform({3}, {1}, {-6}).at(0));
+  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {-5}).at(0));
+  EXPECT_EQ(0, mirrored_index.Transform({3}, {1}, {-4}).at(0));
+  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {-3}).at(0));
+  EXPECT_EQ(2, mirrored_index.Transform({3}, {1}, {-2}).at(0));
+  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {-1}).at(0));
+  EXPECT_EQ(0, mirrored_index.Transform({3}, {1}, {0}).at(0));
+  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {1}).at(0));
+  EXPECT_EQ(2, mirrored_index.Transform({3}, {1}, {2}).at(0));
+  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {3}).at(0));
+  EXPECT_EQ(0, mirrored_index.Transform({3}, {1}, {4}).at(0));
+  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {5}).at(0));
+  EXPECT_EQ(2, mirrored_index.Transform({3}, {1}, {6}).at(0));
+
+  auto tensor5 = Tensor<>({3, 3}, {
+    1, 2, 3,
+    4, 5, 6,
+    7, 8, 9,
+  });
+
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({-3, -3}));
+  EXPECT_EQ(6, tensor5.at<MirroredIndex>({-3, -2}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({-3, -1}));
+  EXPECT_EQ(4, tensor5.at<MirroredIndex>({-3, 0}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({-3, 1}));
+  EXPECT_EQ(6, tensor5.at<MirroredIndex>({-3, 2}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({-3, 3}));
+  EXPECT_EQ(4, tensor5.at<MirroredIndex>({-3, 4}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({-3, 5}));
+
+  EXPECT_EQ(8, tensor5.at<MirroredIndex>({-2, -3}));
+  EXPECT_EQ(9, tensor5.at<MirroredIndex>({-2, -2}));
+  EXPECT_EQ(8, tensor5.at<MirroredIndex>({-2, -1}));
+  EXPECT_EQ(7, tensor5.at<MirroredIndex>({-2, 0}));
+  EXPECT_EQ(8, tensor5.at<MirroredIndex>({-2, 1}));
+  EXPECT_EQ(9, tensor5.at<MirroredIndex>({-2, 2}));
+  EXPECT_EQ(8, tensor5.at<MirroredIndex>({-2, 3}));
+  EXPECT_EQ(7, tensor5.at<MirroredIndex>({-2, 4}));
+  EXPECT_EQ(8, tensor5.at<MirroredIndex>({-2, 5}));
+
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({-1, -3}));
+  EXPECT_EQ(6, tensor5.at<MirroredIndex>({-1, -2}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({-1, -1}));
+  EXPECT_EQ(4, tensor5.at<MirroredIndex>({-1, 0}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({-1, 1}));
+  EXPECT_EQ(6, tensor5.at<MirroredIndex>({-1, 2}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({-1, 3}));
+  EXPECT_EQ(4, tensor5.at<MirroredIndex>({-1, 4}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({-1, 5}));
+
+  EXPECT_EQ(2, tensor5.at<MirroredIndex>({0, -3}));
+  EXPECT_EQ(3, tensor5.at<MirroredIndex>({0, -2}));
+  EXPECT_EQ(2, tensor5.at<MirroredIndex>({0, -1}));
+  EXPECT_EQ(1, tensor5.at<MirroredIndex>({0, 0}));
+  EXPECT_EQ(2, tensor5.at<MirroredIndex>({0, 1}));
+  EXPECT_EQ(3, tensor5.at<MirroredIndex>({0, 2}));
+  EXPECT_EQ(2, tensor5.at<MirroredIndex>({0, 3}));
+  EXPECT_EQ(1, tensor5.at<MirroredIndex>({0, 4}));
+  EXPECT_EQ(2, tensor5.at<MirroredIndex>({0, 5}));
+
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({1, -3}));
+  EXPECT_EQ(6, tensor5.at<MirroredIndex>({1, -2}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({1, -1}));
+  EXPECT_EQ(4, tensor5.at<MirroredIndex>({1, 0}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({1, 1}));
+  EXPECT_EQ(6, tensor5.at<MirroredIndex>({1, 2}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({1, 3}));
+  EXPECT_EQ(4, tensor5.at<MirroredIndex>({1, 4}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({1, 5}));
+
+  EXPECT_EQ(8, tensor5.at<MirroredIndex>({2, -3}));
+  EXPECT_EQ(9, tensor5.at<MirroredIndex>({2, -2}));
+  EXPECT_EQ(8, tensor5.at<MirroredIndex>({2, -1}));
+  EXPECT_EQ(7, tensor5.at<MirroredIndex>({2, 0}));
+  EXPECT_EQ(8, tensor5.at<MirroredIndex>({2, 1}));
+  EXPECT_EQ(9, tensor5.at<MirroredIndex>({2, 2}));
+  EXPECT_EQ(8, tensor5.at<MirroredIndex>({2, 3}));
+  EXPECT_EQ(7, tensor5.at<MirroredIndex>({2, 4}));
+  EXPECT_EQ(8, tensor5.at<MirroredIndex>({2, 5}));
+
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({3, -3}));
+  EXPECT_EQ(6, tensor5.at<MirroredIndex>({3, -2}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({3, -1}));
+  EXPECT_EQ(4, tensor5.at<MirroredIndex>({3, 0}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({3, 1}));
+  EXPECT_EQ(6, tensor5.at<MirroredIndex>({3, 2}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({3, 3}));
+  EXPECT_EQ(4, tensor5.at<MirroredIndex>({3, 4}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({3, 5}));
+
+  EXPECT_EQ(2, tensor5.at<MirroredIndex>({4, -3}));
+  EXPECT_EQ(3, tensor5.at<MirroredIndex>({4, -2}));
+  EXPECT_EQ(2, tensor5.at<MirroredIndex>({4, -1}));
+  EXPECT_EQ(1, tensor5.at<MirroredIndex>({4, 0}));
+  EXPECT_EQ(2, tensor5.at<MirroredIndex>({4, 1}));
+  EXPECT_EQ(3, tensor5.at<MirroredIndex>({4, 2}));
+  EXPECT_EQ(2, tensor5.at<MirroredIndex>({4, 3}));
+  EXPECT_EQ(1, tensor5.at<MirroredIndex>({4, 4}));
+  EXPECT_EQ(2, tensor5.at<MirroredIndex>({4, 5}));
+
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({5, -3}));
+  EXPECT_EQ(6, tensor5.at<MirroredIndex>({5, -2}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({5, -1}));
+  EXPECT_EQ(4, tensor5.at<MirroredIndex>({5, 0}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({5, 1}));
+  EXPECT_EQ(6, tensor5.at<MirroredIndex>({5, 2}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({5, 3}));
+  EXPECT_EQ(4, tensor5.at<MirroredIndex>({5, 4}));
+  EXPECT_EQ(5, tensor5.at<MirroredIndex>({5, 5}));
 }
 
 TEST(Tensor, Initialize1D) {

@@ -145,10 +145,18 @@ cc_test(
   name = 'tensor_test',
   srcs = [
     'functional.hpp',
+    'checked_lookup.hpp',
+    'identity_index.hpp',
+    'identity_lookup.hpp',
+    'index_strategy.hpp',
+    'lookup_strategy.hpp',
+    'mirrored_index.hpp',
+    'strides.hpp',
     'tensor.hpp',
     'tensor_interface.hpp',
     'tensor_test.cpp',
     'testing.hpp',
+    'wrapped_index.hpp',
   ],
   size = 'small',
   deps = [
