@@ -79,8 +79,11 @@ public:
   //   * Looks up values with a hashed strategy
   //
   // at(): {IdentityIndex} x {CheckedLookup}
-  // operator[]: {IdentityIndex} x {IdentityLookup, MaskedLookup, HashedLookup}
+  // operator[]: {WrappedIndex} x {IdentityLookup}
+  // others: {IdentityIndex} x {CheckedLookup, IdentityLookup, MaskedLookup, HashedLookup}
   //             {WrappedIndex, ClippedIndex, MirroredIndex} x {IdentityLookup, HashedLookup}
+  //
+  // Note: Use std::valarray, std::slice, std::gslice.
   template <typename Index = IdentityIndex<I>, typename Lookup = CheckedLookup<I>>
   Tensor<F, I> at(const index_type &index) {
     static_assert(is_base_of<tensor::IndexStrategy<I>, Index>::value,
