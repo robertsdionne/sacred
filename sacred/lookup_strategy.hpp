@@ -8,9 +8,10 @@ namespace sacred {
 // TODO(robertsdionne): Promote tensor namespace to parent.
 namespace tensor {
 
-template <typename I>
+template <typename F, typename I>
 class LookupStrategy {
 public:
+  using storage_type = typename default_storage_type<F>::value;
   using index_type = typename default_index_type<I>::value;
 
   virtual ~LookupStrategy() = default;
@@ -23,8 +24,9 @@ public:
    * @param  index     The indices into the tensor.
    * @return           The index into the data buffer corresponding to the given indices, or -1 if out of bounds.
    */
-  virtual I Offset(
-      I data_size, const index_type &shape, const index_type &stride, const index_type &index) const = 0;
+  virtual F Lookup(
+      const storage_type &data, I data_size,
+      const index_type &shape, const index_type &stride, const index_type &index) const = 0;
 };
 
 }  // namespace tensor

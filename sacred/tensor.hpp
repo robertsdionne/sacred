@@ -82,15 +82,14 @@ public:
   //         {CheckedIndex, WrappedIndex, ClippedIndex, MirroredIndex} x {IdentityLookup, HashedLookup}
   //
   // Note: Use std::valarray, std::slice, std::gslice.
-  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<I>>
+  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
   Tensor<F, I> at(const index_type &index) {
     static_assert(is_base_of<tensor::IndexStrategy<I>, Index>::value,
         "Index must implement interface IndexStrategy<I>.");
-    static_assert(is_base_of<tensor::LookupStrategy<I>, Lookup>::value,
-        "Lookup must implement interface LookupStrategy<I>.");
+    static_assert(is_base_of<tensor::LookupStrategy<F, I>, Lookup>::value,
+        "Lookup must implement interface LookupStrategy<F, I>.");
     auto transformed_index = Index().Transform(shape_, stride_, index);
-    auto lookup_index = Lookup().Offset(data_.size(), shape_, stride_, transformed_index);
-    return data_.at(lookup_index);
+    return Lookup().Lookup(data_, data_.size(), shape_, stride_, transformed_index);
   }
 
   virtual const I number_of_axes() const override {
@@ -98,7 +97,7 @@ public:
   }
 
   virtual Tensor<F, I> operator [](const index_type &index) override {
-    return at<WrappedIndex<I>, IdentityLookup<I>>(index);
+    return at<WrappedIndex<I>, IdentityLookup<F, I>>(index);
   }
 
   virtual Tensor<F, I> &operator =(F other) override {

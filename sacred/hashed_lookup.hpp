@@ -8,17 +8,18 @@
 
 namespace sacred {
 
-template <typename I = default_integer_type>
-class HashedLookup : public tensor::LookupStrategy<I> {
+template <typename F = default_floating_point_type, typename I = default_integer_type>
+class HashedLookup : public tensor::LookupStrategy<F, I> {
 public:
+  using storage_type = typename default_storage_type<F>::value;
   using index_type = typename default_index_type<I>::value;
 
   HashedLookup() = default;
 
-  virtual I Offset(
-      I data_size, const index_type &shape, const index_type &stride, const index_type &index) const override {
+  virtual F Lookup(const storage_type &data, I data_size,
+      const index_type &shape, const index_type &stride, const index_type &index) const override {
     auto hashed_index = hasher(index) % data_size;
-    return hashed_index;
+    return data[hashed_index];
   }
 
 private:
