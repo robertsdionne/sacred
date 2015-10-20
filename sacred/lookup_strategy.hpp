@@ -1,16 +1,12 @@
 #ifndef SACRED_LOOKUP_STRATEGY_HPP_
 #define SACRED_LOOKUP_STRATEGY_HPP_
 
-#include <vector>
-
 #include "default_types.hpp"
 
 namespace sacred {
 
 // TODO(robertsdionne): Promote tensor namespace to parent.
 namespace tensor {
-
-using std::vector;
 
 template <typename I>
 class LookupStrategy {

@@ -1,16 +1,12 @@
 #ifndef SACRED_MIRRORED_INDEX_HPP_
 #define SACRED_MIRRORED_INDEX_HPP_
 
-#include <vector>
-
 #include "checks.hpp"
 #include "default_types.hpp"
 #include "index_strategy.hpp"
 #include "testing.hpp"
 
 namespace sacred {
-
-using std::vector;
 
 // 01 23 45 67 89
 // 01 01 01 01 01

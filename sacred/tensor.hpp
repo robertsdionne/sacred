@@ -6,7 +6,6 @@
 #include <iterator>
 #include <ostream>
 #include <type_traits>
-#include <vector>
 
 #include "checked_lookup.hpp"
 #include "checks.hpp"

@@ -1,16 +1,12 @@
 #ifndef SACRED_CHECKED_LOOKUP_HPP_
 #define SACRED_CHECKED_LOOKUP_HPP_
 
-#include <vector>
-
 #include "checks.hpp"
 #include "default_types.hpp"
 #include "identity_lookup.hpp"
 #include "lookup_strategy.hpp"
 
 namespace sacred {
-
-  using std::vector;
 
   template <typename I = default_integer_type>
   class CheckedLookup : public tensor::LookupStrategy<I> {

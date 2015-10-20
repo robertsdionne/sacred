@@ -1,8 +1,6 @@
 #ifndef SACRED_IDENTITY_INDEX_HPP_
 #define SACRED_IDENTITY_INDEX_HPP_
 
-#include <vector>
-
 #include "default_types.hpp"
 #include "index_strategy.hpp"
 

@@ -1,15 +1,11 @@
 #ifndef SACRED_WRAPPED_INDEX_HPP_
 #define SACRED_WRAPPED_INDEX_HPP_
 
-#include <vector>
-
 #include "checks.hpp"
 #include "default_types.hpp"
 #include "index_strategy.hpp"
 
 namespace sacred {
-
-  using std::vector;
 
   template <typename I = default_integer_type>
   class WrappedIndex : public tensor::IndexStrategy<I> {

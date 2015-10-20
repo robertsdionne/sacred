@@ -1,14 +1,10 @@
 #ifndef SACRED_IDENTITY_LOOKUP_HPP_
 #define SACRED_IDENTITY_LOOKUP_HPP_
 
-#include <vector>
-
 #include "default_types.hpp"
 #include "lookup_strategy.hpp"
 
 namespace sacred {
-
-  using std::vector;
 
   template <typename I = default_integer_type>
   class IdentityLookup : public tensor::LookupStrategy<I> {

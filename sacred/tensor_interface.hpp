@@ -5,7 +5,6 @@
 #include <iostream>
 #include <iterator>
 #include <ostream>
-#include <vector>
 
 #include "checks.hpp"
 #include "default_types.hpp"
@@ -31,7 +30,7 @@ public:
   virtual operator F() const = 0;
 
   // broadcasting
-  // virtual Tensor<F> at(const vector<int> &indices) = 0;
+  // virtual Tensor<F> at(const index_type &index) = 0;
 
   // virtual TensorIterator<F> begin() = 0;
   //
