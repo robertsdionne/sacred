@@ -89,7 +89,9 @@ public:
         "Index must implement interface IndexStrategy<I>.");
     static_assert(is_base_of<tensor::LookupStrategy<I>, Lookup>::value,
         "Lookup must implement interface LookupStrategy<I>.");
-    return data_.at(Lookup().Offset(data_.size(), shape_, stride_, Index().Transform(shape_, stride_, index)));
+    auto transformed_index = Index().Transform(shape_, stride_, index);
+    auto lookup_index = Lookup().Offset(data_.size(), shape_, stride_, transformed_index);
+    return data_.at(lookup_index);
   }
 
   virtual const I number_of_axes() const override {
