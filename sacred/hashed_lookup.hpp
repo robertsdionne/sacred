@@ -18,8 +18,17 @@ public:
 
   virtual F Lookup(const storage_type &data, I data_size,
       const index_type &shape, const index_type &stride, const index_type &index) const override {
-    auto hashed_index = hasher(index) % data_size;
-    return data[hashed_index];
+    auto hash_value = hasher(index);
+    return Parity(hash_value) * data[hash_value % data_size];
+  }
+
+private:
+  static constexpr size_t kSeed = 0x7ff83ce;
+
+  F Parity(const size_t index_hash_value) const {
+    auto hash_value = kSeed;
+    boost::hash_combine(hash_value, index_hash_value);
+    return F(1) - F(2) * (hash_value % 2);
   }
 
 private:
