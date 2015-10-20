@@ -6,18 +6,18 @@
 
 namespace sacred {
 
-  template <typename I = default_integer_type>
-  class IdentityIndex : public tensor::IndexStrategy<I> {
-  public:
-    using index_type = typename default_index_type<I>::value;
+template <typename I = default_integer_type>
+class IdentityIndex : public tensor::IndexStrategy<I> {
+public:
+  using index_type = typename default_index_type<I>::value;
 
-    IdentityIndex() = default;
+  IdentityIndex() = default;
 
-    virtual index_type Transform(
-        const index_type &shape, const index_type &stride, const index_type &index) const override {
-      return index;
-    }
-  };
+  virtual index_type Transform(
+      const index_type &shape, const index_type &stride, const index_type &index) const override {
+    return index;
+  }
+};
 
 }  // namespace sacred
 

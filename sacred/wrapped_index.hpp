@@ -7,22 +7,22 @@
 
 namespace sacred {
 
-  template <typename I = default_integer_type>
-  class WrappedIndex : public tensor::IndexStrategy<I> {
-  public:
-    using index_type = typename default_index_type<I>::value;
+template <typename I = default_integer_type>
+class WrappedIndex : public tensor::IndexStrategy<I> {
+public:
+  using index_type = typename default_index_type<I>::value;
 
-    WrappedIndex() = default;
+  WrappedIndex() = default;
 
-    virtual index_type Transform(
-        const index_type &shape, const index_type &stride, const index_type &index) const override {
-      auto wrapped_index = index_type(index.size());
-      for (auto i = I(0); i < index.size(); ++i) {
-        wrapped_index.at(i) = index.at(i) % shape.at(i) + shape.at(i) * (index.at(i) < 0);
-      }
-      return wrapped_index;
+  virtual index_type Transform(
+      const index_type &shape, const index_type &stride, const index_type &index) const override {
+    auto wrapped_index = index_type(index.size());
+    for (auto i = I(0); i < index.size(); ++i) {
+      wrapped_index.at(i) = index.at(i) % shape.at(i) + shape.at(i) * (index.at(i) < 0);
     }
-  };
+    return wrapped_index;
+  }
+};
 
 }  // namespace sacred
 
