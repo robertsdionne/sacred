@@ -10,12 +10,15 @@ using std::vector;
 // TODO(robertsdionne): Promote tensor namespace to parent.
 namespace tensor {
 
+template <typename I>
 class IndexStrategy {
 public:
+  using index_type = vector<I>;
+
   virtual ~IndexStrategy() = default;
 
-  virtual vector<int> Transform(
-      const vector<int> &shape, const vector<int> &stride, const vector<int> &index) const = 0;
+  virtual index_type Transform(
+      const index_type &shape, const index_type &stride, const index_type &index) const = 0;
 };
 
 }  // namespace tensor

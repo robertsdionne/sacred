@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "checks.hpp"
+#include "default_types.hpp"
 #include "identity_lookup.hpp"
 #include "lookup_strategy.hpp"
 
@@ -11,21 +12,24 @@ namespace sacred {
 
   using std::vector;
 
-  class CheckedLookup : public tensor::LookupStrategy {
+  template <typename I = default_integer_type>
+  class CheckedLookup : public tensor::LookupStrategy<I> {
   public:
+    using index_type = typename tensor::LookupStrategy<I>::index_type;
+
     CheckedLookup() = default;
 
-    virtual int Offset(
-        int data_size, const vector<int> &shape, const vector<int> &stride, const vector<int> &index) const override {
+    virtual I Offset(
+        I data_size, const index_type &shape, const index_type &stride, const index_type &index) const override {
       CHECK_STATE(index.size() <= shape.size());
-      for (auto i = 0; i < shape.size(); ++i) {
+      for (auto i = I(0); i < shape.size(); ++i) {
         CHECK_STATE(0 <= index.at(i) && index.at(i) < shape.at(i));
       }
       return identity_.Offset(data_size, shape, stride, index);
     }
 
   private:
-    IdentityLookup identity_;
+    IdentityLookup<I> identity_;
   };
 
 }  // namespace sacred

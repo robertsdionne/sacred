@@ -3,16 +3,19 @@
 
 #include <vector>
 
+#include "default_types.hpp"
+
 namespace sacred {
 
 using std::vector;
 
 namespace strides {
 
-vector<int> CStyle(const vector<int> &shape) {
-  auto stride = vector<int>(shape.size());
-  auto product = 1;
-  for (auto i = 0; i < shape.size(); ++i) {
+template <typename I = default_integer_type>
+vector<I> CStyle(const vector<I> &shape) {
+  auto stride = vector<I>(shape.size());
+  auto product = I(1);
+  for (auto i = I(0); i < shape.size(); ++i) {
     stride.at(shape.size() - 1 - i) = product;
     product *= shape.at(shape.size() - 1 - i);
   }

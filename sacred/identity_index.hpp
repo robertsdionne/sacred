@@ -1,16 +1,22 @@
 #ifndef SACRED_IDENTITY_INDEX_HPP_
 #define SACRED_IDENTITY_INDEX_HPP_
 
+#include <vector>
+
+#include "default_types.hpp"
 #include "index_strategy.hpp"
 
 namespace sacred {
 
-  class IdentityIndex : public tensor::IndexStrategy {
+  template <typename I = default_integer_type>
+  class IdentityIndex : public tensor::IndexStrategy<I> {
   public:
+    using index_type = typename tensor::IndexStrategy<I>::index_type;
+
     IdentityIndex() = default;
 
-    virtual vector<int> Transform(
-        const vector<int> &shape, const vector<int> &stride, const vector<int> &index) const override {
+    virtual index_type Transform(
+        const index_type &shape, const index_type &stride, const index_type &index) const override {
       return index;
     }
   };

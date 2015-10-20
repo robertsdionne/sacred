@@ -10,6 +10,7 @@
 
 #include "checked_lookup.hpp"
 #include "checks.hpp"
+#include "default_types.hpp"
 #include "functional.hpp"
 #include "identity_index.hpp"
 #include "index_strategy.hpp"
@@ -24,22 +25,27 @@ namespace sacred {
 
 using namespace std;
 
-template <typename F>
+template <typename F = default_floating_point_type, typename I = default_integer_type>
 struct TensorEntry {
-  vector<int> index;
+  using index_type = typename TensorInterface<F, I>::index_type;
+
+  index_type index;
   F value;
 };
 
-template <typename F = float>
-class Tensor : public TensorInterface<F> {
+template <typename F = default_floating_point_type, typename I = default_integer_type>
+class Tensor : public TensorInterface<F, I> {
 public:
+  using storage_type = typename TensorInterface<F, I>::storage_type;
+  using index_type = typename TensorInterface<F, I>::index_type;
+
   Tensor(): shape_({1}), stride_(shape_.size()), data_({F()}) {}
 
   Tensor(F value): shape_({1}), stride_(shape_.size()), data_({value}) {}
 
-  Tensor(const vector<int> &shape) : shape_(shape), stride_(strides::CStyle(shape)), data_(ProductOf(shape)) {}
+  Tensor(const index_type &shape) : shape_(shape), stride_(strides::CStyle(shape)), data_(ProductOf(shape)) {}
 
-  Tensor(const vector<int> &shape, const vector<F> &data):
+  Tensor(const index_type &shape, const storage_type &data):
       shape_(shape), stride_(strides::CStyle(shape)), data_(data) {}
 
   ~Tensor() = default;
@@ -75,54 +81,56 @@ public:
   // at(): {IdentityIndex} x {CheckedLookup}
   // operator[]: {IdentityIndex} x {IdentityLookup, MaskedLookup, HashedLookup}
   //             {WrappedIndex, ClippedIndex, MirroredIndex} x {IdentityLookup, HashedLookup}
-  template <typename Index = IdentityIndex, typename Lookup = CheckedLookup>
-  Tensor<F> at(const vector<int> &index) {
-    static_assert(is_base_of<tensor::IndexStrategy, Index>::value, "Index must implement interface IndexStrategy.");
-    static_assert(is_base_of<tensor::LookupStrategy, Lookup>::value, "Lookup must implement interface LookupStrategy.");
+  template <typename Index = IdentityIndex<I>, typename Lookup = CheckedLookup<I>>
+  Tensor<F, I> at(const index_type &index) {
+    static_assert(is_base_of<tensor::IndexStrategy<I>, Index>::value,
+        "Index must implement interface IndexStrategy<I>.");
+    static_assert(is_base_of<tensor::LookupStrategy<I>, Lookup>::value,
+        "Lookup must implement interface LookupStrategy<I>.");
     return data_.at(Lookup().Offset(data_.size(), shape_, stride_, Index().Transform(shape_, stride_, index)));
   }
 
-  virtual const int number_of_axes() const override {
+  virtual const I number_of_axes() const override {
     return shape_.size();
   }
 
-  virtual Tensor<F> operator [](const vector<int> &index) override {
-    return at<WrappedIndex, IdentityLookup>(index);
+  virtual Tensor<F, I> operator [](const index_type &index) override {
+    return at<WrappedIndex<I>, IdentityLookup<I>>(index);
   }
 
-  virtual Tensor<F> &operator =(F other) override {
+  virtual Tensor<F, I> &operator =(F other) override {
     for (auto &entry : data_) {
       entry = other;
     }
     return *this;
   }
 
-  virtual Tensor<F> &operator =(const Tensor<F> &other) override {
+  virtual Tensor<F, I> &operator =(const Tensor<F, I> &other) override {
     // for (auto entry : other) {
     //   at(entry.index) = entry.value;
     // }
     return *this;
   }
 
-  virtual bool operator ==(const Tensor<F> &other) const override {
+  virtual bool operator ==(const Tensor<F, I> &other) const override {
     return shape_ == other.shape_ && data_ == other.data_;
   }
 
-  friend ostream &operator <<(ostream &out, const Tensor<F> &tensor) {
+  friend ostream &operator <<(ostream &out, const Tensor<F, I> &tensor) {
     return out << "Tensor<F>(" << tensor.shape_ << ", " << tensor.data_ << ")";
   }
 
-  virtual inline const vector<int> &shape() const override {
+  virtual inline const index_type &shape() const override {
     return shape_;
   }
 
-  virtual inline int size() const override {
+  virtual inline I size() const override {
     return data_.size();
   }
 
 private:
-  vector<int> shape_, stride_;
-  vector<F> data_;
+  index_type shape_, stride_;
+  storage_type data_;
 };
 
 }  // namespace sacred

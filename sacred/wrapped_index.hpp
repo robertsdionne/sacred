@@ -4,20 +4,24 @@
 #include <vector>
 
 #include "checks.hpp"
+#include "default_types.hpp"
 #include "index_strategy.hpp"
 
 namespace sacred {
 
   using std::vector;
 
-  class WrappedIndex : public tensor::IndexStrategy {
+  template <typename I = default_integer_type>
+  class WrappedIndex : public tensor::IndexStrategy<I> {
   public:
+    using index_type = typename tensor::IndexStrategy<I>::index_type;
+
     WrappedIndex() = default;
 
-    virtual vector<int> Transform(
-        const vector<int> &shape, const vector<int> &stride, const vector<int> &index) const override {
-      auto wrapped_index = vector<int>(index.size());
-      for (auto i = 0; i < index.size(); ++i) {
+    virtual index_type Transform(
+        const index_type &shape, const index_type &stride, const index_type &index) const override {
+      auto wrapped_index = index_type(index.size());
+      for (auto i = I(0); i < index.size(); ++i) {
         wrapped_index.at(i) = index.at(i) % shape.at(i) + shape.at(i) * (index.at(i) < 0);
       }
       return wrapped_index;

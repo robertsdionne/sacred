@@ -10,8 +10,11 @@ namespace tensor {
 
 using std::vector;
 
+template <typename I>
 class LookupStrategy {
 public:
+  using index_type = vector<I>;
+
   virtual ~LookupStrategy() = default;
 
   /**
@@ -22,8 +25,8 @@ public:
    * @param  index     The indices into the tensor.
    * @return           The index into the data buffer corresponding to the given indices, or -1 if out of bounds.
    */
-  virtual int Offset(
-      int data_size, const vector<int> &shape, const vector<int> &stride, const vector<int> &index) const = 0;
+  virtual I Offset(
+      I data_size, const index_type &shape, const index_type &stride, const index_type &index) const = 0;
 };
 
 }  // namespace tensor

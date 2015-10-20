@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "checks.hpp"
+#include "default_types.hpp"
 #include "index_strategy.hpp"
 #include "testing.hpp"
 
@@ -23,18 +24,21 @@ using std::vector;
 // 1233211233
 
 
-class MirroredIndex : public tensor::IndexStrategy {
+template <typename I = default_integer_type>
+class MirroredIndex : public tensor::IndexStrategy<I> {
 public:
+  using index_type = typename tensor::IndexStrategy<I>::index_type;
+
   MirroredIndex() = default;
 
-  int mod(int x, int y) const {
-    return (x % y + y * (x < 0)) % y;
+  I mod(I x, I y) const {
+    return (x % y + y * (x < I(0))) % y;
   }
 
-  virtual vector<int> Transform(
-      const vector<int> &shape, const vector<int> &stride, const vector<int> &index) const override {
-    auto mirrored_index = vector<int>(index.size());
-    for (auto i = 0; i < index.size(); ++i) {
+  virtual index_type Transform(
+      const index_type &shape, const index_type &stride, const index_type &index) const override {
+    auto mirrored_index = index_type(index.size());
+    for (auto i = I(0); i < index.size(); ++i) {
       auto s = shape.at(i) - 1;
 
       // TODO(robertsdionne): Handle division by 0 here when shape.at(i) = 1.
