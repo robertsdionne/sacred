@@ -11,7 +11,7 @@ namespace sacred {
   template <typename I = default_integer_type>
   class IdentityIndex : public tensor::IndexStrategy<I> {
   public:
-    using index_type = typename tensor::IndexStrategy<I>::index_type;
+    using index_type = typename default_index_type<I>::value;
 
     IdentityIndex() = default;
 

@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "checks.hpp"
+#include "default_types.hpp"
 #include "functional.hpp"
 #include "testing.hpp"
 
@@ -22,8 +23,8 @@ template <typename F, typename I> class Tensor;
 template <typename F, typename I>
 class TensorInterface {
 public:
-  using storage_type = vector<F>;
-  using index_type = vector<I>;
+  using storage_type = typename default_storage_type<F>::value;
+  using index_type = typename default_index_type<I>::value;
 
   ~TensorInterface() = default;
 

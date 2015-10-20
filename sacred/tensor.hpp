@@ -27,7 +27,7 @@ using namespace std;
 
 template <typename F = default_floating_point_type, typename I = default_integer_type>
 struct TensorEntry {
-  using index_type = typename TensorInterface<F, I>::index_type;
+  using index_type = typename default_index_type<I>::value;
 
   index_type index;
   F value;
@@ -36,8 +36,8 @@ struct TensorEntry {
 template <typename F = default_floating_point_type, typename I = default_integer_type>
 class Tensor : public TensorInterface<F, I> {
 public:
-  using storage_type = typename TensorInterface<F, I>::storage_type;
-  using index_type = typename TensorInterface<F, I>::index_type;
+  using storage_type = typename default_storage_type<F>::value;
+  using index_type = typename default_index_type<I>::value;
 
   Tensor(): shape_({1}), stride_(shape_.size()), data_({F()}) {}
 

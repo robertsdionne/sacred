@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include "default_types.hpp"
+
 namespace sacred {
 
 using std::vector;
@@ -13,7 +15,7 @@ namespace tensor {
 template <typename I>
 class IndexStrategy {
 public:
-  using index_type = vector<I>;
+  using index_type = typename default_index_type<I>::value;
 
   virtual ~IndexStrategy() = default;
 

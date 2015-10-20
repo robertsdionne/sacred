@@ -27,7 +27,7 @@ using std::vector;
 template <typename I = default_integer_type>
 class MirroredIndex : public tensor::IndexStrategy<I> {
 public:
-  using index_type = typename tensor::IndexStrategy<I>::index_type;
+  using index_type = typename default_index_type<I>::value;
 
   MirroredIndex() = default;
 

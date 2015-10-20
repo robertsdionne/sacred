@@ -15,7 +15,7 @@ namespace sacred {
   template <typename I = default_integer_type>
   class CheckedLookup : public tensor::LookupStrategy<I> {
   public:
-    using index_type = typename tensor::LookupStrategy<I>::index_type;
+    using index_type = typename default_index_type<I>::value;
 
     CheckedLookup() = default;
 
