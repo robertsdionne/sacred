@@ -14,7 +14,6 @@
 #include "identity_lookup.hpp"
 #include "index_strategy.hpp"
 #include "lookup_strategy.hpp"
-#include "slice.hpp"
 #include "strides.hpp"
 #include "tensor_interface.hpp"
 #include "testing.hpp"
