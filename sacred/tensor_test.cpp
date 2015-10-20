@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "hashed_lookup.hpp"
 #include "mirrored_index.hpp"
 #include "tensor.hpp"
 
@@ -23,6 +24,24 @@ TEST(TestTensor, At) {
   EXPECT_EQ(5.0f, tensor4.at({0, 1}));
   EXPECT_EQ(5.0f, tensor4.at({1, 0}));
   EXPECT_EQ(5.0f, tensor4.at({1, 1}));
+
+  auto hashed_lookup = HashedLookup<>();
+  EXPECT_EQ(0, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {0, 0, 0, 0}));
+  EXPECT_EQ(1, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {0, 0, 0, 1}));
+  EXPECT_EQ(2, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {0, 0, 1, 0}));
+  EXPECT_EQ(1, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {0, 0, 1, 1}));
+  EXPECT_EQ(0, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {0, 1, 0, 0}));
+  EXPECT_EQ(1, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {0, 1, 0, 1}));
+  EXPECT_EQ(2, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {0, 1, 1, 0}));
+  EXPECT_EQ(1, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {0, 1, 1, 1}));
+  EXPECT_EQ(1, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {1, 0, 0, 0}));
+  EXPECT_EQ(0, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {1, 0, 0, 1}));
+  EXPECT_EQ(1, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {1, 0, 1, 0}));
+  EXPECT_EQ(2, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {1, 0, 1, 1}));
+  EXPECT_EQ(1, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {1, 1, 0, 0}));
+  EXPECT_EQ(0, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {1, 1, 0, 1}));
+  EXPECT_EQ(0, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {1, 1, 1, 0}));
+  EXPECT_EQ(1, hashed_lookup.Offset(3, {2, 2, 2, 2}, {8, 4, 2, 1}, {1, 1, 1, 1}));
 
   auto mirrored_index = MirroredIndex<>();
 
