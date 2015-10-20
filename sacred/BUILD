@@ -151,6 +151,7 @@ cc_test(
     'identity_lookup.hpp',
     'index_strategy.hpp',
     'lookup_strategy.hpp',
+    'masked_lookup.hpp',
     'mirrored_index.hpp',
     'strides.hpp',
     'tensor.hpp',

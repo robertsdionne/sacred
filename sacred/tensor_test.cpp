@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "hashed_lookup.hpp"
+#include "masked_lookup.hpp"
 #include "mirrored_index.hpp"
 #include "tensor.hpp"
 
@@ -24,6 +25,25 @@ TEST(TestTensor, At) {
   EXPECT_EQ(5.0f, tensor4.at({0, 1}));
   EXPECT_EQ(5.0f, tensor4.at({1, 0}));
   EXPECT_EQ(5.0f, tensor4.at({1, 1}));
+
+  auto masked_lookup = MaskedLookup<>();
+  auto masked_data = vector<float>({1, 2, 3, 4});
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {-1, -1}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {-1, 0}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {-1, 1}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {-1, 2}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {0, -1}));
+  EXPECT_EQ(1, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {0, 0}));
+  EXPECT_EQ(2, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {0, 1}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {0, 2}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {1, -1}));
+  EXPECT_EQ(3, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {1, 0}));
+  EXPECT_EQ(4, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {1, 1}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {1, 2}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {2, -1}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {2, 0}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {2, 1}));
+  EXPECT_EQ(0, masked_lookup.Lookup(masked_data, masked_data.size(), {2, 2}, {2, 1}, {2, 2}));
 
   auto hashed_lookup = HashedLookup<>();
   auto data = vector<float>({0, 1, 2});
