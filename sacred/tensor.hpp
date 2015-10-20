@@ -7,11 +7,11 @@
 #include <ostream>
 #include <type_traits>
 
-#include "checked_lookup.hpp"
+#include "checked_index.hpp"
 #include "checks.hpp"
 #include "default_types.hpp"
 #include "functional.hpp"
-#include "identity_index.hpp"
+#include "identity_lookup.hpp"
 #include "index_strategy.hpp"
 #include "lookup_strategy.hpp"
 #include "slice.hpp"
@@ -55,6 +55,8 @@ public:
   }
 
   // IndexStrategy
+  // * CheckedIndex
+  //   * Checks indices lie within shape
   // * IdentityIndex
   //   * Passes indices through unchanged
   // * WrappedIndex
@@ -69,21 +71,19 @@ public:
   // LookupStrategy
   // * IdentityLookup
   //   * Looks up values directly
-  // * CheckedLookup
-  //   * Checks indices lie within shape
   // * MaskedLookup
   //   * Looks up values within shape
   //   * Returns default value without
   // * HashedLookup
   //   * Looks up values with a hashed strategy
   //
-  // at(): {IdentityIndex} x {CheckedLookup}
+  // at(): {CheckedIndex} x {IdentityLookup}
   // operator[]: {WrappedIndex} x {IdentityLookup}
-  // others: {IdentityIndex} x {CheckedLookup, IdentityLookup, MaskedLookup, HashedLookup}
-  //             {WrappedIndex, ClippedIndex, MirroredIndex} x {IdentityLookup, HashedLookup}
+  // others: {IdentityIndex} x {IdentityLookup, MaskedLookup, HashedLookup}
+  //         {CheckedIndex, WrappedIndex, ClippedIndex, MirroredIndex} x {IdentityLookup, HashedLookup}
   //
   // Note: Use std::valarray, std::slice, std::gslice.
-  template <typename Index = IdentityIndex<I>, typename Lookup = CheckedLookup<I>>
+  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<I>>
   Tensor<F, I> at(const index_type &index) {
     static_assert(is_base_of<tensor::IndexStrategy<I>, Index>::value,
         "Index must implement interface IndexStrategy<I>.");

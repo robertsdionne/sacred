@@ -145,7 +145,8 @@ cc_test(
   name = 'tensor_test',
   srcs = [
     'functional.hpp',
-    'checked_lookup.hpp',
+    'checked_index.hpp',
+    'hashed_lookup.hpp',
     'identity_index.hpp',
     'identity_lookup.hpp',
     'index_strategy.hpp',
