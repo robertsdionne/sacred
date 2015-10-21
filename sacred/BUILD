@@ -89,6 +89,19 @@ cc_test(
 )
 
 cc_test(
+  name = 'mirrored_index_test',
+  srcs = [
+    'index_strategy.hpp',
+    'mirrored_index.hpp',
+    'mirrored_index_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
   name = 'math_test',
   srcs = [
     'math_test.cpp',

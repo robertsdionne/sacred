@@ -24,22 +24,6 @@ TEST(TestTensor, At) {
   EXPECT_EQ(5.0f, tensor4.at({1, 0}));
   EXPECT_EQ(5.0f, tensor4.at({1, 1}));
 
-  auto mirrored_index = MirroredIndex<>();
-
-  EXPECT_EQ(2, mirrored_index.Transform({3}, {1}, {-6}).at(0));
-  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {-5}).at(0));
-  EXPECT_EQ(0, mirrored_index.Transform({3}, {1}, {-4}).at(0));
-  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {-3}).at(0));
-  EXPECT_EQ(2, mirrored_index.Transform({3}, {1}, {-2}).at(0));
-  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {-1}).at(0));
-  EXPECT_EQ(0, mirrored_index.Transform({3}, {1}, {0}).at(0));
-  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {1}).at(0));
-  EXPECT_EQ(2, mirrored_index.Transform({3}, {1}, {2}).at(0));
-  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {3}).at(0));
-  EXPECT_EQ(0, mirrored_index.Transform({3}, {1}, {4}).at(0));
-  EXPECT_EQ(1, mirrored_index.Transform({3}, {1}, {5}).at(0));
-  EXPECT_EQ(2, mirrored_index.Transform({3}, {1}, {6}).at(0));
-
   auto tensor5 = Tensor<>({3, 3}, {
     1, 2, 3,
     4, 5, 6,
