@@ -185,18 +185,6 @@ cc_test(
 )
 
 cc_test(
-  name = 'slice_test',
-  srcs = [
-    'slice.hpp',
-    'slice_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    '//third_party:gtest',
-  ],
-)
-
-cc_test(
   name = 'stacked_test',
   srcs = [
     'stacked_test.cpp',
