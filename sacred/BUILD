@@ -52,6 +52,19 @@ cc_test(
 )
 
 cc_test(
+  name = 'checked_index_test',
+  srcs = [
+    'checked_index.hpp',
+    'checked_index_test.cpp',
+    'index_strategy.hpp',
+  ],
+  size = 'small',
+  deps = [
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
   name = 'checks_test',
   srcs = [
     'checks_test.cpp',
