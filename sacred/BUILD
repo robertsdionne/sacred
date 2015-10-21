@@ -102,6 +102,19 @@ cc_test(
 )
 
 cc_test(
+  name = 'identity_lookup_test',
+  srcs =[
+    'identity_lookup.hpp',
+    'identity_lookup_test.cpp',
+    'lookup_strategy.hpp',
+  ],
+  size = 'small',
+  deps = [
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
   name = 'masked_lookup_test',
   srcs = [
     'lookup_strategy.hpp',
