@@ -243,3 +243,16 @@ cc_test(
     '//third_party:gtest',
   ],
 )
+
+cc_test(
+  name = 'wrapped_index_test',
+  srcs = [
+    'index_strategy.hpp',
+    'wrapped_index.hpp',
+    'wrapped_index_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    '//third_party:gtest',
+  ],
+)
