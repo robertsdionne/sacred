@@ -63,6 +63,19 @@ cc_test(
 )
 
 cc_test(
+  name = 'masked_lookup_test',
+  srcs = [
+    'lookup_strategy.hpp',
+    'masked_lookup.hpp',
+    'masked_lookup_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
   name = 'math_test',
   srcs = [
     'math_test.cpp',
