@@ -24,6 +24,7 @@ class TensorInterface {
 public:
   using storage_type = typename default_storage_type<F>::value;
   using index_type = typename default_index_type<I>::value;
+  using tensor_type = Tensor<F, I>;
 
   ~TensorInterface() = default;
 
@@ -47,13 +48,13 @@ public:
   virtual const I number_of_axes() const = 0;
 
   // broadcasting and wrapping
-  virtual Tensor<F, I> operator [](const index_type &index) = 0;
+  virtual tensor_type operator [](const index_type &index) = 0;
 
-  virtual Tensor<F, I> &operator =(F other) = 0;
+  virtual tensor_type &operator =(F other) = 0;
 
-  virtual Tensor<F, I> &operator =(const Tensor<F, I> &other) = 0;
+  virtual tensor_type &operator =(const tensor_type &other) = 0;
 
-  virtual bool operator ==(const Tensor<F, I> &other) const = 0;
+  virtual bool operator ==(const tensor_type &other) const = 0;
 
   virtual const index_type &shape() const = 0;
 

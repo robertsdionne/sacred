@@ -36,6 +36,7 @@ class Tensor : public TensorInterface<F, I> {
 public:
   using storage_type = typename default_storage_type<F>::value;
   using index_type = typename default_index_type<I>::value;
+  using tensor_type = Tensor<F, I>;
 
   Tensor(): shape_({1}), stride_(shape_.size()), data_({F()}) {}
 
@@ -83,7 +84,7 @@ public:
   //
   // Note: Use std::valarray, std::slice, std::gslice.
   template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
-  Tensor<F, I> at(const index_type &index) {
+  tensor_type at(const index_type &index) {
     static_assert(is_base_of<tensor::IndexStrategy<I>, Index>::value,
         "Index must implement interface IndexStrategy<I>.");
     static_assert(is_base_of<tensor::LookupStrategy<F, I>, Lookup>::value,
@@ -96,29 +97,29 @@ public:
     return shape_.size();
   }
 
-  virtual Tensor<F, I> operator [](const index_type &index) override {
+  virtual tensor_type operator [](const index_type &index) override {
     return at<WrappedIndex<I>, IdentityLookup<F, I>>(index);
   }
 
-  virtual Tensor<F, I> &operator =(F other) override {
+  virtual tensor_type &operator =(F other) override {
     for (auto &entry : data_) {
       entry = other;
     }
     return *this;
   }
 
-  virtual Tensor<F, I> &operator =(const Tensor<F, I> &other) override {
+  virtual tensor_type &operator =(const tensor_type &other) override {
     // for (auto entry : other) {
     //   at(entry.index) = entry.value;
     // }
     return *this;
   }
 
-  virtual bool operator ==(const Tensor<F, I> &other) const override {
+  virtual bool operator ==(const tensor_type &other) const override {
     return shape_ == other.shape_ && data_ == other.data_;
   }
 
-  friend ostream &operator <<(ostream &out, const Tensor<F, I> &tensor) {
+  friend ostream &operator <<(ostream &out, const tensor_type &tensor) {
     return out << "Tensor<F>(" << tensor.shape_ << ", " << tensor.data_ << ")";
   }
 
