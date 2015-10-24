@@ -50,9 +50,9 @@ public:
   // broadcasting and wrapping
   virtual tensor_type operator [](const index_type &index) = 0;
 
-  virtual tensor_type &operator =(F other) = 0;
+  virtual void operator =(F other) = 0;
 
-  virtual tensor_type &operator =(const tensor_type &other) = 0;
+  virtual void operator =(const tensor_type &other) = 0;
 
   virtual bool operator ==(const tensor_type &other) const = 0;
 

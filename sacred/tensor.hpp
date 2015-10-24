@@ -101,18 +101,16 @@ public:
     return at<WrappedIndex<I>, IdentityLookup<F, I>>(index);
   }
 
-  virtual tensor_type &operator =(F other) override {
+  virtual void operator =(F other) override {
     for (auto &entry : data_) {
       entry = other;
     }
-    return *this;
   }
 
-  virtual tensor_type &operator =(const tensor_type &other) override {
+  virtual void operator =(const tensor_type &other) override {
     // for (auto entry : other) {
     //   at(entry.index) = entry.value;
     // }
-    return *this;
   }
 
   virtual bool operator ==(const tensor_type &other) const override {
