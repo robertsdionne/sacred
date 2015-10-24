@@ -233,6 +233,20 @@ cc_test(
 )
 
 cc_test(
+  name = 'tensor_train_test',
+  srcs = [
+    'tensor_interface.hpp',
+    'tensor.hpp',
+    'tensor_train.hpp',
+    'tensor_train_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
   name = 'wrapped_index_test',
   srcs = [
     'index_strategy.hpp',
