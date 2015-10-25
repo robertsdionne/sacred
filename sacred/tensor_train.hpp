@@ -20,17 +20,23 @@ public:
   using index_type = typename default_index_type<I>::value;
   using tensor_type = Tensor<F, I>;
 
-  TensorTrain() = default;
+  TensorTrain(): shape_({3, 3, 3}), tensors_({
+    {{1, 3, 1}, {1, 2, 3}},
+    {{1, 3, 1}, {1, 2, 3}},
+    {{1, 3, 1}, {1, 2, 3}},
+  }) {}
 
   virtual ~TensorTrain() = default;
 
-  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
+  template <typename Index = CheckedIndex<I>>
   tensor_type at(const index_type &index) {
     static_assert(is_base_of<tensor::IndexStrategy<I>, Index>::value,
         "Index must implement interface IndexStrategy<I>.");
-    static_assert(is_base_of<tensor::LookupStrategy<F, I>, Lookup>::value,
-        "Lookup must implement interface LookupStrategy<F, I>.");
-    return F(0);
+    auto values = storage_type();
+    for (auto i = 0; i < index.size(); ++i) {
+      values.push_back(tensors_.at(i).at({0, index.at(i), 0}));
+    }
+    return ProductOf<F>(values);
   }
 
   virtual operator F() const override {
@@ -43,7 +49,7 @@ public:
   }
 
   virtual tensor_type operator [](const index_type &index) override {
-    return at<WrappedIndex<I>, IdentityLookup<F, I>>(index);
+    return at<WrappedIndex<I>>(index);
   }
 
   virtual void operator =(F other) override {
@@ -66,6 +72,7 @@ public:
 
 private:
   index_type shape_;
+  vector<tensor_type> tensors_;
 };
 
 }  // namespace sacred
