@@ -35,6 +35,16 @@ public:
     return identity_.Lookup(data, data_size, shape, stride, index);
   }
 
+  virtual F &Lookup(storage_type &data, I data_size,
+      const index_type &shape, const index_type &stride, const index_type &index) const override {
+    for (auto i = I(0); i < shape.size(); ++i) {
+      if (index.at(i) < 0 || shape.at(i) <= index.at(i)) {
+        return identity_.Lookup(data, data_size, shape, stride, index);
+      }
+    }
+    return identity_.Lookup(data, data_size, shape, stride, index);
+  }
+
 private:
   F DefaultValue() const {
     return MaskDefault::kZero == mask_default ? F(0) : numeric_limits<F>::quiet_NaN();

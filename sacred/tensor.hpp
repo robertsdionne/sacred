@@ -84,13 +84,28 @@ public:
   //
   // Note: Use std::valarray, std::slice, std::gslice.
   template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
-  tensor_type at(const index_type &index) {
+  F &at(const index_type &index) {
     static_assert(is_base_of<tensor::IndexStrategy<I>, Index>::value,
         "Index must implement interface IndexStrategy<I>.");
     static_assert(is_base_of<tensor::LookupStrategy<F, I>, Lookup>::value,
         "Lookup must implement interface LookupStrategy<F, I>.");
     auto transformed_index = Index().Transform(shape_, stride_, index);
     return Lookup().Lookup(data_, data_.size(), shape_, stride_, transformed_index);
+  }
+
+  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
+  F at(const index_type &index) const {
+    static_assert(is_base_of<tensor::IndexStrategy<I>, Index>::value,
+        "Index must implement interface IndexStrategy<I>.");
+    static_assert(is_base_of<tensor::LookupStrategy<F, I>, Lookup>::value,
+        "Lookup must implement interface LookupStrategy<F, I>.");
+    auto transformed_index = Index().Transform(shape_, stride_, index);
+    return Lookup().Lookup(data_, data_.size(), shape_, stride_, transformed_index);
+  }
+
+  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
+  F set(const index_type &index, const F x) {
+    return at<Index, Lookup>(index) = x;
   }
 
   virtual const I number_of_axes() const override {

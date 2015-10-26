@@ -27,6 +27,10 @@ public:
   virtual F Lookup(
       const storage_type &data, I data_size,
       const index_type &shape, const index_type &stride, const index_type &index) const = 0;
+
+  virtual F &Lookup(
+      storage_type &data, I data_size,
+      const index_type &shape, const index_type &stride, const index_type &index) const = 0;
 };
 
 }  // namespace tensor

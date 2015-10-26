@@ -22,6 +22,12 @@ public:
     return Parity(hash_value) * data[hash_value % data_size];
   }
 
+  virtual F &Lookup(storage_type &data, I data_size,
+      const index_type &shape, const index_type &stride, const index_type &index) const override {
+    auto hash_value = hasher(index);
+    return data[hash_value % data_size];
+  }
+
 private:
   static constexpr size_t kSeed = 0x7ff83ce;
 

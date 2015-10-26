@@ -18,16 +18,16 @@ cc_binary(
     '-framework OpenCL',
   ],
 )
-
-cc_binary(
-  name = 'sacred',
-  srcs = [
-    'sacred.cpp',
-  ],
-  deps = [
-    '//external:googleflags',
-  ],
-)
+#
+# cc_binary(
+#   name = 'sacred',
+#   srcs = [
+#     'sacred.cpp',
+#   ],
+#   deps = [
+#     '//external:googleflags',
+#   ],
+# )
 
 cc_test(
   name = 'array_test',
@@ -74,19 +74,19 @@ cc_test(
     '//third_party:gtest',
   ],
 )
-
-cc_test(
-  name = 'hashed_lookup_test',
-  srcs = [
-    'hashed_lookup.hpp',
-    'hashed_lookup_test.cpp',
-    'lookup_strategy.hpp',
-  ],
-  size = 'small',
-  deps = [
-    '//third_party:gtest',
-  ],
-)
+#
+# cc_test(
+#   name = 'hashed_lookup_test',
+#   srcs = [
+#     'hashed_lookup.hpp',
+#     'hashed_lookup_test.cpp',
+#     'lookup_strategy.hpp',
+#   ],
+#   size = 'small',
+#   deps = [
+#     '//third_party:gtest',
+#   ],
+# )
 
 cc_test(
   name = 'identity_index_test',
@@ -113,19 +113,19 @@ cc_test(
     '//third_party:gtest',
   ],
 )
-
-cc_test(
-  name = 'masked_lookup_test',
-  srcs = [
-    'lookup_strategy.hpp',
-    'masked_lookup.hpp',
-    'masked_lookup_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    '//third_party:gtest',
-  ],
-)
+#
+# cc_test(
+#   name = 'masked_lookup_test',
+#   srcs = [
+#     'lookup_strategy.hpp',
+#     'masked_lookup.hpp',
+#     'masked_lookup_test.cpp',
+#   ],
+#   size = 'small',
+#   deps = [
+#     '//third_party:gtest',
+#   ],
+# )
 
 cc_test(
   name = 'mirrored_index_test',
@@ -143,6 +143,9 @@ cc_test(
 cc_test(
   name = 'math_test',
   srcs = [
+    'tensor_interface.hpp',
+    'tensor.hpp',
+    'math.hpp',
     'math_test.cpp',
   ],
   size = 'small',
@@ -150,50 +153,50 @@ cc_test(
     '//third_party:gtest',
   ],
 )
-
-cc_test(
-  name = 'nonrecursive_filter_layer_test',
-  srcs = [
-    'nonrecursive_filter_layer_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    '//third_party:gtest',
-  ],
-)
-
-cc_test(
-  name = 'reconv_test',
-  srcs = [
-    'reconv_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    '//third_party:gtest',
-  ],
-)
-
-cc_test(
-  name = 'recursive_filter_layer_test',
-  srcs = [
-    'recursive_filter_layer_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    '//third_party:gtest',
-  ],
-)
-
-cc_test(
-  name = 'stacked_test',
-  srcs = [
-    'stacked_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    '//third_party:gtest',
-  ],
-)
+#
+# cc_test(
+#   name = 'nonrecursive_filter_layer_test',
+#   srcs = [
+#     'nonrecursive_filter_layer_test.cpp',
+#   ],
+#   size = 'small',
+#   deps = [
+#     '//third_party:gtest',
+#   ],
+# )
+#
+# cc_test(
+#   name = 'reconv_test',
+#   srcs = [
+#     'reconv_test.cpp',
+#   ],
+#   size = 'small',
+#   deps = [
+#     '//third_party:gtest',
+#   ],
+# )
+#
+# cc_test(
+#   name = 'recursive_filter_layer_test',
+#   srcs = [
+#     'recursive_filter_layer_test.cpp',
+#   ],
+#   size = 'small',
+#   deps = [
+#     '//third_party:gtest',
+#   ],
+# )
+#
+# cc_test(
+#   name = 'stacked_test',
+#   srcs = [
+#     'stacked_test.cpp',
+#   ],
+#   size = 'small',
+#   deps = [
+#     '//third_party:gtest',
+#   ],
+# )
 
 cc_test(
   name = 'strides_test',

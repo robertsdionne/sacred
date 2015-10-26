@@ -22,6 +22,16 @@ public:
     }
     return data[offset];
   }
+
+  virtual F &Lookup(
+      storage_type &data, I data_size,
+      const index_type &shape, const index_type &stride, const index_type &index) const override {
+    auto offset = I(0);
+    for (auto i = I(0); i < stride.size(); ++i) {
+      offset += index.at(i) * stride.at(i);
+    }
+    return data[offset];
+  }
 };
 
 }  // namespace sacred
