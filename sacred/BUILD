@@ -153,17 +153,32 @@ cc_test(
     '//third_party:gtest',
   ],
 )
-#
-# cc_test(
-#   name = 'nonrecursive_filter_layer_test',
-#   srcs = [
-#     'nonrecursive_filter_layer_test.cpp',
-#   ],
-#   size = 'small',
-#   deps = [
-#     '//third_party:gtest',
-#   ],
-# )
+
+cc_test(
+  name = 'nonrecursive_filter_gradient_test',
+  srcs = [
+    'nonrecursive_filter_gradient.hpp',
+    'nonrecursive_filter_gradient_test.cpp',
+    'operator.hpp',
+  ],
+  size = 'small',
+  deps = [
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
+  name = 'nonrecursive_filter_test',
+  srcs = [
+    'nonrecursive_filter.hpp',
+    'nonrecursive_filter_test.cpp',
+    'operator.hpp',
+  ],
+  size = 'small',
+  deps = [
+    '//third_party:gtest',
+  ],
+)
 #
 # cc_test(
 #   name = 'reconv_test',

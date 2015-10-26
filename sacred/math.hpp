@@ -89,7 +89,7 @@ public:
     for (auto i = 0; i < output.number_of_axes(); ++i) {
       CHECK_STATE(output.shape().at(i) == input.shape().at(i));
     }
-    for (auto i = 0; i < output.count(); ++i) {
+    for (auto i = 0; i < output.size(); ++i) {
       output.data(i) = output_coefficient * output.data(i) + input_coefficient * input.data(i);
     }
   }
@@ -167,7 +167,7 @@ public:
           for (auto l = 0; l < input.shape().at(1); ++l) {
             auto I = i - input.shape().at(0) / 2;
             auto J = j - input.shape().at(1) / 2;
-            current_filter += output_coefficient * input.at({k, l}) * output.at({I + k, J + l});
+            current_filter += output_coefficient * input.at({k, l}) * output.template at<IdentityIndex<int>, MaskedLookup<F>>({I + k, J + l});
           }
         }
         filter.set({i, j}, current_filter);

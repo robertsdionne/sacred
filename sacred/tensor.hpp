@@ -103,6 +103,14 @@ public:
     return Lookup().Lookup(data_, data_.size(), shape_, stride_, transformed_index);
   }
 
+  F &data(const I index) {
+    return data_.at(index);
+  }
+
+  F data(const I index) const {
+    return data_.at(index);
+  }
+
   template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
   F set(const index_type &index, const F x) {
     return at<Index, Lookup>(index) = x;
