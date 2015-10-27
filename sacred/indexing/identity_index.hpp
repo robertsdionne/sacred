@@ -1,7 +1,7 @@
 #ifndef SACRED_IDENTITY_INDEX_HPP_
 #define SACRED_IDENTITY_INDEX_HPP_
 
-#include "default_types.hpp"
+#include "../default_types.hpp"
 #include "index_strategy.hpp"
 
 namespace sacred {

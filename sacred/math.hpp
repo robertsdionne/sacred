@@ -5,8 +5,8 @@
 
 #include "checks.hpp"
 #include "default_types.hpp"
-#include "identity_index.hpp"
-#include "masked_lookup.hpp"
+#include "indexing/identity_index.hpp"
+#include "indexing/masked_lookup.hpp"
 #include "tensor.hpp"
 
 namespace sacred {

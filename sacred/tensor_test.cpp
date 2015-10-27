@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "mirrored_index.hpp"
+#include "indexing/mirrored_index.hpp"
 #include "tensor.hpp"
 
 namespace sacred {

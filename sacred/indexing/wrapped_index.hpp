@@ -1,8 +1,8 @@
 #ifndef SACRED_WRAPPED_INDEX_HPP_
 #define SACRED_WRAPPED_INDEX_HPP_
 
-#include "checks.hpp"
-#include "default_types.hpp"
+#include "../checks.hpp"
+#include "../default_types.hpp"
 #include "index_strategy.hpp"
 
 namespace sacred {

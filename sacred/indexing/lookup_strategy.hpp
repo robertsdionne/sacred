@@ -1,7 +1,7 @@
 #ifndef SACRED_LOOKUP_STRATEGY_HPP_
 #define SACRED_LOOKUP_STRATEGY_HPP_
 
-#include "default_types.hpp"
+#include "../default_types.hpp"
 
 namespace sacred {
 

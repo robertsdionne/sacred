@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "default_types.hpp"
+#include "../default_types.hpp"
 
 namespace sacred {
 

@@ -1,7 +1,7 @@
 #ifndef SACRED_IDENTITY_LOOKUP_HPP_
 #define SACRED_IDENTITY_LOOKUP_HPP_
 
-#include "default_types.hpp"
+#include "../default_types.hpp"
 #include "lookup_strategy.hpp"
 
 namespace sacred {

@@ -3,7 +3,7 @@
 
 #include <boost/functional/hash.hpp>
 
-#include "default_types.hpp"
+#include "../default_types.hpp"
 #include "lookup_strategy.hpp"
 
 namespace sacred {

@@ -1,15 +1,15 @@
 #ifndef SACRED_TENSOR_TRAIN_HPP_
 #define SACRED_TENSOR_TRAIN_HPP_
 
-#include "checked_index.hpp"
 #include "default_types.hpp"
 #include "functional.hpp"
-#include "identity_lookup.hpp"
-#include "index_strategy.hpp"
-#include "lookup_strategy.hpp"
+#include "indexing/checked_index.hpp"
+#include "indexing/identity_lookup.hpp"
+#include "indexing/index_strategy.hpp"
+#include "indexing/lookup_strategy.hpp"
+#include "indexing/wrapped_index.hpp"
 #include "tensor_interface.hpp"
 #include "tensor.hpp"
-#include "wrapped_index.hpp"
 
 namespace sacred {
 

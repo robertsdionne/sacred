@@ -1,8 +1,8 @@
 #ifndef SACRED_CHECKED_INDEX_HPP_
 #define SACRED_CHECKED_INDEX_HPP_
 
-#include "checks.hpp"
-#include "default_types.hpp"
+#include "../checks.hpp"
+#include "../default_types.hpp"
 #include "identity_index.hpp"
 #include "index_strategy.hpp"
 
