@@ -132,16 +132,6 @@ cc_library(
 )
 
 cc_library(
-  name = 'layer',
-  srcs = [
-    'layer.hpp',
-  ],
-  deps = [
-    ':blob',
-  ],
-)
-
-cc_library(
   name = 'lookup_strategy',
   srcs = [
     'lookup_strategy.hpp',
@@ -249,14 +239,28 @@ cc_library(
 )
 
 cc_library(
-  name = 'recursive_filter_layer',
+  name = 'recursive_filter',
   srcs = [
-    'recursive_filter_layer.hpp',
+    'recursive_filter.hpp',
   ],
   deps = [
-    ':blob',
-    ':layer',
+    ':default_types',
     ':math',
+    ':operator',
+    ':tensor',
+  ],
+)
+
+cc_library(
+  name = 'recursive_filter_gradient',
+  srcs = [
+    'recursive_filter_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':math',
+    ':operator',
+    ':tensor',
   ],
 )
 
@@ -546,19 +550,31 @@ cc_test(
 # )
 
 # cc_test(
-#   name = 'recursive_filter_layer_test',
+#   name = 'recursive_filter_gradient_test',
 #   srcs = [
-#     'recursive_filter_layer_test.cpp',
+#     'recursive_filter_gradient_test.cpp',
 #   ],
 #   size = 'small',
 #   deps = [
-#     ':array',
-#     ':blob',
 #     ':dual',
-#     ':recursive_filter_layer',
+#     ':recursive_filter_gradient',
+#     ':tensor',
 #     '//third_party:gtest',
 #   ],
 # )
+
+cc_test(
+  name = 'recursive_filter_test',
+  srcs = [
+    'recursive_filter_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':recursive_filter',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
 
 # cc_test(
 #   name = 'stacked_test',

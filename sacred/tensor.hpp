@@ -112,6 +112,11 @@ public:
   }
 
   template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
+  F add(const index_type &index, const F x) {
+    return at<Index, Lookup>(index) += x;
+  }
+
+  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
   F set(const index_type &index, const F x) {
     return at<Index, Lookup>(index) = x;
   }
