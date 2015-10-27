@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-#include "default_types.hpp"
 #include "checks.hpp"
+#include "default_types.hpp"
 #include "identity_index.hpp"
 #include "masked_lookup.hpp"
 #include "tensor.hpp"

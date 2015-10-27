@@ -10,8 +10,8 @@
 #include "clipped_index_strategy.hpp"
 #include "dual.hpp"
 #include "hashed_index_strategy.hpp"
-#include "tiled_index_strategy.hpp"
 #include "index_strategy.hpp"
+#include "tiled_index_strategy.hpp"
 
 namespace sacred {
 
