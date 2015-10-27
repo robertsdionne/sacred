@@ -355,36 +355,6 @@ cc_library(
   ],
 )
 
-cc_binary(
-  name = 'convcl',
-  srcs = [
-    'convcl.cpp',
-  ],
-  linkopts = [
-    '-framework OpenCL',
-  ],
-)
-
-cc_binary(
-  name = 'gemmcl',
-  srcs = [
-    'gemmcl.cpp',
-  ],
-  linkopts = [
-    '-framework OpenCL',
-  ],
-)
-
-# cc_binary(
-#   name = 'sacred',
-#   srcs = [
-#     'sacred.cpp',
-#   ],
-#   deps = [
-#     '//external:googleflags',
-#   ],
-# )
-
 cc_test(
   name = 'array_test',
   srcs = [
@@ -641,3 +611,33 @@ cc_test(
     '//third_party:gtest',
   ],
 )
+
+cc_binary(
+  name = 'convcl',
+  srcs = [
+    'convcl.cpp',
+  ],
+  linkopts = [
+    '-framework OpenCL',
+  ],
+)
+
+cc_binary(
+  name = 'gemmcl',
+  srcs = [
+    'gemmcl.cpp',
+  ],
+  linkopts = [
+    '-framework OpenCL',
+  ],
+)
+
+# cc_binary(
+#   name = 'sacred',
+#   srcs = [
+#     'sacred.cpp',
+#   ],
+#   deps = [
+#     '//external:googleflags',
+#   ],
+# )
