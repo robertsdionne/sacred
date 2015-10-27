@@ -1,29 +1,3 @@
-cc_library(
-  name = 'array',
-  srcs = [
-    'array.hpp',
-  ],
-  deps = [
-    ':checks',
-    ':clipped_index_strategy',
-    ':dual',
-    ':hashed_index_strategy',
-    ':index_strategy',
-    ':tiled_index_strategy',
-  ],
-)
-
-cc_library(
-  name = 'blob',
-  srcs = [
-    'blob.hpp',
-  ],
-  deps = [
-    ':array',
-    ':clipped_index_strategy',
-    ':index_strategy',
-  ],
-)
 
 cc_library(
   name = 'checked_index',
@@ -141,15 +115,15 @@ cc_library(
   ],
 )
 
-cc_library(
-  name = 'lookup_table',
-  srcs = [
-    'lookup_table.hpp'
-  ],
-  deps = [
-    ':blob',
-  ],
-)
+# cc_library(
+#   name = 'lookup_table',
+#   srcs = [
+#     'lookup_table.hpp'
+#   ],
+#   deps = [
+#     ':blob',
+#   ],
+# )
 
 cc_library(
   name = 'masked_lookup',
@@ -177,16 +151,16 @@ cc_library(
   ],
 )
 
-cc_library(
-  name = 'memory_mapped_lookup_table',
-  srcs = [
-    'memory_mapped_lookup_table.hpp',
-  ],
-  deps = [
-    ':blob',
-    ':lookup_table',
-  ],
-)
+# cc_library(
+#   name = 'memory_mapped_lookup_table',
+#   srcs = [
+#     'memory_mapped_lookup_table.hpp',
+#   ],
+#   deps = [
+#     ':blob',
+#     ':lookup_table',
+#   ],
+# )
 
 cc_library(
   name = 'mirrored_index',
@@ -352,31 +326,6 @@ cc_library(
     ':checks',
     ':default_types',
     ':index_strategy',
-  ],
-)
-
-cc_test(
-  name = 'array_test',
-  srcs = [
-    'array_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    ':array',
-    '//third_party:gtest',
-  ],
-)
-
-cc_test(
-  name = 'blob_test',
-  srcs = [
-    'blob_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    ':array',
-    ':blob',
-    '//third_party:gtest',
   ],
 )
 
