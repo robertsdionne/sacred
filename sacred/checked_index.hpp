@@ -9,7 +9,7 @@
 namespace sacred {
 
 template <typename I = default_integer_type>
-class CheckedIndex : public tensor::IndexStrategy<I> {
+class CheckedIndex : public IndexStrategy<I> {
 public:
   using index_type = typename default_index_type<I>::value;
 

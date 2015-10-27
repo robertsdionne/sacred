@@ -9,7 +9,7 @@
 namespace sacred {
 
 template <typename F = default_floating_point_type, typename I = default_integer_type>
-class HashedLookup : public tensor::LookupStrategy<F, I> {
+class HashedLookup : public LookupStrategy<F, I> {
 public:
   using storage_type = typename default_storage_type<F>::value;
   using index_type = typename default_index_type<I>::value;

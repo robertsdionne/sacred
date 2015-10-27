@@ -5,9 +5,6 @@
 
 namespace sacred {
 
-// TODO(robertsdionne): Promote tensor namespace to parent.
-namespace tensor {
-
 template <typename F, typename I>
 class LookupStrategy {
 public:
@@ -32,8 +29,6 @@ public:
       storage_type &data, I data_size,
       const index_type &shape, const index_type &stride, const index_type &index) const = 0;
 };
-
-}  // namespace tensor
 
 }  // namespace sacred
 

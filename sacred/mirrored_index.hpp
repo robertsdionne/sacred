@@ -21,7 +21,7 @@ namespace sacred {
 
 
 template <typename I = default_integer_type>
-class MirroredIndex : public tensor::IndexStrategy<I> {
+class MirroredIndex : public IndexStrategy<I> {
 public:
   using index_type = typename default_index_type<I>::value;
 

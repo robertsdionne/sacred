@@ -9,9 +9,6 @@ namespace sacred {
 
 using std::vector;
 
-// TODO(robertsdionne): Promote tensor namespace to parent.
-namespace tensor {
-
 template <typename I>
 class IndexStrategy {
 public:
@@ -22,8 +19,6 @@ public:
   virtual index_type Transform(
       const index_type &shape, const index_type &stride, const index_type &index) const = 0;
 };
-
-}  // namespace tensor
 
 }  // namespace sacred
 

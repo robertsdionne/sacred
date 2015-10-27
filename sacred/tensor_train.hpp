@@ -30,7 +30,7 @@ public:
 
   template <typename Index = CheckedIndex<I>>
   tensor_type at(const index_type &index) {
-    static_assert(is_base_of<tensor::IndexStrategy<I>, Index>::value,
+    static_assert(is_base_of<IndexStrategy<I>, Index>::value,
         "Index must implement interface IndexStrategy<I>.");
     auto values = storage_type();
     for (auto i = 0; i < index.size(); ++i) {

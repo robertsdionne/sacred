@@ -8,7 +8,7 @@
 namespace sacred {
 
 template <typename I = default_integer_type>
-class WrappedIndex : public tensor::IndexStrategy<I> {
+class WrappedIndex : public IndexStrategy<I> {
 public:
   using index_type = typename default_index_type<I>::value;
 
