@@ -20,17 +20,6 @@ cc_library(
 )
 
 cc_library(
-  name = 'clipped_index_strategy',
-  srcs = [
-    'clipped_index_strategy.hpp',
-  ],
-  deps = [
-    ':checks',
-    ':index_strategy',
-  ],
-)
-
-cc_library(
   name = 'default_types',
   srcs = [
     'default_types.hpp',
@@ -48,17 +37,6 @@ cc_library(
   name = 'functional',
   srcs = [
     'functional.hpp',
-  ],
-)
-
-cc_library(
-  name = 'hashed_index_strategy',
-  srcs = [
-    'hashed_index_strategy.hpp',
-  ],
-  deps = [
-    ':checks',
-    ':index_strategy',
   ],
 )
 
@@ -307,17 +285,6 @@ cc_library(
 )
 
 cc_library(
-  name = 'tiled_index_strategy',
-  srcs = [
-    'tiled_index_strategy.hpp',
-  ],
-  deps = [
-    ':checks',
-    ':index_strategy',
-  ],
-)
-
-cc_library(
   name = 'wrapped_index',
   srcs = [
     'wrapped_index.hpp',
@@ -558,26 +525,6 @@ cc_test(
   deps = [
     ':wrapped_index',
     '//third_party:gtest',
-  ],
-)
-
-cc_binary(
-  name = 'convcl',
-  srcs = [
-    'convcl.cpp',
-  ],
-  linkopts = [
-    '-framework OpenCL',
-  ],
-)
-
-cc_binary(
-  name = 'gemmcl',
-  srcs = [
-    'gemmcl.cpp',
-  ],
-  linkopts = [
-    '-framework OpenCL',
   ],
 )
 
