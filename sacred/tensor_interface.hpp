@@ -6,7 +6,6 @@
 #include <iterator>
 #include <ostream>
 
-#include "checks.hpp"
 #include "default_types.hpp"
 #include "functional.hpp"
 #include "testing.hpp"

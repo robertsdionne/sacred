@@ -1,6 +1,5 @@
 # TODO
 
-* Stack traces for failed checks.
 * Complete Tensor and TensorTrain implementations.
 * Fix DEAD code.
 * Fix broken unit tests.

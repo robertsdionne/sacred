@@ -10,7 +10,7 @@ cc_library(
   deps = [
     ':identity_index',
     ':index_strategy',
-    '//sacred:checks',
+    '//external:googlelog',
     '//sacred:default_types',
   ],
 )
@@ -87,7 +87,6 @@ cc_library(
   ],
   deps = [
     ':index_strategy',
-    '//sacred:checks',
     '//sacred:default_types',
   ],
 )
@@ -109,7 +108,6 @@ cc_library(
   ],
   deps = [
     ':index_strategy',
-    '//sacred:checks',
     '//sacred:default_types',
   ],
 )

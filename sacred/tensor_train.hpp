@@ -40,7 +40,7 @@ public:
   }
 
   virtual operator F() const override {
-    CHECK_STATE(1 == ProductOf(shape_));
+    CHECK(1 == ProductOf(shape_));
     return F(0);
   }
 

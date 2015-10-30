@@ -2,12 +2,12 @@
 #define SACRED_TENSOR_HPP_
 
 #include <algorithm>
+#include <glog/logging.h>
 #include <iostream>
 #include <iterator>
 #include <ostream>
 #include <type_traits>
 
-#include "checks.hpp"
 #include "default_types.hpp"
 #include "functional.hpp"
 #include "indexing/checked_index.hpp"
@@ -50,7 +50,7 @@ public:
   ~Tensor() = default;
 
   virtual operator F() const override {
-    CHECK_STATE(1 == ProductOf(shape_));
+    CHECK(1 == ProductOf(shape_));
     return data_.at(0);
   }
 

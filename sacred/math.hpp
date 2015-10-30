@@ -1,9 +1,9 @@
 #ifndef SACRED_MATH_HPP_
 #define SACRED_MATH_HPP_
 
+#include <glog/logging.h>
 #include <iostream>
 
-#include "checks.hpp"
 #include "default_types.hpp"
 #include "indexing/identity_index.hpp"
 #include "indexing/masked_lookup.hpp"
@@ -92,9 +92,9 @@ public:
   }
 
   void Add(tensor_type &output, const tensor_type &input, const F output_coefficient, const F input_coefficient) const {
-    CHECK_STATE(output.number_of_axes() == input.number_of_axes());
+    CHECK(output.number_of_axes() == input.number_of_axes());
     for (auto i = 0; i < output.number_of_axes(); ++i) {
-      CHECK_STATE(output.shape().at(i) == input.shape().at(i));
+      CHECK(output.shape().at(i) == input.shape().at(i));
     }
     for (auto i = 0; i < output.size(); ++i) {
       output.data(i) = output_coefficient * output.data(i) + input_coefficient * input.data(i);
@@ -103,7 +103,7 @@ public:
 
   void BroadcastAdd(tensor_type &output, const tensor_type &vector,
       const F output_coefficient, const F vector_coefficient) const {
-    CHECK_STATE(output.shape().at(0) == vector.shape().at(0));
+    CHECK(output.shape().at(0) == vector.shape().at(0));
     for (auto i = 0; i < output.shape().at(0); ++i) {
       for (auto j = 0; j < output.shape().at(1); ++j) {
         output.set({i, j}, output_coefficient * output.at({i, j}) + vector_coefficient * vector.data(i));
@@ -124,8 +124,8 @@ public:
 
   void NarrowConvolve2(tensor_type &output, const tensor_type &filter, const tensor_type &input,
       const F output_coefficient, const F input_coefficient) const {
-    CHECK_STATE(input.shape().at(0) - filter.shape().at(0) + 1 == output.shape().at(0));
-    CHECK_STATE(input.shape().at(1) - filter.shape().at(1) + 1 == output.shape().at(1));
+    CHECK(input.shape().at(0) - filter.shape().at(0) + 1 == output.shape().at(0));
+    CHECK(input.shape().at(1) - filter.shape().at(1) + 1 == output.shape().at(1));
     for (auto i = 0; i < output.shape().at(0); ++i) {
       std::cout << ".";
       std::cout.flush();
@@ -146,8 +146,8 @@ public:
 
   void BackwardConvolve2(tensor_type &filter, const tensor_type &input, const tensor_type &output,
       const F filter_coefficient, const F output_coefficient) const {
-    // CHECK_STATE(input.shape().at(0) + filter.shape().at(0) - 1 == output.shape().at(0));
-    // CHECK_STATE(input.shape().at(1) + filter.shape().at(1) - 1 == output.shape().at(1));
+    // CHECK(input.shape().at(0) + filter.shape().at(0) - 1 == output.shape().at(0));
+    // CHECK(input.shape().at(1) + filter.shape().at(1) - 1 == output.shape().at(1));
     for (auto i = 0; i < filter.shape().at(0); ++i) {
       for (auto j = 0; j < filter.shape().at(1); ++j) {
         F current_filter = filter_coefficient * filter.at({i, j});
@@ -165,8 +165,8 @@ public:
 
   void BackwardNarrowConvolve2(tensor_type &filter, const tensor_type &input, const tensor_type &output,
       const F filter_coefficient, const F output_coefficient) const {
-    CHECK_STATE(input.shape().at(0) - filter.shape().at(0) + 1 == output.shape().at(0));
-    CHECK_STATE(input.shape().at(1) - filter.shape().at(1) + 1 == output.shape().at(1));
+    CHECK(input.shape().at(0) - filter.shape().at(0) + 1 == output.shape().at(0));
+    CHECK(input.shape().at(1) - filter.shape().at(1) + 1 == output.shape().at(1));
     for (auto i = 0; i < filter.shape().at(0); ++i) {
       for (auto j = 0; j < filter.shape().at(1); ++j) {
         F current_filter = filter_coefficient * filter.at({i, j});
@@ -185,8 +185,8 @@ public:
 
   void WideConvolve2(tensor_type &output, const tensor_type &filter, const tensor_type &input,
       const F output_coefficient, const F input_coefficient) const {
-    CHECK_STATE(input.shape().at(0) + filter.shape().at(0) - 1 == output.shape().at(0));
-    CHECK_STATE(input.shape().at(1) + filter.shape().at(1) - 1 == output.shape().at(1));
+    CHECK(input.shape().at(0) + filter.shape().at(0) - 1 == output.shape().at(0));
+    CHECK(input.shape().at(1) + filter.shape().at(1) - 1 == output.shape().at(1));
     for (auto i = 0; i < output.shape().at(0); ++i) {
       for (auto j = 0; j < output.shape().at(1); ++j) {
         F current_output = output_coefficient * output.at({i, j});
@@ -203,8 +203,8 @@ public:
 
   void BackwardWideConvolve2(tensor_type &output, const tensor_type &filter, const tensor_type &input,
       const F output_coefficient, const F input_coefficient) const {
-    CHECK_STATE(input.shape().at(0) + filter.shape().at(0) - 1 == output.shape().at(0));
-    CHECK_STATE(input.shape().at(1) + filter.shape().at(1) - 1 == output.shape().at(1));
+    CHECK(input.shape().at(0) + filter.shape().at(0) - 1 == output.shape().at(0));
+    CHECK(input.shape().at(1) + filter.shape().at(1) - 1 == output.shape().at(1));
     for (auto i = 0; i < output.shape().at(0); ++i) {
       for (auto j = 0; j < output.shape().at(1); ++j) {
         auto I = i - filter.shape().at(0) + 1;
@@ -262,9 +262,9 @@ public:
 
   void GeneralMatrixMultiplication(tensor_type &output, const tensor_type &left, const tensor_type &right,
       const F output_coefficient, const F input_coefficient) const {
-    CHECK_STATE(left.shape().at(0) == output.shape().at(0));
-    CHECK_STATE(right.shape().at(1) == output.shape().at(1));
-    CHECK_STATE(left.shape().at(1) == right.shape().at(0));
+    CHECK(left.shape().at(0) == output.shape().at(0));
+    CHECK(right.shape().at(1) == output.shape().at(1));
+    CHECK(left.shape().at(1) == right.shape().at(0));
     for (auto i = 0; i < output.shape().at(0); ++i) {
       for (auto j = 0; j < output.shape().at(1); ++j) {
         F current_output = output_coefficient * output.at({i, j});

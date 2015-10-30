@@ -1,7 +1,8 @@
 #ifndef SACRED_CHECKED_INDEX_HPP_
 #define SACRED_CHECKED_INDEX_HPP_
 
-#include "../checks.hpp"
+#include <glog/logging.h>
+
 #include "../default_types.hpp"
 #include "identity_index.hpp"
 #include "index_strategy.hpp"
@@ -17,9 +18,9 @@ public:
 
   virtual index_type Transform(
       const index_type &shape, const index_type &stride, const index_type &index) const override {
-    CHECK_STATE(index.size() <= shape.size());
+    CHECK(index.size() <= shape.size());
     for (auto i = I(0); i < shape.size(); ++i) {
-      CHECK_STATE(0 <= index.at(i) && index.at(i) < shape.at(i));
+      CHECK(0 <= index.at(i) && index.at(i) < shape.at(i));
     }
     return identity_.Transform(shape, stride, index);
   }

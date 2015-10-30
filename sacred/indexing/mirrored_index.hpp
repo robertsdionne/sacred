@@ -1,7 +1,6 @@
 #ifndef SACRED_MIRRORED_INDEX_HPP_
 #define SACRED_MIRRORED_INDEX_HPP_
 
-#include "../checks.hpp"
 #include "../default_types.hpp"
 #include "index_strategy.hpp"
 

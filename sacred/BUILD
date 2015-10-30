@@ -3,13 +3,6 @@ package(
 )
 
 cc_library(
-  name = 'checks',
-  srcs = [
-    'checks.hpp',
-  ],
-)
-
-cc_library(
   name = 'default_types',
   srcs = [
     'default_types.hpp',
@@ -46,9 +39,9 @@ cc_library(
     'math.hpp',
   ],
   deps = [
-    ':checks',
     ':default_types',
     ':tensor',
+    '//external:googlelog',
     '//sacred/indexing:identity_index',
     '//sacred/indexing:masked_lookup',
   ],
@@ -134,11 +127,11 @@ cc_library(
     'tensor.hpp',
   ],
   deps = [
-    ':checks',
     ':default_types',
     ':functional',
     ':tensor_interface',
     ':testing',
+    '//external:googlelog',
     '//sacred/indexing:checked_index',
     '//sacred/indexing:identity_lookup',
     '//sacred/indexing:index_strategy',
@@ -154,7 +147,6 @@ cc_library(
     'tensor_interface.hpp',
   ],
   deps = [
-    ':checks',
     ':default_types',
     ':functional',
     ':testing',
@@ -183,18 +175,6 @@ cc_library(
   name = 'testing',
   srcs = [
     'testing.hpp',
-  ],
-)
-
-cc_test(
-  name = 'checks_test',
-  srcs = [
-    'checks_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    ':checks',
-    '//third_party:gtest',
   ],
 )
 
