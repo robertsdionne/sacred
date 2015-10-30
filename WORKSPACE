@@ -2,7 +2,7 @@
 new_local_repository(
   name = 'gflags',
   path = '/Users/robertsdionne/Code/gflags',
-  build_file = 'gflags.BUILD',
+  build_file = 'BUILD.gflags',
 )
 
 bind(
