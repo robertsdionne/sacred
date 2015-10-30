@@ -2,7 +2,7 @@
 
 #include "hashed_lookup.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 TEST(HashedLookup, Lookup) {
   auto hashed_lookup = HashedLookup<>();
@@ -26,4 +26,4 @@ TEST(HashedLookup, Lookup) {
   EXPECT_EQ(-1, hashed_lookup.Lookup(data, data.size(), {2, 2, 2, 2}, {8, 4, 2, 1}, {1, 1, 1, 1}));
 }
 
-}  // namespace sacred
+}}  // namespaces

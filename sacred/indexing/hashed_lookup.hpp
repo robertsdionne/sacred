@@ -6,7 +6,7 @@
 #include "../default_types.hpp"
 #include "lookup_strategy.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 template <typename F = default_floating_point_type, typename I = default_integer_type>
 class HashedLookup : public LookupStrategy<F, I> {
@@ -41,6 +41,6 @@ private:
   boost::hash<index_type> hasher;
 };
 
-}  // namespace sacred
+}}  // namespaces
 
 #endif  // SACRED_HASHED_LOOKUP_HPP_

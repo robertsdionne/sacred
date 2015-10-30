@@ -5,11 +5,9 @@
 
 #include "../default_types.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing { namespace strides {
 
 using std::vector;
-
-namespace strides {
 
 template <typename I = default_integer_type>
 vector<I> CStyle(const vector<I> &shape) {
@@ -22,8 +20,6 @@ vector<I> CStyle(const vector<I> &shape) {
   return stride;
 }
 
-}  // namespace strides
-
-}  // namespace sacred
+}}}  // namespaces
 
 #endif  // SACRED_STRIDES_HPP_

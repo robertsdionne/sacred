@@ -3,7 +3,7 @@
 
 #include "../default_types.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 template <typename F, typename I>
 class LookupStrategy {
@@ -30,7 +30,7 @@ public:
       const index_type &shape, const index_type &stride, const index_type &index) const = 0;
 };
 
-}  // namespace sacred
+}}  // namespaces
 
 
 #endif  // SACRED_LOOKUP_STRATEGY_HPP_

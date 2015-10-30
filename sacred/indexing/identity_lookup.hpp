@@ -4,7 +4,7 @@
 #include "../default_types.hpp"
 #include "lookup_strategy.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 template <typename F = default_floating_point_type, typename I = default_integer_type>
 class IdentityLookup : public LookupStrategy<F, I> {
@@ -34,6 +34,6 @@ public:
   }
 };
 
-}  // namespace sacred
+}}  // namespaces
 
 #endif  // SACRED_IDENTITY_LOOKUP_HPP_

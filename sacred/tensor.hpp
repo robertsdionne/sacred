@@ -42,10 +42,10 @@ public:
 
   Tensor(F value): shape_({1}), stride_(shape_.size()), data_({value}) {}
 
-  Tensor(const index_type &shape) : shape_(shape), stride_(strides::CStyle(shape)), data_(ProductOf(shape)) {}
+  Tensor(const index_type &shape) : shape_(shape), stride_(indexing::strides::CStyle(shape)), data_(ProductOf(shape)) {}
 
   Tensor(const index_type &shape, const storage_type &data):
-      shape_(shape), stride_(strides::CStyle(shape)), data_(data) {}
+      shape_(shape), stride_(indexing::strides::CStyle(shape)), data_(data) {}
 
   ~Tensor() = default;
 
@@ -83,21 +83,21 @@ public:
   //         {CheckedIndex, WrappedIndex, ClippedIndex, MirroredIndex} x {IdentityLookup, HashedLookup}
   //
   // Note: Use std::valarray, std::slice, std::gslice.
-  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
+  template <typename Index = indexing::CheckedIndex<I>, typename Lookup = indexing::IdentityLookup<F, I>>
   F &at(const index_type &index) {
-    static_assert(is_base_of<IndexStrategy<I>, Index>::value,
+    static_assert(is_base_of<indexing::IndexStrategy<I>, Index>::value,
         "Index must implement interface IndexStrategy<I>.");
-    static_assert(is_base_of<LookupStrategy<F, I>, Lookup>::value,
+    static_assert(is_base_of<indexing::LookupStrategy<F, I>, Lookup>::value,
         "Lookup must implement interface LookupStrategy<F, I>.");
     auto transformed_index = Index().Transform(shape_, stride_, index);
     return Lookup().Lookup(data_, data_.size(), shape_, stride_, transformed_index);
   }
 
-  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
+  template <typename Index = indexing::CheckedIndex<I>, typename Lookup = indexing::IdentityLookup<F, I>>
   F at(const index_type &index) const {
-    static_assert(is_base_of<IndexStrategy<I>, Index>::value,
+    static_assert(is_base_of<indexing::IndexStrategy<I>, Index>::value,
         "Index must implement interface IndexStrategy<I>.");
-    static_assert(is_base_of<LookupStrategy<F, I>, Lookup>::value,
+    static_assert(is_base_of<indexing::LookupStrategy<F, I>, Lookup>::value,
         "Lookup must implement interface LookupStrategy<F, I>.");
     auto transformed_index = Index().Transform(shape_, stride_, index);
     return Lookup().Lookup(data_, data_.size(), shape_, stride_, transformed_index);
@@ -111,12 +111,12 @@ public:
     return data_.at(index);
   }
 
-  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
+  template <typename Index = indexing::CheckedIndex<I>, typename Lookup = indexing::IdentityLookup<F, I>>
   F add(const index_type &index, const F x) {
     return at<Index, Lookup>(index) += x;
   }
 
-  template <typename Index = CheckedIndex<I>, typename Lookup = IdentityLookup<F, I>>
+  template <typename Index = indexing::CheckedIndex<I>, typename Lookup = indexing::IdentityLookup<F, I>>
   F set(const index_type &index, const F x) {
     return at<Index, Lookup>(index) = x;
   }
@@ -126,7 +126,7 @@ public:
   }
 
   virtual tensor_type operator [](const index_type &index) override {
-    return at<WrappedIndex<I>, IdentityLookup<F, I>>(index);
+    return at<indexing::WrappedIndex<I>, indexing::IdentityLookup<F, I>>(index);
   }
 
   virtual void operator =(F other) override {

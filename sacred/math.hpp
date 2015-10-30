@@ -38,10 +38,13 @@ public:
       for (auto j = 0; j < scratch.shape().at(2); ++j) {
         for (auto i = 0; i < scratch.shape().at(1) + 1; ++i) {
           F current_output = F(0);
-          current_output += output.template at<IdentityIndex<int>, MaskedLookup<F>>({i - filter.shape().at(0) / 2 + m, j - 1});
+          current_output += output.template at<
+              indexing::IdentityIndex<int>, indexing::MaskedLookup<F>>({i - filter.shape().at(0) / 2 + m, j - 1});
           for (auto k = 0; k < filter.shape().at(0); ++k) {
             for (auto l = 0; l < filter.shape().at(1); ++l) {
-              current_output += filter.at({k, l}) * scratch.template at<IdentityIndex<int>, MaskedLookup<F>>({m, i - k + filter.shape().at(0) / 2, j - l - 1});
+              current_output += filter.at({k, l}) * scratch.template at<
+                  indexing::IdentityIndex<int>, indexing::MaskedLookup<F>>(
+                      {m, i - k + filter.shape().at(0) / 2, j - l - 1});
             }
           }
           scratch.add({m, i, j}, current_output);
@@ -52,7 +55,11 @@ public:
       for (auto i = 0; i < scratch.shape().at(1); ++i) {
         for (auto k = 0; k < filter.shape().at(0); ++k) {
           for (auto l = 0; l < filter.shape().at(1); ++l) {
-            filter_diff.template add<IdentityIndex<int>, MaskedLookup<F>>({k, l}, scratch.template at<IdentityIndex<int>, MaskedLookup<F>>({filter.shape().at(0) - 1 - k, i, j - l}) * output_diff.template at<IdentityIndex<int>, MaskedLookup<F>>({i, j}));
+            filter_diff.template add<indexing::IdentityIndex<int>, indexing::MaskedLookup<F>>(
+                {k, l}, scratch.template at<
+                    indexing::IdentityIndex<int>, indexing::MaskedLookup<F>>(
+                        {filter.shape().at(0) - 1 - k, i, j - l}) * output_diff.template at<
+                            indexing::IdentityIndex<int>, indexing::MaskedLookup<F>>({i, j}));
           }
         }
       }
@@ -167,7 +174,8 @@ public:
           for (auto l = 0; l < input.shape().at(1); ++l) {
             auto I = i - input.shape().at(0) / 2;
             auto J = j - input.shape().at(1) / 2;
-            current_filter += output_coefficient * input.at({k, l}) * output.template at<IdentityIndex<int>, MaskedLookup<F>>({I + k, J + l});
+            current_filter += output_coefficient * input.at({k, l}) * output.template at<
+                indexing::IdentityIndex<int>, indexing::MaskedLookup<F>>({I + k, J + l});
           }
         }
         filter.set({i, j}, current_filter);
@@ -184,7 +192,8 @@ public:
         F current_output = output_coefficient * output.at({i, j});
         for (auto k = 0; k < filter.shape().at(0); ++k) {
           for (auto l = 0; l < filter.shape().at(1); ++l) {
-            current_output += input_coefficient * filter.at({k, l}) * input.template at<IdentityIndex<int>, MaskedLookup<F>>({i - k, j - l});
+            current_output += input_coefficient * filter.at({k, l}) * input.template at<
+                indexing::IdentityIndex<int>, indexing::MaskedLookup<F>>({i - k, j - l});
           }
         }
         output.set({i, j}, current_output);
@@ -203,7 +212,8 @@ public:
         F current_output = output_coefficient * output.at({i, j});
         for (auto k = 0; k < filter.shape().at(0); ++k) {
           for (auto l = 0; l < filter.shape().at(1); ++l) {
-            current_output += input_coefficient * filter.at({k, l}) * input.template at<IdentityIndex<int>, MaskedLookup<F>>({I + k, J + l});
+            current_output += input_coefficient * filter.at({k, l}) * input.template at<
+                indexing::IdentityIndex<int>, indexing::MaskedLookup<F>>({I + k, J + l});
           }
         }
         output.set({i, j}, current_output);
@@ -222,7 +232,8 @@ public:
         F current_output = output_coefficient * output.at({i, j});
         for (auto k = 0; k < filter.shape().at(0); ++k) {
           for (auto l = 0; l < filter.shape().at(1); ++l) {
-            current_output += input_coefficient * filter.at({k, l}) * output.template at<IdentityIndex<int>, MaskedLookup<F>>({I - k, J - l});
+            current_output += input_coefficient * filter.at({k, l}) * output.template at<
+                indexing::IdentityIndex<int>, indexing::MaskedLookup<F>>({I - k, J - l});
           }
         }
         output.set({i, j}, current_output);
@@ -240,7 +251,8 @@ public:
         F current_output = output_coefficient * output.at({i, j});
         for (auto k = 0; k < filter.shape().at(0); ++k) {
           for (auto l = 0; l < filter.shape().at(1); ++l) {
-            current_output += input_coefficient * filter.at({k, l}) * output.template at<IdentityIndex<int>, MaskedLookup<F>>({I + k, J + l});
+            current_output += input_coefficient * filter.at({k, l}) * output.template at<
+                indexing::IdentityIndex<int>, indexing::MaskedLookup<F>>({I + k, J + l});
           }
         }
         output.set({i, j}, current_output);

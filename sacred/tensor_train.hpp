@@ -28,9 +28,9 @@ public:
 
   virtual ~TensorTrain() = default;
 
-  template <typename Index = CheckedIndex<I>>
+  template <typename Index = indexing::CheckedIndex<I>>
   tensor_type at(const index_type &index) {
-    static_assert(is_base_of<IndexStrategy<I>, Index>::value,
+    static_assert(is_base_of<indexing::IndexStrategy<I>, Index>::value,
         "Index must implement interface IndexStrategy<I>.");
     auto values = storage_type();
     for (auto i = 0; i < index.size(); ++i) {
@@ -49,7 +49,7 @@ public:
   }
 
   virtual tensor_type operator [](const index_type &index) override {
-    return at<WrappedIndex<I>>(index);
+    return at<indexing::WrappedIndex<I>>(index);
   }
 
   virtual void operator =(F other) override {

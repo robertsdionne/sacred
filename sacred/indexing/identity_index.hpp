@@ -4,7 +4,7 @@
 #include "../default_types.hpp"
 #include "index_strategy.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 template <typename I = default_integer_type>
 class IdentityIndex : public IndexStrategy<I> {
@@ -19,6 +19,6 @@ public:
   }
 };
 
-}  // namespace sacred
+}}  // namespaces
 
 #endif  // SACRED_IDENTITY_INDEX_HPP_

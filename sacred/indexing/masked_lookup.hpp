@@ -7,7 +7,7 @@
 #include "identity_lookup.hpp"
 #include "lookup_strategy.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 using std::numeric_limits;
 
@@ -54,6 +54,6 @@ private:
   IdentityLookup<F, I> identity_;
 };
 
-}  // namespace sacred
+}}  // namespaces
 
 #endif  // SACRED_MASKED_LOOKUP_HPP_

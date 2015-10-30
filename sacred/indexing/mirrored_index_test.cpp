@@ -2,7 +2,7 @@
 
 #include "mirrored_index.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 TEST(MirroredIndex, Transform) {
   auto mirrored_index = MirroredIndex<>();
@@ -22,4 +22,4 @@ TEST(MirroredIndex, Transform) {
   EXPECT_EQ(2, mirrored_index.Transform({3}, {1}, {6}).at(0));
 }
 
-}  // namespace sacred
+}}  // namespaces

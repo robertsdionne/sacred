@@ -6,7 +6,7 @@
 #include "identity_index.hpp"
 #include "index_strategy.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 template <typename I = default_integer_type>
 class CheckedIndex : public IndexStrategy<I> {
@@ -28,6 +28,6 @@ private:
   IdentityIndex<I> identity_;
 };
 
-}  // namespace sacred
+}}  // namespaces
 
 #endif  // SACRED_CHECKED_INDEX_HPP_

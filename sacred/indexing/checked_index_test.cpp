@@ -2,7 +2,7 @@
 
 #include "checked_index.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 TEST(CheckedIndex, Transform) {
   auto checked_index = CheckedIndex<>();
@@ -16,4 +16,4 @@ TEST(CheckedIndex, Transform) {
   EXPECT_DEATH(checked_index.Transform({3}, {1}, {4}).at(0), "index\\.at\\(i\\)");
 }
 
-}  // namespace sacred
+}}  // namespaces

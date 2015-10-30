@@ -2,7 +2,7 @@
 
 #include "identity_lookup.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 TEST(IdentityLookup, Lookup) {
   auto identity_lookup = IdentityLookup<>();
@@ -13,4 +13,4 @@ TEST(IdentityLookup, Lookup) {
   EXPECT_EQ(2, identity_lookup.Lookup(data, data.size(), {3}, {1}, {2}));
 }
 
-}  // namespace sacred
+}}  // namespaces

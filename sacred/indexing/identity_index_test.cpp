@@ -2,7 +2,7 @@
 
 #include "identity_index.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 TEST(IdentityIndex, Transform) {
   auto identity_index = IdentityIndex<>();
@@ -14,4 +14,4 @@ TEST(IdentityIndex, Transform) {
   EXPECT_EQ(3, identity_index.Transform({3}, {1}, {3}).at(0));
 }
 
-}  // namespace sacred
+}}  // namespaces

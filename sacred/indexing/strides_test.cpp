@@ -3,7 +3,7 @@
 
 #include "strides.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
   using std::vector;
 
@@ -12,4 +12,4 @@ namespace sacred {
     EXPECT_EQ(vector<int>({32, 16, 8, 4, 2, 1}), strides::CStyle<>({2, 2, 2, 2, 2, 2}));
   }
 
-}  // namespace sacred
+}}  // namespaces

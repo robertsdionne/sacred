@@ -5,7 +5,7 @@
 #include "../default_types.hpp"
 #include "index_strategy.hpp"
 
-namespace sacred {
+namespace sacred { namespace indexing {
 
 // 01 23 45 67 89
 // 01 01 01 01 01
@@ -46,6 +46,6 @@ public:
   }
 };
 
-}  // namespace sacred
+}}  // namespaces
 
 #endif  // SACRED_MIRRORED_INDEX_HPP_
