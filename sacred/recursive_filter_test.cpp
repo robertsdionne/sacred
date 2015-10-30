@@ -19,9 +19,9 @@ TEST(RecursiveFilter, Run) {
     2, 3, 4,
     4, 5, 6
   });
-  auto layer = RecursiveFilter<>(bias, filter);
+  auto op = RecursiveFilter<>(bias, filter);
   auto output = Tensor<>({4, 4});
-  layer.Run({&input}, {&output});
+  op({&input}, {&output});
   // EXPECT_EQ(
   //     Tensor<>({4, 4}, {
   //       1, 6, 36, 227,

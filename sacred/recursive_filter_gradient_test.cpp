@@ -36,7 +36,7 @@ TEST(RecursiveFilterGradient, Run) {
     4, 5, 6, 7
   });
   auto input_gradient = Tensor<>({4, 4});
-  op.Run({&output, &output_gradient}, {&input_gradient});
+  op({&output, &output_gradient}, {&input_gradient});
   EXPECT_EQ(Tensor<>({4}, {
     6, 10, 14, 18
   }), bias_gradient);

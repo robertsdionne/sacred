@@ -20,7 +20,7 @@ TEST(NonrecursiveFilter, Run) {
   });
   auto op = NonrecursiveFilter<>(bias, filter);
   auto output = Tensor<>({2, 2});
-  op.Run({&input}, {&output});
+  op({&input}, {&output});
   EXPECT_EQ(
       Tensor<>({2, 2}, {
         69, 96,

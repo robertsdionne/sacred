@@ -18,7 +18,7 @@ public:
 
   virtual ~NonrecursiveFilter() = default;
 
-  void Run(const tensors_type &in, const tensors_type &out) override {
+  void operator ()(const tensors_type &in, const tensors_type &out) override {
     // y = c ⁎ u + b
     // y_n = Σ_k c_k * u_{n-k} + b_n
     math_.NarrowConvolve2(*out.at(0), filter_, *in.at(0), F(1.0), F(1.0));

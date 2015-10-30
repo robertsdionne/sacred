@@ -13,7 +13,7 @@ public:
 
   virtual ~Operator() = default;
 
-  virtual void Run(const tensors_type &in, const tensors_type &out) = 0;
+  virtual void operator ()(const tensors_type &in, const tensors_type &out) = 0;
 };
 
 }  // namespace sacred

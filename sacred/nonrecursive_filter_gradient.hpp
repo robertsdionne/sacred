@@ -19,7 +19,7 @@ public:
 
   virtual ~NonrecursiveFilterGradient() = default;
 
-  void Run(const tensors_type &in, const tensors_type &out) override {
+  void operator ()(const tensors_type &in, const tensors_type &out) override {
     // Filter derivatives:
     // ∂E/∂c_k = Σ_n ∂E/∂y_n * u_{n+k}
     // Note: my manual calculations figured ∂E/∂c_k = Σ_n ∂E/∂y_n * u_{n-k} but this disagrees
