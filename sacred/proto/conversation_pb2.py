@@ -17,7 +17,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='sacred/proto/conversation.proto',
   package='sacred.proto',
   syntax='proto3',
-  serialized_pb=b'\n\x1fsacred/proto/conversation.proto\x12\x0csacred.proto\"#\n\x07Speaker\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\"$\n\x04Word\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08spelling\x18\x02 \x01(\t\"-\n\tUtterance\x12 \n\x04word\x18\x01 \x03(\x0b\x32\x12.sacred.proto.Word\"Z\n\x04Turn\x12&\n\x07speaker\x18\x01 \x01(\x0b\x32\x15.sacred.proto.Speaker\x12*\n\tutterance\x18\x02 \x03(\x0b\x32\x17.sacred.proto.Utterance\"0\n\x0c\x43onversation\x12 \n\x04turn\x18\x01 \x03(\x0b\x32\x12.sacred.proto.Turnb\x06proto3'
+  serialized_pb=b'\n\x1fsacred/proto/conversation.proto\x12\x0csacred.proto\"#\n\x07Speaker\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\"$\n\x04Word\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08spelling\x18\x02 \x01(\t\"<\n\tUtterance\x12 \n\x04word\x18\x01 \x03(\x0b\x32\x12.sacred.proto.Word\x12\r\n\x05words\x18\x02 \x01(\t\"Z\n\x04Turn\x12&\n\x07speaker\x18\x01 \x01(\x0b\x32\x15.sacred.proto.Speaker\x12*\n\tutterance\x18\x02 \x03(\x0b\x32\x17.sacred.proto.Utterance\"0\n\x0c\x43onversation\x12 \n\x04turn\x18\x01 \x03(\x0b\x32\x12.sacred.proto.Turnb\x06proto3'
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -114,6 +114,13 @@ _UTTERANCE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='words', full_name='sacred.proto.Utterance.words', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -127,7 +134,7 @@ _UTTERANCE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=124,
-  serialized_end=169,
+  serialized_end=184,
 )
 
 
@@ -164,8 +171,8 @@ _TURN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=171,
-  serialized_end=261,
+  serialized_start=186,
+  serialized_end=276,
 )
 
 
@@ -195,8 +202,8 @@ _CONVERSATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=263,
-  serialized_end=311,
+  serialized_start=278,
+  serialized_end=326,
 )
 
 _UTTERANCE.fields_by_name['word'].message_type = _WORD
