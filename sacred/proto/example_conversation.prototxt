@@ -1,77 +1,1090 @@
-turn: {
-  speaker: {
-    id: 0
+turn {
+  speaker {
     name: "bz"
   }
-  utterance: {
-    word: {
-      id: 0
-      spelling: "or"
-    }
-    word: {
-      id: 1
-      spelling: "maybe"
-    }
-    word: {
-      id: 2
-      spelling: "i"
-    }
-    word: {
-      id: 3
-      spelling: "could"
-    }
-    word: {
-      id: 4
-      spelling: "do"
-    }
-    word: {
-      id: 5
-      spelling: "that"
-    }
+  utterance {
+    words: "or maybe i could do that"
   }
 }
-turn: {
-  speaker: {
-    id: 1
+turn {
+  speaker {
     name: "icecube45"
   }
-  utterance: {
-    word: {
-      id: 6
-      spelling: "kk"
-    }
+  utterance {
+    words: "kk"
   }
 }
-turn: {
-  speaker: {
-    id: 0
+turn {
+  speaker {
+    name: "bz"
   }
-  utterance: {
-    word: {
-      id: 7
-      spelling: "um"
-    }
-    word: {
-      id: 8
-      spelling: ","
-    }
-    word: {
-      id: 9
-      spelling: "yeah"
-    }
+  utterance {
+    words: "um, yeah."
   }
-  utterance: {
-    word: {
-      id: 10
-      spelling: "check"
-    }
-    word: {
-      id: 11
-      spelling: "from"
-    }
-    word: {
-      id: 12
-      spelling: "localhost"
-    }
+  utterance {
+    words: "check from localhost"
   }
 }
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "i can connect fine using localhost"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "then it\'s your router"
+  }
+  utterance {
+    words: "what address are you listening on?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "launching now"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "gogogogo"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "bootedup, canyouseeme cant see me"
+  }
+  utterance {
+    words: "should i possibly post my netstat -ltn?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "sure"
+  }
+  utterance {
+    words: "i assume that the server\'s running on the same machine you\'re typing on right now?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "here is my netstat -ltn"
+  }
+  utterance {
+    words: "http://paste.ubuntu.com/1072325/"
+  }
+  utterance {
+    words: "you see that paste?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "yeah."
+  }
+  utterance {
+    words: "can we do an experiment?"
+  }
+  utterance {
+    words: "just wanna make sure your ports are being fwded correctly"
+  }
+  utterance {
+    words: "so on the minecraft machine, nc -l 0.0.0.0 10012"
+  }
+  utterance {
+    words: "don\'t sigterm it"
+  }
+  utterance {
+    words: "check your query window for a sec"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "how long is this ment to take exactly?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "open up another term, then: echo \"it works\" | nc <insert your minecraft server ip> 10012"
+  }
+  utterance {
+    words: "echo \"it works\" | nc <external ip> 10012"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "done"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "works?"
+  }
+  utterance {
+    words: "check the window that had \"nc -l 0.0.0.0 10012\""
+  }
+  utterance {
+    words: "seriously? not even an \"it works\"?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "using my internal ip on the echo it works thing, it works fine"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "yeah, then you have a forwarding issue, bro"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "it shouldnt be that tho"
+  }
+  utterance {
+    words: "all my other computers are fowarding fine"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "how do you know that?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "ive tested them multiple times"
+  }
+  utterance {
+    words: "running servers on them"
+  }
+  utterance {
+    words: "they just dont have the capacity to run them, thats y i want this one to work"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "so they can\'t run minecraft, but you tested them by running minecraft?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "do i need to have eth0 or eth1 enabled to make this work or anything"
+  }
+  utterance {
+    words: "i ran a server on them, its jsut supppeeeeeeeeeeeerrrrrrrr laggy"
+  }
+  utterance {
+    words: "and running the server ate all my ram, it ended up crashing my comp"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "yeah, welcome to java"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "i have one theory"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "it\'s a forwrding issue; check your router"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "i checked it"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "do any of the other comps run nix?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "should be fine"
+  }
+  utterance {
+    words: "no they dont"
+  }
+  utterance {
+    words: "windows Xp and 7"
+  }
+  utterance {
+    words: "its very strange"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "it\'s not, it\'s quite obvious"
+  }
+  utterance {
+    words: "double check your forwarding"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "i have, jsut now"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "how?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "192.168.2.1, gets me to router page, overlooked my port fowarding, checked my interla ip"
+  }
+  utterance {
+    words: "do i need eth1 or eth0 runnign or anything to get this working, my /etc/networking or whatever uses lo"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "wat"
+  }
+  utterance {
+    words: "lo is loopback, you wouldn\'t even be able to touch it from another box on your lan if you only had lo"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "is this my problem?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "didn\'t you say that you are able to do the nc -l trick over lan?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "i also get a thing when starting up saying waiting for network configurationg"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "ok, pastebin ifconfig -a"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "k"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "eth2 is up"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "so....?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "what\'re eth2 and eth0?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "what do you mean?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "i mean that the nix kernel creates a new eth* entry for each physical interface; you\'ve got more than one interface, so i\'m guessing your network topology is a bit more complicated than usual"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "really?"
+  }
+  utterance {
+    words: "want me to describe my router?"
+  }
+  utterance {
+    words: "router is connected to a thing called nettopia, or vise versa, and that is connected to the phone lines"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "doh"
+  }
+  utterance {
+    words: "what port do you use for mc?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "um....?"
+  }
+  utterance {
+    words: "25565"
+  }
+  utterance {
+    words: "the default for mc"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "ok, \"nc -l 0.0.0.0 25565\" on the"
+  }
+  utterance {
+    words: "on the mc server box, then `echo \"it works\" | nc 68.164.80.221 25565\" ` some other box"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "could u?"
+  }
+  utterance {
+    words: "the nc -l 0.0.0.0 25565 is running"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "try the echo | nc command with your internal ip"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "it works using internal ip on echo"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "btw, what ip does your router forward port 25565 to?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "i bet you\'ve got windoze setup on a static ip"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "i dont have a static ip set on my ubuntu, i jsut want to test if it works, then im setting one"
+  }
+  utterance {
+    words: "im porting it to 192.168.2.7"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "so my previous question stands"
+  }
+  utterance {
+    words: "btw, what ip does your router forward port 25565 to?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "^^^"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "can you double check that it works on windows? eg, don\'t touch the router; just reboot to windows, then set your new static to .2.7, then run mc"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "can i not run minecraft, but something else"
+  }
+  utterance {
+    words: "using the same port"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "that\'s odd, why?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "not enough ram to run the server"
+  }
+  utterance {
+    words: "on my windows"
+  }
+  utterance {
+    words: "u can connect to it by minecraft.. its a, um... griefing tool... :3"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "but you just said you tested mc on this very box...in windows"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "i didnt say on this box"
+  }
+  utterance {
+    words: "windows is not installed on this box"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "mate, you got two variables then"
+  }
+  utterance {
+    words: "different box (eg different ip), and different os"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "the only thing different between them is the internal ip, which i adjust if im gonna host from there"
+  }
+  utterance {
+    words: "and the OS"
+  }
+  utterance {
+    words: "should i still test?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "every test you\'ve just done for me demonstrates that it\'s a problem exterior to your \'buntu box"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "but it only happens on a ubuntu os"
+  }
+  utterance {
+    words: "no"
+  }
+  utterance {
+    words: "when i had a different os on this box, it worked fine"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "you knwo what?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "its just not gonna work?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "set another one of your boxes to .2.7, then run a server on them"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "they dont have enough ram"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "not sure how to help you then"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "thanks anyways"
+  }
+  utterance {
+    words: "that may be my only option then"
+  }
+  utterance {
+    words: "its very strange"
+  }
+  utterance {
+    words: "quick question"
+  }
+  utterance {
+    words: "whats the mininum amount of ram that is required to run ubuntu?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "define \'run ubuntu\'"
+  }
+  utterance {
+    words: "heck, define your use case"
+  }
+  utterance {
+    words: "i can run my nix server on 30 mb of ram"
+  }
+  utterance {
+    words: "wubi sounds graphical, so probably hundreds of megs of ram"
+  }
+  utterance {
+    words: "go with that one ^"
+  }
+  utterance {
+    words: "although, i run icewm on my debian with 256 MB just fine"
+  }
+  utterance {
+    words: "check your forwarding ;_;"
+  }
+  utterance {
+    words: "or install windows on the mc box and check your forwarding from inside windows"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "ill check my fowarding to the end of time"
+  }
+  utterance {
+    words: "its got no harddrive"
+  }
+  utterance {
+    words: "so no windowws"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "you mean it\'s sitting in a dmz?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "i enabled dmz for its internal ip, so it is outside the NAT firewall"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "and yet not one of its ports are accessible from the outside"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "thats right"
+  }
+  utterance {
+    words: "is there anything that can be blocking incoming connections on ubuntu?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "yet we already accessed your ports from an internal ip"
+  }
+  utterance {
+    words: "so...problem can\'t be ubuntu, right?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "its wierd"
+  }
+  utterance {
+    words: "check iptables?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "yeah, check iptab"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "command again please?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "iptables -L as root"
+  }
+  utterance {
+    words: "you realize that i\'m \'bz\' and not \'dz\', right? that\'s pretty much a guarantee that i won\'t see your messages"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "i know"
+  }
+  utterance {
+    words: "it was a while up there"
+  }
+  utterance {
+    words: "typo"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "iptables -F as root"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "why?"
+  }
+  utterance {
+    words: "starting server up.."
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "gogogogogo"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "comon.... please work"
+  }
+  utterance {
+    words: "nope.avi no go"
+  }
+  utterance {
+    words: "WTF IS WRONG WITH THIS"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "chill. try the nc -l diagnostic again"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "what were the commands again"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "on the mc box: nc -l 0.0.0.0 25565"
+  }
+  utterance {
+    words: "on the non-mc box; echo \"it works\" | nc <external ip> 25565"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "good new is, it recognizes that it is running on 25565 :2"
+  }
+  utterance {
+    words: "does it have to be on a different box"
+  }
+  utterance {
+    words: "or can i use the same box, for i only have one ubuntu box"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "could be the same box"
+  }
+  utterance {
+    words: "obviously a different vt"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "vt?"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "virtual terminal. gnome-term xterm kterm kate xfceterm rxvt urxvt"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "can i use a different tab?"
+  }
+  utterance {
+    words: "would that work fine"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "ouash"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "okay, command again please"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "nc -l 0.0.0.0 25535"
+  }
+  utterance {
+    words: "echo \"it works\" | nc 68.164.80.221 25565"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "trying"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "might wanna dial-down on slapping that enter key for escott\'s sake"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "nothing"
+  }
+  utterance {
+    words: "it didnt work"
+  }
+  utterance {
+    words: "the echo didnt work, i suspect it times out, for i can enter a new command now"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "uh, does the other window say \'it works\'?"
+  }
+}
+turn {
+  speaker {
+    name: "icecube45"
+  }
+  utterance {
+    words: "nope"
+  }
+}
+turn {
+  speaker {
+    name: "bz"
+  }
+  utterance {
+    words: "nice"
+  }
+  utterance {
+    words: "i\'m out of ideas"
+  }
+  utterance {
+    words: "i play quake 3 :p"
+  }
+  utterance {
+    words: "go aehad"
+  }
+  utterance {
+    words: "what changed?"
+  }
+  utterance {
+    words: "no, i mean what have you changed with the new system? did you update, upgrade, delete, modify somethin?"
+  }
+  utterance {
+    words: "hm, ifconfig -a?"
+  }
+  utterance {
+    words: "no need, just read off the device names"
+  }
+  utterance {
+    words: "eth0, eth2, ham0, and lo, right?"
+  }
+  utterance {
+    words: "so, as root, \"dhclient eth2\""
+  }
+  utterance {
+    words: "dhclient eth2"
+  }
+}
+
