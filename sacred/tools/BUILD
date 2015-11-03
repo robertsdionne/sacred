@@ -1,12 +1,12 @@
 py_binary(
-  name = 'group_consecutive_utterances',
+  name = 'group_by',
   srcs = [
-    'group_consecutive_utterances.py',
+    'group_by.py',
   ],
 )
 
 sh_binary(
-  name = 'group_consecutive_utterances_sh',
+  name = 'group_consecutive_utterances',
   srcs = [
     'group_consecutive_utterances.sh',
   ],

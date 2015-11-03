@@ -8,8 +8,8 @@ import sys
 
 
 def main():
-  parser = argparse.ArgumentParser(description='Group utterances into turns.')
-  parser.add_argument('--key', default='sender', help='The key identifying the speaker.')
+  parser = argparse.ArgumentParser(description='Group JSON by key.')
+  parser.add_argument('--key', help='The key.')
   arguments = parser.parse_args()
 
   records = json.loads(sys.stdin.read())
