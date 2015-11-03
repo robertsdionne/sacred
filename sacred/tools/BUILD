@@ -1,3 +1,17 @@
+py_binary(
+  name = 'group_consecutive_utterances',
+  srcs = [
+    'group_consecutive_utterances.py',
+  ],
+)
+
+sh_binary(
+  name = 'group_consecutive_utterances_sh',
+  srcs = [
+    'group_consecutive_utterances.sh',
+  ],
+)
+
 cc_binary(
   name = 'print_floats',
   srcs = [
