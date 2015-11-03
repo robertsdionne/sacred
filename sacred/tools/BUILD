@@ -14,3 +14,13 @@ py_binary(
     'prepare_data.py',
   ],
 )
+
+py_binary(
+  name = 'proto3',
+  srcs = [
+    'proto3.py',
+  ],
+  deps = [
+    '//sacred/proto:conversation',
+  ],
+)

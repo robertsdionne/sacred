@@ -1,0 +1,77 @@
+turn: {
+  speaker: {
+    id: 0
+    name: "bz"
+  }
+  utterance: {
+    word: {
+      id: 0
+      spelling: "or"
+    }
+    word: {
+      id: 1
+      spelling: "maybe"
+    }
+    word: {
+      id: 2
+      spelling: "i"
+    }
+    word: {
+      id: 3
+      spelling: "could"
+    }
+    word: {
+      id: 4
+      spelling: "do"
+    }
+    word: {
+      id: 5
+      spelling: "that"
+    }
+  }
+}
+turn: {
+  speaker: {
+    id: 1
+    name: "icecube45"
+  }
+  utterance: {
+    word: {
+      id: 6
+      spelling: "kk"
+    }
+  }
+}
+turn: {
+  speaker: {
+    id: 0
+  }
+  utterance: {
+    word: {
+      id: 7
+      spelling: "um"
+    }
+    word: {
+      id: 8
+      spelling: ","
+    }
+    word: {
+      id: 9
+      spelling: "yeah"
+    }
+  }
+  utterance: {
+    word: {
+      id: 10
+      spelling: "check"
+    }
+    word: {
+      id: 11
+      spelling: "from"
+    }
+    word: {
+      id: 12
+      spelling: "localhost"
+    }
+  }
+}

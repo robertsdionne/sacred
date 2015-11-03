@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package sacred.proto;
+
+message Speaker {
+  uint64 id = 1;
+  string name = 2;
+}
+
+message Word {
+  uint64 id = 1;
+  string spelling = 2;
+}
+
+message Utterance {
+  repeated Word word = 1;
+}
+
+message Turn {
+  Speaker speaker = 1;
+  repeated Utterance utterance = 2;
+}
+
+message Conversation {
+  repeated Turn turn = 1;
+}
