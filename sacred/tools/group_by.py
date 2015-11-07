@@ -14,7 +14,7 @@ def main():
 
   records = json.loads(sys.stdin.read())
   grouped = itertools.groupby(records, lambda record: record[arguments.key])
-  print json.dumps([list(group) for key, group in grouped])
+  print(json.dumps([list(group) for key, group in grouped]))
 
 
 if '__main__' == __name__:

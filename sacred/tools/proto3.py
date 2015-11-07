@@ -32,9 +32,9 @@ def main():
   if BINARY == arguments.output_format:
     sys.stdout.write(conversation.SerializeToString())
   elif JSON == arguments.output_format:
-    print json_format.MessageToJson(conversation)
+    print(json_format.MessageToJson(conversation))
   else:
-    print text_format.MessageToString(conversation, as_utf8=True)
+    print(text_format.MessageToString(conversation, as_utf8=True))
 
 
 if '__main__' == __name__:
