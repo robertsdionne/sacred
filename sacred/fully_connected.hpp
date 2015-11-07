@@ -20,7 +20,7 @@ public:
 
   virtual ~FullyConnected() = default;
 
-  void operator ()(const tensors_type &in, const tensors_type &out) override {
+  virtual void operator ()(const tensors_type &in, const tensors_type &out) override {
     auto input = in.at(0), output = out.at(0);
     CHECK_LE(input->order(), 2);
     CHECK_GT(input->order(), 0);
