@@ -38,3 +38,10 @@ py_binary(
     '//sacred/proto:conversation',
   ],
 )
+
+py_binary(
+  name = 'replace_unknown_words',
+  srcs = [
+    'replace_unknown_words.py',
+  ],
+)
