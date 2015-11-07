@@ -55,6 +55,8 @@ public:
 
   virtual bool operator ==(const tensor_type &other) const = 0;
 
+  virtual I order() const = 0;
+
   virtual const index_type &shape() const = 0;
 
   virtual I size() const = 0;

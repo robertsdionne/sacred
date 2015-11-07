@@ -149,6 +149,10 @@ public:
     return out << "Tensor<F>(" << tensor.shape_ << ", " << tensor.data_ << ")";
   }
 
+  virtual inline I order() const override {
+    return shape_.size();
+  }
+
   virtual inline const index_type &shape() const override {
     return shape_;
   }

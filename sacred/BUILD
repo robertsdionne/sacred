@@ -17,6 +17,33 @@ cc_library(
 )
 
 cc_library(
+  name = 'fully_connected',
+  srcs = [
+    'fully_connected.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':math',
+    ':operator',
+    ':testing',
+    '//external:googlelog',
+  ],
+)
+
+cc_test(
+  name = 'fully_connected_test',
+  srcs = [
+    'fully_connected_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':fully_connected',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_library(
   name = 'functional',
   srcs = [
     'functional.hpp',

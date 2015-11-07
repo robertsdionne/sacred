@@ -62,6 +62,10 @@ public:
     return false;
   }
 
+  virtual inline I order() const override {
+    return shape_.size();
+  }
+
   virtual const index_type &shape() const override {
     return shape_;
   }
