@@ -12,21 +12,26 @@ class FullyConnectedGradient : public Operator<F> {
 public:
   using tensor_type = typename default_tensor_type<F>::value;
   using tensors_type = typename default_tensors_type<F>::value;
+  using tensors_const_type = typename default_tensors_const_type<F>::value;
 
   FullyConnectedGradient(tensor_type &bias_gradient, tensor_type &weight, tensor_type &weight_gradient):
       bias_gradient_(bias_gradient), weight_(weight), weight_gradient_(weight_gradient) {}
 
-  virtual void operator ()(const tensors_type &in, const tensors_type &out) override {
-    auto delta = in.at(0), x = out.at(0), x_gradient = out.at(1);
-
+  void operator ()(const tensor_type &delta, const tensor_type &x, tensor_type &x_gradient) {
     // ∂E/∂W_ij = δ_i x_j
-    math_.GeneralMatrixMultiplicationNormalTranspose(weight_gradient_, *delta, *x, F(1), F(1));
+    math_.GeneralMatrixMultiplicationNormalTranspose(weight_gradient_, delta, x, F(1), F(1));
 
     // ∂E/∂b_i = δ_i
-    math_.Add(bias_gradient_, *delta, F(1), F(1));
+    math_.Add(bias_gradient_, delta, F(1), F(1));
 
     // ∂E/∂x_j = δ_i W^i_j
-    math_.GeneralMatrixMultiplicationTransposeNormal(*x_gradient, weight_, *delta, F(1), F(1));
+    math_.GeneralMatrixMultiplicationTransposeNormal(x_gradient, weight_, delta, F(1), F(1));
+  }
+
+  virtual void operator ()(const tensors_const_type &in, const tensors_type &out) override {
+    auto delta = in.at(0), x = in.at(1);
+    auto x_gradient = out.at(0);
+    operator ()(*delta, *x, *x_gradient);
   }
 
 private:

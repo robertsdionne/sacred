@@ -31,7 +31,9 @@ TEST(NonrecursiveFilterGradient, Run) {
     4, 5, 6, 7
   });
   auto input_gradient = Tensor<>({4, 4});
-  op({&output_gradient}, {&input, &input_gradient});
+
+  op(output_gradient, input, input_gradient);
+
   EXPECT_EQ(Tensor<>({2, 2}, {
     1, 1,
     1, 1

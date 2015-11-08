@@ -22,7 +22,7 @@ TEST(FullyConnectedGradient, Run) {
   auto op = FullyConnectedGradient<>(bias_gradient, weight, weight_gradient);
   auto output_gradient = Tensor<>({3, 1}, {1, 2, 3});
 
-  op({&output_gradient}, {&input, &input_gradient});
+  op(output_gradient, input, input_gradient);
 
   EXPECT_EQ(Tensor<>({4, 1}, {38, 44, 50, 56}), input_gradient);
   EXPECT_EQ(Tensor<>({3, 4}, {

@@ -10,10 +10,11 @@ template <typename F = default_floating_point_type>
 class Operator {
 public:
   using tensors_type = typename default_tensors_type<F>::value;
+  using tensors_const_type = typename default_tensors_const_type<F>::value;
 
   virtual ~Operator() = default;
 
-  virtual void operator ()(const tensors_type &in, const tensors_type &out) = 0;
+  virtual void operator ()(const tensors_const_type &in, const tensors_type &out) = 0;
 };
 
 }  // namespace sacred

@@ -16,7 +16,7 @@ TEST(FullyConnected, Run) {
   auto op = FullyConnected<>(bias, weight);
   auto output = Tensor<>({3, 1}, {0, 0, 0});
 
-  op({&input}, {&output});
+  op(input, output);
 
   EXPECT_EQ(Tensor<>({3, 1}, {31, 72, 113}), output);
 }

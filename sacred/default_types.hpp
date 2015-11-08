@@ -31,6 +31,12 @@ struct default_tensor_type {
 template <typename F = default_floating_point_type, typename I = default_integer_type>
 struct default_tensors_type {
   using value = vector<typename default_tensor_type<F, I>::value *>;
+  using const_value = vector<const typename default_tensor_type<F, I>::value *>;
+};
+
+template <typename F = default_floating_point_type, typename I = default_integer_type>
+struct default_tensors_const_type {
+  using value = vector<const typename default_tensor_type<F, I>::value *>;
 };
 
 }  // namespace sacred

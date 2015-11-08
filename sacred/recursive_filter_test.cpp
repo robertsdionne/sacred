@@ -21,7 +21,9 @@ TEST(RecursiveFilter, Run) {
   });
   auto op = RecursiveFilter<>(bias, filter);
   auto output = Tensor<>({4, 4});
-  op({&input}, {&output});
+
+  op(input, output);
+
   // EXPECT_EQ(
   //     Tensor<>({4, 4}, {
   //       1, 6, 36, 227,
