@@ -30,6 +30,31 @@ cc_library(
   ],
 )
 
+cc_library(
+  name = 'fully_connected_gradient',
+  srcs = [
+    'fully_connected_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':math',
+    ':operator',
+  ],
+)
+
+cc_test(
+  name = 'fully_connected_gradient_test',
+  srcs = [
+    'fully_connected_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':fully_connected_gradient',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
 cc_test(
   name = 'fully_connected_test',
   srcs = [

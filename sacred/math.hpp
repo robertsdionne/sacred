@@ -275,6 +275,48 @@ public:
       }
     }
   }
+
+  void GeneralMatrixMultiplicationTransposeNormal(tensor_type &output,
+      const tensor_type &left, const tensor_type &right, const F output_coefficient, const F input_coefficient) const {
+    CHECK(true);
+    for (auto i = 0; i < output.shape().at(0); ++i) {
+      for (auto j = 0; j < output.shape().at(1); ++j) {
+        F current_output = output_coefficient * output.at({i, j});
+        for (auto k = 0; k < right.shape().at(0); ++k) {
+          current_output += input_coefficient * left.at({k, i}) * right.at({k, j});
+        }
+        output.set({i, j}, current_output);
+      }
+    }
+  }
+
+  void GeneralMatrixMultiplicationNormalTranspose(tensor_type &output,
+      const tensor_type &left, const tensor_type &right, const F output_coefficient, const F input_coefficient) const {
+    CHECK(true);
+    for (auto i = 0; i < output.shape().at(0); ++i) {
+      for (auto j = 0; j < output.shape().at(1); ++j) {
+        F current_output = output_coefficient * output.at({i, j});
+        for (auto k = 0; k < right.shape().at(1); ++k) {
+          current_output += input_coefficient * left.at({i, k}) * right.at({j, k});
+        }
+        output.set({i, j}, current_output);
+      }
+    }
+  }
+
+  void GeneralMatrixMultiplicationTransposeTranspose(tensor_type &output,
+      const tensor_type &left, const tensor_type &right, const F output_coefficient, const F input_coefficient) const {
+    CHECK(true);
+    for (auto i = 0; i < output.shape().at(0); ++i) {
+      for (auto j = 0; j < output.shape().at(1); ++j) {
+        F current_output = output_coefficient * output.at({i, j});
+        for (auto k = 0; k < right.shape().at(1); ++k) {
+          current_output += input_coefficient * left.at({k, i}) * right.at({j, k});
+        }
+        output.set({i, j}, current_output);
+      }
+    }
+  }
 };
 
 }  // namespace sacred
