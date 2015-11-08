@@ -160,6 +160,31 @@ cc_library(
   ],
 )
 
+cc_library(
+  name = 'rectifier_gradient',
+  srcs = [
+    'rectifier_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_test(
+  name = 'rectifier_gradient_test',
+  srcs = [
+    'rectifier_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':rectifier_gradient',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
 cc_test(
   name = 'rectifier_test',
   srcs = [
