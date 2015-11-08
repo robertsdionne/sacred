@@ -23,6 +23,7 @@ public:
   void operator ()(const tensor_type &x, tensor_type &y) {
     using std::max;
     CHECK_EQ(x.order(), y.order());
+    // TODO(robertsdionne): Support arbitrary tensor order with an n-dimensional iterator.
     for (auto i = 0; i < x.shape().at(0); ++i) {
       for (auto j = 0; j < x.shape().at(1); ++j) {
         y.set({i, j}, max(F(0), x.at({i, j})));

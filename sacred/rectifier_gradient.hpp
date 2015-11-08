@@ -21,6 +21,7 @@ public:
 
   void operator ()(const tensor_type &delta, const tensor_type &x, tensor_type &x_gradient) {
     CHECK_EQ(x.order(), delta.order());
+    // TODO(robertsdionne): Support arbitrary tensor order with an n-dimensional iterator.
     for (auto i = 0; i < x.shape().at(0); ++i) {
       for (auto j = 0; j < x.shape().at(1); ++j) {
         x_gradient.set({i, j}, delta.at({i, j}) * (x.at({i, j}) > F(0)));
