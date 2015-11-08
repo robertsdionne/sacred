@@ -65,10 +65,13 @@ TEST(FullyConnected, Gradient) {
 
         op(input, output);
 
-        auto dx = target.at({0, 0}) - output.at({0, 0}),
-            dy = target.at({1, 0}) - output.at({1, 0}),
-            dz = target.at({2, 0}) - output.at({2, 0}),
-            loss = (dx * dx + dy * dy + dz * dz) / 2.0f;
+        auto loss = 0_ɛ;
+        for (auto u = 0; u < target.shape().at(0); ++u) {
+          for (auto v = 0; v < target.shape().at(1); ++v) {
+            auto delta = target.at({u, v}) - output.at({u, v});
+            loss += delta * delta / 2.0f;
+          }
+        }
 
         EXPECT_EQ(expected_parameter_gradient->at({i, j}), loss.dual);
 
