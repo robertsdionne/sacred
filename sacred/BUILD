@@ -149,6 +149,31 @@ cc_library(
 )
 
 cc_library(
+  name = 'rectifier',
+  srcs = [
+    'rectifier.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_test(
+  name = 'rectifier_test',
+  srcs = [
+    'rectifier_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':rectifier',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_library(
   name = 'recursive_filter',
   srcs = [
     'recursive_filter.hpp',
