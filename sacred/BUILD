@@ -62,6 +62,7 @@ cc_test(
   ],
   size = 'small',
   deps = [
+    ':dual',
     ':fully_connected',
     ':tensor',
     '//third_party:gtest',
