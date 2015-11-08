@@ -17,8 +17,8 @@ def main():
 
     for turn in conversation['turn']:
       for utterance in turn['utterance']:
-        words = map(lambda word: word if word in vocabulary else '(%s)' % word, utterance['words'].split())
-        utterance['words'] = ' '.join(words)
+        words = map(lambda word: word if word in vocabulary else '(%s)' % word, utterance['text'].split())
+        utterance['text'] = ' '.join(words)
 
     print(json.dumps(conversation))
 
