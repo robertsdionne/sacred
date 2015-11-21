@@ -144,8 +144,6 @@ TEST(Tensor, Initialize1D) {
   EXPECT_EQ(1, tensor[{3}]);
 
   EXPECT_DEATH(tensor.at({0, 0}), "index\\.size\\(\\)");
-
-  // EXPECT_EQ(Tensor<float>({3}, {1, 2, 3}), tensor.slice(_));
 }
 
 TEST(Tensor, Initialize2D) {
@@ -196,15 +194,7 @@ TEST(Tensor, Initialize2D) {
   EXPECT_EQ(3, (tensor[{2, 2}]));
   EXPECT_EQ(1, (tensor[{2, 3}]));
 
-  // EXPECT_DEATH(tensor.at({0}), "index\\.size\\(\\)");
   EXPECT_DEATH(tensor.at({0, 0, 0}), "index\\.size\\(\\)");
-
-  // EXPECT_EQ(Tensor<float>({2}, {1, 4}), tensor.slice(_, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {2, 5}), tensor.slice(_, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {3, 6}), tensor.slice(_, 2));
-  //
-  // EXPECT_EQ(Tensor<float>({3}, {1, 2, 3}), tensor.slice(0, _));
-  // EXPECT_EQ(Tensor<float>({3}, {4, 5, 6}), tensor.slice(1, _));
 }
 
 TEST(Tensor, Initialize3D) {
@@ -239,7 +229,6 @@ TEST(Tensor, Initialize3D) {
   EXPECT_DEATH(tensor.at({0, 2, 0}), "index\\.at\\(i\\).* <");
   EXPECT_DEATH(tensor.at({0, 0, 2}), "index\\.at\\(i\\).* <");
 
-  // EXPECT_DEATH(tensor.at(0, 0), "index\\.size\\(\\)");
   EXPECT_DEATH(tensor.at({0, 0, 0, 0}), "index\\.size\\(\\)");
 
   EXPECT_EQ(8, (tensor[{-1, -1, -1}]));
@@ -321,38 +310,21 @@ TEST(Tensor, Initialize3D) {
   EXPECT_EQ(1, (tensor[{2, 2, 0}]));
   EXPECT_EQ(2, (tensor[{2, 2, 1}]));
   EXPECT_EQ(1, (tensor[{2, 2, 2}]));
-
-  // EXPECT_EQ(Tensor<float>({2}, {1, 5}), tensor.slice(_, 0, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {2, 6}), tensor.slice(_, 0, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {3, 7}), tensor.slice(_, 1, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {4, 8}), tensor.slice(_, 1, 1));
-  //
-  // EXPECT_EQ(Tensor<float>({2}, {1, 3}), tensor.slice(0, _, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {2, 4}), tensor.slice(0, _, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {5, 7}), tensor.slice(1, _, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {6, 8}), tensor.slice(1, _, 1));
-  //
-  // EXPECT_EQ(Tensor<float>({2}, {1, 2}), tensor.slice(0, 0, _));
-  // EXPECT_EQ(Tensor<float>({2}, {3, 4}), tensor.slice(0, 1, _));
-  // EXPECT_EQ(Tensor<float>({2}, {5, 6}), tensor.slice(1, 0, _));
-  // EXPECT_EQ(Tensor<float>({2}, {7, 8}), tensor.slice(1, 1, _));
 }
 
 TEST(Tensor, Initialize4D) {
   auto tensor = Tensor<>({2, 2, 2, 2}, {
-    //{
       1, 2,
       3, 4,
 
       5, 6,
       7, 8,
-    //}, {
+
       9, 10,
       11, 12,
 
       13, 14,
       15, 16,
-    //}
   });
 
   EXPECT_EQ(4, tensor.number_of_axes());
@@ -389,7 +361,6 @@ TEST(Tensor, Initialize4D) {
   EXPECT_DEATH(tensor.at({0, 0, 2, 0}), "index\\.at\\(i\\).* <");
   EXPECT_DEATH(tensor.at({0, 0, 0, 2}), "index\\.at\\(i\\).* <");
 
-  // EXPECT_DEATH(tensor.at(0, 0, 0), "index\\.size\\(\\)");
   EXPECT_DEATH(tensor.at({0, 0, 0, 0, 0}), "index\\.size\\(\\)");
 
   EXPECT_EQ(16, (tensor[{-1, -1, -1, -1}]));
@@ -711,42 +682,6 @@ TEST(Tensor, Initialize4D) {
   EXPECT_EQ(1, (tensor[{2, 2, 2, 0}]));
   EXPECT_EQ(2, (tensor[{2, 2, 2, 1}]));
   EXPECT_EQ(1, (tensor[{2, 2, 2, 2}]));
-
-  // EXPECT_EQ(Tensor<float>({2}, {1, 9}), tensor.slice(_, 0, 0, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {2, 10}), tensor.slice(_, 0, 0, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {3, 11}), tensor.slice(_, 0, 1, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {4, 12}), tensor.slice(_, 0, 1, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {5, 13}), tensor.slice(_, 1, 0, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {6, 14}), tensor.slice(_, 1, 0, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {7, 15}), tensor.slice(_, 1, 1, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {8, 16}), tensor.slice(_, 1, 1, 1));
-  //
-  // EXPECT_EQ(Tensor<float>({2}, {1, 5}), tensor.slice(0, _, 0, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {2, 6}), tensor.slice(0, _, 0, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {3, 7}), tensor.slice(0, _, 1, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {4, 8}), tensor.slice(0, _, 1, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {9, 13}), tensor.slice(1, _, 0, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {10, 14}), tensor.slice(1, _, 0, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {11, 15}), tensor.slice(1, _, 1, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {12, 16}), tensor.slice(1, _, 1, 1));
-  //
-  // EXPECT_EQ(Tensor<float>({2}, {1, 3}), tensor.slice(0, 0, _, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {2, 4}), tensor.slice(0, 0, _, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {5, 7}), tensor.slice(0, 1, _, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {6, 8}), tensor.slice(0, 1, _, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {9, 11}), tensor.slice(1, 0, _, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {10, 12}), tensor.slice(1, 0, _, 1));
-  // EXPECT_EQ(Tensor<float>({2}, {13, 15}), tensor.slice(1, 1, _, 0));
-  // EXPECT_EQ(Tensor<float>({2}, {14, 16}), tensor.slice(1, 1, _, 1));
-  //
-  // EXPECT_EQ(Tensor<float>({2}, {1, 2}), tensor.slice(0, 0, 0, _));
-  // EXPECT_EQ(Tensor<float>({2}, {3, 4}), tensor.slice(0, 0, 1, _));
-  // EXPECT_EQ(Tensor<float>({2}, {5, 6}), tensor.slice(0, 1, 0, _));
-  // EXPECT_EQ(Tensor<float>({2}, {7, 8}), tensor.slice(0, 1, 1, _));
-  // EXPECT_EQ(Tensor<float>({2}, {9, 10}), tensor.slice(1, 0, 0, _));
-  // EXPECT_EQ(Tensor<float>({2}, {11, 12}), tensor.slice(1, 0, 1, _));
-  // EXPECT_EQ(Tensor<float>({2}, {13, 14}), tensor.slice(1, 1, 0, _));
-  // EXPECT_EQ(Tensor<float>({2}, {15, 16}), tensor.slice(1, 1, 1, _));
 }
 
 }  // namespace sacred
