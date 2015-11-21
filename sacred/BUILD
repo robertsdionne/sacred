@@ -76,16 +76,6 @@ cc_library(
   ],
 )
 
-# cc_library(
-#   name = 'lookup_table',
-#   srcs = [
-#     'lookup_table.hpp'
-#   ],
-#   deps = [
-#     ':blob',
-#   ],
-# )
-
 cc_library(
   name = 'math',
   srcs = [
@@ -97,43 +87,6 @@ cc_library(
     '//external:googlelog',
     '//sacred/indexing:identity_index',
     '//sacred/indexing:masked_lookup',
-  ],
-)
-
-# cc_library(
-#   name = 'memory_mapped_lookup_table',
-#   srcs = [
-#     'memory_mapped_lookup_table.hpp',
-#   ],
-#   deps = [
-#     ':blob',
-#     ':lookup_table',
-#   ],
-# )
-
-cc_library(
-  name = 'nonrecursive_filter',
-  srcs = [
-    'nonrecursive_filter.hpp',
-  ],
-  deps = [
-    ':default_types',
-    ':math',
-    ':operator',
-    ':tensor',
-  ],
-)
-
-cc_library(
-  name = 'nonrecursive_filter_gradient',
-  srcs = [
-    'nonrecursive_filter_gradient.hpp',
-  ],
-  deps = [
-    ':default_types',
-    ':math',
-    ':operator',
-    ':tensor',
   ],
 )
 
@@ -195,32 +148,6 @@ cc_test(
     ':rectifier',
     ':tensor',
     '//third_party:gtest',
-  ],
-)
-
-cc_library(
-  name = 'recursive_filter',
-  srcs = [
-    'recursive_filter.hpp',
-  ],
-  deps = [
-    ':default_types',
-    ':math',
-    ':operator',
-    ':tensor',
-  ],
-)
-
-cc_library(
-  name = 'recursive_filter_gradient',
-  srcs = [
-    'recursive_filter_gradient.hpp',
-  ],
-  deps = [
-    ':default_types',
-    ':math',
-    ':operator',
-    ':tensor',
   ],
 )
 
@@ -296,91 +223,6 @@ cc_test(
 )
 
 cc_test(
-  name = 'nonrecursive_filter_gradient_test',
-  srcs = [
-    'nonrecursive_filter_gradient_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    ':dual',
-    ':nonrecursive_filter_gradient',
-    ':tensor',
-    '//third_party:gtest',
-  ],
-)
-
-cc_test(
-  name = 'nonrecursive_filter_test',
-  srcs = [
-    'nonrecursive_filter_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    ':nonrecursive_filter',
-    ':tensor',
-    '//third_party:gtest',
-  ],
-)
-
-# cc_test(
-#   name = 'reconv_test',
-#   srcs = [
-#     'reconv_test.cpp',
-#   ],
-#   size = 'small',
-#   deps = [
-#     ':array',
-#     ':dual',
-#     ':math',
-#     '//third_party:gtest',
-#   ],
-# )
-
-# cc_test(
-#   name = 'recursive_filter_gradient_test',
-#   srcs = [
-#     'recursive_filter_gradient_test.cpp',
-#   ],
-#   size = 'small',
-#   deps = [
-#     ':dual',
-#     ':recursive_filter_gradient',
-#     ':tensor',
-#     '//third_party:gtest',
-#   ],
-# )
-
-cc_test(
-  name = 'recursive_filter_test',
-  srcs = [
-    'recursive_filter_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    ':recursive_filter',
-    ':tensor',
-    '//third_party:gtest',
-  ],
-)
-
-# cc_test(
-#   name = 'stacked_test',
-#   srcs = [
-#     'stacked_test.cpp',
-#   ],
-#   size = 'small',
-#   deps = [
-#     ':array',
-#     ':blob',
-#     ':dual',
-#     ':nonrecursive_filter',
-#     ':nonrecursive_filter_gradient',
-#     ':recursive_filter_layer',
-#     '//third_party:gtest',
-#   ],
-# )
-
-cc_test(
   name = 'tensor_test',
   srcs = [
     'tensor_test.cpp',
@@ -404,13 +246,3 @@ cc_test(
     '//third_party:gtest',
   ],
 )
-
-# cc_binary(
-#   name = 'sacred',
-#   srcs = [
-#     'sacred.cpp',
-#   ],
-#   deps = [
-#     '//external:googleflags',
-#   ],
-# )
