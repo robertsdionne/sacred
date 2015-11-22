@@ -6,7 +6,6 @@
 #include "default_types.hpp"
 #include "math.hpp"
 #include "operator.hpp"
-#include "testing.hpp"
 
 namespace sacred {
 

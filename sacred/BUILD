@@ -25,7 +25,6 @@ cc_library(
     ':default_types',
     ':math',
     ':operator',
-    ':testing',
     '//external:googlelog',
   ],
 )
