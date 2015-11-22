@@ -19,6 +19,7 @@ cc_test(
   srcs = [
     'convolution_test.cpp',
   ],
+  size = 'small',
   deps = [
     ':convolution',
     ':tensor',
