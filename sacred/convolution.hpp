@@ -26,12 +26,10 @@ public:
       for (auto j = 0; j < y.shape().at(1); ++j) {
         for (auto s = 0; s < filter_.shape().at(0); ++s) {
           for (auto t = 0; t < filter_.shape().at(1); ++t) {
-            auto is = i + s;
-            auto jt = j + t;
             for (auto u = 0; u < y.shape().at(2); ++u) {
               F output_value = F(1) * y.at({i, j, u});
               for (auto v = 0; v < filter_.shape().at(3); ++v) {
-                output_value += F(1) * filter_.at({s, t, u, v}) * x.at({is, jt, v});
+                output_value += F(1) * filter_.at({s, t, u, v}) * x.at({i + s, j + t, v});
               }
               y.set({i, j, u}, output_value);
             }
