@@ -3,6 +3,30 @@ package(
 )
 
 cc_library(
+  name = 'convolution',
+  srcs = [
+    'convolution.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':math',
+    ':operator',
+  ],
+)
+
+cc_test(
+  name = 'convolution_test',
+  srcs = [
+    'convolution_test.cpp',
+  ],
+  deps = [
+    ':convolution',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_library(
   name = 'default_types',
   srcs = [
     'default_types.hpp',
