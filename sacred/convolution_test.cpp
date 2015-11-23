@@ -55,10 +55,7 @@ TEST(Convolution, Run) {
   });
 
   auto op = Convolution<>(bias, filter);
-  auto output = Tensor<>({2, 2, 3}, {
-    0, 0, 0,  0, 0, 0,
-    0, 0, 0,  0, 0, 0,
-  });
+  auto output = Tensor<>({2, 2, 3});
 
   op(input, output);
 

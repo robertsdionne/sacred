@@ -7,18 +7,14 @@ namespace sacred {
 
 TEST(FullyConnectedGradient, Run) {
   auto input = Tensor<>({4, 1}, {1, 2, 3, 4});
-  auto input_gradient = Tensor<>({4, 1}, {0, 0, 0, 0});
-  auto bias_gradient = Tensor<>({3, 1}, {0, 0, 0});
+  auto input_gradient = Tensor<>({4, 1});
+  auto bias_gradient = Tensor<>({3, 1});
   auto weight = Tensor<>({3, 4}, {
     1, 2, 3, 4,
     5, 6, 7, 8,
     9, 10, 11, 12,
   });
-  auto weight_gradient = Tensor<>({3, 4}, {
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-  });
+  auto weight_gradient = Tensor<>({3, 4});
   auto op = FullyConnectedGradient<>(bias_gradient, weight, weight_gradient);
   auto output_gradient = Tensor<>({3, 1}, {1, 2, 3});
 
