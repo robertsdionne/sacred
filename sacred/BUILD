@@ -14,6 +14,29 @@ cc_library(
   ],
 )
 
+cc_library(
+  name = 'convolution_gradient',
+  srcs = [
+    'convolution_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+  ],
+)
+
+cc_test(
+  name = 'convolution_gradient_test',
+  srcs = [
+    'convolution_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
 cc_test(
   name = 'convolution_test',
   srcs = [
