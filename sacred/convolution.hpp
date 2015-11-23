@@ -54,7 +54,7 @@ public:
   }
 
 private:
-  tensor_type &bias_, filter_;
+  tensor_type &bias_, &filter_;
   Math<F> math_;
 };
 

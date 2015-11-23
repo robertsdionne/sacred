@@ -22,6 +22,7 @@ cc_test(
   size = 'small',
   deps = [
     ':convolution',
+    ':dual',
     ':tensor',
     '//third_party:gtest',
   ],
