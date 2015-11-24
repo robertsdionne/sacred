@@ -47,7 +47,7 @@ public:
   Tensor(const index_type &shape, const storage_type &data):
       shape_(shape), stride_(indexing::strides::CStyle(shape)), data_(data) {}
 
-  ~Tensor() = default;
+  virtual ~Tensor() = default;
 
   virtual operator F() const override {
     CHECK(1 == ProductOf(shape_));

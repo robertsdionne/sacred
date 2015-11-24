@@ -112,6 +112,7 @@ cc_test(
   deps = [
     ':dual',
     ':fully_connected',
+    ':gradients',
     ':tensor',
     '//third_party:gtest',
   ],
@@ -121,6 +122,17 @@ cc_library(
   name = 'functional',
   srcs = [
     'functional.hpp',
+  ],
+)
+
+cc_library(
+  name = 'gradients',
+  srcs = [
+    'gradients.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':dual',
   ],
 )
 

@@ -4,6 +4,7 @@
 
 #include "dual.hpp"
 #include "fully_connected.hpp"
+#include "gradients.hpp"
 #include "tensor.hpp"
 
 namespace sacred {
@@ -41,34 +42,15 @@ TEST(FullyConnected, Gradient) {
   auto bias_gradient = Tensor<>({3, 1});
   auto weight_gradient = Tensor<>({3, 4});
 
-  for (auto pair : {
+  TestGradients<FullyConnected<Dual>>({
     make_pair(&input, &input_gradient),
     make_pair(&bias, &bias_gradient),
     make_pair(&weight, &weight_gradient),
-  }) {
-    Tensor<Dual> *parameter;
-    Tensor<> *parameter_gradient;
-    tie(parameter, parameter_gradient) = pair;
-
-    for (auto i = 0; i < parameter->size(); ++i) {
-      auto output = Tensor<Dual>({3, 1}, {0, 0, 0});
-      auto op = FullyConnected<Dual>(bias, weight);
-
-      parameter->data(i) += 1_ɛ;
-
-      op(input, output);
-
-      auto loss = 0_ɛ;
-      for (auto j = 0; j < target.size(); ++j) {
-        auto delta = target.data(j) - output.data(j);
-        loss += delta * delta / 2.0f;
-      }
-
-      parameter_gradient->data(i) = loss.dual;
-
-      parameter->data(i).dual = 0;
-    }
-  }
+  }, [] () {
+    return new Tensor<Dual>({3, 1}, {0, 0, 0});
+  }, [&bias, &weight] () {
+    return new FullyConnected<Dual>(bias, weight);
+  }, input, target);
 
   EXPECT_EQ(Tensor<>({4, 1}, {38, 44, 50, 56}), input_gradient);
   EXPECT_EQ(Tensor<>({3, 1}, {1, 2, 3}), bias_gradient);
