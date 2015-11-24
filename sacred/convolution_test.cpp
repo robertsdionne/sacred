@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <tuple>
 #include <utility>
 
 #include "convolution.hpp"
@@ -68,7 +67,6 @@ TEST(Convolution, Run) {
 
 TEST(Convolution, Gradient) {
   using std::make_pair;
-  using std::tie;
 
   auto input = Tensor<Dual>({4, 4, 4}, {
     1, 2, 3, 4,  2, 3, 4, 5,  3, 4, 5, 6,  4, 5, 6, 7,

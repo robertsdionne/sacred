@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <tuple>
 #include <utility>
 
 #include "dual.hpp"
@@ -27,7 +26,6 @@ TEST(FullyConnected, Run) {
 
 TEST(FullyConnected, Gradient) {
   using std::make_pair;
-  using std::tie;
 
   auto input = Tensor<Dual>({4, 1}, {1, 2, 3, 4});
   auto bias = Tensor<Dual>({3, 1}, {1, 2, 3});
