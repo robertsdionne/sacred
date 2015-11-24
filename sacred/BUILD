@@ -46,6 +46,7 @@ cc_test(
   deps = [
     ':convolution',
     ':dual',
+    ':gradients',
     ':tensor',
     '//third_party:gtest',
   ],

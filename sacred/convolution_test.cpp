@@ -4,6 +4,7 @@
 
 #include "convolution.hpp"
 #include "dual.hpp"
+#include "gradients.hpp"
 #include "tensor.hpp"
 
 namespace sacred {
@@ -122,34 +123,15 @@ TEST(Convolution, Gradient) {
   auto bias_gradient = Tensor<>({3}, {0, 0, 0});
   auto filter_gradient = Tensor<>({3, 3, 3, 4});
 
-  for (auto pair : {
+  TestGradients<Convolution<Dual>>({
     make_pair(&input, &input_gradient),
     make_pair(&bias, &bias_gradient),
     make_pair(&filter, &filter_gradient),
-  }) {
-    Tensor<Dual> *parameter;
-    Tensor<> *parameter_gradient;
-    tie(parameter, parameter_gradient) = pair;
-
-    for (auto i = 0; i < parameter->size(); ++i) {
-      auto output = Tensor<Dual>({2, 2, 3});
-      auto op = Convolution<Dual>(bias, filter);
-
-      parameter->data(i) += 1_ɛ;
-
-      op(input, output);
-
-      auto loss = 0_ɛ;
-      for (auto j = 0; j < target.size(); ++j) {
-        auto delta = target.data(j) - output.data(j);
-        loss += delta * delta / 2.0f;
-      }
-
-      parameter_gradient->data(i) = loss.dual;
-
-      parameter->data(i).dual = 0;
-    }
-  }
+  }, [] () {
+    return new Tensor<Dual>({2, 2, 3});
+  }, [&bias, &filter] () {
+    return new Convolution<Dual>(bias, filter);
+  }, input, target);
 
   EXPECT_EQ(Tensor<>({4, 4, 4}, {
     14, 20, 26, 32,   52, 73, 94, 115,     73, 94, 115, 136,    62, 77, 92, 107,
