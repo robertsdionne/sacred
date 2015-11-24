@@ -7,6 +7,7 @@
 
 #include "default_types.hpp"
 #include "dual.hpp"
+#include "tensor.hpp"
 
 namespace sacred {
 

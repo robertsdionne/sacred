@@ -134,6 +134,7 @@ cc_library(
   deps = [
     ':default_types',
     ':dual',
+    ':tensor',
   ],
 )
 
@@ -206,6 +207,7 @@ cc_test(
   ],
   size = 'small',
   deps = [
+    ':gradients',
     ':rectifier',
     ':tensor',
     '//third_party:gtest',
