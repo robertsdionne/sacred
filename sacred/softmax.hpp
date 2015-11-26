@@ -17,9 +17,7 @@ using std::numeric_limits;
 template <typename F = default_floating_point_type>
 class Softmax : public Operator<F> {
 public:
-  using tensor_type = typename default_tensor_type<F>::value;
-  using tensors_type = typename default_tensors_type<F>::value;
-  using tensors_const_type = typename default_tensors_const_type<F>::value;
+  USING_TENSOR_TYPES();
 
   Softmax() = default;
 
@@ -27,12 +25,12 @@ public:
 
   void operator ()(const tensor_type &x, tensor_type &y) {
     auto maximum = max_element(x.data().begin(), x.data().end());
-    auto sum = numeric_limits<F>::epsilon();
+    auto sum = F(1.19209e-07);
     for (auto i = 0; i < x.size(); ++i) {
       sum += exp(x.data(i) - *maximum);
     }
     for (auto i = 0; i < x.size(); ++i) {
-      y.data(i) = exp(x.data(i) - *maximum + numeric_limits<F>::epsilon()) / sum;
+      y.data(i) = exp(x.data(i) - *maximum + F(1.19209e-07)) / sum;
     }
   }
 

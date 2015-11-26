@@ -232,7 +232,32 @@ cc_library(
     'softmax.hpp',
   ],
   deps = [
+    ':default_types',
     ':operator',
+  ],
+)
+
+cc_library(
+  name = 'softmax_gradient',
+  srcs = [
+    'softmax_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+  ],
+)
+
+cc_test(
+  name = 'softmax_gradient_test',
+  srcs = [
+    'softmax_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':softmax_gradient',
+    ':tensor',
+    '//third_party:gtest',
   ],
 )
 

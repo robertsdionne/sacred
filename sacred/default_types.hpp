@@ -7,6 +7,11 @@ namespace sacred {
 
 using std::vector;
 
+#define USING_TENSOR_TYPES() \
+  using tensor_type = typename default_tensor_type<F>::value; \
+  using tensors_type = typename default_tensors_type<F>::value; \
+  using tensors_const_type = typename default_tensors_const_type<F>::value;
+
 using default_floating_point_type = float;
 using default_integer_type = int;
 
