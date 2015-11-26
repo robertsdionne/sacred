@@ -66,6 +66,18 @@ cc_library(
   ],
 )
 
+cc_test(
+  name = 'dual_test',
+  srcs = [
+    'dual_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':dual',
+    '//third_party:gtest',
+  ],
+)
+
 cc_library(
   name = 'fully_connected',
   srcs = [
@@ -209,6 +221,31 @@ cc_test(
   deps = [
     ':gradients',
     ':rectifier',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_library(
+  name = 'softmax',
+  srcs = [
+    'softmax.hpp',
+  ],
+  deps = [
+    ':operator',
+  ],
+)
+
+cc_test(
+  name = 'softmax_test',
+  srcs = [
+    'softmax_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':dual',
+    ':gradients',
+    ':softmax',
     ':tensor',
     '//third_party:gtest',
   ],

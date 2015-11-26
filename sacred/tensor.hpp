@@ -103,6 +103,14 @@ public:
     return Lookup().Lookup(data_, data_.size(), shape_, stride_, transformed_index);
   }
 
+  storage_type &data() {
+    return data_;
+  }
+
+  const storage_type &data() const {
+    return data_;
+  }
+
   F &data(const I index) {
     return data_.at(index);
   }
