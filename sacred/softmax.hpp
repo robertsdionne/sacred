@@ -17,7 +17,7 @@ using std::numeric_limits;
 template <typename F = default_floating_point_type>
 class Softmax : public Operator<F> {
 public:
-  USING_TENSOR_TYPES();
+  USING_TENSOR_TYPES(F);
 
   Softmax() = default;
 

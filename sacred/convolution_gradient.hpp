@@ -9,9 +9,7 @@ namespace sacred {
 template <typename F = default_floating_point_type>
 class ConvolutionGradient : public Operator<F> {
 public:
-  using tensor_type = typename default_tensor_type<F>::value;
-  using tensors_type = typename default_tensors_type<F>::value;
-  using tensors_const_type = typename default_tensors_const_type<F>::value;
+  USING_TENSOR_TYPES(F);
 
   ConvolutionGradient(tensor_type &bias_gradient, tensor_type &filter, tensor_type &filter_gradient):
       bias_gradient_(bias_gradient), filter_(filter), filter_gradient_(filter_gradient) {}

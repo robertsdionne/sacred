@@ -9,7 +9,7 @@ namespace sacred {
 template <typename F = default_floating_point_type>
 class SoftmaxGradient : public Operator<F> {
 public:
-  USING_TENSOR_TYPES();
+  USING_TENSOR_TYPES(F);
 
   SoftmaxGradient() = default;
 
