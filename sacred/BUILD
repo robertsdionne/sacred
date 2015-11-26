@@ -57,6 +57,9 @@ cc_library(
   srcs = [
     'default_types.hpp',
   ],
+  deps = [
+    ':dual',
+  ],
 )
 
 cc_library(

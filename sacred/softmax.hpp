@@ -3,7 +3,6 @@
 
 #include <algorithm>
 #include <cmath>
-#include <limits>
 
 #include "default_types.hpp"
 #include "operator.hpp"
@@ -12,7 +11,6 @@ namespace sacred {
 
 using std::exp;
 using std::max_element;
-using std::numeric_limits;
 
 template <typename F = default_floating_point_type>
 class Softmax : public Operator<F> {
@@ -25,12 +23,12 @@ public:
 
   void operator ()(const tensor_type &x, tensor_type &y) {
     auto maximum = max_element(x.data().begin(), x.data().end());
-    auto sum = F(1.19209e-07);
+    auto sum = epsilon<F>::value;
     for (auto i = 0; i < x.size(); ++i) {
       sum += exp(x.data(i) - *maximum);
     }
     for (auto i = 0; i < x.size(); ++i) {
-      y.data(i) = exp(x.data(i) - *maximum + F(1.19209e-07)) / sum;
+      y.data(i) = exp(x.data(i) - *maximum + epsilon<F>::value) / sum;
     }
   }
 
