@@ -288,6 +288,59 @@ cc_test(
 )
 
 cc_library(
+  name = 'smooth_exponential_linear',
+  srcs = [
+    'smooth_exponential_linear.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_library(
+  name = 'smooth_exponential_linear_gradient',
+  srcs = [
+    'smooth_exponential_linear_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_test(
+  name = 'smooth_exponential_linear_gradient_test',
+  srcs = [
+    'smooth_exponential_linear_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':dual',
+    ':gradients',
+    ':smooth_exponential_linear',
+    ':smooth_exponential_linear_gradient',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
+  name = 'smooth_exponential_linear_test',
+  srcs = [
+    'smooth_exponential_linear_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':smooth_exponential_linear',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_library(
   name = 'softmax',
   srcs = [
     'softmax.hpp',
