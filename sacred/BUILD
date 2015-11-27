@@ -163,6 +163,9 @@ cc_test(
   ],
   size = 'small',
   deps = [
+    ':dual',
+    ':gradients',
+    ':fully_connected',
     ':fully_connected_gradient',
     ':tensor',
     '//third_party:gtest',
@@ -176,9 +179,7 @@ cc_test(
   ],
   size = 'small',
   deps = [
-    ':dual',
     ':fully_connected',
-    ':gradients',
     ':tensor',
     '//third_party:gtest',
   ],

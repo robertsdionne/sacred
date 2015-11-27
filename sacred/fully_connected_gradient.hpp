@@ -1,5 +1,5 @@
-#ifndef SACRED_FULLY_CONNECTED_HPP_
-#define SACRED_FULLY_CONNECTED_HPP_
+#ifndef SACRED_FULLY_CONNECTED_GRADIENT_HPP_
+#define SACRED_FULLY_CONNECTED_GRADIENT_HPP_
 
 #include "default_types.hpp"
 #include "math.hpp"
@@ -39,4 +39,4 @@ private:
 
 }  // namespace sacred
 
-#endif  // SACRED_FULLY_CONNECTED_HPP_
+#endif  // SACRED_FULLY_CONNECTED_GRADIENT_HPP_
