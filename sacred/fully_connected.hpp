@@ -6,16 +6,13 @@
 #include "default_types.hpp"
 #include "math.hpp"
 #include "operator.hpp"
-#include "testing.hpp"
 
 namespace sacred {
 
 template <typename F = default_floating_point_type>
 class FullyConnected : public Operator<F> {
 public:
-  using tensor_type = typename default_tensor_type<F>::value;
-  using tensors_type = typename default_tensors_type<F>::value;
-  using tensors_const_type = typename default_tensors_const_type<F>::value;
+  USING_TENSOR_TYPES(F);
 
   FullyConnected(tensor_type &bias, tensor_type &weight) : bias_(bias), weight_(weight) {}
 

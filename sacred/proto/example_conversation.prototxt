@@ -3,7 +3,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "or maybe i could do that"
+    text: "or maybe i could do that"
   }
 }
 turn {
@@ -11,7 +11,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "kk"
+    text: "kk"
   }
 }
 turn {
@@ -19,10 +19,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "um, yeah."
+    text: "um, yeah."
   }
   utterance {
-    words: "check from localhost"
+    text: "check from localhost"
   }
 }
 turn {
@@ -30,7 +30,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "i can connect fine using localhost"
+    text: "i can connect fine using localhost"
   }
 }
 turn {
@@ -38,10 +38,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "then it\'s your router"
+    text: "then it\'s your router"
   }
   utterance {
-    words: "what address are you listening on?"
+    text: "what address are you listening on?"
   }
 }
 turn {
@@ -49,7 +49,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "launching now"
+    text: "launching now"
   }
 }
 turn {
@@ -57,7 +57,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "gogogogo"
+    text: "gogogogo"
   }
 }
 turn {
@@ -65,10 +65,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "bootedup, canyouseeme cant see me"
+    text: "bootedup, canyouseeme cant see me"
   }
   utterance {
-    words: "should i possibly post my netstat -ltn?"
+    text: "should i possibly post my netstat -ltn?"
   }
 }
 turn {
@@ -76,10 +76,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "sure"
+    text: "sure"
   }
   utterance {
-    words: "i assume that the server\'s running on the same machine you\'re typing on right now?"
+    text: "i assume that the server\'s running on the same machine you\'re typing on right now?"
   }
 }
 turn {
@@ -87,13 +87,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "here is my netstat -ltn"
+    text: "here is my netstat -ltn"
   }
   utterance {
-    words: "http://paste.ubuntu.com/1072325/"
+    text: "http://paste.ubuntu.com/1072325/"
   }
   utterance {
-    words: "you see that paste?"
+    text: "you see that paste?"
   }
 }
 turn {
@@ -101,22 +101,22 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "yeah."
+    text: "yeah."
   }
   utterance {
-    words: "can we do an experiment?"
+    text: "can we do an experiment?"
   }
   utterance {
-    words: "just wanna make sure your ports are being fwded correctly"
+    text: "just wanna make sure your ports are being fwded correctly"
   }
   utterance {
-    words: "so on the minecraft machine, nc -l 0.0.0.0 10012"
+    text: "so on the minecraft machine, nc -l 0.0.0.0 10012"
   }
   utterance {
-    words: "don\'t sigterm it"
+    text: "don\'t sigterm it"
   }
   utterance {
-    words: "check your query window for a sec"
+    text: "check your query window for a sec"
   }
 }
 turn {
@@ -124,7 +124,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "how long is this ment to take exactly?"
+    text: "how long is this ment to take exactly?"
   }
 }
 turn {
@@ -132,10 +132,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "open up another term, then: echo \"it works\" | nc <insert your minecraft server ip> 10012"
+    text: "open up another term, then: echo \"it works\" | nc <insert your minecraft server ip> 10012"
   }
   utterance {
-    words: "echo \"it works\" | nc <external ip> 10012"
+    text: "echo \"it works\" | nc <external ip> 10012"
   }
 }
 turn {
@@ -143,7 +143,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "done"
+    text: "done"
   }
 }
 turn {
@@ -151,13 +151,13 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "works?"
+    text: "works?"
   }
   utterance {
-    words: "check the window that had \"nc -l 0.0.0.0 10012\""
+    text: "check the window that had \"nc -l 0.0.0.0 10012\""
   }
   utterance {
-    words: "seriously? not even an \"it works\"?"
+    text: "seriously? not even an \"it works\"?"
   }
 }
 turn {
@@ -165,7 +165,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "using my internal ip on the echo it works thing, it works fine"
+    text: "using my internal ip on the echo it works thing, it works fine"
   }
 }
 turn {
@@ -173,7 +173,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "yeah, then you have a forwarding issue, bro"
+    text: "yeah, then you have a forwarding issue, bro"
   }
 }
 turn {
@@ -181,10 +181,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "it shouldnt be that tho"
+    text: "it shouldnt be that tho"
   }
   utterance {
-    words: "all my other computers are fowarding fine"
+    text: "all my other computers are fowarding fine"
   }
 }
 turn {
@@ -192,7 +192,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "how do you know that?"
+    text: "how do you know that?"
   }
 }
 turn {
@@ -200,13 +200,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "ive tested them multiple times"
+    text: "ive tested them multiple times"
   }
   utterance {
-    words: "running servers on them"
+    text: "running servers on them"
   }
   utterance {
-    words: "they just dont have the capacity to run them, thats y i want this one to work"
+    text: "they just dont have the capacity to run them, thats y i want this one to work"
   }
 }
 turn {
@@ -214,7 +214,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "so they can\'t run minecraft, but you tested them by running minecraft?"
+    text: "so they can\'t run minecraft, but you tested them by running minecraft?"
   }
 }
 turn {
@@ -222,13 +222,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "do i need to have eth0 or eth1 enabled to make this work or anything"
+    text: "do i need to have eth0 or eth1 enabled to make this work or anything"
   }
   utterance {
-    words: "i ran a server on them, its jsut supppeeeeeeeeeeeerrrrrrrr laggy"
+    text: "i ran a server on them, its jsut supppeeeeeeeeeeeerrrrrrrr laggy"
   }
   utterance {
-    words: "and running the server ate all my ram, it ended up crashing my comp"
+    text: "and running the server ate all my ram, it ended up crashing my comp"
   }
 }
 turn {
@@ -236,7 +236,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "yeah, welcome to java"
+    text: "yeah, welcome to java"
   }
 }
 turn {
@@ -244,7 +244,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "i have one theory"
+    text: "i have one theory"
   }
 }
 turn {
@@ -252,7 +252,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "it\'s a forwrding issue; check your router"
+    text: "it\'s a forwrding issue; check your router"
   }
 }
 turn {
@@ -260,7 +260,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "i checked it"
+    text: "i checked it"
   }
 }
 turn {
@@ -268,7 +268,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "do any of the other comps run nix?"
+    text: "do any of the other comps run nix?"
   }
 }
 turn {
@@ -276,16 +276,16 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "should be fine"
+    text: "should be fine"
   }
   utterance {
-    words: "no they dont"
+    text: "no they dont"
   }
   utterance {
-    words: "windows Xp and 7"
+    text: "windows Xp and 7"
   }
   utterance {
-    words: "its very strange"
+    text: "its very strange"
   }
 }
 turn {
@@ -293,10 +293,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "it\'s not, it\'s quite obvious"
+    text: "it\'s not, it\'s quite obvious"
   }
   utterance {
-    words: "double check your forwarding"
+    text: "double check your forwarding"
   }
 }
 turn {
@@ -304,7 +304,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "i have, jsut now"
+    text: "i have, jsut now"
   }
 }
 turn {
@@ -312,7 +312,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "how?"
+    text: "how?"
   }
 }
 turn {
@@ -320,10 +320,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "192.168.2.1, gets me to router page, overlooked my port fowarding, checked my interla ip"
+    text: "192.168.2.1, gets me to router page, overlooked my port fowarding, checked my interla ip"
   }
   utterance {
-    words: "do i need eth1 or eth0 runnign or anything to get this working, my /etc/networking or whatever uses lo"
+    text: "do i need eth1 or eth0 runnign or anything to get this working, my /etc/networking or whatever uses lo"
   }
 }
 turn {
@@ -331,10 +331,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "wat"
+    text: "wat"
   }
   utterance {
-    words: "lo is loopback, you wouldn\'t even be able to touch it from another box on your lan if you only had lo"
+    text: "lo is loopback, you wouldn\'t even be able to touch it from another box on your lan if you only had lo"
   }
 }
 turn {
@@ -342,7 +342,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "is this my problem?"
+    text: "is this my problem?"
   }
 }
 turn {
@@ -350,7 +350,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "didn\'t you say that you are able to do the nc -l trick over lan?"
+    text: "didn\'t you say that you are able to do the nc -l trick over lan?"
   }
 }
 turn {
@@ -358,7 +358,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "i also get a thing when starting up saying waiting for network configurationg"
+    text: "i also get a thing when starting up saying waiting for network configurationg"
   }
 }
 turn {
@@ -366,7 +366,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "ok, pastebin ifconfig -a"
+    text: "ok, pastebin ifconfig -a"
   }
 }
 turn {
@@ -374,7 +374,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "k"
+    text: "k"
   }
 }
 turn {
@@ -382,7 +382,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "eth2 is up"
+    text: "eth2 is up"
   }
 }
 turn {
@@ -390,7 +390,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "so....?"
+    text: "so....?"
   }
 }
 turn {
@@ -398,7 +398,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "what\'re eth2 and eth0?"
+    text: "what\'re eth2 and eth0?"
   }
 }
 turn {
@@ -406,7 +406,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "what do you mean?"
+    text: "what do you mean?"
   }
 }
 turn {
@@ -414,7 +414,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "i mean that the nix kernel creates a new eth* entry for each physical interface; you\'ve got more than one interface, so i\'m guessing your network topology is a bit more complicated than usual"
+    text: "i mean that the nix kernel creates a new eth* entry for each physical interface; you\'ve got more than one interface, so i\'m guessing your network topology is a bit more complicated than usual"
   }
 }
 turn {
@@ -422,13 +422,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "really?"
+    text: "really?"
   }
   utterance {
-    words: "want me to describe my router?"
+    text: "want me to describe my router?"
   }
   utterance {
-    words: "router is connected to a thing called nettopia, or vise versa, and that is connected to the phone lines"
+    text: "router is connected to a thing called nettopia, or vise versa, and that is connected to the phone lines"
   }
 }
 turn {
@@ -436,10 +436,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "doh"
+    text: "doh"
   }
   utterance {
-    words: "what port do you use for mc?"
+    text: "what port do you use for mc?"
   }
 }
 turn {
@@ -447,13 +447,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "um....?"
+    text: "um....?"
   }
   utterance {
-    words: "25565"
+    text: "25565"
   }
   utterance {
-    words: "the default for mc"
+    text: "the default for mc"
   }
 }
 turn {
@@ -461,10 +461,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "ok, \"nc -l 0.0.0.0 25565\" on the"
+    text: "ok, \"nc -l 0.0.0.0 25565\" on the"
   }
   utterance {
-    words: "on the mc server box, then `echo \"it works\" | nc 68.164.80.221 25565\" ` some other box"
+    text: "on the mc server box, then `echo \"it works\" | nc 68.164.80.221 25565\" ` some other box"
   }
 }
 turn {
@@ -472,10 +472,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "could u?"
+    text: "could u?"
   }
   utterance {
-    words: "the nc -l 0.0.0.0 25565 is running"
+    text: "the nc -l 0.0.0.0 25565 is running"
   }
 }
 turn {
@@ -483,7 +483,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "try the echo | nc command with your internal ip"
+    text: "try the echo | nc command with your internal ip"
   }
 }
 turn {
@@ -491,7 +491,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "it works using internal ip on echo"
+    text: "it works using internal ip on echo"
   }
 }
 turn {
@@ -499,7 +499,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "btw, what ip does your router forward port 25565 to?"
+    text: "btw, what ip does your router forward port 25565 to?"
   }
 }
 turn {
@@ -507,7 +507,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "?"
+    text: "?"
   }
 }
 turn {
@@ -515,7 +515,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "i bet you\'ve got windoze setup on a static ip"
+    text: "i bet you\'ve got windoze setup on a static ip"
   }
 }
 turn {
@@ -523,10 +523,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "i dont have a static ip set on my ubuntu, i jsut want to test if it works, then im setting one"
+    text: "i dont have a static ip set on my ubuntu, i jsut want to test if it works, then im setting one"
   }
   utterance {
-    words: "im porting it to 192.168.2.7"
+    text: "im porting it to 192.168.2.7"
   }
 }
 turn {
@@ -534,10 +534,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "so my previous question stands"
+    text: "so my previous question stands"
   }
   utterance {
-    words: "btw, what ip does your router forward port 25565 to?"
+    text: "btw, what ip does your router forward port 25565 to?"
   }
 }
 turn {
@@ -545,7 +545,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "^^^"
+    text: "^^^"
   }
 }
 turn {
@@ -553,7 +553,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "can you double check that it works on windows? eg, don\'t touch the router; just reboot to windows, then set your new static to .2.7, then run mc"
+    text: "can you double check that it works on windows? eg, don\'t touch the router; just reboot to windows, then set your new static to .2.7, then run mc"
   }
 }
 turn {
@@ -561,10 +561,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "can i not run minecraft, but something else"
+    text: "can i not run minecraft, but something else"
   }
   utterance {
-    words: "using the same port"
+    text: "using the same port"
   }
 }
 turn {
@@ -572,7 +572,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "that\'s odd, why?"
+    text: "that\'s odd, why?"
   }
 }
 turn {
@@ -580,13 +580,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "not enough ram to run the server"
+    text: "not enough ram to run the server"
   }
   utterance {
-    words: "on my windows"
+    text: "on my windows"
   }
   utterance {
-    words: "u can connect to it by minecraft.. its a, um... griefing tool... :3"
+    text: "u can connect to it by minecraft.. its a, um... griefing tool... :3"
   }
 }
 turn {
@@ -594,7 +594,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "but you just said you tested mc on this very box...in windows"
+    text: "but you just said you tested mc on this very box...in windows"
   }
 }
 turn {
@@ -602,10 +602,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "i didnt say on this box"
+    text: "i didnt say on this box"
   }
   utterance {
-    words: "windows is not installed on this box"
+    text: "windows is not installed on this box"
   }
 }
 turn {
@@ -613,10 +613,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "mate, you got two variables then"
+    text: "mate, you got two variables then"
   }
   utterance {
-    words: "different box (eg different ip), and different os"
+    text: "different box (eg different ip), and different os"
   }
 }
 turn {
@@ -624,13 +624,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "the only thing different between them is the internal ip, which i adjust if im gonna host from there"
+    text: "the only thing different between them is the internal ip, which i adjust if im gonna host from there"
   }
   utterance {
-    words: "and the OS"
+    text: "and the OS"
   }
   utterance {
-    words: "should i still test?"
+    text: "should i still test?"
   }
 }
 turn {
@@ -638,7 +638,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "every test you\'ve just done for me demonstrates that it\'s a problem exterior to your \'buntu box"
+    text: "every test you\'ve just done for me demonstrates that it\'s a problem exterior to your \'buntu box"
   }
 }
 turn {
@@ -646,13 +646,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "but it only happens on a ubuntu os"
+    text: "but it only happens on a ubuntu os"
   }
   utterance {
-    words: "no"
+    text: "no"
   }
   utterance {
-    words: "when i had a different os on this box, it worked fine"
+    text: "when i had a different os on this box, it worked fine"
   }
 }
 turn {
@@ -660,7 +660,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "you knwo what?"
+    text: "you knwo what?"
   }
 }
 turn {
@@ -668,7 +668,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "its just not gonna work?"
+    text: "its just not gonna work?"
   }
 }
 turn {
@@ -676,7 +676,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "set another one of your boxes to .2.7, then run a server on them"
+    text: "set another one of your boxes to .2.7, then run a server on them"
   }
 }
 turn {
@@ -684,7 +684,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "they dont have enough ram"
+    text: "they dont have enough ram"
   }
 }
 turn {
@@ -692,7 +692,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "not sure how to help you then"
+    text: "not sure how to help you then"
   }
 }
 turn {
@@ -700,19 +700,19 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "thanks anyways"
+    text: "thanks anyways"
   }
   utterance {
-    words: "that may be my only option then"
+    text: "that may be my only option then"
   }
   utterance {
-    words: "its very strange"
+    text: "its very strange"
   }
   utterance {
-    words: "quick question"
+    text: "quick question"
   }
   utterance {
-    words: "whats the mininum amount of ram that is required to run ubuntu?"
+    text: "whats the mininum amount of ram that is required to run ubuntu?"
   }
 }
 turn {
@@ -720,28 +720,28 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "define \'run ubuntu\'"
+    text: "define \'run ubuntu\'"
   }
   utterance {
-    words: "heck, define your use case"
+    text: "heck, define your use case"
   }
   utterance {
-    words: "i can run my nix server on 30 mb of ram"
+    text: "i can run my nix server on 30 mb of ram"
   }
   utterance {
-    words: "wubi sounds graphical, so probably hundreds of megs of ram"
+    text: "wubi sounds graphical, so probably hundreds of megs of ram"
   }
   utterance {
-    words: "go with that one ^"
+    text: "go with that one ^"
   }
   utterance {
-    words: "although, i run icewm on my debian with 256 MB just fine"
+    text: "although, i run icewm on my debian with 256 MB just fine"
   }
   utterance {
-    words: "check your forwarding ;_;"
+    text: "check your forwarding ;_;"
   }
   utterance {
-    words: "or install windows on the mc box and check your forwarding from inside windows"
+    text: "or install windows on the mc box and check your forwarding from inside windows"
   }
 }
 turn {
@@ -749,13 +749,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "ill check my fowarding to the end of time"
+    text: "ill check my fowarding to the end of time"
   }
   utterance {
-    words: "its got no harddrive"
+    text: "its got no harddrive"
   }
   utterance {
-    words: "so no windowws"
+    text: "so no windowws"
   }
 }
 turn {
@@ -763,7 +763,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "you mean it\'s sitting in a dmz?"
+    text: "you mean it\'s sitting in a dmz?"
   }
 }
 turn {
@@ -771,7 +771,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "i enabled dmz for its internal ip, so it is outside the NAT firewall"
+    text: "i enabled dmz for its internal ip, so it is outside the NAT firewall"
   }
 }
 turn {
@@ -779,7 +779,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "and yet not one of its ports are accessible from the outside"
+    text: "and yet not one of its ports are accessible from the outside"
   }
 }
 turn {
@@ -787,10 +787,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "thats right"
+    text: "thats right"
   }
   utterance {
-    words: "is there anything that can be blocking incoming connections on ubuntu?"
+    text: "is there anything that can be blocking incoming connections on ubuntu?"
   }
 }
 turn {
@@ -798,10 +798,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "yet we already accessed your ports from an internal ip"
+    text: "yet we already accessed your ports from an internal ip"
   }
   utterance {
-    words: "so...problem can\'t be ubuntu, right?"
+    text: "so...problem can\'t be ubuntu, right?"
   }
 }
 turn {
@@ -809,10 +809,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "its wierd"
+    text: "its wierd"
   }
   utterance {
-    words: "check iptables?"
+    text: "check iptables?"
   }
 }
 turn {
@@ -820,7 +820,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "yeah, check iptab"
+    text: "yeah, check iptab"
   }
 }
 turn {
@@ -828,7 +828,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "command again please?"
+    text: "command again please?"
   }
 }
 turn {
@@ -836,10 +836,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "iptables -L as root"
+    text: "iptables -L as root"
   }
   utterance {
-    words: "you realize that i\'m \'bz\' and not \'dz\', right? that\'s pretty much a guarantee that i won\'t see your messages"
+    text: "you realize that i\'m \'bz\' and not \'dz\', right? that\'s pretty much a guarantee that i won\'t see your messages"
   }
 }
 turn {
@@ -847,13 +847,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "i know"
+    text: "i know"
   }
   utterance {
-    words: "it was a while up there"
+    text: "it was a while up there"
   }
   utterance {
-    words: "typo"
+    text: "typo"
   }
 }
 turn {
@@ -861,7 +861,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "iptables -F as root"
+    text: "iptables -F as root"
   }
 }
 turn {
@@ -869,10 +869,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "why?"
+    text: "why?"
   }
   utterance {
-    words: "starting server up.."
+    text: "starting server up.."
   }
 }
 turn {
@@ -880,7 +880,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "gogogogogo"
+    text: "gogogogogo"
   }
 }
 turn {
@@ -888,13 +888,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "comon.... please work"
+    text: "comon.... please work"
   }
   utterance {
-    words: "nope.avi no go"
+    text: "nope.avi no go"
   }
   utterance {
-    words: "WTF IS WRONG WITH THIS"
+    text: "WTF IS WRONG WITH THIS"
   }
 }
 turn {
@@ -902,7 +902,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "chill. try the nc -l diagnostic again"
+    text: "chill. try the nc -l diagnostic again"
   }
 }
 turn {
@@ -910,7 +910,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "what were the commands again"
+    text: "what were the commands again"
   }
 }
 turn {
@@ -918,10 +918,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "on the mc box: nc -l 0.0.0.0 25565"
+    text: "on the mc box: nc -l 0.0.0.0 25565"
   }
   utterance {
-    words: "on the non-mc box; echo \"it works\" | nc <external ip> 25565"
+    text: "on the non-mc box; echo \"it works\" | nc <external ip> 25565"
   }
 }
 turn {
@@ -929,13 +929,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "good new is, it recognizes that it is running on 25565 :2"
+    text: "good new is, it recognizes that it is running on 25565 :2"
   }
   utterance {
-    words: "does it have to be on a different box"
+    text: "does it have to be on a different box"
   }
   utterance {
-    words: "or can i use the same box, for i only have one ubuntu box"
+    text: "or can i use the same box, for i only have one ubuntu box"
   }
 }
 turn {
@@ -943,10 +943,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "could be the same box"
+    text: "could be the same box"
   }
   utterance {
-    words: "obviously a different vt"
+    text: "obviously a different vt"
   }
 }
 turn {
@@ -954,7 +954,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "vt?"
+    text: "vt?"
   }
 }
 turn {
@@ -962,7 +962,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "virtual terminal. gnome-term xterm kterm kate xfceterm rxvt urxvt"
+    text: "virtual terminal. gnome-term xterm kterm kate xfceterm rxvt urxvt"
   }
 }
 turn {
@@ -970,10 +970,10 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "can i use a different tab?"
+    text: "can i use a different tab?"
   }
   utterance {
-    words: "would that work fine"
+    text: "would that work fine"
   }
 }
 turn {
@@ -981,7 +981,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "ouash"
+    text: "ouash"
   }
 }
 turn {
@@ -989,7 +989,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "okay, command again please"
+    text: "okay, command again please"
   }
 }
 turn {
@@ -997,10 +997,10 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "nc -l 0.0.0.0 25535"
+    text: "nc -l 0.0.0.0 25535"
   }
   utterance {
-    words: "echo \"it works\" | nc 68.164.80.221 25565"
+    text: "echo \"it works\" | nc 68.164.80.221 25565"
   }
 }
 turn {
@@ -1008,7 +1008,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "trying"
+    text: "trying"
   }
 }
 turn {
@@ -1016,7 +1016,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "might wanna dial-down on slapping that enter key for escott\'s sake"
+    text: "might wanna dial-down on slapping that enter key for escott\'s sake"
   }
 }
 turn {
@@ -1024,13 +1024,13 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "nothing"
+    text: "nothing"
   }
   utterance {
-    words: "it didnt work"
+    text: "it didnt work"
   }
   utterance {
-    words: "the echo didnt work, i suspect it times out, for i can enter a new command now"
+    text: "the echo didnt work, i suspect it times out, for i can enter a new command now"
   }
 }
 turn {
@@ -1038,7 +1038,7 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "uh, does the other window say \'it works\'?"
+    text: "uh, does the other window say \'it works\'?"
   }
 }
 turn {
@@ -1046,7 +1046,7 @@ turn {
     name: "icecube45"
   }
   utterance {
-    words: "nope"
+    text: "nope"
   }
 }
 turn {
@@ -1054,37 +1054,36 @@ turn {
     name: "bz"
   }
   utterance {
-    words: "nice"
+    text: "nice"
   }
   utterance {
-    words: "i\'m out of ideas"
+    text: "i\'m out of ideas"
   }
   utterance {
-    words: "i play quake 3 :p"
+    text: "i play quake 3 :p"
   }
   utterance {
-    words: "go aehad"
+    text: "go aehad"
   }
   utterance {
-    words: "what changed?"
+    text: "what changed?"
   }
   utterance {
-    words: "no, i mean what have you changed with the new system? did you update, upgrade, delete, modify somethin?"
+    text: "no, i mean what have you changed with the new system? did you update, upgrade, delete, modify somethin?"
   }
   utterance {
-    words: "hm, ifconfig -a?"
+    text: "hm, ifconfig -a?"
   }
   utterance {
-    words: "no need, just read off the device names"
+    text: "no need, just read off the device names"
   }
   utterance {
-    words: "eth0, eth2, ham0, and lo, right?"
+    text: "eth0, eth2, ham0, and lo, right?"
   }
   utterance {
-    words: "so, as root, \"dhclient eth2\""
+    text: "so, as root, \"dhclient eth2\""
   }
   utterance {
-    words: "dhclient eth2"
+    text: "dhclient eth2"
   }
 }
-

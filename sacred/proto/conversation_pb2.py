@@ -17,7 +17,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='sacred/proto/conversation.proto',
   package='sacred.proto',
   syntax='proto3',
-  serialized_pb=b'\n\x1fsacred/proto/conversation.proto\x12\x0csacred.proto\"#\n\x07Speaker\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\"$\n\x04Word\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08spelling\x18\x02 \x01(\t\"<\n\tUtterance\x12 \n\x04word\x18\x01 \x03(\x0b\x32\x12.sacred.proto.Word\x12\r\n\x05words\x18\x02 \x01(\t\"Z\n\x04Turn\x12&\n\x07speaker\x18\x01 \x01(\x0b\x32\x15.sacred.proto.Speaker\x12*\n\tutterance\x18\x02 \x03(\x0b\x32\x17.sacred.proto.Utterance\"0\n\x0c\x43onversation\x12 \n\x04turn\x18\x01 \x03(\x0b\x32\x12.sacred.proto.Turnb\x06proto3'
+  serialized_pb=b'\n\x1fsacred/proto/conversation.proto\x12\x0csacred.proto\"#\n\x07Speaker\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\"$\n\x04Word\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08spelling\x18\x02 \x01(\t\";\n\tUtterance\x12 \n\x04word\x18\x01 \x03(\x0b\x32\x12.sacred.proto.Word\x12\x0c\n\x04text\x18\x02 \x01(\t\"Z\n\x04Turn\x12&\n\x07speaker\x18\x01 \x01(\x0b\x32\x15.sacred.proto.Speaker\x12*\n\tutterance\x18\x02 \x03(\x0b\x32\x17.sacred.proto.Utterance\"0\n\x0c\x43onversation\x12 \n\x04turn\x18\x01 \x03(\x0b\x32\x12.sacred.proto.Turn\";\n\x07\x44\x61taSet\x12\x30\n\x0c\x63onversation\x18\x01 \x03(\x0b\x32\x1a.sacred.proto.Conversationb\x06proto3'
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -115,7 +115,7 @@ _UTTERANCE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='words', full_name='sacred.proto.Utterance.words', index=1,
+      name='text', full_name='sacred.proto.Utterance.text', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -134,7 +134,7 @@ _UTTERANCE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=124,
-  serialized_end=184,
+  serialized_end=183,
 )
 
 
@@ -171,8 +171,8 @@ _TURN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=186,
-  serialized_end=276,
+  serialized_start=185,
+  serialized_end=275,
 )
 
 
@@ -202,19 +202,52 @@ _CONVERSATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=278,
-  serialized_end=326,
+  serialized_start=277,
+  serialized_end=325,
+)
+
+
+_DATASET = _descriptor.Descriptor(
+  name='DataSet',
+  full_name='sacred.proto.DataSet',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='conversation', full_name='sacred.proto.DataSet.conversation', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=327,
+  serialized_end=386,
 )
 
 _UTTERANCE.fields_by_name['word'].message_type = _WORD
 _TURN.fields_by_name['speaker'].message_type = _SPEAKER
 _TURN.fields_by_name['utterance'].message_type = _UTTERANCE
 _CONVERSATION.fields_by_name['turn'].message_type = _TURN
+_DATASET.fields_by_name['conversation'].message_type = _CONVERSATION
 DESCRIPTOR.message_types_by_name['Speaker'] = _SPEAKER
 DESCRIPTOR.message_types_by_name['Word'] = _WORD
 DESCRIPTOR.message_types_by_name['Utterance'] = _UTTERANCE
 DESCRIPTOR.message_types_by_name['Turn'] = _TURN
 DESCRIPTOR.message_types_by_name['Conversation'] = _CONVERSATION
+DESCRIPTOR.message_types_by_name['DataSet'] = _DATASET
 
 Speaker = _reflection.GeneratedProtocolMessageType('Speaker', (_message.Message,), dict(
   DESCRIPTOR = _SPEAKER,
@@ -250,6 +283,13 @@ Conversation = _reflection.GeneratedProtocolMessageType('Conversation', (_messag
   # @@protoc_insertion_point(class_scope:sacred.proto.Conversation)
   ))
 _sym_db.RegisterMessage(Conversation)
+
+DataSet = _reflection.GeneratedProtocolMessageType('DataSet', (_message.Message,), dict(
+  DESCRIPTOR = _DATASET,
+  __module__ = 'sacred.proto.conversation_pb2'
+  # @@protoc_insertion_point(class_scope:sacred.proto.DataSet)
+  ))
+_sym_db.RegisterMessage(DataSet)
 
 
 # @@protoc_insertion_point(module_scope)

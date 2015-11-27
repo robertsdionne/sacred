@@ -17,7 +17,7 @@ TEST(FullyConnected, Run) {
     9, 10, 11, 12,
   });
   auto op = FullyConnected<>(bias, weight);
-  auto output = Tensor<>({3, 1}, {0, 0, 0});
+  auto output = Tensor<>({3, 1});
 
   op(input, output);
 

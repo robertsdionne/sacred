@@ -14,7 +14,7 @@ message Word {
 
 message Utterance {
   repeated Word word = 1;
-  string words = 2;
+  string text = 2;
 }
 
 message Turn {
@@ -24,4 +24,8 @@ message Turn {
 
 message Conversation {
   repeated Turn turn = 1;
+}
+
+message DataSet {
+  repeated Conversation conversation = 1;
 }

@@ -9,8 +9,7 @@ namespace sacred {
 template <typename F = default_floating_point_type>
 class Operator {
 public:
-  using tensors_type = typename default_tensors_type<F>::value;
-  using tensors_const_type = typename default_tensors_const_type<F>::value;
+  USING_TENSOR_TYPES(F);
 
   virtual ~Operator() = default;
 

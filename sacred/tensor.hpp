@@ -47,7 +47,7 @@ public:
   Tensor(const index_type &shape, const storage_type &data):
       shape_(shape), stride_(indexing::strides::CStyle(shape)), data_(data) {}
 
-  ~Tensor() = default;
+  virtual ~Tensor() = default;
 
   virtual operator F() const override {
     CHECK(1 == ProductOf(shape_));
@@ -101,6 +101,14 @@ public:
         "Lookup must implement interface LookupStrategy<F, I>.");
     auto transformed_index = Index().Transform(shape_, stride_, index);
     return Lookup().Lookup(data_, data_.size(), shape_, stride_, transformed_index);
+  }
+
+  storage_type &data() {
+    return data_;
+  }
+
+  const storage_type &data() const {
+    return data_;
   }
 
   F &data(const I index) {

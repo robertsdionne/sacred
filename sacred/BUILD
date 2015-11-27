@@ -3,9 +3,64 @@ package(
 )
 
 cc_library(
+  name = 'convolution',
+  srcs = [
+    'convolution.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':math',
+    ':operator',
+  ],
+)
+
+cc_library(
+  name = 'convolution_gradient',
+  srcs = [
+    'convolution_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+  ],
+)
+
+cc_test(
+  name = 'convolution_gradient_test',
+  srcs = [
+    'convolution_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':convolution',
+    ':convolution_gradient',
+    ':dual',
+    ':gradients',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
+  name = 'convolution_test',
+  srcs = [
+    'convolution_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':convolution',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_library(
   name = 'default_types',
   srcs = [
     'default_types.hpp',
+  ],
+  deps = [
+    ':dual',
   ],
 )
 
@@ -13,6 +68,71 @@ cc_library(
   name = 'dual',
   srcs = [
     'dual.hpp',
+  ],
+)
+
+cc_test(
+  name = 'dual_test',
+  srcs = [
+    'dual_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':dual',
+    '//third_party:gtest',
+  ],
+)
+
+cc_library(
+  name = 'exponential_linear',
+  srcs = [
+    'exponential_linear.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_library(
+  name = 'exponential_linear_gradient',
+  srcs = [
+    'exponential_linear_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_test(
+  name = 'exponential_linear_gradient_test',
+  srcs = [
+    'exponential_linear_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':dual',
+    ':gradients',
+    ':exponential_linear',
+    ':exponential_linear_gradient',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
+  name = 'exponential_linear_test',
+  srcs = [
+    'exponential_linear_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':exponential_linear',
+    ':tensor',
+    '//third_party:gtest',
   ],
 )
 
@@ -25,7 +145,6 @@ cc_library(
     ':default_types',
     ':math',
     ':operator',
-    ':testing',
     '//external:googlelog',
   ],
 )
@@ -49,6 +168,9 @@ cc_test(
   ],
   size = 'small',
   deps = [
+    ':dual',
+    ':gradients',
+    ':fully_connected',
     ':fully_connected_gradient',
     ':tensor',
     '//third_party:gtest',
@@ -76,15 +198,17 @@ cc_library(
   ],
 )
 
-# cc_library(
-#   name = 'lookup_table',
-#   srcs = [
-#     'lookup_table.hpp'
-#   ],
-#   deps = [
-#     ':blob',
-#   ],
-# )
+cc_library(
+  name = 'gradients',
+  srcs = [
+    'gradients.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':dual',
+    ':tensor',
+  ],
+)
 
 cc_library(
   name = 'math',
@@ -100,43 +224,6 @@ cc_library(
   ],
 )
 
-# cc_library(
-#   name = 'memory_mapped_lookup_table',
-#   srcs = [
-#     'memory_mapped_lookup_table.hpp',
-#   ],
-#   deps = [
-#     ':blob',
-#     ':lookup_table',
-#   ],
-# )
-
-cc_library(
-  name = 'nonrecursive_filter',
-  srcs = [
-    'nonrecursive_filter.hpp',
-  ],
-  deps = [
-    ':default_types',
-    ':math',
-    ':operator',
-    ':tensor',
-  ],
-)
-
-cc_library(
-  name = 'nonrecursive_filter_gradient',
-  srcs = [
-    'nonrecursive_filter_gradient.hpp',
-  ],
-  deps = [
-    ':default_types',
-    ':math',
-    ':operator',
-    ':tensor',
-  ],
-)
-
 cc_library(
   name = 'operator',
   srcs = [
@@ -149,28 +236,159 @@ cc_library(
 )
 
 cc_library(
-  name = 'recursive_filter',
+  name = 'rectified_linear',
   srcs = [
-    'recursive_filter.hpp',
+    'rectified_linear.hpp',
   ],
   deps = [
     ':default_types',
-    ':math',
     ':operator',
-    ':tensor',
+    '//external:googlelog',
   ],
 )
 
 cc_library(
-  name = 'recursive_filter_gradient',
+  name = 'rectified_linear_gradient',
   srcs = [
-    'recursive_filter_gradient.hpp',
+    'rectified_linear_gradient.hpp',
   ],
   deps = [
     ':default_types',
-    ':math',
     ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_test(
+  name = 'rectified_linear_gradient_test',
+  srcs = [
+    'rectified_linear_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':dual',
+    ':gradients',
+    ':rectified_linear',
+    ':rectified_linear_gradient',
     ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
+  name = 'rectified_linear_test',
+  srcs = [
+    'rectified_linear_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':rectified_linear',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_library(
+  name = 'smooth_exponential_linear',
+  srcs = [
+    'smooth_exponential_linear.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_library(
+  name = 'smooth_exponential_linear_gradient',
+  srcs = [
+    'smooth_exponential_linear_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_test(
+  name = 'smooth_exponential_linear_gradient_test',
+  srcs = [
+    'smooth_exponential_linear_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':dual',
+    ':gradients',
+    ':smooth_exponential_linear',
+    ':smooth_exponential_linear_gradient',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
+  name = 'smooth_exponential_linear_test',
+  srcs = [
+    'smooth_exponential_linear_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':smooth_exponential_linear',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_library(
+  name = 'softmax',
+  srcs = [
+    'softmax.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+  ],
+)
+
+cc_library(
+  name = 'softmax_gradient',
+  srcs = [
+    'softmax_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+  ],
+)
+
+cc_test(
+  name = 'softmax_gradient_test',
+  srcs = [
+    'softmax_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':dual',
+    ':gradients',
+    ':softmax',
+    ':softmax_gradient',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_test(
+  name = 'softmax_test',
+  srcs = [
+    'softmax_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':softmax',
+    ':tensor',
+    '//third_party:gtest',
   ],
 )
 
@@ -246,91 +464,6 @@ cc_test(
 )
 
 cc_test(
-  name = 'nonrecursive_filter_gradient_test',
-  srcs = [
-    'nonrecursive_filter_gradient_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    ':dual',
-    ':nonrecursive_filter_gradient',
-    ':tensor',
-    '//third_party:gtest',
-  ],
-)
-
-cc_test(
-  name = 'nonrecursive_filter_test',
-  srcs = [
-    'nonrecursive_filter_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    ':nonrecursive_filter',
-    ':tensor',
-    '//third_party:gtest',
-  ],
-)
-
-# cc_test(
-#   name = 'reconv_test',
-#   srcs = [
-#     'reconv_test.cpp',
-#   ],
-#   size = 'small',
-#   deps = [
-#     ':array',
-#     ':dual',
-#     ':math',
-#     '//third_party:gtest',
-#   ],
-# )
-
-# cc_test(
-#   name = 'recursive_filter_gradient_test',
-#   srcs = [
-#     'recursive_filter_gradient_test.cpp',
-#   ],
-#   size = 'small',
-#   deps = [
-#     ':dual',
-#     ':recursive_filter_gradient',
-#     ':tensor',
-#     '//third_party:gtest',
-#   ],
-# )
-
-cc_test(
-  name = 'recursive_filter_test',
-  srcs = [
-    'recursive_filter_test.cpp',
-  ],
-  size = 'small',
-  deps = [
-    ':recursive_filter',
-    ':tensor',
-    '//third_party:gtest',
-  ],
-)
-
-# cc_test(
-#   name = 'stacked_test',
-#   srcs = [
-#     'stacked_test.cpp',
-#   ],
-#   size = 'small',
-#   deps = [
-#     ':array',
-#     ':blob',
-#     ':dual',
-#     ':nonrecursive_filter',
-#     ':nonrecursive_filter_gradient',
-#     ':recursive_filter_layer',
-#     '//third_party:gtest',
-#   ],
-# )
-
-cc_test(
   name = 'tensor_test',
   srcs = [
     'tensor_test.cpp',
@@ -354,13 +487,3 @@ cc_test(
     '//third_party:gtest',
   ],
 )
-
-# cc_binary(
-#   name = 'sacred',
-#   srcs = [
-#     'sacred.cpp',
-#   ],
-#   deps = [
-#     '//external:googleflags',
-#   ],
-# )

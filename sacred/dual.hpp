@@ -1,6 +1,7 @@
 #ifndef SACRED_DUAL_HPP_
 #define SACRED_DUAL_HPP_
 
+#include <cmath>
 #include <ostream>
 
 namespace sacred {
@@ -34,8 +35,29 @@ constexpr bool operator ==(const Dual &a, const Dual &b) {
   return a.real == b.real && a.dual == b.dual;
 }
 
+constexpr bool operator <(const Dual &a, const Dual &b) {
+  return a.real < b.real;
+}
+
+constexpr bool operator <=(const Dual &a, const Dual &b) {
+  return a.real <= b.real;
+}
+
+constexpr bool operator >(const Dual &a, const Dual &b) {
+  return a.real > b.real;
+}
+
+constexpr bool operator >=(const Dual &a, const Dual &b) {
+  return a.real >= b.real;
+}
+
 constexpr bool operator !=(const Dual &a, const Dual &b) {
   return !(a == b);
+}
+
+// Exponential
+const Dual exp(Dual x) {
+  return Dual(std::exp(x.real), x.dual * std::exp(x.real));
 }
 
 // Negation

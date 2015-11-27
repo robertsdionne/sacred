@@ -1,5 +1,5 @@
-#ifndef SACRED_FULLY_CONNECTED_HPP_
-#define SACRED_FULLY_CONNECTED_HPP_
+#ifndef SACRED_FULLY_CONNECTED_GRADIENT_HPP_
+#define SACRED_FULLY_CONNECTED_GRADIENT_HPP_
 
 #include "default_types.hpp"
 #include "math.hpp"
@@ -10,9 +10,7 @@ namespace sacred {
 template <typename F = default_floating_point_type>
 class FullyConnectedGradient : public Operator<F> {
 public:
-  using tensor_type = typename default_tensor_type<F>::value;
-  using tensors_type = typename default_tensors_type<F>::value;
-  using tensors_const_type = typename default_tensors_const_type<F>::value;
+  USING_TENSOR_TYPES(F);
 
   FullyConnectedGradient(tensor_type &bias_gradient, tensor_type &weight, tensor_type &weight_gradient):
       bias_gradient_(bias_gradient), weight_(weight), weight_gradient_(weight_gradient) {}
@@ -41,4 +39,4 @@ private:
 
 }  // namespace sacred
 
-#endif  // SACRED_FULLY_CONNECTED_HPP_
+#endif  // SACRED_FULLY_CONNECTED_GRADIENT_HPP_
