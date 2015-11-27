@@ -308,6 +308,9 @@ cc_test(
   ],
   size = 'small',
   deps = [
+    ':dual',
+    ':gradients',
+    ':softmax',
     ':softmax_gradient',
     ':tensor',
     '//third_party:gtest',
@@ -321,8 +324,6 @@ cc_test(
   ],
   size = 'small',
   deps = [
-    ':dual',
-    ':gradients',
     ':softmax',
     ':tensor',
     '//third_party:gtest',
