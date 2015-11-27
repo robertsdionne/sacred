@@ -21,10 +21,13 @@ public:
   void operator ()(const tensor_type &x, tensor_type &y) {
     using std::exp;
     using std::max;
-    using std::min;
     CHECK_EQ(x.order(), y.order());
     for (auto i = 0; i < x.size(); ++i) {
-      y.data(i) = max(x.data(i), F(0)) + alpha_ * (exp(min(x.data(i), F(0))) - F(1));
+      if (F(0) < x.data(i)) {
+        y.data(i) = x.data(i);
+      } else {
+        y.data(i) = alpha_ * (exp(x.data(i)) - F(1));
+      }
     }
   }
 

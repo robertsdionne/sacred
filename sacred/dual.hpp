@@ -39,6 +39,18 @@ constexpr bool operator <(const Dual &a, const Dual &b) {
   return a.real < b.real;
 }
 
+constexpr bool operator <=(const Dual &a, const Dual &b) {
+  return a.real <= b.real;
+}
+
+constexpr bool operator >(const Dual &a, const Dual &b) {
+  return a.real > b.real;
+}
+
+constexpr bool operator >=(const Dual &a, const Dual &b) {
+  return a.real >= b.real;
+}
+
 constexpr bool operator !=(const Dual &a, const Dual &b) {
   return !(a == b);
 }
