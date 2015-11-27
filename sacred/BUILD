@@ -82,6 +82,31 @@ cc_test(
 )
 
 cc_library(
+  name = 'exponential_linear',
+  srcs = [
+    'exponential_linear.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_test(
+  name = 'exponential_linear_test',
+  srcs = [
+    'exponential_linear_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':exponential_linear',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
+cc_library(
   name = 'fully_connected',
   srcs = [
     'fully_connected.hpp',
