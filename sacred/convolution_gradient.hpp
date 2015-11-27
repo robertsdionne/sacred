@@ -56,6 +56,21 @@ public:
     }
 
     // filter gradient
+    for (auto s = 0; s < filter_gradient_.shape().at(0); ++s) {
+      for (auto t = 0; t < filter_gradient_.shape().at(1); ++t) {
+        for (auto u = 0; u < filter_gradient_.shape().at(2); ++u) {
+          for (auto v = 0; v < filter_gradient_.shape().at(3); ++v) {
+            F output_value = F(1) * filter_gradient_.at({s, t, u, v});
+            for (auto i = 0; i < delta.shape().at(0); ++i) {
+              for (auto j = 0; j < delta.shape().at(1); ++j) {
+                output_value += F(1) * delta.at({i, j, u}) * x.at({i + s, j + t, v});
+              }
+            }
+            filter_gradient_.set({s, t, u, v}, output_value);
+          }
+        }
+      }
+    }
   }
 
   virtual void operator ()(const tensors_const_type &in, const tensors_type &out) override {
