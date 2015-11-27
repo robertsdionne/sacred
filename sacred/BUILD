@@ -112,6 +112,9 @@ cc_test(
   ],
   size = 'small',
   deps = [
+    ':dual',
+    ':gradients',
+    ':exponential_linear',
     ':exponential_linear_gradient',
     ':tensor',
     '//third_party:gtest',
