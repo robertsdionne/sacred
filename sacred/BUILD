@@ -93,6 +93,31 @@ cc_library(
   ],
 )
 
+cc_library(
+  name = 'exponential_linear_gradient',
+  srcs = [
+    'exponential_linear_gradient.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':operator',
+    '//external:googlelog',
+  ],
+)
+
+cc_test(
+  name = 'exponential_linear_gradient_test',
+  srcs = [
+    'exponential_linear_gradient_test.cpp',
+  ],
+  size = 'small',
+  deps = [
+    ':exponential_linear_gradient',
+    ':tensor',
+    '//third_party:gtest',
+  ],
+)
+
 cc_test(
   name = 'exponential_linear_test',
   srcs = [

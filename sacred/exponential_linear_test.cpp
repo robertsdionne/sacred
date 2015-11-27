@@ -29,7 +29,7 @@ TEST(ExponentialLinear, Run) {
 TEST(ExponentialLinear, Gradient) {
   using std::make_pair;
 
-  auto input = Tensor<Dual>({8}, {-4, -3, -2, -1, 0, 1, 2, 3});
+  auto input = Tensor<Dual>({8}, {-4, -2, -1, -0.5, 0, 1, 2, 3});
   auto target = Tensor<Dual>({8}, {
     -1.98168439,
     -1.86466473,
@@ -48,9 +48,9 @@ TEST(ExponentialLinear, Gradient) {
   }, input, target);
 
   EXPECT_FLOAT_EQ(0.018315639, input_gradient.at({0}));
-  EXPECT_FLOAT_EQ(0.045527868, input_gradient.at({1}));
-  EXPECT_FLOAT_EQ(0.10386386, input_gradient.at({2}));
-  EXPECT_FLOAT_EQ(0.28008458, input_gradient.at({3}));
+  EXPECT_FLOAT_EQ(0.13533527, input_gradient.at({1}));
+  EXPECT_FLOAT_EQ(0.36787945, input_gradient.at({2}));
+  EXPECT_FLOAT_EQ(0.60653067, input_gradient.at({3}));
   EXPECT_FLOAT_EQ(1, input_gradient.at({4}));
   EXPECT_FLOAT_EQ(1, input_gradient.at({5}));
   EXPECT_FLOAT_EQ(1, input_gradient.at({6}));
