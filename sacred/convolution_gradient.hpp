@@ -17,6 +17,14 @@ public:
   virtual ~ConvolutionGradient() = default;
 
   void operator ()(const tensor_type &delta, const tensor_type &x, tensor_type &x_gradient) {
+
+    for (auto i = 0; i < delta.shape().at(0); ++i) {
+      for (auto j = 0; j < delta.shape().at(1); ++j) {
+        for (auto k = 0; k < delta.shape().at(2); ++k) {
+          bias_gradient_.add({k}, delta.at({i, j, k}));
+        }
+      }
+    }
   }
 
   virtual void operator ()(const tensors_const_type &in, const tensors_type &out) override {

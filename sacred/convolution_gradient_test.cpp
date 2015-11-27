@@ -58,8 +58,8 @@ TEST(ConvolutionGradient, Run) {
   auto filter_gradient = Tensor<>({3, 3, 3, 4});
   auto op = ConvolutionGradient<>(bias_gradient, filter, filter_gradient);
   auto output_gradient = Tensor<>({2, 2, 3}, {
-    823, 986, 1149,   985, 1184, 1383,
-    985, 1184, 1383,  1147, 1382, 1617,
+    1, 2, 3,  4, 5, 6,
+    2, 3, 4,  5, 6, 7,
   });
 
   op(output_gradient, input, input_gradient);
