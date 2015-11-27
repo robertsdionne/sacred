@@ -259,6 +259,9 @@ cc_test(
   ],
   size = 'small',
   deps = [
+    ':dual',
+    ':gradients',
+    ':rectifier',
     ':rectifier_gradient',
     ':tensor',
     '//third_party:gtest',
@@ -272,7 +275,6 @@ cc_test(
   ],
   size = 'small',
   deps = [
-    ':gradients',
     ':rectifier',
     ':tensor',
     '//third_party:gtest',
