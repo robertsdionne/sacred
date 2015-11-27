@@ -1,6 +1,8 @@
 #ifndef SACRED_CONVOLUTION_GRADIENT_HPP_
 #define SACRED_CONVOLUTION_GRADIENT_HPP_
 
+#include <algorithm>
+
 #include "default_types.hpp"
 #include "operator.hpp"
 
@@ -17,7 +19,34 @@ public:
   virtual ~ConvolutionGradient() = default;
 
   void operator ()(const tensor_type &delta, const tensor_type &x, tensor_type &x_gradient) {
+    using std::min;
+    using std::max;
 
+    // input gradient
+    for (auto i = 0; i < x_gradient.shape().at(0); ++i) {
+      for (auto j = 0; j < x_gradient.shape().at(1); ++j) {
+
+        auto s_begin = max(0, i - (x_gradient.shape().at(0) - filter_.shape().at(0))),
+            s_end = min(filter_.shape().at(0), i + 1);
+
+        auto t_begin = max(0, j - (x_gradient.shape().at(1) - filter_.shape().at(1))),
+            t_end = min(filter_.shape().at(1), j + 1);
+
+        for (auto s = s_begin; s < s_end; ++s) {
+          for (auto t = t_begin; t < t_end; ++t) {
+            for (auto k = 0; k < x_gradient.shape().at(2); ++k) {
+              F output_value = F(1) * x_gradient.at({i, j, k});
+              for (auto u = 0; u < filter_.shape().at(2); ++u) {
+                output_value += F(1) * filter_.at({s, t, u, k}) * delta.at({i - s, j - t, u});
+              }
+              x_gradient.set({i, j, k}, output_value);
+            }
+          }
+        }
+      }
+    }
+
+    // bias gradient
     for (auto i = 0; i < delta.shape().at(0); ++i) {
       for (auto j = 0; j < delta.shape().at(1); ++j) {
         for (auto k = 0; k < delta.shape().at(2); ++k) {
@@ -25,6 +54,8 @@ public:
         }
       }
     }
+
+    // filter gradient
   }
 
   virtual void operator ()(const tensors_const_type &in, const tensors_type &out) override {
