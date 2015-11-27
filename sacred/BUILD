@@ -32,6 +32,10 @@ cc_test(
   ],
   size = 'small',
   deps = [
+    ':convolution',
+    ':convolution_gradient',
+    ':dual',
+    ':gradients',
     ':tensor',
     '//third_party:gtest',
   ],
@@ -45,8 +49,6 @@ cc_test(
   size = 'small',
   deps = [
     ':convolution',
-    ':dual',
-    ':gradients',
     ':tensor',
     '//third_party:gtest',
   ],
