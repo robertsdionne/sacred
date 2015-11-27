@@ -1,5 +1,5 @@
-#ifndef SACRED_RECTIFIER_GRADIENT_HPP_
-#define SACRED_RECTIFIER_GRADIENT_HPP_
+#ifndef SACRED_RECTIFIED_LINEAR_GRADIENT_HPP_
+#define SACRED_RECTIFIED_LINEAR_GRADIENT_HPP_
 
 #include <glog/logging.h>
 
@@ -9,13 +9,13 @@
 namespace sacred {
 
 template <typename F = default_floating_point_type>
-class RectifierGradient : public Operator<F> {
+class RectifiedLinearGradient : public Operator<F> {
 public:
   USING_TENSOR_TYPES(F);
 
-  RectifierGradient() = default;
+  RectifiedLinearGradient() = default;
 
-  virtual ~RectifierGradient() = default;
+  virtual ~RectifiedLinearGradient() = default;
 
   void operator ()(const tensor_type &delta, const tensor_type &x, tensor_type &x_gradient) {
     CHECK_EQ(x.order(), delta.order());
@@ -36,4 +36,4 @@ public:
 
 }  // namespace sacred
 
-#endif  // SACRED_RECTIFIER_GRADIENT_HPP_
+#endif  // SACRED_RECTIFIED_LINEAR_GRADIENT_HPP_

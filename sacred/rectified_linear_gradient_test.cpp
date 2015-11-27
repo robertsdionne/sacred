@@ -3,13 +3,13 @@
 
 #include "dual.hpp"
 #include "gradients.hpp"
-#include "rectifier.hpp"
-#include "rectifier_gradient.hpp"
+#include "rectified_linear.hpp"
+#include "rectified_linear_gradient.hpp"
 #include "tensor.hpp"
 
 namespace sacred {
 
-TEST(RectifierGradient, Run) {
+TEST(RectifiedLinearGradient, Run) {
   auto input = Tensor<>({3, 4}, {
     1, -2, 3, -4,
     -5, 6, -7, 8,
@@ -20,7 +20,7 @@ TEST(RectifierGradient, Run) {
     0, 0, 0, 0,
     0, 0, 0, 0,
   });
-  auto op = RectifierGradient<>();
+  auto op = RectifiedLinearGradient<>();
   auto output_gradient = Tensor<>({3, 4}, {
     1, 1, 1, 1,
     1, 1, 1, 1,
@@ -36,7 +36,7 @@ TEST(RectifierGradient, Run) {
   }), input_gradient);
 }
 
-TEST(RectifierGradient, Dual) {
+TEST(RectifiedLinearGradient, Dual) {
   using std::make_pair;
 
   auto input = Tensor<Dual>({3, 4}, {
@@ -52,7 +52,7 @@ TEST(RectifierGradient, Dual) {
 
   auto input_gradient = Tensor<>({3, 4});
 
-  TestGradients<Rectifier<Dual>>({
+  TestGradients<RectifiedLinear<Dual>>({
     make_pair(&input, &input_gradient),
   }, [] () {
     return new Tensor<Dual>({3, 4}, {
@@ -61,7 +61,7 @@ TEST(RectifierGradient, Dual) {
       0, 0, 0, 0,
     });
   }, [] () {
-    return new Rectifier<Dual>();
+    return new RectifiedLinear<Dual>();
   }, input, target);
 
   EXPECT_EQ(Tensor<>({3, 4}, {

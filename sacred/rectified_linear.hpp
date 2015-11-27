@@ -1,5 +1,5 @@
-#ifndef SACRED_RECTIFIER_HPP_
-#define SACRED_RECTIFIER_HPP_
+#ifndef SACRED_RECTIFIED_LINEAR_HPP_
+#define SACRED_RECTIFIED_LINEAR_HPP_
 
 #include <algorithm>
 #include <glog/logging.h>
@@ -10,13 +10,13 @@
 namespace sacred {
 
 template <typename F = default_floating_point_type>
-class Rectifier : public Operator<F> {
+class RectifiedLinear : public Operator<F> {
 public:
   USING_TENSOR_TYPES(F);
 
-  Rectifier() = default;
+  RectifiedLinear() = default;
 
-  virtual ~Rectifier() = default;
+  virtual ~RectifiedLinear() = default;
 
   void operator ()(const tensor_type &x, tensor_type &y) {
     using std::max;
@@ -38,4 +38,4 @@ public:
 
 }  // namespace sacred
 
-#endif  // SACRED_RECTIFIER_HPP_
+#endif  // SACRED_RECTIFIED_LINEAR_HPP_

@@ -235,9 +235,9 @@ cc_library(
 )
 
 cc_library(
-  name = 'rectifier',
+  name = 'rectified_linear',
   srcs = [
-    'rectifier.hpp',
+    'rectified_linear.hpp',
   ],
   deps = [
     ':default_types',
@@ -247,9 +247,9 @@ cc_library(
 )
 
 cc_library(
-  name = 'rectifier_gradient',
+  name = 'rectified_linear_gradient',
   srcs = [
-    'rectifier_gradient.hpp',
+    'rectified_linear_gradient.hpp',
   ],
   deps = [
     ':default_types',
@@ -259,29 +259,29 @@ cc_library(
 )
 
 cc_test(
-  name = 'rectifier_gradient_test',
+  name = 'rectified_linear_gradient_test',
   srcs = [
-    'rectifier_gradient_test.cpp',
+    'rectified_linear_gradient_test.cpp',
   ],
   size = 'small',
   deps = [
     ':dual',
     ':gradients',
-    ':rectifier',
-    ':rectifier_gradient',
+    ':rectified_linear',
+    ':rectified_linear_gradient',
     ':tensor',
     '//third_party:gtest',
   ],
 )
 
 cc_test(
-  name = 'rectifier_test',
+  name = 'rectified_linear_test',
   srcs = [
-    'rectifier_test.cpp',
+    'rectified_linear_test.cpp',
   ],
   size = 'small',
   deps = [
-    ':rectifier',
+    ':rectified_linear',
     ':tensor',
     '//third_party:gtest',
   ],
