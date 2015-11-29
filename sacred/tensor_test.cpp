@@ -5,6 +5,15 @@
 
 namespace sacred {
 
+TEST(TestTensor, Index) {
+  auto tensor = Tensor<>({2, 2, 32});
+  EXPECT_EQ(std::vector<int>({1, 0, 18}), tensor.index(82));
+  EXPECT_EQ(std::vector<int>({1, 1, 1}), tensor.index(97));
+  EXPECT_EQ(std::vector<int>({0, 1, 31}), tensor.index(63));
+  EXPECT_EQ(std::vector<int>({1, 1, 31}), tensor.index(127));
+  EXPECT_EQ(std::vector<int>({0, 0, 31}), tensor.index(31));
+}
+
 TEST(TestTensor, At) {
   auto tensor = Tensor<>();
   auto tensor2 = Tensor<>(3);

@@ -119,6 +119,15 @@ public:
     return data_.at(index);
   }
 
+  index_type index(I index) const {
+    auto result = index_type(stride_.size());
+    for (auto i = 0; i < stride_.size(); ++i) {
+      result.at(i) = index / stride_.at(i);
+      index %= stride_.at(i);
+    }
+    return result;
+  }
+
   template <typename Index = indexing::CheckedIndex<I>, typename Lookup = indexing::IdentityLookup<F, I>>
   F add(const index_type &index, const F x) {
     return at<Index, Lookup>(index) += x;

@@ -143,7 +143,6 @@ cc_library(
   ],
   deps = [
     ':default_types',
-    ':math',
     ':operator',
     '//external:googlelog',
   ],
@@ -186,6 +185,7 @@ cc_test(
   deps = [
     ':fully_connected',
     ':tensor',
+    ':tensor_testing',
     '//third_party:gtest',
   ],
 )
@@ -420,6 +420,17 @@ cc_library(
     ':default_types',
     ':functional',
     ':testing',
+  ],
+)
+
+cc_library(
+  name = 'tensor_testing',
+  srcs = [
+    'tensor_testing.hpp',
+  ],
+  deps = [
+    ':default_types',
+    ':tensor',
   ],
 )
 
