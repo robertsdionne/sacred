@@ -6,55 +6,15 @@
 #include "dual.hpp"
 #include "gradients.hpp"
 #include "tensor.hpp"
+#include "tensor_testing.hpp"
 
 namespace sacred {
 
 TEST(ConvolutionGradient, Run) {
-  auto input = Tensor<>({4, 4, 4}, {
-    1, 2, 3, 4,  2, 3, 4, 5,  3, 4, 5, 6,  4, 5, 6, 7,
-    2, 3, 4, 5,  3, 4, 5, 6,  4, 5, 6, 7,  5, 6, 7, 8,
-    3, 4, 5, 6,  4, 5, 6, 7,  5, 6, 7, 8,  6, 7, 8, 9,
-    4, 5, 6, 7,  5, 6, 7, 8,  6, 7, 8, 9,  7, 8, 9, 10,
-  });
+  auto input = MakeTestTensor<>({4, 4, 4});
   auto input_gradient = Tensor<>({4, 4, 4});
   auto bias_gradient = Tensor<>({3}, {0, 0, 0});
-  auto filter = Tensor<>({3, 3, 3, 4}, { // h, w, n, c
-    1, 2, 3, 4,
-    2, 3, 4, 5,
-    3, 4, 5, 6,
-
-    2, 3, 4, 5,
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-
-    2, 3, 4, 5,
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-    6, 7, 8, 9,
-
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-    6, 7, 8, 9,
-
-    5, 6, 7, 8,
-    6, 7, 8, 9,
-    7, 8, 9, 10,
-  });
+  auto filter = MakeTestTensor<>({3, 3, 3, 4});
   auto filter_gradient = Tensor<>({3, 3, 3, 4});
   auto op = ConvolutionGradient<>(bias_gradient, filter, filter_gradient);
   auto output_gradient = Tensor<>({2, 2, 3}, {
@@ -113,50 +73,9 @@ TEST(ConvolutionGradient, Run) {
 TEST(ConvolutionGradient, Dual) {
   using std::make_pair;
 
-  auto input = Tensor<Dual>({4, 4, 4}, {
-    1, 2, 3, 4,  2, 3, 4, 5,  3, 4, 5, 6,  4, 5, 6, 7,
-    2, 3, 4, 5,  3, 4, 5, 6,  4, 5, 6, 7,  5, 6, 7, 8,
-    3, 4, 5, 6,  4, 5, 6, 7,  5, 6, 7, 8,  6, 7, 8, 9,
-    4, 5, 6, 7,  5, 6, 7, 8,  6, 7, 8, 9,  7, 8, 9, 10,
-  });
-  auto bias = Tensor<Dual>({3}, {1, 2, 3});
-  auto filter = Tensor<Dual>({3, 3, 3, 4}, { // h, w, n, c
-    1, 2, 3, 4,
-    2, 3, 4, 5,
-    3, 4, 5, 6,
-
-    2, 3, 4, 5,
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-
-    2, 3, 4, 5,
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-    6, 7, 8, 9,
-
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-    6, 7, 8, 9,
-
-    5, 6, 7, 8,
-    6, 7, 8, 9,
-    7, 8, 9, 10,
-  });
+  auto input = MakeTestTensor<Dual>({4, 4, 4});
+  auto bias = MakeTestTensor<Dual>({3});
+  auto filter = MakeTestTensor<Dual>({3, 3, 3, 4});
   auto target = Tensor<Dual>({2, 2, 3}, {
     822, 984, 1146,   981, 1179, 1377,
     983, 1181, 1379,  1142, 1376, 1610,
@@ -225,50 +144,9 @@ TEST(ConvolutionGradient, Dual) {
 TEST(ConvolutionGradient, DualWithStride) {
   using std::make_pair;
 
-  auto input = Tensor<Dual>({4, 4, 4}, {
-    1, 2, 3, 4,  2, 3, 4, 5,  3, 4, 5, 6,  4, 5, 6, 7,
-    2, 3, 4, 5,  3, 4, 5, 6,  4, 5, 6, 7,  5, 6, 7, 8,
-    3, 4, 5, 6,  4, 5, 6, 7,  5, 6, 7, 8,  6, 7, 8, 9,
-    4, 5, 6, 7,  5, 6, 7, 8,  6, 7, 8, 9,  7, 8, 9, 10,
-  });
-  auto bias = Tensor<Dual>({3}, {1, 2, 3});
-  auto filter = Tensor<Dual>({3, 3, 3, 4}, { // h, w, n, c
-    1, 2, 3, 4,
-    2, 3, 4, 5,
-    3, 4, 5, 6,
-
-    2, 3, 4, 5,
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-
-    2, 3, 4, 5,
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-    6, 7, 8, 9,
-
-    3, 4, 5, 6,
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-
-    4, 5, 6, 7,
-    5, 6, 7, 8,
-    6, 7, 8, 9,
-
-    5, 6, 7, 8,
-    6, 7, 8, 9,
-    7, 8, 9, 10,
-  });
+  auto input = MakeTestTensor<Dual>({4, 4, 4});
+  auto bias = MakeTestTensor<Dual>({3});
+  auto filter = MakeTestTensor<Dual>({3, 3, 3, 4});
   auto target = Tensor<Dual>({2, 2, 3}, {
     822, 984, 1146,   0, 0, 0,
     0, 0, 0,  0, 0, 0,
