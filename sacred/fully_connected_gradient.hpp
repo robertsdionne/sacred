@@ -17,13 +17,43 @@ public:
 
   void operator ()(const tensor_type &delta, const tensor_type &x, tensor_type &x_gradient) {
     // ∂E/∂W_ij = δ_i x_j
-    math_.GeneralMatrixMultiplicationNormalTranspose(weight_gradient_, delta, x, F(1), F(1));
+    for (auto i = 0; i < delta.shape().at(0); ++i) {
+      for (auto q = 0; q < delta.shape().at(1); ++q) {
+        for (auto r = 0; r < delta.shape().at(2); ++r) {
+          for (auto j = 0; j < x.shape().at(1); ++j) {
+            for (auto k = 0; k < x.shape().at(2); ++k) {
+              weight_gradient_.set({q, r, j, k},
+                  F(1) * weight_gradient_.at({q, r, j, k}) + F(1) * delta.at({i, q, r}) * x.at({i, j, k}));
+            }
+          }
+        }
+      }
+    }
 
     // ∂E/∂b_i = δ_i
-    math_.Add(bias_gradient_, delta, F(1), F(1));
+    for (auto i = 0; i < delta.shape().at(0); ++i) {
+      for (auto q = 0; q < delta.shape().at(1); ++q) {
+        for (auto r = 0; r < delta.shape().at(2); ++r) {
+          bias_gradient_.set({q, r}, F(1) * bias_gradient_.at({q, r}) + F(1) * delta.at({i, q, r}));
+        }
+      }
+    }
 
     // ∂E/∂x_j = δ_i W^i_j
-    math_.GeneralMatrixMultiplicationTransposeNormal(x_gradient, weight_, delta, F(1), F(1));
+    // math_.GeneralMatrixMultiplicationTransposeNormal(x_gradient, weight_, delta, F(1), F(1));
+    for (auto i = 0; i < delta.shape().at(0); ++i) {
+      for (auto j = 0; j < x.shape().at(1); ++j) {
+        for (auto k = 0; k < x.shape().at(2); ++k) {
+          F current_output = F(1) * x_gradient.at({i, j, k});
+          for (auto q = 0; q < delta.shape().at(1); ++q) {
+            for (auto r = 0; r < delta.shape().at(2); ++r) {
+              current_output += F(1) * weight_.at({q, r, j, k}) * delta.at({i, q, r});
+            }
+          }
+          x_gradient.set({i, j, k}, current_output);
+        }
+      }
+    }
   }
 
   virtual void operator ()(const tensors_const_type &in, const tensors_type &out) override {

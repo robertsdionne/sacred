@@ -174,6 +174,7 @@ cc_test(
     ':fully_connected',
     ':fully_connected_gradient',
     ':tensor',
+    ':tensor_testing',
     '//third_party:gtest',
   ],
 )
