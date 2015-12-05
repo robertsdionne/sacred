@@ -4,6 +4,17 @@ package(
   ],
 )
 
+cc_library(
+  name = 'conversation_cc',
+  srcs = [
+    'conversation.pb.cc',
+    'conversation.pb.h',
+  ],
+  deps = [
+    '//google/protobuf',
+  ],
+)
+
 py_library(
   name = 'conversation',
   srcs = [
