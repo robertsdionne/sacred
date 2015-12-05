@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package sacred.proto;
+
+message OpenCl {
+  repeated Platform platform = 1;
+}
+
+message Platform {
+  string profile = 1;
+  string version = 2;
+  string name = 3;
+  string vendor = 4;
+  string extensions = 5;
+  repeated Device device = 6;
+}
+
+message Device {
+  enum Type {
+    TYPE_NONE = 0;
+    DEFAULT = 1;
+    CPU = 2;
+    GPU = 4;
+    ACCELERATOR = 8;
+    CUSTOM = 16;
+  }
+
+  enum FloatingPointConfiguration {
+    FLOATING_POINT_CONFIGURATION_NONE = 0;
+    DENORMALIZED = 1;
+    INFINITY_NOT_A_NUMBER = 2;
+    ROUND_TO_NEAREST = 4;
+    ROUND_TO_ZERO = 8;
+    ROUND_TO_INFINITY = 16;
+    ROUND_TO_FUSED_MULTIPLY_ADD = 32;
+    ROUND_TO_SOFTWARE_FLOAT = 64;
+    CORRECTLY_ROUNDED_DIVIDE_SQRT = 128;
+  }
+
+  enum MemoryCacheType {
+    MEMORY_CACHE_NONE = 0;
+    READ_ONLY = 1;
+    READ_WRITE = 2;
+  }
+
+  enum LocalMemoryType {
+    LOCAL_MEMORY_NONE = 0;
+    LOCAL = 1;
+    GLOBAL = 2;
+  }
+
+  enum ExecutionCapability {
+    EXECUTION_CAPABILITY_NONE = 0;
+    KERNEL = 1;
+    NATIVE_KERNEL = 2;
+  }
+
+  enum QueueProperty {
+    QUEUE_PROPERTY_NONE = 0;
+    OUT_OF_ORDER_EXECUTION_MODE_ENABLE = 1;
+    PROFILING_ENABLE = 2;
+  }
+
+  Type type = 1;
+  uint32 vendor_identifier = 2;
+  uint32 maximum_compute_units = 3;
+  uint32 maximum_work_item_dimensions = 4;
+  repeated uint64 maximum_work_item_sizes = 5;
+  uint64 maximum_work_group_size = 6;
+  uint32 preferred_vector_width_character = 7;
+  uint32 preferred_vector_width_short = 8;
+  uint32 preferred_vector_width_integer = 9;
+  uint32 preferred_vector_width_long = 10;
+  uint32 preferred_vector_width_float = 11;
+  uint32 preferred_vector_width_double = 12;
+  uint32 preferred_vector_width_half = 13;
+  uint32 native_vector_width_character = 14;
+  uint32 native_vector_width_short = 15;
+  uint32 native_vector_width_integer = 16;
+  uint32 native_vector_width_long = 17;
+  uint32 native_vector_width_float = 18;
+  uint32 native_vector_width_double = 19;
+  uint32 native_vector_width_half = 20;
+  uint32 address_bits = 21;
+  uint64 maximum_memory_allocation_size = 22;
+  bool image_support = 23;
+  uint32 maximum_read_image_arguments = 24;
+  uint32 maximum_write_image_arguments = 25;
+  uint64 image2d_maximum_width = 26;
+  uint64 image2d_maximum_height = 27;
+  uint64 image3d_maximum_width = 28;
+  uint64 image3d_maximum_height = 29;
+  uint64 image3d_maximum_depth = 30;
+  uint32 maximum_samplers = 31;
+  uint64 maximum_parameter_size = 32;
+  uint32 memory_base_address_alignment = 33;
+  uint32 minimum_data_type_alignment_size = 34;
+  repeated FloatingPointConfiguration single_floating_point_configuration = 35;
+  MemoryCacheType global_memory_cache_type = 36;
+  uint32 global_memory_cacheline_size = 37;
+  uint64 global_memory_cache_size = 38;
+  uint64 global_memory_size = 39;
+  uint64 maximum_constant_buffer_size = 40;
+  uint32 maximum_constant_arguments = 41;
+  LocalMemoryType local_memory_type = 42;
+  uint64 local_memory_size = 43;
+  bool error_correction_support = 44;
+  bool host_unified_memory = 45;
+  uint64 profiling_timer_resolution = 46;
+  bool endian_little = 47;
+  bool available = 48;
+  bool compiler_available = 49;
+  repeated ExecutionCapability execution_capabilities = 50;
+  repeated QueueProperty queue_properties = 51;
+  string name = 52;
+  string vendor = 53;
+  string driver_version = 54;
+  string profile = 55;
+  string version = 56;
+  string opencl_c_version = 57;
+  string extensions = 58;
+}

@@ -10,3 +10,14 @@ py_library(
     'conversation_pb2.py',
   ],
 )
+
+cc_library(
+  name = 'opencl',
+  srcs = [
+    'opencl.pb.cc',
+    'opencl.pb.h',
+  ],
+  deps = [
+    '//google/protobuf',
+  ],
+)

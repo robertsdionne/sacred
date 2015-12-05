@@ -13,12 +13,16 @@ sh_binary(
 )
 
 cc_binary(
-  name = 'print_floats',
+  name = 'opencl',
   srcs = [
-    'print_floats.cpp',
+    'opencl.cpp',
   ],
   deps = [
-    '//external:googleflags',
+    '//sacred/proto:opencl',
+    '//opencl:cl',
+  ],
+  linkopts = [
+    '-framework OpenCL',
   ],
 )
 
@@ -26,6 +30,16 @@ py_binary(
   name = 'prepare_data',
   srcs = [
     'prepare_data.py',
+  ],
+)
+
+cc_binary(
+  name = 'print_floats',
+  srcs = [
+    'print_floats.cpp',
+  ],
+  deps = [
+    '//external:googleflags',
   ],
 )
 
